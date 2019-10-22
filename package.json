@@ -1,0 +1,50 @@
+{
+	"name": "vscode-logstash-editor",
+	"displayName": "Logstash Configuration Editor",
+	"description": "Provides completion for Logstash configuration files",
+	"version": "0.0.3",
+	"publisher": "fbaligand",
+	"license": "Apache 2.0",
+	"icon": "images/icon-logstash.png",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/fbaligand/vscode-logstash-editor"
+	},
+	"bugs": {
+		"url": "https://github.com/fbaligand/vscode-logstash-editor/issues"
+	},
+	"engines": {
+		"vscode": "^1.15.0"
+	},
+	"categories": [
+		"Programming Languages"
+	],
+    "contributes": {
+        "languages": [{
+            "id": "logstash",
+            "aliases": ["Logstash", "logstash"],
+            "filenamePatterns": [
+                "*logstash.conf",
+                "*logstash.conf.j2",
+				"*logstash.conf.template",
+				"logstash-*.conf"
+            ]
+        }]
+	},
+	"activationEvents": [
+		"*"
+	],
+	"main": "./out/extension.js",
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"lint": "tslint -p ./",
+		"watch": "tsc -watch -p ./"
+	},
+	"devDependencies": {
+		"@types/node": "^10.12.18",
+		"tslint": "^5.16.0",
+		"typescript": "^3.5.1",
+		"@types/vscode": "^1.15.0"
+	}
+}
