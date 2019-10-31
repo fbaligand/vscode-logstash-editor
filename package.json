@@ -1,40 +1,54 @@
 {
 	"name": "vscode-logstash-editor",
-	"displayName": "Logstash Configuration Editor",
-	"description": "Provides completion for Logstash configuration files",
+	"displayName": "Logstash Editor",
+	"description": "Provide completion and documentation for Logstash pipeline configuration files",
 	"version": "0.0.3",
+	"author": {
+		"name": "Fabien Baligand",
+		"email": "fbaligand@gmail.com"
+	},
 	"publisher": "fbaligand",
 	"license": "Apache 2.0",
-	"icon": "images/icon-logstash.png",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/fbaligand/vscode-logstash-editor"
-	},
+	"homepage": "https://github.com/fbaligand/vscode-logstash-editor",
 	"bugs": {
 		"url": "https://github.com/fbaligand/vscode-logstash-editor/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/fbaligand/vscode-logstash-editor.git"
 	},
 	"engines": {
 		"vscode": "^1.15.0"
 	},
+	"main": "./out/extension.js",
+	"icon": "images/icon-logstash.png",
 	"categories": [
 		"Programming Languages"
 	],
-    "contributes": {
-        "languages": [{
-            "id": "logstash",
-            "aliases": ["Logstash", "logstash"],
-            "filenamePatterns": [
-                "*logstash.conf",
-                "*logstash.conf.j2",
-				"*logstash.conf.template",
-				"logstash-*.conf"
-            ]
-        }]
+	"keywords": [
+		"logstash",
+		"completion"
+	],
+	"contributes": {
+		"languages": [
+			{
+				"id": "logstash",
+				"aliases": [
+					"Logstash",
+					"logstash"
+				],
+				"filenamePatterns": [
+					"*logstash.conf",
+					"*logstash.conf.j2",
+					"*logstash.conf.template",
+					"logstash-*.conf"
+				]
+			}
+		]
 	},
 	"activationEvents": [
 		"*"
 	],
-	"main": "./out/extension.js",
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
 		"compile": "tsc -p ./",
