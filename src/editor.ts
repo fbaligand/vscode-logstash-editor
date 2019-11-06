@@ -97,7 +97,7 @@ function getLogstashParent(document: vscode.TextDocument, currentLineNumber: num
 		// check if line contains parent?
 		if (parenthesisCount > 0) {
 			if (line.match(PARENT_REGEX)) {
-				const label = line.replace(PARENT_REGEX, '$1');
+				const label = line.replace(PARENT_REGEX, '$1').trim();
 				if (label != 'else') {
 					return { label, lineNumber };
 				}
