@@ -2,7 +2,7 @@ import { createSnippet } from './snippetCreator';
 import * as vscode from 'vscode';
 
 export const snippetsBase: Record<string, vscode.CompletionItem[]> = {
-	"logstash-root": [
+	'logstash-root': [
 		createSnippet(
 			'input',
 			'section',
@@ -26,7 +26,7 @@ export const snippetsBase: Record<string, vscode.CompletionItem[]> = {
 	],
 
 
-	"logstash-filter": [
+	'logstash-filter': [
 		createSnippet(
 			'aggregate',
 			'plugin',
@@ -36,7 +36,7 @@ export const snippetsBase: Record<string, vscode.CompletionItem[]> = {
 	],
 
 
-	"logstash-filter-aggregate": [
+	'logstash-filter-aggregate': [
 		createSnippet(
 			'task_id',
 			'option',
@@ -65,7 +65,7 @@ export const snippetsBase: Record<string, vscode.CompletionItem[]> = {
 		)
 	],
 
-	"logstash-filter-common_options": [
+	'logstash-filter-common_options': [
 		createSnippet(
 			'add_tag',
 			'common_option',
@@ -74,7 +74,7 @@ export const snippetsBase: Record<string, vscode.CompletionItem[]> = {
 		)
 	],
 
-	"logstash-codec": [
+	'logstash-codec': [
 		createSnippet(
 			'plain',
 			'plugin',

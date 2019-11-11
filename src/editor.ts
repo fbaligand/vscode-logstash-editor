@@ -98,7 +98,7 @@ function getLogstashParent(document: vscode.TextDocument, currentLineNumber: num
 		if (parenthesisCount > 0) {
 			if (line.match(PARENT_REGEX)) {
 				const label = line.replace(PARENT_REGEX, '$1').trim();
-				if (label != 'else') {
+				if (label !== 'else') {
 					return { label, lineNumber };
 				}
 			}
@@ -159,7 +159,7 @@ function getSnippetsKey(logstashContext: LogstashContext): string {
 }
 
 /**
- * create return a "No suggestions" item list, when no completion is available
+ * create return a 'No suggestions' item list, when no completion is available
  */
 function getNoSuggestionCompletionItems(): vscode.CompletionItem[] {
 	const noSuggestionCompletionItem = new vscode.CompletionItem('No suggestions.');
@@ -248,4 +248,4 @@ export const logstashHoverProvider: vscode.HoverProvider = {
 		// return hover information on current position item
 		return new vscode.Hover(foundCompletionItem.documentation, logstashCurrentItemRange);
 	}
-}
+};
