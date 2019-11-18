@@ -18,8 +18,9 @@ For example, if cursor is inside `grok` filter, options for `grok` filter are su
 - If you choose a completion item, a code snippet is automatically inserted with relevant content :
   - for a plugin, inserted snippet is the plugin block and all its required options
   - for an option, inserted snippet is based on option type (string, boolean, number, string_duration, array, hash)
-- Provides documentation when hover on a section, a plugin or an option
 - Provides completion for if statement
+- Provides documentation when hover on a section, a plugin or an option
+- Provides document formatting and document range formatting on a Logstash pipeline configuration file
 - Automatically detects files that match:
   - `*logstash.conf`
   - `*logstash.conf.j2`

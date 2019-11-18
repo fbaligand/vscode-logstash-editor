@@ -1,6 +1,13 @@
 # Change Log
 
 
+## 0.1.0
+
+- provide document formatting and document range formatting on Logstash pipeline configuration
+- fix some cases where completion didn't work
+- fix lint issues
+
+
 ## 0.0.3
 
 - provide completion and documentation based on Logstash 7.2
