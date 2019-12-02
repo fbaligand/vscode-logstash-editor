@@ -2,7 +2,7 @@
 	"name": "vscode-logstash-editor",
 	"displayName": "Logstash Editor",
 	"description": "Provide completion, documentation and auto-formatting for Logstash pipeline configuration files and Elasticsearch index template json files",
-	"version": "0.1.0",
+	"version": "0.2.0",
 	"author": {
 		"name": "Fabien Baligand",
 		"email": "fbaligand@gmail.com"
