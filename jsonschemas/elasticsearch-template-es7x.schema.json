@@ -1,0 +1,1239 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "field_mapping": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "text",
+            "keyword",
+            "long",
+            "integer",
+            "short",
+            "byte",
+            "double",
+            "float",
+            "half_float",
+            "scaled_float",
+            "date",
+            "date_nanos",
+            "boolean",
+            "binary",
+            "integer_range",
+            "float_range",
+            "long_range",
+            "double_range",
+            "date_range",
+            "object",
+            "nested",
+            "geo_point",
+            "geo_shape",
+            "ip",
+            "completion",
+            "token_count",
+            "murmur3",
+            "annotated-text",
+            "percolator",
+            "join",
+            "rank_feature",
+            "rank_features",
+            "dense_vector",
+            "sparse_vector",
+            "search_as_you_type",
+            "alias",
+            "flattened",
+            "shape"
+          ]
+        },
+        "fields": {
+          "$ref": "#/definitions/field",
+          "defaultSnippets": [
+            {
+              "label": "add new field",
+              "body": {
+                "${1:FIELD}": {}
+              }
+            }
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/field",
+          "defaultSnippets": [
+            {
+              "label": "add new property",
+              "body": {
+                "${1:PROPERTY}": {}
+              }
+            }
+          ]
+        },
+        "analyzer": {
+          "type": "string",
+          "examples": [
+            "standard",
+            "english",
+            "default"
+          ]
+        },
+        "normalizer": {
+          "type": "string",
+          "examples": [
+            "standard"
+          ]
+        },
+        "coerce": {
+          "type": "boolean",
+          "default": true
+        },
+        "copy_to": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "examples": [
+              "other_field"
+            ]
+          }
+        },
+        "doc_values": {
+          "type": "boolean",
+          "default": true
+        },
+        "dynamic": {
+          "$ref": "#/definitions/dynamic"
+        },
+        "enabled": {
+          "type": "boolean",
+          "default": true
+        },
+        "eager_global_ordinals": {
+          "type": "boolean",
+          "default": false
+        },
+        "fielddata": {
+          "type": "boolean",
+          "default": false
+        },
+        "format": {
+          "type": "string",
+          "examples": [
+            "yyyy-MM-dd"
+          ]
+        },
+        "ignore_above": {
+          "type": "integer",
+          "examples": [
+            8191,
+            32766
+          ]
+        },
+        "ignore_malformed": {
+          "type": "boolean",
+          "default": false
+        },
+        "index": {
+          "type": "boolean",
+          "default": true
+        },
+        "index_options": {
+          "type": "string",
+          "enum": [
+            "docs",
+            "freqs",
+            "positions",
+            "offsets"
+          ]
+        },
+        "index_phrases": {
+          "type": "boolean",
+          "default": false
+        },
+        "index_prefixes": {
+          "type": "object",
+          "properties": {
+            "min_chars": {
+              "type": "integer",
+              "default": 2
+            },
+            "max_chars": {
+              "type": "integer",
+              "default": 2
+            }
+          }
+        },
+        "norms": {
+          "type": "boolean",
+          "default": true
+        },
+        "null_value": {
+          "examples": [
+            "NULL"
+          ]
+        },
+        "position_increment_gap": {
+          "type": "integer",
+          "default": 100
+        },
+        "search_analyzer": {
+          "type": "string",
+          "examples": [
+            "standard",
+            "english",
+            "default"
+          ]
+        },
+        "similarity": {
+          "type": "string",
+          "enum": [
+            "BM25",
+            "classic",
+            "boolean"
+          ],
+          "default": "BM25"
+        },
+        "store": {
+          "type": "boolean",
+          "default": false
+        },
+        "term_vector": {
+          "type": "string",
+          "enum": [
+            "no",
+            "yes",
+            "with_positions",
+            "with_offsets",
+            "with_positions_offsets",
+            "with_positions_payloads",
+            "with_positions_offsets_payloads"
+          ],
+          "default": "no"
+        }
+      }
+    },
+    "field": {
+      "patternProperties": {
+        "^.*$": {
+          "$ref": "#/definitions/field_mapping"
+        }
+      }
+    },
+    "dynamic": {
+      "$comment": "disable/enable dynamic field mapping at index level and field level",
+      "default": true,
+      "anyOf": [
+        {
+          "type": "string",
+          "enum": [
+            "strict"
+          ]
+        },
+        {
+          "type": "boolean"
+        }
+      ]
+    },
+    "index_settings": {
+      "type": "object",
+      "properties": {
+        "number_of_replicas": {
+          "type": "integer",
+          "default": 1
+        },
+        "number_of_shards": {
+          "type": "integer",
+          "default": 1
+        },
+        "auto_expand_replicas": {
+          "type": "string",
+          "default": "false",
+          "examples": [
+            "0-1"
+          ]
+        },
+        "allocation.max_retries": {
+          "type": "integer",
+          "default": 5
+        },
+        "analyze.max_token_count": {
+          "type": "integer",
+          "default": 10000
+        },
+        "blocks.metadata": {
+          "type": "boolean",
+          "default": false
+        },
+        "blocks.read": {
+          "type": "boolean",
+          "default": false
+        },
+        "blocks.read_only": {
+          "type": "boolean",
+          "default": false
+        },
+        "blocks.read_only_allow_delete": {
+          "type": "boolean",
+          "default": false
+        },
+        "blocks.write": {
+          "type": "boolean",
+          "default": false
+        },
+        "codec": {
+          "type": "string",
+          "default": "default"
+        },
+        "compound_format": {
+          "type": "string",
+          "default": "0.1"
+        },
+        "data_path": {
+          "type": "string",
+          "default": ""
+        },
+        "default_pipeline": {
+          "type": "string",
+          "default": "_none"
+        },
+        "fielddata.cache": {
+          "type": "string",
+          "default": "node"
+        },
+        "flush_after_merge": {
+          "type": "string",
+          "default": "512mb"
+        },
+        "force_memory_term_dictionary": {
+          "type": "string",
+          "default": "false"
+        },
+        "format": {
+          "type": "string",
+          "default": "0"
+        },
+        "frozen": {
+          "type": "string",
+          "default": "false"
+        },
+        "gc_deletes": {
+          "type": "string",
+          "default": "60s"
+        },
+        "highlight.max_analyzed_offset": {
+          "type": "string",
+          "default": "1000000"
+        },
+        "indexing.slowlog.level": {
+          "type": "string",
+          "default": "TRACE"
+        },
+        "indexing.slowlog.reformat": {
+          "type": "string",
+          "default": "true"
+        },
+        "indexing.slowlog.source": {
+          "type": "string",
+          "default": "1000"
+        },
+        "indexing.slowlog.threshold.index.debug": {
+          "type": "string",
+          "default": "-1"
+        },
+        "indexing.slowlog.threshold.index.info": {
+          "type": "string",
+          "default": "-1"
+        },
+        "indexing.slowlog.threshold.index.trace": {
+          "type": "string",
+          "default": "-1"
+        },
+        "indexing.slowlog.threshold.index.warn": {
+          "type": "string",
+          "default": "-1"
+        },
+        "lifecycle.indexing_complete": {
+          "type": "string",
+          "default": "false"
+        },
+        "lifecycle.name": {
+          "type": "string",
+          "default": ""
+        },
+        "lifecycle.rollover_alias": {
+          "type": "string",
+          "default": ""
+        },
+        "load_fixed_bitset_filters_eagerly": {
+          "type": "string",
+          "default": "true"
+        },
+        "mapper.dynamic": {
+          "type": "string",
+          "default": "true"
+        },
+        "mapping.coerce": {
+          "type": "string",
+          "default": "false"
+        },
+        "mapping.depth.limit": {
+          "type": "string",
+          "default": "20"
+        },
+        "mapping.field_name_length.limit": {
+          "type": "string",
+          "default": "9223372036854775807"
+        },
+        "mapping.ignore_malformed": {
+          "type": "string",
+          "default": "false"
+        },
+        "mapping.nested_fields.limit": {
+          "type": "string",
+          "default": "50"
+        },
+        "mapping.nested_objects.limit": {
+          "type": "string",
+          "default": "10000"
+        },
+        "mapping.total_fields.limit": {
+          "type": "string",
+          "default": "1000"
+        },
+        "max_adjacency_matrix_filters": {
+          "type": "string",
+          "default": "100"
+        },
+        "max_docvalue_fields_search": {
+          "type": "string",
+          "default": "100"
+        },
+        "max_inner_result_window": {
+          "type": "string",
+          "default": "100"
+        },
+        "max_ngram_diff": {
+          "type": "string",
+          "default": "1"
+        },
+        "max_refresh_listeners": {
+          "type": "string",
+          "default": "1000"
+        },
+        "max_regex_length": {
+          "type": "string",
+          "default": "1000"
+        },
+        "max_rescore_window": {
+          "type": "string",
+          "default": "10000"
+        },
+        "max_result_window": {
+          "type": "string",
+          "default": "10000"
+        },
+        "max_script_fields": {
+          "type": "string",
+          "default": "32"
+        },
+        "max_shingle_diff": {
+          "type": "string",
+          "default": "3"
+        },
+        "max_slices_per_scroll": {
+          "type": "string",
+          "default": "1024"
+        },
+        "max_terms_count": {
+          "type": "string",
+          "default": "65536"
+        },
+        "merge.policy.deletes_pct_allowed": {
+          "type": "string",
+          "default": "33.0"
+        },
+        "merge.policy.expunge_deletes_allowed": {
+          "type": "string",
+          "default": "10.0"
+        },
+        "merge.policy.floor_segment": {
+          "type": "string",
+          "default": "2mb"
+        },
+        "merge.policy.max_merge_at_once": {
+          "type": "string",
+          "default": "10"
+        },
+        "merge.policy.max_merge_at_once_explicit": {
+          "type": "string",
+          "default": "30"
+        },
+        "merge.policy.max_merged_segment": {
+          "type": "string",
+          "default": "5gb"
+        },
+        "merge.policy.reclaim_deletes_weight": {
+          "type": "string",
+          "default": "2.0"
+        },
+        "merge.policy.segments_per_tier": {
+          "type": "string",
+          "default": "10.0"
+        },
+        "merge.scheduler.auto_throttle": {
+          "type": "string",
+          "default": "true"
+        },
+        "merge.scheduler.max_merge_count": {
+          "type": "string",
+          "default": "7"
+        },
+        "merge.scheduler.max_thread_count": {
+          "type": "string",
+          "default": "2"
+        },
+        "number_of_routing_shards": {
+          "type": "string",
+          "default": "1"
+        },
+        "optimize_auto_generated_id": {
+          "type": "string",
+          "default": "true"
+        },
+        "percolator.map_unmapped_fields_as_text": {
+          "type": "string",
+          "default": "false"
+        },
+        "priority": {
+          "type": "string",
+          "default": "1"
+        },
+        "queries.cache.enabled": {
+          "type": "string",
+          "default": "true"
+        },
+        "query.default_field": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "default": "*"
+          }
+        },
+        "query.parse.allow_unmapped_fields": {
+          "type": "string",
+          "default": "true"
+        },
+        "query_string.lenient": {
+          "type": "string",
+          "default": "false"
+        },
+        "refresh_interval": {
+          "type": "string",
+          "default": "1s"
+        },
+        "requests.cache.enable": {
+          "type": "string",
+          "default": "true"
+        },
+        "routing.allocation.enable": {
+          "type": "string",
+          "default": "all"
+        },
+        "routing.allocation.total_shards_per_node": {
+          "type": "string",
+          "default": "-1"
+        },
+        "routing.rebalance.enable": {
+          "type": "string",
+          "default": "all"
+        },
+        "routing_partition_size": {
+          "type": "string",
+          "default": "1"
+        },
+        "search.idle.after": {
+          "type": "string",
+          "default": "30s"
+        },
+        "search.slowlog.level": {
+          "type": "string",
+          "default": "TRACE"
+        },
+        "search.slowlog.threshold.fetch.debug": {
+          "type": "string",
+          "default": "-1"
+        },
+        "search.slowlog.threshold.fetch.info": {
+          "type": "string",
+          "default": "-1"
+        },
+        "search.slowlog.threshold.fetch.trace": {
+          "type": "string",
+          "default": "-1"
+        },
+        "search.slowlog.threshold.fetch.warn": {
+          "type": "string",
+          "default": "-1"
+        },
+        "search.slowlog.threshold.query.debug": {
+          "type": "string",
+          "default": "-1"
+        },
+        "search.slowlog.threshold.query.info": {
+          "type": "string",
+          "default": "-1"
+        },
+        "search.slowlog.threshold.query.trace": {
+          "type": "string",
+          "default": "-1"
+        },
+        "search.slowlog.threshold.query.warn": {
+          "type": "string",
+          "default": "-1"
+        },
+        "search.throttled": {
+          "type": "string",
+          "default": "false"
+        },
+        "shard.check_on_startup": {
+          "type": "string",
+          "default": "false"
+        },
+        "soft_deletes.enabled": {
+          "type": "string",
+          "default": "false"
+        },
+        "soft_deletes.retention.operations": {
+          "type": "string",
+          "default": "0"
+        },
+        "soft_deletes.retention_lease.period": {
+          "type": "string",
+          "default": "12h"
+        },
+        "sort.field": {
+          "type": "array"
+        },
+        "sort.missing": {
+          "type": "array"
+        },
+        "sort.mode": {
+          "type": "array"
+        },
+        "sort.order": {
+          "type": "array"
+        },
+        "source_only": {
+          "type": "string",
+          "default": "false"
+        },
+        "store.fs.fs_lock": {
+          "type": "string",
+          "default": "native"
+        },
+        "store.preload": {
+          "type": "array"
+        },
+        "store.stats_refresh_interval": {
+          "type": "string",
+          "default": "10s"
+        },
+        "store.type": {
+          "type": "string",
+          "default": ""
+        },
+        "translog.durability": {
+          "type": "string",
+          "default": "REQUEST"
+        },
+        "translog.flush_threshold_size": {
+          "type": "string",
+          "default": "512mb"
+        },
+        "translog.generation_threshold_size": {
+          "type": "string",
+          "default": "64mb"
+        },
+        "translog.retention.age": {
+          "type": "string",
+          "default": "12h"
+        },
+        "translog.retention.size": {
+          "type": "string",
+          "default": "512MB"
+        },
+        "translog.sync_interval": {
+          "type": "string",
+          "default": "5s"
+        },
+        "unassigned.node_left.delayed_timeout": {
+          "type": "string",
+          "default": "1m"
+        },
+        "verified_before_close": {
+          "type": "string",
+          "default": "false"
+        },
+        "warmer.enabled": {
+          "type": "string",
+          "default": "true"
+        },
+        "write.wait_for_active_shards": {
+          "type": "string",
+          "default": "1"
+        },
+        "xpack.ccr.following_index": {
+          "type": "string",
+          "default": "false"
+        },
+        "xpack.version": {
+          "type": "string",
+          "default": ""
+        },
+        "xpack.watcher.template.version": {
+          "type": "string",
+          "default": ""
+        }
+      }
+    }
+  },
+  "type": "object",
+  "anyOf": [
+    {
+      "required": [
+        "index_patterns"
+      ]
+    },
+    {
+      "required": [
+        "template"
+      ]
+    }
+  ],
+  "properties": {
+    "index_patterns": {
+      "examples": [
+        [
+          "logstash-*"
+        ]
+      ],
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "template": {
+      "type": "string",
+      "description": "deprecated",
+      "examples": [
+        "logstash-*"
+      ]
+    },
+    "order": {
+      "type": "integer",
+      "default": 0
+    },
+    "version": {
+      "type": "integer",
+      "default": 1
+    },
+    "settings": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/index_settings"
+        },
+        {
+          "properties": {
+            "index": {
+              "$ref": "#/definitions/index_settings"
+            },
+            "analysis": {
+              "type": "object",
+              "properties": {
+                "analyzer": {
+                  "type": "object",
+                  "defaultSnippets": [
+                    {
+                      "label": "add new analyzer",
+                      "body": {
+                        "${1:ANALYZER}": {}
+                      }
+                    }
+                  ],
+                  "patternProperties": {
+                    "^.*$": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "examples": [
+                            "custom",
+                            "standard",
+                            "simple",
+                            "whitespace",
+                            "stop",
+                            "keyword",
+                            "pattern",
+                            "english",
+                            "fingerprint"
+                          ]
+                        },
+                        "char_filter": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "examples": [
+                              "html_strip"
+                            ]
+                          }
+                        },
+                        "tokenizer": {
+                          "type": "string",
+                          "examples": [
+                            "standard",
+                            "whitespace",
+                            "classic",
+                            "keyword"
+                          ]
+                        },
+                        "filter": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "examples": [
+                              "lowercase",
+                              "asciifolding",
+                              "limit",
+                              "shingle"
+                            ]
+                          }
+                        },
+                        "position_increment_gap": {
+                          "type": "integer",
+                          "default": 100
+                        }
+                      }
+                    }
+                  }
+                },
+                "normalizer": {
+                  "type": "object",
+                  "defaultSnippets": [
+                    {
+                      "label": "add new normalizer",
+                      "body": {
+                        "${1:NORMALIZER}": {}
+                      }
+                    }
+                  ],
+                  "patternProperties": {
+                    "^.*$": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "examples": [
+                            "custom"
+                          ]
+                        },
+                        "char_filter": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "examples": [
+                              "html_strip"
+                            ]
+                          }
+                        },
+                        "filter": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "examples": [
+                              "arabic_normalization",
+                              "asciifolding",
+                              "bengali_normalization",
+                              "cjk_width",
+                              "decimal_digit",
+                              "elision",
+                              "german_normalization",
+                              "hindi_normalization",
+                              "indic_normalization",
+                              "lowercase",
+                              "persian_normalization",
+                              "scandinavian_folding",
+                              "serbian_normalization",
+                              "sorani_normalization",
+                              "uppercase"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "tokenizer": {
+                  "type": "object",
+                  "defaultSnippets": [
+                    {
+                      "label": "add new tokenizer",
+                      "body": {
+                        "${1:TOKENIZER}": {}
+                      }
+                    }
+                  ],
+                  "patternProperties": {
+                    "^.*$": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "examples": [
+                            "standard",
+                            "pattern",
+                            "path_hierarchy"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                },
+                "filter": {
+                  "type": "object",
+                  "defaultSnippets": [
+                    {
+                      "label": "add new filter",
+                      "body": {
+                        "${1:FILTER}": {}
+                      }
+                    }
+                  ],
+                  "patternProperties": {
+                    "^.*$": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "examples": [
+                            "stop",
+                            "stemmer"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                },
+                "char_filter": {
+                  "type": "object",
+                  "defaultSnippets": [
+                    {
+                      "label": "add new char filter",
+                      "body": {
+                        "${1:CHAR_FILTER}": {}
+                      }
+                    }
+                  ],
+                  "patternProperties": {
+                    "^.*$": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "html_strip",
+                            "mapping",
+                            "pattern_replace"
+                          ]
+                        }
+                      },
+                      "allOf": [
+                        {
+                          "if": {
+                            "properties": {
+                              "type": {
+                                "const": "html_strip"
+                              }
+                            }
+                          },
+                          "then": {
+                            "properties": {
+                              "escaped_tags": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string",
+                                  "examples": [
+                                    "b"
+                                  ]
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "if": {
+                            "properties": {
+                              "type": {
+                                "const": "mapping"
+                              }
+                            }
+                          },
+                          "then": {
+                            "properties": {
+                              "mappings": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string",
+                                  "examples": [
+                                    ":) => _happy_"
+                                  ]
+                                }
+                              },
+                              "mappings_path": {
+                                "type": "string",
+                                "examples": [
+                                  "/path/to/mappings_file"
+                                ]
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "if": {
+                            "properties": {
+                              "type": {
+                                "const": "pattern_replace"
+                              }
+                            }
+                          },
+                          "then": {
+                            "properties": {
+                              "pattern": {
+                                "type": "string",
+                                "examples": [
+                                  "[0-9]"
+                                ]
+                              },
+                              "replacement": {
+                                "type": "string",
+                                "examples": [
+                                  "-$1-"
+                                ]
+                              },
+                              "flags": {
+                                "type": "string",
+                                "examples": [
+                                  "CASE_INSENSITIVE|COMMENTS"
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "mappings": {
+      "type": "object",
+      "properties": {
+        "dynamic_templates": {
+          "type": "array",
+          "defaultSnippets": [
+            {
+              "label": "add new dynamic template",
+              "body": [
+                {
+                  "${1:DYNAMIC_TEMPLATE}": {}
+                }
+              ]
+            }
+          ],
+          "items": {
+            "type": "object",
+            "patternProperties": {
+              "^.*$": {
+                "type": "object",
+                "properties": {
+                  "match": {
+                    "type": "string",
+                    "default": "",
+                    "examples": [
+                      "long_*"
+                    ]
+                  },
+                  "unmatch": {
+                    "type": "string",
+                    "default": "",
+                    "examples": [
+                      "*_text"
+                    ]
+                  },
+                  "path_match": {
+                    "type": "string",
+                    "default": "",
+                    "examples": [
+                      "name.*"
+                    ]
+                  },
+                  "path_unmatch": {
+                    "type": "string",
+                    "default": "",
+                    "examples": [
+                      "*.name"
+                    ]
+                  },
+                  "match_pattern": {
+                    "type": "string",
+                    "default": "",
+                    "examples": [
+                      "regex"
+                    ]
+                  },
+                  "match_mapping_type": {
+                    "type": "string",
+                    "enum": [
+                      "boolean",
+                      "date",
+                      "double",
+                      "long",
+                      "object",
+                      "string"
+                    ]
+                  },
+                  "mapping": {
+                    "$ref": "#/definitions/field_mapping"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "date_detection": {
+          "type": "boolean",
+          "default": true
+        },
+        "dynamic_date_formats": {
+          "type": "array",
+          "default": [
+            "strict_date_optional_time",
+            "yyyy/MM/dd HH:mm:ss Z||yyyy/MM/dd Z"
+          ],
+          "items": {
+            "type": "string",
+            "examples": [
+              "strict_date",
+              "epoch_millis",
+              "yyyy-MM-dd"
+            ]
+          }
+        },
+        "numeric_detection": {
+          "type": "boolean",
+          "default": false
+        },
+        "dynamic": {
+          "$ref": "#/definitions/dynamic"
+        },
+        "properties": {
+          "type": "object",
+          "$ref": "#/definitions/field",
+          "defaultSnippets": [
+            {
+              "label": "add new property",
+              "body": {
+                "${1:PROPERTY}": {}
+              }
+            }
+          ]
+        },
+        "_meta": {
+          "type": "object"
+        },
+        "_source": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "default": true
+            },
+            "includes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "excludes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "_field_names": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "default": true
+            }
+          }
+        },
+        "_routing": {
+          "type": "object",
+          "properties": {
+            "required": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        }
+      }
+    },
+    "aliases": {
+      "type": "object",
+      "defaultSnippets": [
+        {
+          "label": "add new alias",
+          "body": {
+            "${1:ALIAS}": {}
+          }
+        }
+      ],
+      "patternProperties": {
+        "^.*$": {
+          "type": "object",
+          "properties": {
+            "filter": {
+              "type": "object"
+            },
+            "is_write_index": {
+              "type": "boolean",
+              "default": false
+            },
+            "routing": {
+              "type": "string"
+            },
+            "index_routing": {
+              "type": "string"
+            },
+            "search_routing": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,6 +1,11 @@
 # Change Log
 
 
+## 0.2.0
+
+- add completion for Elasticsearch index template json files, based on a json schema, both for Elasticsearch 6.x and 7.x
+
+
 ## 0.1.0
 
 - provide document formatting and document range formatting on Logstash pipeline configuration

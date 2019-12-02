@@ -1,7 +1,7 @@
 {
 	"name": "vscode-logstash-editor",
 	"displayName": "Logstash Editor",
-	"description": "Provide completion and documentation for Logstash pipeline configuration files",
+	"description": "Provide completion, documentation and auto-formatting for Logstash pipeline configuration files and Elasticsearch index template json files",
 	"version": "0.1.0",
 	"author": {
 		"name": "Fabien Baligand",
@@ -43,6 +43,20 @@
 					"*logstash.conf.template",
 					"logstash-*.conf"
 				]
+			}
+		],
+		"jsonValidation": [
+			{
+				"fileMatch": "*elasticsearch-template.json",
+				"url": "./jsonschemas/elasticsearch-template-es7x.schema.json"
+			},
+			{
+				"fileMatch": "*elasticsearch-template-es7x.json",
+				"url": "./jsonschemas/elasticsearch-template-es7x.schema.json"
+			},
+			{
+				"fileMatch": "*elasticsearch-template-es6x.json",
+				"url": "./jsonschemas/elasticsearch-template-es6x.schema.json"
 			}
 		]
 	},
