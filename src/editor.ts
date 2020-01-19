@@ -208,7 +208,12 @@ export const logstashCompletionItemProvider: vscode.CompletionItemProvider = {
 			}
 
 			// return all snippets for completion
-			return allSnippets;
+			if (allSnippets.length > 0) {
+				return allSnippets;
+			}
+			else {
+				return getNoSuggestionCompletionItems();
+			}
 		}
 		catch (error) {
 			if(error instanceof NoCompletionError) {
