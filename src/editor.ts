@@ -1,7 +1,6 @@
 import * as vscode from 'vscode';
 
-// import { snippetsBase } from './snippetsTest';
-import { snippetsBase } from './snippets';
+import { getSnippets } from './snippets/snippetsProvider';
 
 /**
  * CONSTANTS 
@@ -144,7 +143,7 @@ function getLogstashContext(document: vscode.TextDocument, currentLineNumber: nu
 }
 
 /**
- * compute and return the key (in snippetsBase) matching `logstashContext`
+ * compute and return the key (in snippets) matching `logstashContext`
  */
 function getSnippetsKey(logstashContext: LogstashContext): string {
 	if (!logstashContext.section) {
@@ -189,7 +188,7 @@ export const logstashCompletionItemProvider: vscode.CompletionItemProvider = {
 			const allSnippets = new Array<vscode.CompletionItem>();
 
 			// first add initial root/section/plugin snippets
-			const initialSnippets = snippetsBase[getSnippetsKey(logstashContext)];
+			const initialSnippets = getSnippets()[getSnippetsKey(logstashContext)];
 			if (initialSnippets) {
 				allSnippets.push(...initialSnippets);
 			}
@@ -201,7 +200,7 @@ export const logstashCompletionItemProvider: vscode.CompletionItemProvider = {
 
 			// add plugin common options
 			if (logstashContext.plugin) {
-				const commonOptions = snippetsBase[`logstash-${logstashContext.section}-common_options`];
+				const commonOptions = getSnippets()[`logstash-${logstashContext.section}-common_options`];
 				if (commonOptions) {
 					allSnippets.push(...commonOptions);
 				}

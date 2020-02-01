@@ -1,7 +1,7 @@
 import { createSnippet } from './snippetCreator';
 import * as vscode from 'vscode';
 
-export const snippetsBase: Record<string, vscode.CompletionItem[]> = {
+export const snippetsTest: Record<string, vscode.CompletionItem[]> = {
 	'logstash-root': [
 		createSnippet(
 			'input',

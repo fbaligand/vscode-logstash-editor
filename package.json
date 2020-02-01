@@ -58,6 +58,38 @@
 				"fileMatch": "*elasticsearch-template-es6x.json",
 				"url": "./jsonschemas/elasticsearch-template-es6x.schema.json"
 			}
+		],
+		"configuration": [
+			{
+				"title": "Logstash",
+				"properties": {
+					"logstash.version": {
+						"type": "string",
+						"enum": [
+							"6.8",
+							"7.2",
+							"7.5"
+						],
+						"default": "7.5",	
+						"description": "Logstash Version",
+						"scope": "resource"
+					}
+				}
+			}
+		],
+		"commands": [
+			{
+				"category": "Logstash",
+				"command": "config.commands.setLogstashVersion",
+				"title": "Set Logstash Version"
+			}
+		],
+		"keybindings": [
+			{
+				"command": "config.commands.setLogstashVersion",
+				"key": "ctrl+shift+l",
+				"when": "editorFocus && editorLangId == logstash"
+			}
 		]
 	},
 	"activationEvents": [

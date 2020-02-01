@@ -1,7 +1,7 @@
 import { createSnippet } from './snippetCreator';
 import * as vscode from 'vscode';
 
-export const snippetsBase: Record<string, vscode.CompletionItem[]> = {
+export const snippets72: Record<string, vscode.CompletionItem[]> = {
 	"logstash-input-websocket": [
 			createSnippet('mode', 'option', 'mode => "${1|client|}"', '**[mode](https://www.elastic.co/guide/en/logstash/7.2/plugins-inputs-websocket.html#plugins-inputs-websocket-mode) option**\n\n- Value can be any of: client\n- Default value is "client"\n\nSelect the plugin’s mode of operation. Right now only client mode is supported, i.e. this plugin connects to a websocket server and receives events from the server as websocket messages.'),
 			createSnippet('url', 'option', 'url => "${1:url}"', '**[url](https://www.elastic.co/guide/en/logstash/7.2/plugins-inputs-websocket.html#plugins-inputs-websocket-url) option**\n\n- This is a required setting.\n- Value type is string\n- There is no default value for this setting.\n\nThe URL to connect to.', true)
