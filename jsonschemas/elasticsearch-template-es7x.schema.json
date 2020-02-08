@@ -299,6 +299,10 @@
           "type": "string",
           "default": "node"
         },
+        "final_pipeline": {
+          "type": "string",
+          "default": "_none"
+        },
         "flush_after_merge": {
           "type": "string",
           "default": "512mb"
@@ -358,6 +362,14 @@
         "lifecycle.name": {
           "type": "string",
           "default": ""
+        },
+        "lifecycle.origination_date": {
+          "type": "string",
+          "default": "-1"
+        },
+        "lifecycle.parse_origination_date": {
+          "type": "string",
+          "default": "false"
         },
         "lifecycle.rollover_alias": {
           "type": "string",
