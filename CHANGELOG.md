@@ -1,6 +1,17 @@
 # Change Log
 
 
+## 0.3.0
+
+- add support for multiple Logstash versions: 6.8, 7.2, 7.5
+- add "logstash.version" configuration setting to choose Logstash version (for completion)
+- add "Set Logstash Version" command (shortcut: Ctrl+Shift+L) to change Logstash version setting
+- index template completion: add analyzers, tokenizers and filters completion
+- index template completion: add new index settings for Elasticsearch 7.5
+- add common options in completion for Logstash outputs
+- add '[tags]' possible value in 'if' snippet
+
+
 ## 0.2.0
 
 - add completion for Elasticsearch index template json files, based on a json schema, both for Elasticsearch 6.x and 7.x
