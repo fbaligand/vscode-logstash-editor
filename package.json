@@ -59,6 +59,16 @@
 				"url": "./jsonschemas/elasticsearch-template-es6x.schema.json"
 			}
 		],
+		"yamlValidation": [
+			{
+				"fileMatch": "logstash.yml",
+				"url": "./yamlschemas/logstash.yml.schema.json"
+			},
+			{
+				"fileMatch": "pipelines.yml",
+				"url": "./yamlschemas/pipelines.yml.schema.json"
+			}
+		],
 		"configuration": [
 			{
 				"title": "Logstash",
@@ -101,6 +111,7 @@
 		"lint": "tslint -p ./",
 		"watch": "tsc -watch -p ./"
 	},
+	"extensionDependencies": ["redhat.vscode-yaml"],
 	"devDependencies": {
 		"@types/node": "^10.12.18",
 		"tslint": "^5.16.0",

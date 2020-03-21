@@ -1,0 +1,133 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"type": "array",
+	"items": {
+		"type": "object",
+		"required": [
+			"pipeline.id"
+		],
+		"anyOf": [
+			{
+				"required": [ "path.config" ]
+			},
+			{
+				"required": [ "config.string" ]
+			}
+		],
+		"properties": {
+			"pipeline.id": {
+				"type": "string",
+				"description": "The ID of the pipeline."
+			},
+			"path.config": {
+				"type": "string",
+				"description": "The path to the Logstash config for the main pipeline. If you specify a directory or wildcard, config files are read from the directory in alphabetical order. Default value is platform-specific, see Logstash Directory Layout.",
+				"default": "",
+				"examples": [
+					"\"pipelines/pipeline1\""
+				]
+			},
+			"config.string": {
+				"type": "string",
+				"description": "A string that contains the pipeline configuration to use for the main pipeline. Use the same syntax as the config file. There is no default value."
+			},
+			"pipeline.workers": {
+				"type": "integer",
+				"description": "The number of workers that will, in parallel, execute the filter and output stages of the pipeline. This setting uses the java.lang.Runtime.getRuntime.availableProcessors value as a default if not overridden by pipeline.workers in pipelines.yml or pipeline.workers from logstash.yml. If you have modified this setting and see that events are backing up, or that the CPU is not saturated, consider increasing this number to better utilize machine processing power. Default value is the number of the host’s CPU cores.",
+				"default": "",
+				"examples": [
+					"1"
+				]
+			},
+			"pipeline.batch.size": {
+				"type": "integer",
+				"description": "The maximum number of events an individual worker thread will collect from inputs before attempting to execute its filters and outputs. Larger batch sizes are generally more efficient, but come at the cost of increased memory overhead. You may need to increase JVM heap space in the jvm.options config file. See Logstash Configuration Files for more info.",
+				"default": 125,
+				"examples": [
+					125
+				]
+			},
+			"pipeline.batch.delay": {
+				"type": "integer",
+				"description": "When creating pipeline event batches, how long in milliseconds to wait for each event before dispatching an undersized batch to pipeline workers.",
+				"default": 50,
+				"examples": [
+					50
+				]
+			},
+			"queue.type": {
+				"type": "string",
+				"description": "The internal queuing model to use for event buffering. Specify memory for legacy in-memory based queuing, or persisted for disk-based ACKed queueing (persistent queues).",
+				"default": "memory",
+				"examples": [
+					"memory",
+					"persisted"
+				]
+			},
+			"queue.page_capacity": {
+				"type": "string",
+				"description": "The size of the page data files used when persistent queues are enabled (queue.type: persisted). The queue data consists of append-only data files separated into pages.",
+				"default": "64mb",
+				"examples": [
+					"64mb"
+				]
+			},
+			"queue.max_events": {
+				"type": "integer",
+				"description": "The maximum number of unread events in the queue when persistent queues are enabled (queue.type: persisted). Default is 0, that is to say unlimited.",
+				"default": 0,
+				"examples": [
+					0
+				]
+			},
+			"queue.max_bytes": {
+				"type": "string",
+				"description": "The total capacity of the queue in number of bytes. Make sure the capacity of your disk drive is greater than the value you specify here. If both queue.max_events and queue.max_bytes are specified, Logstash uses whichever criteria is reached first.",
+				"default": "1024mb",
+				"examples": [
+					"1024mb"
+				]
+			},
+			"queue.checkpoint.acks": {
+				"type": "integer",
+				"description": "The maximum number of ACKed events before forcing a checkpoint when persistent queues are enabled (queue.type: persisted). Specify queue.checkpoint.acks: 0 to set this value to unlimited.",
+				"default": 1024,
+				"examples": [
+					1024
+				]
+			},
+			"queue.checkpoint.writes": {
+				"type": "integer",
+				"description": "The maximum number of written events before forcing a checkpoint when persistent queues are enabled (queue.type: persisted). Specify queue.checkpoint.writes: 0 to set this value to unlimited.",
+				"default": 1024,
+				"examples": [
+					1024
+				]
+			},
+			"dead_letter_queue.enable": {
+				"type": "boolean",
+				"description": "Flag to instruct Logstash to enable the DLQ feature supported by plugins.",
+				"default": false,
+				"examples": [
+					false
+				]
+			},
+			"dead_letter_queue.max_bytes": {
+				"type": "string",
+				"description": "The maximum size of each dead letter queue. Entries will be dropped if they would increase the size of the dead letter queue beyond this setting.",
+				"default": "1024mb",
+				"examples": [
+					"1024mb"
+				]
+			},
+			"path.dead_letter_queue": {
+				"type": "string",
+				"description": "The directory path where the data files will be stored for the dead-letter queue.",
+				"default": "\"<path.data>/dead_letter_queue\"",
+				"examples": [
+					"\"<path.data>/dead_letter_queue\""
+				]
+			}
+		}
+	}
+}
