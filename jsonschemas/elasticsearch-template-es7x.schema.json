@@ -718,7 +718,7 @@
       "type": "string",
       "examples": [
         "apostrophe",
-        "ascii_folding",
+        "asciifolding",
         "cjk_bigram",
         "cjk_width",
         "classic",
