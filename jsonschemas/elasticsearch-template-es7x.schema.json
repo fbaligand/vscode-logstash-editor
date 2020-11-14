@@ -26,25 +26,30 @@
             "long_range",
             "double_range",
             "date_range",
+            "ip_range",
             "object",
             "nested",
             "geo_point",
             "geo_shape",
+            "point",
+            "shape",
             "ip",
+            "constant_keyword",
+            "wildcard",
             "completion",
+            "search_as_you_type",
             "token_count",
             "murmur3",
+            "histogram",
             "annotated-text",
             "percolator",
             "join",
             "alias",
-            "rank_feature",
-            "rank_features",
             "dense_vector",
             "sparse_vector",
-            "search_as_you_type",
-            "flattened",
-            "shape"
+            "rank_feature",
+            "rank_features",
+            "flattened"
           ]
         },
         "fields": {
@@ -242,6 +247,10 @@
           "type": "integer",
           "default": 5
         },
+        "allocation.existing_shards_allocator": {
+          "type": "string",
+          "default": "gateway_allocator"
+        },
         "analyze.max_token_count": {
           "type": "integer",
           "default": 10000
@@ -309,6 +318,10 @@
         "gc_deletes": {
           "type": "string",
           "default": "60s"
+        },
+        "hidden": {
+          "type": "boolean",
+          "default": false
         },
         "highlight.max_analyzed_offset": {
           "type": "string",
@@ -525,6 +538,10 @@
           "type": "string",
           "default": "false"
         },
+        "recovery.type": {
+          "type": "string",
+          "default": ""
+        },
         "refresh_interval": {
           "type": "string",
           "default": "1s"
@@ -639,6 +656,10 @@
         "store.type": {
           "type": "string",
           "default": ""
+        },
+        "top_metrics_max_size": {
+          "type": "integer",
+          "default": 10
         },
         "translog.durability": {
           "type": "string",
@@ -789,6 +810,7 @@
         "danish",
         "dutch",
         "english",
+        "estonian",
         "finnish",
         "french",
         "galician",
