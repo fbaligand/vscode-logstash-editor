@@ -4,7 +4,7 @@
 	"properties": {
 		"node.name": {
 			"type": "string",
-			"description": "A descriptive name for the node.",
+			"description": "A descriptive name for the node. Default is machine's hostname.",
 			"default": "\"${HOSTNAME}\"",
 			"examples": [
 				"\"${HOSTNAME}\""
@@ -22,17 +22,13 @@
 			"type": "string",
 			"description": "The ID of the pipeline.",
 			"default": "main",
-			"examples": [
-				"main"
-			]
+			"examples": ["main"]
 		},
 		"pipeline.java_execution": {
 			"type": "boolean",
 			"description": "Use the Java execution engine.",
-			"default": true,
-			"examples": [
-				true
-			]
+			"default": "true",
+			"examples": ["false"]
 		},
 		"pipeline.workers": {
 			"type": "integer",
@@ -45,34 +41,32 @@
 		"pipeline.batch.size": {
 			"type": "integer",
 			"description": "The maximum number of events an individual worker thread will collect from inputs before attempting to execute its filters and outputs. Larger batch sizes are generally more efficient, but come at the cost of increased memory overhead. You may need to increase JVM heap space in the jvm.options config file. See Logstash Configuration Files for more info.",
-			"default": 125,
-			"examples": [
-				125
-			]
+			"default": "125",
+			"examples": ["125"]
 		},
 		"pipeline.batch.delay": {
 			"type": "integer",
 			"description": "When creating pipeline event batches, how long in milliseconds to wait for each event before dispatching an undersized batch to pipeline workers.",
-			"default": 50,
-			"examples": [
-				50
-			]
+			"default": "50",
+			"examples": ["50"]
 		},
 		"pipeline.unsafe_shutdown": {
 			"type": "boolean",
 			"description": "When set to true, forces Logstash to exit during shutdown even if there are still inflight events in memory. By default, Logstash will refuse to quit until all received events have been pushed to the outputs. Enabling this option can lead to data loss during shutdown.",
-			"default": false,
-			"examples": [
-				false
-			]
+			"default": "false",
+			"examples": ["true"]
 		},
 		"pipeline.plugin_classloaders": {
 			"type": "boolean",
 			"description": "(Beta) Load Java plugins in independent classloaders to isolate their dependencies.",
-			"default": false,
-			"examples": [
-				false
-			]
+			"default": "false",
+			"examples": ["true"]
+		},
+		"pipeline.ordered": {
+			"type": "string",
+			"description": "(Beta) Load Java plugins in independent classloaders to isolate their dependencies.",
+			"default": "auto",
+			"examples": ["true", "false"]
 		},
 		"path.config": {
 			"type": "string",
@@ -84,22 +78,24 @@
 		},
 		"config.string": {
 			"type": "string",
-			"description": "A string that contains the pipeline configuration to use for the main pipeline. Use the same syntax as the config file. There is no default value."
-		},
+			"description": "A string that contains the pipeline configuration to use for the main pipeline. Use the same syntax as the config file. There is no default value.",
+			"default": "",
+			"examples": [ "\"input { generator {} } filter { dns {} } output { stdout { codec => rubydebug } }\"" ]
+	},
 		"config.test_and_exit": {
 			"type": "boolean",
 			"description": "When set to true, checks that the configuration is valid and then exits. Note that grok patterns are not checked for correctness with this setting. Logstash can read multiple config files from a directory. If you combine this setting with log.level: debug, Logstash will log the combined config file, annotating each config block with the source file it came from.",
-			"default": false,
+			"default": "false",
 			"examples": [
-				false
+				"true"
 			]
 		},
 		"config.reload.automatic": {
 			"type": "boolean",
 			"description": "When set to true, periodically checks if the configuration has changed and reloads the configuration whenever it is changed. This can also be triggered manually through the SIGHUP signal.",
-			"default": false,
+			"default": "false",
 			"examples": [
-				false
+				"true"
 			]
 		},
 		"config.reload.interval": {
@@ -113,18 +109,14 @@
 		"config.debug": {
 			"type": "boolean",
 			"description": "When set to true, shows the fully compiled configuration as a debug log message. You must also set log.level: debug. WARNING: The log message will include any password options passed to plugin configs as plaintext, and may result in plaintext passwords appearing in your logs!",
-			"default": false,
-			"examples": [
-				false
-			]
+			"default": "false",
+			"examples": ["true"]
 		},
 		"config.support_escapes": {
 			"type": "boolean",
 			"description": "When set to true, quoted strings will process the following escape sequences: \\n becomes a literal newline (ASCII 10). \\r becomes a literal carriage return (ASCII 13). \\t becomes a literal tab (ASCII 9). \\\\ becomes a literal backslash \\. \" becomes a literal double quotation mark. \\' becomes a literal quotation mark.",
-			"default": false,
-			"examples": [
-				false
-			]
+			"default": "false",
+			"examples": [ "true" ]
 		},
 		"modules": {
 			"type": "array",
@@ -170,9 +162,9 @@
 		"queue.max_events": {
 			"type": "integer",
 			"description": "The maximum number of unread events in the queue when persistent queues are enabled (queue.type: persisted). Default is 0, that is to say unlimited.",
-			"default": 0,
+			"default": "0",
 			"examples": [
-				0
+				"0"
 			]
 		},
 		"queue.max_bytes": {
@@ -186,41 +178,47 @@
 		"queue.checkpoint.acks": {
 			"type": "integer",
 			"description": "The maximum number of ACKed events before forcing a checkpoint when persistent queues are enabled (queue.type: persisted). Specify queue.checkpoint.acks: 0 to set this value to unlimited.",
-			"default": 1024,
+			"default": "1024",
 			"examples": [
-				1024
+				"1024"
 			]
+		},
+		"queue.checkpoint.interval": {
+			"type": "integer",
+			"description": "If using 'queue.type: persisted', the interval in milliseconds when a checkpoint is forced on the head page. Default is 1000, 0 for no periodic checkpoint.",
+			"default": "1000",
+			"examples": ["1000"]
 		},
 		"queue.checkpoint.writes": {
 			"type": "integer",
 			"description": "The maximum number of written events before forcing a checkpoint when persistent queues are enabled (queue.type: persisted). Specify queue.checkpoint.writes: 0 to set this value to unlimited.",
-			"default": 1024,
+			"default": "1024",
 			"examples": [
-				1024
+				"1024"
 			]
 		},
 		"queue.checkpoint.retry": {
 			"type": "boolean",
 			"description": "When enabled, Logstash will retry once per attempted checkpoint write for any checkpoint writes that fail. Any subsequent errors are not retried. This is a workaround for failed checkpoint writes that have been seen only on filesystems with non-standard behavior such as SANs and is not recommended except in those specific circumstances.",
-			"default": false,
+			"default": "false",
 			"examples": [
-				false
+				"true"
 			]
 		},
 		"queue.drain": {
 			"type": "boolean",
 			"description": "When enabled, Logstash waits until the persistent queue is drained before shutting down.",
-			"default": false,
+			"default": "false",
 			"examples": [
-				false
+				"true"
 			]
 		},
 		"dead_letter_queue.enable": {
 			"type": "boolean",
 			"description": "Flag to instruct Logstash to enable the DLQ feature supported by plugins.",
-			"default": false,
+			"default": "false",
 			"examples": [
-				false
+				"true"
 			]
 		},
 		"dead_letter_queue.max_bytes": {
@@ -250,9 +248,9 @@
 		"http.port": {
 			"type": "integer",
 			"description": "The bind port for the metrics REST endpoint.",
-			"default": 9600,
+			"default": "9600",
 			"examples": [
-				9600
+				"9600"
 			]
 		},
 		"log.level": {
@@ -278,9 +276,9 @@
 		"pipeline.separate_logs": {
 			"type": "boolean",
 			"description": "This a boolean setting to enable separation of logs per pipeline in different log files. If enabled Logstash will create a different log file for each pipeline, using the pipeline.id as name of the file. The destination directory is taken from the `path.log`s setting. When there are many pipelines configured in Logstash, separating each log lines per pipeline could be helpful in case you need to troubleshoot what’s happening in a single pipeline, without interference of the other ones.",
-			"default": false,
+			"default": "false",
 			"examples": [
-				false
+				"true"
 			]
 		},
 		"path.plugins": {
