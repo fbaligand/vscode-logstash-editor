@@ -1,6 +1,17 @@
 # Change Log
 
 
+## 0.4.0
+
+- add completion for logstash.yml and pipelines.yml files
+- add completion for "pipeline" input and output
+- add support for Logstash version 7.9
+- index template completion: add new index settings for Elasticsearch 7.9
+- for number, bytes and string_duration option values, default value is provided in completion (if available), instead of a sample value
+- for boolean values, a list of choices is now provided in completion (true or false), instead of just true
+- fix asciifolding token filter typo
+
+
 ## 0.3.0
 
 - add support for multiple Logstash versions: 6.8, 7.2, 7.5
