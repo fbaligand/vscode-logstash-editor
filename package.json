@@ -78,9 +78,10 @@
 						"enum": [
 							"6.8",
 							"7.2",
-							"7.5"
+							"7.5",
+							"7.9"
 						],
-						"default": "7.5",	
+						"default": "7.9",
 						"description": "Logstash Version",
 						"scope": "resource"
 					}
