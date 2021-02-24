@@ -8,6 +8,7 @@ import { getSnippets } from './snippets/snippetsProvider';
 const PARENT_REGEX = /^\s*((codec\s*=>\s*)?\w+)\s*\{/;
 const CODEC_PARENT_REGEX = /^\s*codec\s*=>\s*\w*/;
 const COMPLETION_AVAILABLE_PREFIX_REGEX = /^\s*(codec\s*=>\s*)?\w*$/;
+const OPTION_SNIPPET_COMPLETION_AVAILABLE_PREFIX_REGEX = /^(\s*(\w+))(\s+|\s*=|\s*=>.*)$/;
 const LAST_TOKEN_REGEX = /^.*\b(\w+)$/;
 const FRAGMENTS_TO_IGNORE_REGEX = /"[^"]*"|'[^']*'|#.*$/g;
 const QUOTE_BLOCK_START_REGEX = /=>\s*('[^']*|"[^"]*)$/;
@@ -158,6 +159,21 @@ function getSnippetsKey(logstashContext: LogstashContext): string {
 }
 
 /**
+ * Create and return a new CompletionItem from 'baseCompletionItem', with a custom replacement range
+ */
+function createCompletionItemSnippet(baseCompletionItem: vscode.CompletionItem, line: vscode.TextLine, snippetOption: string): vscode.CompletionItem {
+	const newCompletionItem = new vscode.CompletionItem(baseCompletionItem.label + ' snippet', baseCompletionItem.kind);
+	newCompletionItem.insertText = baseCompletionItem.insertText;
+	newCompletionItem.documentation = baseCompletionItem.documentation;
+	newCompletionItem.sortText = baseCompletionItem.sortText;
+	const snippetReplacementStart = line.text.indexOf(snippetOption);
+	newCompletionItem.filterText = line.text.substr(snippetReplacementStart);
+	const startPosition = new vscode.Position(line.range.start.line, snippetReplacementStart);
+	newCompletionItem.range = new vscode.Range(startPosition, line.range.end);
+	return newCompletionItem;
+}
+
+/**
  * create return a 'No suggestions' item list, when no completion is available
  */
 function getNoSuggestionCompletionItems(): vscode.CompletionItem[] {
@@ -175,9 +191,17 @@ export const logstashCompletionItemProvider: vscode.CompletionItemProvider = {
 	provideCompletionItems(document: vscode.TextDocument, position: vscode.Position, token: vscode.CancellationToken, context: vscode.CompletionContext): vscode.CompletionItem[] {
 
 		// check if current line has completion available
-		const currentLinePrefix = document.lineAt(position).text.substr(0, position.character);
+		let currentLinePrefix = document.lineAt(position).text.substr(0, position.character);
+		let currentOptionPrefix = '';
 		if (!currentLinePrefix.match(COMPLETION_AVAILABLE_PREFIX_REGEX)) {
-			return getNoSuggestionCompletionItems();
+			const optionSnippetMatches = currentLinePrefix.match(OPTION_SNIPPET_COMPLETION_AVAILABLE_PREFIX_REGEX);
+			if (optionSnippetMatches) {
+				currentLinePrefix = optionSnippetMatches[1];
+				currentOptionPrefix = optionSnippetMatches[2];
+			}
+			else {
+				return getNoSuggestionCompletionItems();
+			}
 		}
 
 		try {
@@ -185,7 +209,7 @@ export const logstashCompletionItemProvider: vscode.CompletionItemProvider = {
 			const logstashContext = getLogstashContext(document, position.line, currentLinePrefix);
 
 			// build snippets list to return
-			const allSnippets = new Array<vscode.CompletionItem>();
+			let allSnippets = new Array<vscode.CompletionItem>();
 
 			// first add initial root/section/plugin snippets
 			const initialSnippets = getSnippets()[getSnippetsKey(logstashContext)];
@@ -203,6 +227,17 @@ export const logstashCompletionItemProvider: vscode.CompletionItemProvider = {
 				const commonOptions = getSnippets()[`logstash-${logstashContext.section}-common_options`];
 				if (commonOptions) {
 					allSnippets.push(...commonOptions);
+				}
+			}
+
+			// if position is after an option, suggest the option snippet for the whole line
+			if (logstashContext.plugin && currentOptionPrefix) {
+				const snippetCompletionItem = allSnippets.find(snippet => snippet.label === currentOptionPrefix);
+				if (snippetCompletionItem) {
+					allSnippets = [ createCompletionItemSnippet(snippetCompletionItem, document.lineAt(position), currentOptionPrefix) ];
+				}
+				else {
+					allSnippets = [];
 				}
 			}
 
