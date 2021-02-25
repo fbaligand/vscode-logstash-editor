@@ -2,8 +2,10 @@ import * as vscode from 'vscode';
 
 // CONSTANTS //
 const TABS_REGEX = /\t/g;
+const ESCAPED_DELIMITER_REGEX = /\\["'/]/g;
 const DOUBLE_QUOTED_STRING_REGEX = /"([^"]*)"/g;
 const SINGLE_QUOTED_STRING_REGEX = /'([^']*)'/g;
+const REGULAR_EXPRESSION_REGEX = /\/([^/]*)\//g;
 const LINE_WITH_ONE_DOUBLE_QUOTE_REGEX = /^[^"]*"[^"]*$/;
 const LINE_WITH_ONE_SINGLE_QUOTE_REGEX = /^[^']*'[^']*$/;
 const TRAILING_WHITESPACE_REGEX = /\s+$/;
@@ -38,6 +40,14 @@ function getFullRange(document: vscode.TextDocument): vscode.Range {
 		new vscode.Position(0, 0),
 		document.lineAt(document.lineCount - 1).range.end
 	);
+}
+
+/**
+ * compute and return obfuscated delimited content
+ */
+function obfuscateDelimitedContent(contentWithDelimiters: string, delimitedContent: string): string {
+	const delimiter = contentWithDelimiters.substring(0, 1);
+	return  delimiter + 'x'.repeat(delimitedContent.length) + delimiter;
 }
 
 /**
@@ -80,8 +90,10 @@ export const logstashDocumentRangeFormattingEditProvider: vscode.DocumentRangeFo
 			let currentLineText = currentLine.text;
 
 			// mask quoted strings
-			currentLineText = currentLineText.replace(DOUBLE_QUOTED_STRING_REGEX, (match, quotedContent) => '"' + 'x'.repeat(quotedContent.length) + '"');
-			currentLineText = currentLineText.replace(SINGLE_QUOTED_STRING_REGEX, (match, quotedContent) => '\'' + 'x'.repeat(quotedContent.length) + '\'');
+			currentLineText = currentLineText.replace(ESCAPED_DELIMITER_REGEX, 'xx');
+			currentLineText = currentLineText.replace(DOUBLE_QUOTED_STRING_REGEX, obfuscateDelimitedContent);
+			currentLineText = currentLineText.replace(SINGLE_QUOTED_STRING_REGEX, obfuscateDelimitedContent);
+			currentLineText = currentLineText.replace(REGULAR_EXPRESSION_REGEX, obfuscateDelimitedContent);
 
 			// remove comment text (if any)
 			const firstSharpIndex = currentLineText.indexOf('#');
