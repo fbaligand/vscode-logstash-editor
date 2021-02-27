@@ -17,7 +17,7 @@ For example, if cursor is inside `grok` filter, options for `grok` filter are su
 - When you preselect an item, a link to official documentation, a short description and an example (if available) are provided
 - If you choose a completion item, a code snippet is automatically inserted with relevant content:
   - for a plugin, inserted snippet is the plugin block and all its required options
-  - for an option, inserted snippet is based on option type (string, boolean, number, string_duration, array, hash)
+  - for an option, inserted snippet is based on option type (string, boolean, number, string_duration, array, hash) and option default value
 - Provides completion for if statement
 - Provides documentation when hover on a section, a plugin or an option
 - Provides document formatting and document range formatting on a Logstash pipeline configuration file

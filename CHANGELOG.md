@@ -1,6 +1,17 @@
 # Change Log
 
 
+## 0.5.0
+
+- option completion: use default value for string, boolean, array and enum option types
+- option completion: add snippet completion for plugin option anywhere on the line after option
+- http filter: add completion for http connectivity options (automatic_retries, ...)
+- http output: add completion for undocumented options (user, password)
+- 'if' completion: add /regex/ option to right operand
+- formatting: ignore escaped delimiters (`\"`, `\'`, `\/`)
+- pipelines.yml completion: add 'add new pipeline' default snippet
+
+
 ## 0.4.0
 
 - add completion for logstash.yml and pipelines.yml files
