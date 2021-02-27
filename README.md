@@ -4,9 +4,6 @@ Visual Studio Code extension that provides completion, documentation and auto-fo
 
 ![Example](images/example.png)
 
-[Project Page](https://github.com/fbaligand/vscode-logstash-editor)  
-[Change Log](https://github.com/randomchance/vscode-logstash-configuration-syntax/blob/master/CHANGELOG.md)
-
 
 ## Features
 
