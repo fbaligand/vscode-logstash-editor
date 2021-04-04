@@ -3,11 +3,13 @@
 	"type": "array",
 	"defaultSnippets": [
 		{
-			"label": "add new pipeline",
+			"label": "- (array item)",
+			"type": "array",
 			"description": "add a new Logstash pipeline",
+			"suggestionKind": 9,
 			"body": {
-				"pipeline.id": "\"${1:pipeline_id}\"",
-				"path.config": "\"${2:/path/to/logstash.conf}\""
+				"pipeline.id": "${1:pipeline1}",
+				"path.config": "\"${2:pipeline-config/pipeline1/logstash-*.conf}\""
 			}
 		}
 	],
@@ -47,7 +49,7 @@
 				"type": "string",
 				"description": "The path to the Logstash config for the main pipeline. If you specify a directory or wildcard, config files are read from the directory in alphabetical order. Default value is platform-specific, see Logstash Directory Layout.",
 				"default": "",
-				"examples": ["\"${LOGSTASH_HOME}/pipelines/pipeline1/logstash-*.conf\""]
+				"examples": ["\"pipeline-config/pipeline1/logstash-*.conf\""]
 			},
 			"config.string": {
 				"type": "string",
