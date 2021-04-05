@@ -44,12 +44,19 @@ For example, if cursor is inside `grok` filter, options for `grok` filter are su
 ## Syntax highlighting
 
 This extension does not provide syntax highlighting for Logstash configuration files, because this feature is already provdided by [Logstash Configuration Syntax / Language Support](https://marketplace.visualstudio.com/items?itemName=RandomChance.logstash) extension.  
-So this extension is recommended to complete this one.
+Both extensions complement each other perfectly.
 
 
-## Important note
+## Troubleshooting
 
-For now, only this format style is supported for Logstash configuration files:
+- if completion does not work and your Visual Studio Code version is less than 1.52, upgrade your Visual Studio Code version or downgrade 'YAML' extension version to v0.15.0 (because this extension depends on 'YAML' extension).
+- if you don't see documentation associated to completion suggestions, click on the ">" (or "i") button:
+![Example](images/troubleshooting.png)
+
+
+## Limitations
+
+For now, only this format style is supported for completion in Logstash configuration files:
 ``` ruby
 filter {
 	tcp {
