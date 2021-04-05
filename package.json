@@ -67,6 +67,26 @@
 			{
 				"fileMatch": "pipelines.yml",
 				"url": "./yamlschemas/pipelines.yml.schema.json"
+			},
+			{
+				"fileMatch": "filebeat.yml",
+				"url": "./yamlschemas/filebeat.yml.schema.json"
+			},
+			{
+				"fileMatch": "filebeat.config.inputs.yml",
+				"url": "./yamlschemas/filebeat.config.inputs.yml.schema.json"
+			},
+			{
+				"fileMatch": "filebeat.config.modules.yml",
+				"url": "./yamlschemas/filebeat.config.modules.yml.schema.json"
+			},
+			{
+				"fileMatch": "filebeat*/inputs.d/*.yml",
+				"url": "./yamlschemas/filebeat.config.inputs.yml.schema.json"
+			},
+			{
+				"fileMatch": "filebeat*/modules.d/*.yml",
+				"url": "./yamlschemas/filebeat.config.modules.yml.schema.json"
 			}
 		],
 		"configuration": [

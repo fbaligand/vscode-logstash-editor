@@ -1,6 +1,6 @@
 # VSCode Logstash Editor
 
-Visual Studio Code extension that provides completion, documentation and auto-formatting for Logstash pipeline configuration files, logstash.yml, pipelines.yml and Elasticsearch index template json files.
+Visual Studio Code extension that provides completion, documentation and auto-formatting for Logstash pipeline configuration files, logstash.yml, pipelines.yml, filebeat.yml and Elasticsearch index template json files.
 
 ![Example](images/example.png)
 
@@ -19,6 +19,12 @@ For example, if cursor is inside `grok` filter, options for `grok` filter are su
 - Provides documentation when hover on a section, a plugin or an option
 - Provides document formatting and document range formatting on a Logstash pipeline configuration file
 - Provides completion for "logstash.yml" and "pipelines.yml" files
+- Provides completion for Filebeat configuration files:
+  - filebeat.yml
+  - filebeat.config.inputs.yml
+  - filebeat.config.modules.yml
+  - filebeat*/inputs.d/*.yml
+  - filebeat*/modules.d/*.yml
 - Provides completion for Elasticsearch index template json files, based on a json schema
 - Provides a specific index template json schema for Elasticsearch 6.x and 7.x
 - Provides "logstash.version" configuration setting to choose Logstash version (for completion)
