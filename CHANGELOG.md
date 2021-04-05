@@ -1,6 +1,18 @@
 # Change Log
 
 
+## 1.0.0
+
+- add completion support for Filebeat configuration files:
+  - filebeat.yml
+  - filebeat.config.inputs.yml
+  - filebeat.config.modules.yml
+  - filebeat*/inputs.d/*.yml
+  - filebeat*/modules.d/*.yml
+- pipelines.yml: enhance completion to add a new pipeline entry
+- docs: add a 'Troubleshooting' section
+
+
 ## 0.5.0
 
 - option completion: use default value for string, boolean, array and enum option types
