@@ -17,6 +17,7 @@
             "float",
             "half_float",
             "scaled_float",
+            "unsigned_long",
             "date",
             "date_nanos",
             "boolean",
@@ -49,7 +50,9 @@
             "sparse_vector",
             "rank_feature",
             "rank_features",
-            "flattened"
+            "flattened",
+            "version",
+            "aggregate_metric_double"
           ]
         },
         "fields": {
@@ -203,10 +206,40 @@
         }
       }
     },
+    "runtime_field_mapping": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "examples": [
+            "boolean",
+            "date",
+            "double",
+            "geo_point",
+            "ip",
+            "keyword",
+            "long"
+          ]
+        },
+        "format": {
+          "type": "string",
+          "examples": [
+            "yyyy-MM-dd"
+          ]
+        }
+      }
+    },
     "field": {
       "patternProperties": {
         "^.*$": {
           "$ref": "#/definitions/field_mapping"
+        }
+      }
+    },
+    "runtime_field": {
+      "patternProperties": {
+        "^.*$": {
+          "$ref": "#/definitions/runtime_field_mapping"
         }
       }
     },
@@ -217,7 +250,8 @@
         {
           "type": "string",
           "enum": [
-            "strict"
+            "strict",
+            "runtime"
           ]
         },
         {
@@ -550,9 +584,25 @@
           "type": "string",
           "default": "true"
         },
+        "routing.allocation.disk.watermark.ignore": {
+          "type": "string",
+          "default": "false"
+        },
         "routing.allocation.enable": {
           "type": "string",
           "default": "all"
+        },
+        "routing.allocation.exclude._tier": {
+          "type": "string",
+          "default": ""
+        },
+        "routing.allocation.include._tier": {
+          "type": "string",
+          "default": ""
+        },
+        "routing.allocation.require._tier": {
+          "type": "string",
+          "default": ""
         },
         "routing.allocation.total_shards_per_node": {
           "type": "string",
@@ -616,7 +666,7 @@
         },
         "soft_deletes.enabled": {
           "type": "string",
-          "default": "false"
+          "default": "true"
         },
         "soft_deletes.retention.operations": {
           "type": "string",
@@ -649,6 +699,53 @@
         "store.preload": {
           "type": "array"
         },
+        "store.snapshot.blob_cache.metadata_files.max_length": {
+          "type": "string",
+          "default": "64kb"
+        },
+        "store.snapshot.cache.enabled": {
+          "type": "string",
+          "default": "true"
+        },
+        "store.snapshot.cache.excluded_file_types": {
+          "type": "array"
+        },
+        "store.snapshot.cache.prewarm.enabled": {
+          "type": "string",
+          "default": "true"
+        },
+        "store.snapshot.index_name": {
+          "type": "string",
+          "default": ""
+        },
+        "store.snapshot.index_uuid": {
+          "type": "string",
+          "default": ""
+        },
+        "store.snapshot.partial": {
+          "type": "string",
+          "default": "false"
+        },
+        "store.snapshot.repository_name": {
+          "type": "string",
+          "default": ""
+        },
+        "store.snapshot.repository_uuid": {
+          "type": "string",
+          "default": ""
+        },
+        "store.snapshot.snapshot_name": {
+          "type": "string",
+          "default": ""
+        },
+        "store.snapshot.snapshot_uuid": {
+          "type": "string",
+          "default": ""
+        },
+        "store.snapshot.uncached_chunk_size": {
+          "type": "string",
+          "default": "-1b"
+        },
         "store.stats_refresh_interval": {
           "type": "string",
           "default": "10s"
@@ -675,11 +772,11 @@
         },
         "translog.retention.age": {
           "type": "string",
-          "default": "12h"
+          "default": "-1"
         },
         "translog.retention.size": {
           "type": "string",
-          "default": "512MB"
+          "default": "-1"
         },
         "translog.sync_interval": {
           "type": "string",
@@ -884,6 +981,7 @@
       "default": 1
     },
     "settings": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/index_settings"
@@ -1271,6 +1369,18 @@
               "label": "add new property",
               "body": {
                 "${1:PROPERTY}": {}
+              }
+            }
+          ]
+        },
+        "runtime": {
+          "type": "object",
+          "$ref": "#/definitions/runtime_field",
+          "defaultSnippets": [
+            {
+              "label": "add new runtime property",
+              "body": {
+                "${1:RUNTIME_PROPERTY}": {}
               }
             }
           ]
