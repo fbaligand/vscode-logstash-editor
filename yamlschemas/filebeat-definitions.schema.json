@@ -7778,25 +7778,6 @@
         }
       }
     },
-    "cloud" : {
-      "properties" : {
-        "cloud" : {
-          "description" : "Elastic Cloud",
-          "properties" : {
-            "id" : {
-              "type" : "object",
-              "description" : "These settings simplify using Filebeat with the Elastic Cloud (https://cloud.elastic.co/). The cloud.id setting overwrites the `output.elasticsearch.hosts` and `setup.kibana.host` options. You can find the `cloud.id` in the Elastic Cloud web UI.",
-              "properties" : { }
-            },
-            "auth" : {
-              "type" : "object",
-              "description" : "The cloud.auth setting overwrites the `output.elasticsearch.username` and `output.elasticsearch.password` settings. The format is `<user>:<pass>`.",
-              "properties" : { }
-            }
-          }
-        }
-      }
-    },
     "output" : {
       "type" : "object",
       "properties" : {
@@ -9181,8 +9162,6 @@
       }, {
         "$ref" : "#/definitions/general"
       }, {
-        "$ref" : "#/definitions/cloud"
-      }, {
         "$ref" : "#/definitions/path"
       }, {
         "$ref" : "#/definitions/keystore"
@@ -9415,6 +9394,20 @@
           "type" : "boolean",
           "examples" : [ "true" ],
           "description" : "By default, all events contain host.name. This option can be set to true to disable the addition of this field to all events. The default value is false."
+        }
+      }
+    },
+    "cloud" : {
+      "type" : "object",
+      "description" : "Elastic Cloud authentication. These settings simplify using Filebeat with the Elastic Cloud.",
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "description" : "The cloud.id setting overwrites the `output.elasticsearch.hosts` and `setup.kibana.host` options. You can find the `cloud.id` in the Elastic Cloud web UI."
+        },
+        "auth" : {
+          "type" : "string",
+          "description" : "The cloud.auth setting overwrites the `output.elasticsearch.username` and `output.elasticsearch.password` settings. The format is `<user>:<pass>`."
         }
       }
     },
@@ -9796,6 +9789,9 @@
         "output" : {
           "description" : "Output configuration",
           "$ref" : "#/definitions/output"
+        },
+        "cloud" : {
+          "$ref" : "#/definitions/cloud"
         },
         "filebeat.autodiscover" : {
           "type" : "object",
