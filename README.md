@@ -29,7 +29,7 @@ For example, if cursor is inside `grok` filter, options for `grok` filter are su
 - Provides a specific index template json schema for Elasticsearch 6.x and 7.x
 - Provides "logstash.version" configuration setting to choose Logstash version (for completion)
 - Provides "Set Logstash Version" command (shortcut: Ctrl+Shift+L) to change Logstash version setting
-- Supported Logstash versions: 6.8, 7.2, 7.5, 7.9
+- Supported Logstash versions: 6.8, 7.2, 7.5, 7.9, 7.12
 - Following file patterns are automatically associated to Logstash language:
   - `*logstash.conf`
   - `*logstash.conf.j2`

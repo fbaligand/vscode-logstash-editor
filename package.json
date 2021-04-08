@@ -99,9 +99,10 @@
 							"6.8",
 							"7.2",
 							"7.5",
-							"7.9"
+							"7.9",
+							"7.12"
 						],
-						"default": "7.9",
+						"default": "7.12",
 						"description": "Logstash Version",
 						"scope": "resource"
 					}
