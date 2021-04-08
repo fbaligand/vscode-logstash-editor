@@ -49,7 +49,7 @@ Both extensions complement each other perfectly.
 
 ## Troubleshooting
 
-- if completion does not work and your Visual Studio Code version is less than 1.52, upgrade your Visual Studio Code version or downgrade 'YAML' extension version to v0.15.0 (because this extension depends on 'YAML' extension).
+- if completion does not work and your Visual Studio Code version is less than 1.52, upgrade your Visual Studio Code version.
 - if you don't see documentation associated to completion suggestions, click on the ">" (or "i") button:
 ![Example](images/troubleshooting.png)
 

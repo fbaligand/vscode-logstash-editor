@@ -18,7 +18,7 @@
 		"url": "https://github.com/fbaligand/vscode-logstash-editor.git"
 	},
 	"engines": {
-		"vscode": "^1.15.0"
+		"vscode": "^1.52.0"
 	},
 	"main": "./out/extension.js",
 	"icon": "images/icon-logstash.png",
@@ -138,6 +138,6 @@
 		"@types/node": "^10.12.18",
 		"tslint": "^5.16.0",
 		"typescript": "^3.5.1",
-		"@types/vscode": "^1.15.0"
+		"@types/vscode": "^1.52.0"
 	}
 }
