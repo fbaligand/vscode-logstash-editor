@@ -1,6 +1,13 @@
 # Change Log
 
 
+## 1.1.0
+
+- add support for Logstash version 7.12
+- index template completion: add new index settings and new index mappings for Elasticsearch 7.12
+- filebeat.yml: fix 'cloud' completion
+
+
 ## 1.0.0
 
 - add completion support for Filebeat configuration files:
