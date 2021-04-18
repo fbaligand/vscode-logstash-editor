@@ -54,6 +54,32 @@ Both extensions complement each other perfectly.
 ![Example](images/troubleshooting.png)
 
 
+## Advanced tip: choose Elasticsearch index template minor version
+
+By default, with Logstash Editor extension, Elasticsearch index template version is based on file name. And only major versions are supported (6 and 7).
+
+If you want to have completion for one specific minor version, you can do it with 2 ways:
+- you use "$schema" attribute in index template JSON file:
+``` json
+{
+  "$schema": "https://raw.githubusercontent.com/fbaligand/vscode-logstash-editor/es-<VERSION>/jsonschemas/elasticsearch-template-es7x.schema.json"
+}
+```
+- in Visual Studio Code settings, you associate you index template file pattern with URL to JSON schema:
+``` json
+"json.schemas": [
+    {
+        "fileMatch": [
+            "/my-elasticsearch-index-template.json"
+        ],
+        "url": "https://raw.githubusercontent.com/fbaligand/vscode-logstash-editor/es-<VERSION>/jsonschemas/elasticsearch-template-es7x.schema.json"
+    }
+]
+```
+
+In both cases, you replace `<VERSION>` with one of the supported versions: `7.2`, `7.5`, `7.9` or `7.12`
+
+
 ## Limitations
 
 For now, only this format style is supported for completion in Logstash configuration files:
