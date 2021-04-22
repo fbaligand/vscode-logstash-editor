@@ -1,6 +1,12 @@
 # Change Log
 
 
+## 1.1.1
+
+- filebeat.yml: fix and complete 'processors' completion
+- docs: new section 'Advanced tip: choose Elasticsearch index template minor version'
+
+
 ## 1.1.0
 
 - add support for Logstash version 7.12
