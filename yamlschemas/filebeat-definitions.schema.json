@@ -6279,12 +6279,14 @@
           "description" : "AWS CloudWatch",
           "properties" : {
             "log_group_arn" : {
-              "type" : "string",
-              "description" : "ARN of the log group to collect logs from."
-            },
-            "log_group_name" : {
-              "type" : "string",
-              "description" : "Name of the log group to collect logs from. Note: region_name is required when log_group_name is given."
+              "type" : "object",
+              "description" : "ARN of the log group to collect logs from.",
+              "properties" : {
+                "log_group_name" : {
+                  "type" : "string",
+                  "description" : "Name of the log group to collect logs from. Note: region_name is required when log_group_name is given."
+                }
+              }
             },
             "region_name" : {
               "type" : "string",
@@ -6307,18 +6309,15 @@
             },
             "scan_frequency" : {
               "type" : "string",
-              "description" : "This config parameter sets how often Filebeat checks for new log events from the specified log group. Default scan_frequency is 1 minute, which means Filebeat will sleep for 1 minute before querying for new logs again.",
-              "examples" : [ "1" ]
+              "description" : "This config parameter sets how often Filebeat checks for new log events from the specified log group. Default scan_frequency is 1 minute, which means Filebeat will sleep for 1 minute before querying for new logs again."
             },
             "api_timeout" : {
               "type" : "string",
-              "description" : "The maximum duration of AWS API can take. If it exceeds the timeout, AWS API will be interrupted. The default AWS API timeout for a message is 120 seconds. The minimum is 0 seconds.",
-              "examples" : [ "120" ]
+              "description" : "The maximum duration of AWS API can take. If it exceeds the timeout, AWS API will be interrupted. The default AWS API timeout for a message is 120 seconds. The minimum is 0 seconds."
             },
             "api_sleep" : {
               "type" : "string",
-              "description" : "This is used to sleep between AWS FilterLogEvents API calls inside the same collection period. FilterLogEvents API has a quota of 5 transactions per second (TPS)/account/Region. By default, api_sleep is 200 ms. This value should only be adjusted when there are multiple Filebeats or multiple Filebeat inputs collecting logs from the same region and AWS account.",
-              "examples" : [ "200" ]
+              "description" : "This is used to sleep between AWS FilterLogEvents API calls inside the same collection period. FilterLogEvents API has a quota of 5 transactions per second (TPS)/account/Region. By default, api_sleep is 200 ms. This value should only be adjusted when there are multiple Filebeats or multiple Filebeat inputs collecting logs from the same region and AWS account."
             }
           }
         }
@@ -6495,42 +6494,46 @@
             },
             "max_bytes" : {
               "type" : "string",
-              "description" : "The maximum number of bytes that a single log message can have. All bytes after max_bytes are discarded and not sent. This setting is especially useful for multiline log messages, which can get large. The default is 10MB (10485760).",
-              "examples" : [ "10MB" ]
+              "description" : "The maximum number of bytes that a single log message can have. All bytes after max_bytes are discarded and not sent. This setting is especially useful for multiline log messages, which can get large. The default is 10MB (10485760)."
             },
             "json" : {
-              "type" : "string",
-              "description" : "These options make it possible for Filebeat to decode logs structured as JSON messages. Filebeat processes the logs line by line, so the JSON decoding only works if there is one JSON object per line.\nThe decoding happens before line filtering and multiline. You can combine JSON decoding with filtering and multiline if you set the message_key option. This can be helpful in situations where the application logs are wrapped in JSON objects, as with like it happens for example with Docker.\nExample configuration:\nYou must specify at least one of the following settings to enable JSON parsing mode:"
-            },
-            "keys_under_root" : {
-              "type" : "string",
-              "description" : "By default, the decoded JSON is placed under a \"json\" key in the output document. If you enable this setting, the keys are copied top level in the output document. The default is false.",
-              "examples" : [ "placed" ]
-            },
-            "overwrite_keys" : {
-              "type" : "string",
-              "description" : "If keys_under_root and this setting are enabled, then the values from the decoded JSON object overwrite the fields that Filebeat normally adds (type, source, offset, etc.) in case of conflicts."
-            },
-            "expand_keys" : {
-              "type" : "string",
-              "description" : "If this setting is enabled, Filebeat will recursively de-dot keys in the decoded JSON, and expand them into a hierarchical object structure. For example, {\"a.b.c\": 123} would be expanded into {\"a\":{\"b\":{\"c\":123}}}. This setting should be enabled when the input is produced by an ECS logger."
-            },
-            "add_error_key" : {
-              "type" : "string",
-              "description" : "If this setting is enabled, Filebeat adds a \"error.message\" and \"error.type: json\" key in case of JSON unmarshalling errors or when a message_key is defined in the configuration but cannot be used."
-            },
-            "message_key" : {
-              "type" : "string",
-              "description" : "An optional configuration setting that specifies a JSON key on which to apply the line filtering and multiline settings. If specified the key must be at the top level in the JSON object and the value associated with the key must be a string, otherwise no filtering or multiline aggregation will occur."
-            },
-            "document_id" : {
-              "type" : "string",
-              "description" : "Option configuration setting that specifies the JSON key to set the document id. If configured, the field will be removed from the original json document and stored in @metadata._id"
-            },
-            "ignore_decoding_error" : {
-              "type" : "boolean",
-              "description" : "An optional configuration setting that specifies if JSON decoding errors should be logged or not. If set to true, errors will not be logged. The default is false.",
-              "examples" : [ "false" ]
+              "type" : "object",
+              "description" : "These options make it possible for Filebeat to decode logs structured as JSON messages. Filebeat processes the logs line by line, so the JSON decoding only works if there is one JSON object per line.",
+              "properties" : {
+                "keys_under_root" : {
+                  "type" : "boolean",
+                  "description" : "By default, the decoded JSON is placed under a \"json\" key in the output document. If you enable this setting, the keys are copied top level in the output document. The default is false.",
+                  "examples" : [ "false" ]
+                },
+                "overwrite_keys" : {
+                  "type" : "boolean",
+                  "description" : "If keys_under_root and this setting are enabled, then the values from the decoded JSON object overwrite the fields that Filebeat normally adds (type, source, offset, etc.) in case of conflicts.",
+                  "examples" : [ "true" ]
+                },
+                "expand_keys" : {
+                  "type" : "boolean",
+                  "description" : "If this setting is enabled, Filebeat will recursively de-dot keys in the decoded JSON, and expand them into a hierarchical object structure. For example, {\"a.b.c\": 123} would be expanded into {\"a\":{\"b\":{\"c\":123}}}. This setting should be enabled when the input is produced by an ECS logger.",
+                  "examples" : [ "true" ]
+                },
+                "add_error_key" : {
+                  "type" : "boolean",
+                  "description" : "If this setting is enabled, Filebeat adds a \"error.message\" and \"error.type: json\" key in case of JSON unmarshalling errors or when a message_key is defined in the configuration but cannot be used.",
+                  "examples" : [ "true" ]
+                },
+                "message_key" : {
+                  "type" : "string",
+                  "description" : "An optional configuration setting that specifies a JSON key on which to apply the line filtering and multiline settings. If specified the key must be at the top level in the JSON object and the value associated with the key must be a string, otherwise no filtering or multiline aggregation will occur."
+                },
+                "document_id" : {
+                  "type" : "string",
+                  "description" : "Option configuration setting that specifies the JSON key to set the document id. If configured, the field will be removed from the original json document and stored in @metadata._id"
+                },
+                "ignore_decoding_error" : {
+                  "type" : "boolean",
+                  "description" : "An optional configuration setting that specifies if JSON decoding errors should be logged or not. If set to true, errors will not be logged. The default is false.",
+                  "examples" : [ "false" ]
+                }
+              }
             },
             "multiline" : {
               "$ref" : "#/definitions/multiline"
@@ -6545,7 +6548,7 @@
             "ignore_older" : {
               "type" : "string",
               "description" : "If this option is enabled, Filebeat ignores any files that were modified before the specified timespan. Configuring ignore_older can be especially useful if you keep log files for a long time. For example, if you want to start Filebeat, but only want to send the newest files and files from last week, you can configure this option.\nYou can use time strings like 2h (2 hours) and 5m (5 minutes). The default is 0, which disables the setting. Commenting out the config has the same effect as setting it to 0.\nThe files affected by this setting fall into two categories:\n- Files that were never harvested\n- Files that were harvested but weren’t updated for longer than ignore_older\nFor files which were never seen before, the offset state is set to the end of the file. If a state already exist, the offset is not changed. In case a file is updated again later, reading continues at the set offset position.\nThe ignore_older setting relies on the modification time of the file to determine if a file is ignored. If the modification time of the file is not updated when lines are written to a file (which can happen on Windows), the ignore_older setting may cause Filebeat to ignore files even though content was added at a later time.\nTo remove the state of previously harvested files from the registry file, use the clean_inactive configuration option.\nBefore a file can be ignored by Filebeat, the file must be closed. To ensure a file is no longer being harvested when it is ignored, you must set ignore_older to a longer duration than close_inactive.\nIf a file that’s currently being harvested falls under ignore_older, the harvester will first finish reading the file and close it after close_inactive is reached. Then, after that, the file will be ignored.",
-              "examples" : [ "0," ]
+              "examples" : [ "0" ]
             },
             "close_*" : {
               "type" : "string",
@@ -6571,8 +6574,7 @@
             },
             "close_timeout" : {
               "type" : "string",
-              "description" : "When this option is enabled, Filebeat gives every harvester a predefined lifetime. Regardless of where the reader is in the file, reading will stop after the close_timeout period has elapsed. This option can be useful for older log files when you want to spend only a predefined amount of time on the files. While close_timeout will close the file after the predefined timeout, if the file is still being updated, Filebeat will start a new harvester again per the defined scan_frequency. And the close_timeout for this harvester will start again with the countdown for the timeout.\nThis option is particularly useful in case the output is blocked, which makes Filebeat keep open file handlers even for files that were deleted from the disk. Setting close_timeout to 5m ensures that the files are periodically closed so they can be freed up by the operating system.\nIf you set close_timeout to equal ignore_older, the file will not be picked up if it’s modified while the harvester is closed. This combination of settings normally leads to data loss, and the complete file is not sent.\nWhen you use close_timeout for logs that contain multiline events, the harvester might stop in the middle of a multiline event, which means that only parts of the event will be sent. If the harvester is started again and the file still exists, only the second part of the event will be sent.\nThis option is set to 0 by default which means it is disabled.",
-              "examples" : [ "disabled" ]
+              "description" : "When this option is enabled, Filebeat gives every harvester a predefined lifetime. Regardless of where the reader is in the file, reading will stop after the close_timeout period has elapsed. This option can be useful for older log files when you want to spend only a predefined amount of time on the files. While close_timeout will close the file after the predefined timeout, if the file is still being updated, Filebeat will start a new harvester again per the defined scan_frequency. And the close_timeout for this harvester will start again with the countdown for the timeout.\nThis option is particularly useful in case the output is blocked, which makes Filebeat keep open file handlers even for files that were deleted from the disk. Setting close_timeout to 5m ensures that the files are periodically closed so they can be freed up by the operating system.\nIf you set close_timeout to equal ignore_older, the file will not be picked up if it’s modified while the harvester is closed. This combination of settings normally leads to data loss, and the complete file is not sent.\nWhen you use close_timeout for logs that contain multiline events, the harvester might stop in the middle of a multiline event, which means that only parts of the event will be sent. If the harvester is started again and the file still exists, only the second part of the event will be sent.\nThis option is set to 0 by default which means it is disabled."
             },
             "clean_*" : {
               "type" : "string",
@@ -6593,8 +6595,7 @@
             },
             "scan.sort" : {
               "type" : "string",
-              "description" : "If you specify a value other than the empty string for this setting you can determine whether to use ascending or descending order using scan.order. Possible values are modtime and filename. To sort by file modification time, use modtime, otherwise use filename. Leave this option empty to disable it.\nIf you specify a value for this setting, you can use scan.order to configure whether files are scanned in ascending or descending order.\nThe default setting is disabled.",
-              "examples" : [ "disabled" ]
+              "description" : "If you specify a value other than the empty string for this setting you can determine whether to use ascending or descending order using scan.order. Possible values are modtime and filename. To sort by file modification time, use modtime, otherwise use filename. Leave this option empty to disable it.\nIf you specify a value for this setting, you can use scan.order to configure whether files are scanned in ascending or descending order.\nThe default setting is disabled."
             },
             "scan.order" : {
               "type" : "string",
@@ -6613,7 +6614,7 @@
             "backoff" : {
               "type" : "string",
               "description" : "The backoff options specify how aggressively Filebeat crawls open files for updates. You can use the default values in most cases.\nThe backoff option defines how long Filebeat waits before checking a file again after EOF is reached. The default is 1s, which means the file is checked every second if new lines were added. This enables near real-time crawling. Every time a new line appears in the file, the backoff value is reset to the initial value. The default is 1s.",
-              "examples" : [ "checked" ]
+              "examples" : [ "1s" ]
             },
             "max_backoff" : {
               "type" : "string",
@@ -6628,15 +6629,17 @@
             "harvester_limit" : {
               "type" : "string",
               "description" : "The harvester_limit option limits the number of harvesters that are started in parallel for one input. This directly relates to the maximum number of file handlers that are opened. The default for harvester_limit is 0, which means there is no limit. This configuration is useful if the number of files to be harvested exceeds the open file handler limit of the operating system.\nSetting a limit on the number of harvesters means that potentially not all files are opened in parallel. Therefore we recommended that you use this option in combination with the close_* options to make sure harvesters are stopped more often so that new files can be picked up.\nCurrently if a new harvester can be started again, the harvester is picked randomly. This means it’s possible that the harvester for a file that was just closed and then updated again might be started instead of the harvester for a file that hasn’t been harvested for a longer period of time.\nThis configuration option applies per input. You can use this option to indirectly set higher priorities on certain inputs by assigning a higher limit of harvesters.",
-              "examples" : [ "no" ]
+              "examples" : [ "0" ]
             },
             "file_identity" : {
-              "type" : "string",
-              "description" : "Different file_identity methods can be configured to suit the environment where you are collecting log messages."
-            },
-            "native" : {
-              "type" : "string",
-              "description" : "The default behaviour of Filebeat is to differentiate between files using their inodes and device ids."
+              "type" : "object",
+              "description" : "Different file_identity methods can be configured to suit the environment where you are collecting log messages.",
+              "properties" : {
+                "native" : {
+                  "type" : "string",
+                  "description" : "The default behaviour of Filebeat is to differentiate between files using their inodes and device ids."
+                }
+              }
             },
             "path" : {
               "type" : "string",
@@ -6981,14 +6984,15 @@
               "examples" : [ "1.0.0" ]
             },
             "initial_offset" : {
-              "type" : "string",
+              "type" : "object",
               "description" : "The initial offset to start reading, either \"oldest\" or \"newest\". Defaults to \"oldest\".",
-              "examples" : [ "oldest" ]
-            },
-            "connect_backoff" : {
-              "type" : "string",
-              "description" : "How long to wait before trying to reconnect to the kafka cluster after a fatal error. Default is 30s.",
-              "examples" : [ "30s" ]
+              "properties" : {
+                "connect_backoff" : {
+                  "type" : "string",
+                  "description" : "How long to wait before trying to reconnect to the kafka cluster after a fatal error. Default is 30s.",
+                  "examples" : [ "30s" ]
+                }
+              }
             },
             "consume_backoff" : {
               "type" : "string",
@@ -7010,51 +7014,54 @@
               "examples" : [ "read_uncommitted" ]
             },
             "fetch" : {
-              "type" : "string",
-              "description" : "Kafka fetch settings:"
-            },
-            "min" : {
-              "type" : "string",
-              "description" : "The minimum number of bytes to wait for. Defaults to 1.",
-              "examples" : [ "1" ]
-            },
-            "default" : {
-              "type" : "string",
-              "description" : "The default number of bytes to read per request. Defaults to 1MB.",
-              "examples" : [ "1MB" ]
-            },
-            "max" : {
-              "type" : "string",
-              "description" : "The maximum number of bytes to read per request. Defaults to 0 (no limit).",
-              "examples" : [ "0" ]
+              "type" : "object",
+              "description" : "Kafka fetch settings:",
+              "properties" : {
+                "min" : {
+                  "type" : "string",
+                  "description" : "The minimum number of bytes to wait for. Defaults to 1.",
+                  "examples" : [ "1" ]
+                },
+                "default" : {
+                  "type" : "string",
+                  "description" : "The default number of bytes to read per request. Defaults to 1MB.",
+                  "examples" : [ "1MB" ]
+                },
+                "max" : {
+                  "type" : "string",
+                  "description" : "The maximum number of bytes to read per request. Defaults to 0 (no limit)."
+                }
+              }
             },
             "expand_event_list_from_field" : {
               "type" : "string",
               "description" : "If the fileset using this input expects to receive multiple messages bundled under a specific field then the config option expand_event_list_from_field value can be assigned the name of the field. For example in the case of azure filesets the events are found under the json object \"records\".\nThis setting will be able to split the messages under the group value (records) into separate events."
             },
             "rebalance" : {
-              "type" : "string",
-              "description" : "Kafka rebalance settings:"
-            },
-            "strategy" : {
-              "type" : "string",
-              "description" : "Either \"range\" or \"roundrobin\". Defaults to \"range\".",
-              "examples" : [ "range" ]
-            },
-            "timeout" : {
-              "type" : "string",
-              "description" : "How long to wait for an attempted rebalance. Defaults to 60s.",
-              "examples" : [ "60s" ]
-            },
-            "max_retries" : {
-              "type" : "string",
-              "description" : "How many times to retry if rebalancing fails. Defaults to 4.",
-              "examples" : [ "4" ]
-            },
-            "retry_backoff" : {
-              "type" : "string",
-              "description" : "How long to wait after an unsuccessful rebalance attempt. Defaults to 2s.",
-              "examples" : [ "2s" ]
+              "type" : "object",
+              "description" : "Kafka rebalance settings:",
+              "properties" : {
+                "strategy" : {
+                  "type" : "string",
+                  "description" : "Either \"range\" or \"roundrobin\". Defaults to \"range\".",
+                  "examples" : [ "range" ]
+                },
+                "timeout" : {
+                  "type" : "string",
+                  "description" : "How long to wait for an attempted rebalance. Defaults to 60s.",
+                  "examples" : [ "60s" ]
+                },
+                "max_retries" : {
+                  "type" : "string",
+                  "description" : "How many times to retry if rebalancing fails. Defaults to 4.",
+                  "examples" : [ "4" ]
+                },
+                "retry_backoff" : {
+                  "type" : "string",
+                  "description" : "How long to wait after an unsuccessful rebalance attempt. Defaults to 2s.",
+                  "examples" : [ "2s" ]
+                }
+              }
             },
             "kerberos" : {
               "type" : "string",
@@ -7155,12 +7162,14 @@
               "description" : "Passphrase used to decrypt the private key."
             },
             "api.authentication_endpoint" : {
-              "type" : "string",
-              "description" : "The authentication endpoint used to authorize the Azure app. This is https://login.microsoftonline.com/ by default, and can be changed to access alternative endpoints."
-            },
-            "api.resource" : {
-              "type" : "string",
-              "description" : "The API resource to retrieve information from. This is https://manage.office.com by default, and can be changed to access alternative endpoints."
+              "type" : "object",
+              "description" : "The authentication endpoint used to authorize the Azure app. This is https://login.microsoftonline.com/ by default, and can be changed to access alternative endpoints.",
+              "properties" : {
+                "api.resource" : {
+                  "type" : "string",
+                  "description" : "The API resource to retrieve information from. This is https://manage.office.com by default, and can be changed to access alternative endpoints."
+                }
+              }
             },
             "api.max_retention" : {
               "type" : "string",
@@ -7218,42 +7227,46 @@
             },
             "max_bytes" : {
               "type" : "string",
-              "description" : "The maximum number of bytes that a single log message can have. All bytes after max_bytes are discarded and not sent. This setting is especially useful for multiline log messages, which can get large. The default is 10MB (10485760).",
-              "examples" : [ "10MB" ]
+              "description" : "The maximum number of bytes that a single log message can have. All bytes after max_bytes are discarded and not sent. This setting is especially useful for multiline log messages, which can get large. The default is 10MB (10485760)."
             },
             "json" : {
-              "type" : "string",
-              "description" : "These options make it possible for Filebeat to decode logs structured as JSON messages. Filebeat processes the logs line by line, so the JSON decoding only works if there is one JSON object per line.\nThe decoding happens before line filtering and multiline. You can combine JSON decoding with filtering and multiline if you set the message_key option. This can be helpful in situations where the application logs are wrapped in JSON objects, as with like it happens for example with Docker.\nExample configuration:\nYou must specify at least one of the following settings to enable JSON parsing mode:"
-            },
-            "keys_under_root" : {
-              "type" : "string",
-              "description" : "By default, the decoded JSON is placed under a \"json\" key in the output document. If you enable this setting, the keys are copied top level in the output document. The default is false.",
-              "examples" : [ "placed" ]
-            },
-            "overwrite_keys" : {
-              "type" : "string",
-              "description" : "If keys_under_root and this setting are enabled, then the values from the decoded JSON object overwrite the fields that Filebeat normally adds (type, source, offset, etc.) in case of conflicts."
-            },
-            "expand_keys" : {
-              "type" : "string",
-              "description" : "If this setting is enabled, Filebeat will recursively de-dot keys in the decoded JSON, and expand them into a hierarchical object structure. For example, {\"a.b.c\": 123} would be expanded into {\"a\":{\"b\":{\"c\":123}}}. This setting should be enabled when the input is produced by an ECS logger."
-            },
-            "add_error_key" : {
-              "type" : "string",
-              "description" : "If this setting is enabled, Filebeat adds a \"error.message\" and \"error.type: json\" key in case of JSON unmarshalling errors or when a message_key is defined in the configuration but cannot be used."
-            },
-            "message_key" : {
-              "type" : "string",
-              "description" : "An optional configuration setting that specifies a JSON key on which to apply the line filtering and multiline settings. If specified the key must be at the top level in the JSON object and the value associated with the key must be a string, otherwise no filtering or multiline aggregation will occur."
-            },
-            "document_id" : {
-              "type" : "string",
-              "description" : "Option configuration setting that specifies the JSON key to set the document id. If configured, the field will be removed from the original json document and stored in @metadata._id"
-            },
-            "ignore_decoding_error" : {
-              "type" : "boolean",
-              "description" : "An optional configuration setting that specifies if JSON decoding errors should be logged or not. If set to true, errors will not be logged. The default is false.",
-              "examples" : [ "false" ]
+              "type" : "object",
+              "description" : "These options make it possible for Filebeat to decode logs structured as JSON messages. Filebeat processes the logs line by line, so the JSON decoding only works if there is one JSON object per line.",
+              "properties" : {
+                "keys_under_root" : {
+                  "type" : "boolean",
+                  "description" : "By default, the decoded JSON is placed under a \"json\" key in the output document. If you enable this setting, the keys are copied top level in the output document. The default is false.",
+                  "examples" : [ "false" ]
+                },
+                "overwrite_keys" : {
+                  "type" : "boolean",
+                  "description" : "If keys_under_root and this setting are enabled, then the values from the decoded JSON object overwrite the fields that Filebeat normally adds (type, source, offset, etc.) in case of conflicts.",
+                  "examples" : [ "true" ]
+                },
+                "expand_keys" : {
+                  "type" : "boolean",
+                  "description" : "If this setting is enabled, Filebeat will recursively de-dot keys in the decoded JSON, and expand them into a hierarchical object structure. For example, {\"a.b.c\": 123} would be expanded into {\"a\":{\"b\":{\"c\":123}}}. This setting should be enabled when the input is produced by an ECS logger.",
+                  "examples" : [ "true" ]
+                },
+                "add_error_key" : {
+                  "type" : "boolean",
+                  "description" : "If this setting is enabled, Filebeat adds a \"error.message\" and \"error.type: json\" key in case of JSON unmarshalling errors or when a message_key is defined in the configuration but cannot be used.",
+                  "examples" : [ "true" ]
+                },
+                "message_key" : {
+                  "type" : "string",
+                  "description" : "An optional configuration setting that specifies a JSON key on which to apply the line filtering and multiline settings. If specified the key must be at the top level in the JSON object and the value associated with the key must be a string, otherwise no filtering or multiline aggregation will occur."
+                },
+                "document_id" : {
+                  "type" : "string",
+                  "description" : "Option configuration setting that specifies the JSON key to set the document id. If configured, the field will be removed from the original json document and stored in @metadata._id"
+                },
+                "ignore_decoding_error" : {
+                  "type" : "boolean",
+                  "description" : "An optional configuration setting that specifies if JSON decoding errors should be logged or not. If set to true, errors will not be logged. The default is false.",
+                  "examples" : [ "false" ]
+                }
+              }
             },
             "multiline" : {
               "$ref" : "#/definitions/multiline"
@@ -7287,13 +7300,11 @@
             },
             "group" : {
               "type" : "string",
-              "description" : "The group ownership of the Unix socket that will be created by Filebeat. The default is the primary group name for the user Filebeat is running as. This option is ignored on Windows.",
-              "examples" : [ "running" ]
+              "description" : "The group ownership of the Unix socket that will be created by Filebeat. The default is the primary group name for the user Filebeat is running as. This option is ignored on Windows."
             },
             "mode" : {
               "type" : "string",
-              "description" : "The file mode of the Unix socket that will be created by Filebeat. This is expected to be a file mode as an octal string. The default value is the system default (generally 0755).",
-              "examples" : [ "the" ]
+              "description" : "The file mode of the Unix socket that will be created by Filebeat. This is expected to be a file mode as an octal string. The default value is the system default (generally 0755)."
             },
             "framing" : {
               "type" : "string",
@@ -7586,7 +7597,28 @@
       "items" : {
         "type" : "object",
         "maxProperties" : 1,
+        "allOf" : [ {
+          "$ref" : "#/definitions/handwritten_processors"
+        } ],
         "properties" : {
+          "include_fields" : {
+            "type" : "object",
+            "description" : "keep only provided field names (whatever field hierarchical position)",
+            "properties" : {
+              "when" : {
+                "$ref" : "#/definitions/condition"
+              },
+              "fields" : {
+                "type" : "array",
+                "items" : {
+                  "type" : "string",
+                  "defaultSnippets" : [ {
+                    "body" : "cpu"
+                  } ]
+                }
+              }
+            }
+          },
           "drop_fields" : {
             "type" : "object",
             "description" : "drop provided field names (whatever field hierarchical position)",
@@ -7605,149 +7637,194 @@
               }
             }
           },
-          "equals" : {
+          "drop_event" : {
             "type" : "object",
-            "description" : "drops the events that have the HTTP response code 200",
+            "description" : "drop event if 'when' condition is matched",
+            "properties" : {
+              "when" : {
+                "$ref" : "#/definitions/condition"
+              }
+            }
+          },
+          "rename" : {
+            "type" : "object",
+            "description" : "renames the field a to b",
             "properties" : {
               "when" : {
                 "$ref" : "#/definitions/condition"
               },
-              "http.code" : {
-                "type" : "string",
-                "examples" : [ "200" ]
+              "fields" : {
+                "type" : "array",
+                "items" : {
+                  "type" : "object",
+                  "properties" : {
+                    "from" : {
+                      "type" : "string",
+                      "examples" : [ "a" ]
+                    },
+                    "to" : {
+                      "type" : "string",
+                      "examples" : [ "b" ]
+                    }
+                  }
+                }
               }
             }
           },
-          "from" : {
-            "type" : "string",
-            "description" : "renames the field a to b",
-            "examples" : [ "a" ]
-          },
-          "to" : {
-            "type" : "string",
-            "description" : "renames the field a to b",
-            "examples" : [ "b" ]
-          },
-          "field" : {
-            "type" : "string",
-            "description" : "tokenizes the string into fields",
-            "examples" : [ "message" ]
-          },
-          "target_prefix" : {
-            "type" : "string",
-            "description" : "tokenizes the string into fields",
-            "examples" : [ "dissect" ]
-          },
-          "add_cloud_metadata" : {
-            "type" : "string",
-            "description" : "enriches each event with metadata from the cloud provider about the host machine. It works on EC2, GCE, DigitalOcean, Tencent Cloud, and Alibaba Cloud.",
-            "examples" : [ "~" ]
-          },
-          "processors" : {
-            "type" : "array",
-            "description" : "enriches each event with the machine's local time zone offset from UTC.",
-            "items" : {
-              "type" : "string",
-              "defaultSnippets" : [ {
-                "body" : "add_docker_metadata:"
-              } ]
-            }
-          },
-          "match_fields" : {
-            "type" : "array",
-            "description" : "enriches each event with the machine's local time zone offset from UTC.",
-            "items" : {
-              "type" : "string",
-              "defaultSnippets" : [ {
-                "body" : "system.process.cgroup.id"
-              } ]
-            }
-          },
-          "match_pids" : {
-            "type" : "array",
-            "description" : "enriches each event with the machine's local time zone offset from UTC.",
-            "items" : {
-              "type" : "string",
-              "defaultSnippets" : [ {
-                "body" : "process.pid"
-              } ]
-            }
-          },
-          "match_source" : {
-            "type" : "boolean",
-            "description" : "enriches each event with the machine's local time zone offset from UTC.",
-            "examples" : [ "true" ]
-          },
-          "match_source_index" : {
-            "type" : "string",
-            "description" : "enriches each event with the machine's local time zone offset from UTC.",
-            "examples" : [ "4" ]
-          },
-          "match_short_id" : {
-            "type" : "boolean",
-            "description" : "enriches each event with the machine's local time zone offset from UTC.",
-            "examples" : [ "false" ]
-          },
-          "cleanup_timeout" : {
-            "type" : "string",
-            "description" : "enriches each event with the machine's local time zone offset from UTC.",
-            "examples" : [ "60" ]
-          },
-          "labels.dedot" : {
-            "type" : "boolean",
-            "description" : "enriches each event with the machine's local time zone offset from UTC.",
-            "examples" : [ "false" ]
-          },
-          "add_docker_metadata" : {
-            "type" : "string",
-            "examples" : [ "~" ]
-          },
-          "add_host_metadata" : {
-            "type" : "string",
-            "description" : "enriches each event with host metadata.",
-            "examples" : [ "~" ]
-          },
-          "target" : {
-            "type" : "string",
-            "description" : "enriches each event with process metadata using process IDs included in the event.",
-            "examples" : [ "system.process.parent" ]
-          },
-          "process_array" : {
-            "type" : "boolean",
-            "description" : "decodes fields containing JSON strings and replaces the strings with valid JSON objects.",
-            "examples" : [ "false" ]
-          },
-          "max_depth" : {
-            "type" : "string",
-            "description" : "decodes fields containing JSON strings and replaces the strings with valid JSON objects.",
-            "examples" : [ "1" ]
-          },
-          "overwrite_keys" : {
-            "type" : "boolean",
-            "description" : "decodes fields containing JSON strings and replaces the strings with valid JSON objects.",
-            "examples" : [ "false" ]
-          },
-          "ignore_missing" : {
-            "type" : "boolean",
-            "examples" : [ "false" ]
-          },
-          "fail_on_error" : {
-            "type" : "boolean",
-            "examples" : [ "true" ]
-          },
-          "message" : {
+          "add_locale" : {
             "type" : "object",
-            "description" : "truncates the value of message to 1024 bytes",
+            "description" : "enriches each event with the machine's local time zone offset from UTC.",
             "properties" : {
               "when" : {
                 "$ref" : "#/definitions/condition"
+              },
+              "format" : {
+                "type" : "string",
+                "examples" : [ "offset" ]
               }
             }
           },
-          "max_bytes" : {
-            "type" : "string",
-            "description" : "truncates the value of message to 1024 bytes",
-            "examples" : [ "1024" ]
+          "add_docker_metadata" : {
+            "type" : "object",
+            "description" : "enriches each event with docker metadata, it matches given fields to an existing container id and adds info from that container",
+            "properties" : {
+              "when" : {
+                "$ref" : "#/definitions/condition"
+              },
+              "host" : {
+                "type" : "string",
+                "examples" : [ "unix:///var/run/docker.sock" ]
+              },
+              "match_fields" : {
+                "type" : "array",
+                "items" : {
+                  "type" : "string",
+                  "defaultSnippets" : [ {
+                    "body" : "system.process.cgroup.id"
+                  } ]
+                }
+              },
+              "match_pids" : {
+                "type" : "array",
+                "items" : {
+                  "type" : "string",
+                  "defaultSnippets" : [ {
+                    "body" : "process.pid"
+                  } ]
+                }
+              },
+              "match_source" : {
+                "type" : "boolean",
+                "examples" : [ "true" ]
+              },
+              "match_source_index" : {
+                "type" : "string",
+                "examples" : [ "4" ]
+              },
+              "match_short_id" : {
+                "type" : "boolean",
+                "examples" : [ "false" ]
+              },
+              "cleanup_timeout" : {
+                "type" : "string",
+                "examples" : [ "60" ]
+              },
+              "labels.dedot" : {
+                "type" : "boolean",
+                "examples" : [ "false" ]
+              }
+            }
+          },
+          "decode_json_fields" : {
+            "type" : "object",
+            "description" : "decodes fields containing JSON strings and replaces the strings with valid JSON objects.",
+            "properties" : {
+              "when" : {
+                "$ref" : "#/definitions/condition"
+              },
+              "fields" : {
+                "type" : "array",
+                "items" : {
+                  "type" : "string",
+                  "defaultSnippets" : [ {
+                    "body" : "field1"
+                  } ]
+                }
+              },
+              "process_array" : {
+                "type" : "boolean",
+                "examples" : [ "false" ]
+              },
+              "max_depth" : {
+                "type" : "string",
+                "examples" : [ "1" ]
+              },
+              "target" : {
+                "type" : "string"
+              },
+              "overwrite_keys" : {
+                "type" : "boolean",
+                "examples" : [ "false" ]
+              }
+            }
+          },
+          "decompress_gzip_field" : {
+            "type" : "object",
+            "description" : "decompress 'from' field content to 'to' field",
+            "properties" : {
+              "when" : {
+                "$ref" : "#/definitions/condition"
+              },
+              "from" : {
+                "type" : "string",
+                "examples" : [ "field1" ]
+              },
+              "to" : {
+                "type" : "string",
+                "examples" : [ "field2" ]
+              },
+              "ignore_missing" : {
+                "type" : "boolean",
+                "examples" : [ "false" ]
+              },
+              "fail_on_error" : {
+                "type" : "boolean",
+                "examples" : [ "true" ]
+              }
+            }
+          },
+          "copy_fields" : {
+            "type" : "object",
+            "description" : "copy field a to b",
+            "properties" : {
+              "when" : {
+                "$ref" : "#/definitions/condition"
+              },
+              "fields" : {
+                "type" : "array",
+                "items" : {
+                  "type" : "object",
+                  "properties" : {
+                    "from" : {
+                      "type" : "string",
+                      "examples" : [ "message" ]
+                    },
+                    "to" : {
+                      "type" : "string",
+                      "examples" : [ "message_copied" ]
+                    }
+                  }
+                }
+              },
+              "fail_on_error" : {
+                "type" : "boolean",
+                "examples" : [ "true" ]
+              },
+              "ignore_missing" : {
+                "type" : "boolean",
+                "examples" : [ "false" ]
+              }
+            }
           },
           "truncate_fields" : {
             "type" : "object",
@@ -7761,7 +7838,7 @@
                 "items" : {
                   "type" : "string",
                   "defaultSnippets" : [ {
-                    "body" : "event.original"
+                    "body" : "message"
                   } ]
                 }
               },
@@ -7772,6 +7849,854 @@
               "ignore_missing" : {
                 "type" : "boolean",
                 "examples" : [ "true" ]
+              }
+            }
+          },
+          "urldecode" : {
+            "type" : "object",
+            "description" : "URL-decodes the value of field1 to field2",
+            "properties" : {
+              "when" : {
+                "$ref" : "#/definitions/condition"
+              },
+              "fields" : {
+                "type" : "array",
+                "items" : {
+                  "type" : "object",
+                  "properties" : {
+                    "from" : {
+                      "type" : "string",
+                      "examples" : [ "field1" ]
+                    },
+                    "to" : {
+                      "type" : "string",
+                      "examples" : [ "field2" ]
+                    }
+                  }
+                }
+              },
+              "ignore_missing" : {
+                "type" : "boolean",
+                "examples" : [ "false" ]
+              },
+              "fail_on_error" : {
+                "type" : "boolean",
+                "examples" : [ "true" ]
+              }
+            }
+          },
+          "add_cloudfoundry_metadata" : {
+            "type" : "object",
+            "description" : "The add_cloudfoundry_metadata processor annotates each event with relevant metadata from Cloud Foundry applications. The events are annotated with Cloud Foundry metadata, only if the event contains a reference to a Cloud Foundry application (using field cloudfoundry.app.id) and the configured Cloud Foundry client is able to retrieve information for the application.",
+            "properties" : {
+              "when" : {
+                "$ref" : "#/definitions/condition"
+              },
+              "api_address" : {
+                "type" : "string",
+                "description" : "(Optional) The URL of the Cloud Foundry API. It uses http://api.bosh-lite.com by default."
+              },
+              "doppler_address" : {
+                "type" : "string",
+                "description" : "(Optional) The URL of the Cloud Foundry Doppler Websocket. It uses value from ${api_address}/v2/info by default."
+              },
+              "uaa_address" : {
+                "type" : "string",
+                "description" : "(Optional) The URL of the Cloud Foundry UAA API. It uses value from ${api_address}/v2/info by default."
+              },
+              "rlp_address" : {
+                "type" : "string",
+                "description" : "(Optional) The URL of the Cloud Foundry RLP Gateway. It uses value from ${api_address}/v2/info by default."
+              },
+              "client_id" : {
+                "type" : "string",
+                "description" : "Client ID to authenticate with Cloud Foundry."
+              },
+              "client_secret" : {
+                "type" : "string",
+                "description" : "Client Secret to authenticate with Cloud Foundry."
+              },
+              "cache_duration" : {
+                "type" : "string",
+                "description" : "(Optional) Maximum amount of time to cache an application’s metadata. Defaults to 120 seconds."
+              },
+              "cache_retry_delay" : {
+                "type" : "string",
+                "description" : "(Optional) Time to wait before trying to obtain an application’s metadata again in case of error. Defaults to 20 seconds."
+              },
+              "ssl" : {
+                "description" : "(Optional) SSL configuration to use when connecting to Cloud Foundry.",
+                "$ref" : "#/definitions/ssl"
+              }
+            }
+          },
+          "add_fields" : {
+            "type" : "object",
+            "description" : "The add_fields processor adds additional fields to the event. Fields can be scalar values, arrays, dictionaries, or any nested combination of these. By default the fields that you specify will be grouped under the fields sub-dictionary in the event. To group the fields under a different sub-dictionary, use the target setting. To store the fields as top-level fields, set target: ''.",
+            "properties" : {
+              "when" : {
+                "$ref" : "#/definitions/condition"
+              },
+              "target" : {
+                "type" : "string",
+                "description" : "(Optional) Sub-dictionary to put all fields into. Defaults to fields.",
+                "examples" : [ "fields" ]
+              },
+              "fields" : {
+                "type" : "object",
+                "description" : "Fields to be added.",
+                "additionalItems" : true
+              }
+            }
+          },
+          "add_host_metadata" : {
+            "type" : "object",
+            "description" : "It has the following settings:",
+            "properties" : {
+              "when" : {
+                "$ref" : "#/definitions/condition"
+              },
+              "netinfo.enabled" : {
+                "type" : "string",
+                "description" : "(Optional) Default true. Include IP addresses and MAC addresses as fields host.ip and host.mac"
+              },
+              "cache.ttl" : {
+                "type" : "string",
+                "description" : "(Optional) The processor uses an internal cache for the host metadata. This sets the cache expiration time. The default is 5m, negative values disable caching altogether.",
+                "examples" : [ "5m" ]
+              },
+              "geo.name" : {
+                "type" : "string",
+                "description" : "(Optional) User definable token to be used for identifying a discrete location. Frequently a datacenter, rack, or similar."
+              },
+              "geo.location" : {
+                "type" : "string",
+                "description" : "(Optional) Longitude and latitude in comma separated format."
+              },
+              "geo.continent_name" : {
+                "type" : "string",
+                "description" : "(Optional) Name of the continent."
+              },
+              "geo.country_name" : {
+                "type" : "string",
+                "description" : "(Optional) Name of the country."
+              },
+              "geo.region_name" : {
+                "type" : "string",
+                "description" : "(Optional) Name of the region."
+              },
+              "geo.city_name" : {
+                "type" : "string",
+                "description" : "(Optional) Name of the city."
+              },
+              "geo.country_iso_code" : {
+                "type" : "string",
+                "description" : "(Optional) ISO country code."
+              },
+              "geo.region_iso_code" : {
+                "type" : "string",
+                "description" : "(Optional) ISO region code."
+              },
+              "replace_fields" : {
+                "type" : "string",
+                "description" : "(Optional) Default true. If set to false, original host fields from the event will not be replaced by host fields from add_host_metadata."
+              }
+            }
+          },
+          "add_id" : {
+            "type" : "object",
+            "description" : "The add_id processor generates a unique ID for an event.",
+            "properties" : {
+              "when" : {
+                "$ref" : "#/definitions/condition"
+              },
+              "target_field" : {
+                "type" : "string",
+                "description" : "(Optional) Field where the generated ID will be stored. Default is @metadata._id.",
+                "examples" : [ "@metadata" ]
+              },
+              "type" : {
+                "type" : "string",
+                "description" : "(Optional) Type of ID to generate. Currently only elasticsearch is supported and is the default. The elasticsearch type generates IDs using the same algorithm that Elasticsearch uses for auto-generating document IDs."
+              }
+            }
+          },
+          "add_kubernetes_metadata" : {
+            "type" : "object",
+            "description" : "The add_kubernetes_metadata processor annotates each event with relevant metadata based on which Kubernetes pod the event originated from. At startup it detects an in_cluster environment and caches the Kubernetes-related metadata. Events are only annotated if a valid configuration is detected. If it’s not able to detect a valid Kubernetes configuration, the events are not annotated with Kubernetes-related metadata.",
+            "properties" : {
+              "when" : {
+                "$ref" : "#/definitions/condition"
+              },
+              "host" : {
+                "type" : "string",
+                "description" : "(Optional) Specify the node to scope filebeat to in case it cannot be accurately detected, as when running filebeat in host network mode."
+              },
+              "namespace" : {
+                "type" : "string",
+                "description" : "(Optional) Select the namespace from which to collect the metadata. If it is not set, the processor collects metadata from all namespaces. It is unset by default."
+              },
+              "add_resource_metadata" : {
+                "$ref" : "#/definitions/add_resource_metadata"
+              },
+              "kube_config" : {
+                "type" : "string",
+                "description" : "(Optional) Use given config file as configuration for Kubernetes client. It defaults to KUBECONFIG environment variable if present."
+              },
+              "default_indexers.enabled" : {
+                "type" : "boolean",
+                "description" : "(Optional) Enable/Disable default pod indexers, in case you want to specify your own.",
+                "examples" : [ "true" ]
+              },
+              "default_matchers.enabled" : {
+                "type" : "boolean",
+                "description" : "(Optional) Enable/Disable default pod matchers, in case you want to specify your own.",
+                "examples" : [ "true" ]
+              },
+              "indexers" : {
+                "type" : "array",
+                "description" : "Indexers use pods metadata to create unique identifiers for each one of the pods.",
+                "items" : {
+                  "type" : "object",
+                  "properties" : {
+                    "container" : {
+                      "type" : "string",
+                      "description" : "Identifies the pod metadata using the IDs of its containers."
+                    },
+                    "ip_port" : {
+                      "type" : "string",
+                      "description" : "Identifies the pod metadata using combinations of its IP and its exposed ports. When using this indexer metadata is identified using the IP of the pods, and the combination if ip:port for each one of the ports exposed by its containers."
+                    },
+                    "pod_name" : {
+                      "type" : "string",
+                      "description" : "Identifies the pod metadata using its namespace and its name as namespace/pod_name."
+                    },
+                    "pod_uid" : {
+                      "type" : "string",
+                      "description" : "Identifies the pod metadata using the UID of the pod."
+                    }
+                  }
+                }
+              },
+              "matchers" : {
+                "type" : "array",
+                "description" : "Matchers are used to construct the lookup keys that match with the identifiers created by indexes.",
+                "items" : {
+                  "type" : "object",
+                  "properties" : {
+                    "field_format" : {
+                      "type" : "object",
+                      "description" : "Looks up pod metadata using a key created with a string format that can include event fields.\nThis matcher has an option format to define the string format. This string format can contain placeholders for any field in the event.\nFor example, the following configuration uses the ip_port indexer to identify the pod metadata by combinations of the pod IP and its exposed ports, and uses the destination IP and port in events as match keys:",
+                      "additionalItems" : true
+                    },
+                    "fields" : {
+                      "type" : "object",
+                      "description" : "Looks up pod metadata using as key the value of some specific fields. When multiple fields are defined, the first one included in the event is used.\nThis matcher has an option lookup_fields to define the files whose value will be used for lookup.\nFor example, the following configuration uses the ip_port indexer to identify pods, and defines a matcher that uses the destination IP or the server IP for the lookup, the first it finds in the event:",
+                      "additionalItems" : true
+                    },
+                    "logs_path" : {
+                      "type" : "object",
+                      "description" : "Looks up pod metadata using identifiers extracted from the log path stored in the log.file.path field.",
+                      "properties" : {
+                        "logs_path" : {
+                          "type" : "string",
+                          "description" : "(Optional) Base path of container logs. If not specified, it uses the default logs path of the platform where Filebeat is running."
+                        },
+                        "resource_type" : {
+                          "type" : "string",
+                          "description" : "(Optional) Type of the resource to obtain the ID of. It can be pod, to make the lookup based on the pod UID, or container, to make the lookup based on the container ID. It defaults to container.",
+                          "examples" : [ "container" ]
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "add_labels" : {
+            "type" : "object",
+            "description" : "The add_labels processors adds a set of key-value pairs to an event. The processor will flatten nested configuration objects like arrays or dictionaries into a fully qualified name by merging nested names with a .. Array entries create numeric names starting with 0. Labels are always stored under the Elastic Common Schema compliant labels sub-dictionary.",
+            "properties" : {
+              "when" : {
+                "$ref" : "#/definitions/condition"
+              },
+              "labels" : {
+                "type" : "string",
+                "description" : "dictionaries of labels to be added."
+              }
+            }
+          },
+          "add_observer_metadata" : {
+            "type" : "object",
+            "description" : "This functionality is in beta and is subject to change. The design and code is less mature than official GA features and is being provided as-is with no warranties. Beta features are not subject to the support SLA of official GA features.",
+            "properties" : {
+              "when" : {
+                "$ref" : "#/definitions/condition"
+              },
+              "netinfo.enabled" : {
+                "type" : "string",
+                "description" : "(Optional) Default true. Include IP addresses and MAC addresses as fields observer.ip and observer.mac"
+              },
+              "cache.ttl" : {
+                "type" : "string",
+                "description" : "(Optional) The processor uses an internal cache for the observer metadata. This sets the cache expiration time. The default is 5m, negative values disable caching altogether.",
+                "examples" : [ "5m" ]
+              },
+              "geo.name" : {
+                "type" : "string",
+                "description" : "(Optional) User definable token to be used for identifying a discrete location. Frequently a datacenter, rack, or similar."
+              },
+              "geo.location" : {
+                "type" : "string",
+                "description" : "(Optional) Longitude and latitude in comma separated format."
+              },
+              "geo.continent_name" : {
+                "type" : "string",
+                "description" : "(Optional) Name of the continent."
+              },
+              "geo.country_name" : {
+                "type" : "string",
+                "description" : "(Optional) Name of the country."
+              },
+              "geo.region_name" : {
+                "type" : "string",
+                "description" : "(Optional) Name of the region."
+              },
+              "geo.city_name" : {
+                "type" : "string",
+                "description" : "(Optional) Name of the city."
+              },
+              "geo.country_iso_code" : {
+                "type" : "string",
+                "description" : "(Optional) ISO country code."
+              },
+              "geo.region_iso_code" : {
+                "type" : "string",
+                "description" : "(Optional) ISO region code."
+              }
+            }
+          },
+          "add_process_metadata" : {
+            "type" : "object",
+            "description" : "The add_process_metadata processor enriches events with information from running processes, identified by their process ID (PID).",
+            "properties" : {
+              "when" : {
+                "$ref" : "#/definitions/condition"
+              },
+              "match_pids" : {
+                "type" : "array",
+                "description" : "List of fields to lookup for a PID. The processor will search the list sequentially until the field is found in the current event, and the PID lookup will be applied to the value of this field.",
+                "items" : {
+                  "type" : "string"
+                }
+              },
+              "target" : {
+                "type" : "string",
+                "description" : "(Optional) Destination prefix where the process object will be created. The default is the event’s root."
+              },
+              "include_fields" : {
+                "type" : "array",
+                "description" : "(Optional) List of fields to add. By default, the processor will add all the available fields except process.env.",
+                "items" : {
+                  "type" : "string"
+                }
+              },
+              "ignore_missing" : {
+                "type" : "string",
+                "description" : "(Optional) When set to false, events that don’t contain any of the fields in match_pids will be discarded and an error will be generated. By default, this condition is ignored."
+              },
+              "overwrite_keys" : {
+                "type" : "string",
+                "description" : "(Optional) By default, if a target field already exists, it will not be overwritten and an error will be logged. If overwrite_keys is set to true, this condition will be ignored."
+              },
+              "restricted_fields" : {
+                "type" : "string",
+                "description" : "(Optional) By default, the process.env field is not output, to avoid leaking sensitive data. If restricted_fields is true, the field will be present in the output."
+              },
+              "host_path" : {
+                "type" : "string",
+                "description" : "(Optional) By default, the host_path field is set to the root directory of the host /. This is the path where /proc is mounted. For different runtime configurations of Kubernetes or Docker, the host_path can be set to overwrite the default."
+              },
+              "cgroup_prefixes" : {
+                "type" : "string",
+                "description" : "(Optional) By default, the cgroup_prefixes field is set to /kubepods and /docker. This is the prefix where the container ID is inside cgroup. For different runtime configurations of Kubernetes or Docker, the cgroup_prefixes can be set to overwrite the defaults."
+              },
+              "cgroup_regex" : {
+                "type" : "string",
+                "description" : "(Optional) By default, the container id is extracted from cgroup file based on cgroup_prefixes. This can be overwritten by specifying regular expression with capture group for capturing container id from cgroup path. Examples: ^\\/.+\\/.+\\/.+\\/([0-9a-f]{64}).* will match the container id of a cgroup like /kubepods/besteffort/pod665fb997-575b-11ea-bfce-080027421ddf/b5285682fba7449c86452b89a800609440ecc88a7ba5f2d38bedfb85409b30b1 ^\\/.+\\/.+\\/.+\\/docker-([0-9a-f]{64}).scope will match the container id of a cgroup like /kubepods.slice/kubepods-burstable.slice/kubepods-burstable-pod69349abe_d645_11ea_9c4c_08002709c05c.slice/docker-80d85a3a585f1575028ebe468d83093c301eda20d37d1671ff2a0be50fc0e460.scope ^\\/.+\\/.+\\/.+\\/crio-([0-9a-f]{64}).scope will match the container id of a cgroup like /kubepods.slice/kubepods-burstable.slice/kubepods-burstable-pod69349abe_d645_11ea_9c4c_08002709c05c.slice/crio-80d85a3a585f1575028ebe468d83093c301eda20d37d1671ff2a0be50fc0e460.scope"
+              },
+              "cgroup_cache_expire_time" : {
+                "type" : "string",
+                "description" : "(Optional) By default, the cgroup_cache_expire_time is set to 30 seconds. This is the length of time before cgroup cache elements expire in seconds. It can be set to 0 to disable the cgroup cache. In some container runtimes technology like runc, the container’s process is also process in the host kernel, and will be affected by PID rollover/reuse. The expire time needs to set smaller than the PIDs wrap around time to avoid wrong container id."
+              }
+            }
+          },
+          "add_tags" : {
+            "type" : "object",
+            "description" : "The add_tags processor adds tags to a list of tags. If the target field already exists, the tags are appended to the existing list of tags.",
+            "properties" : {
+              "when" : {
+                "$ref" : "#/definitions/condition"
+              },
+              "tags" : {
+                "type" : "array",
+                "description" : "List of tags to add.",
+                "items" : {
+                  "type" : "string"
+                }
+              },
+              "target" : {
+                "type" : "string",
+                "description" : "(Optional) Field the tags will be added to. Defaults to tags.",
+                "examples" : [ "tags" ]
+              }
+            }
+          },
+          "community_id" : {
+            "type" : "object",
+            "description" : "The community_id processor computes a network flow hash according to the Community ID Flow Hash specification.",
+            "properties" : {
+              "when" : {
+                "$ref" : "#/definitions/condition"
+              }
+            }
+          },
+          "convert" : {
+            "type" : "object",
+            "description" : "The convert processor converts a field in the event to a different type, such as converting a string to an integer.",
+            "properties" : {
+              "when" : {
+                "$ref" : "#/definitions/condition"
+              },
+              "fields" : {
+                "type" : "array",
+                "description" : "(Required) This is the list of fields to convert. At least one item must be contained in the list. Each item in the list must have a from key that specifies the source field. The to key is optional and specifies where to assign the converted value. If to is omitted then the from field is updated in-place. The type key specifies the data type to convert the value to. If type is omitted then the processor copies or renames the field without any type conversion.",
+                "items" : {
+                  "type" : "string"
+                }
+              },
+              "ignore_missing" : {
+                "type" : "boolean",
+                "description" : "(Optional) If true the processor continues to the next field when the from key is not found in the event. If false then the processor returns an error and does not process the remaining fields. Default is false.",
+                "examples" : [ "false" ]
+              },
+              "fail_on_error" : {
+                "type" : "boolean",
+                "description" : "(Optional) If false type conversion failures are ignored and the processor continues to the next field. Default is true.",
+                "examples" : [ "true" ]
+              },
+              "tag" : {
+                "type" : "string",
+                "description" : "(Optional) An identifier for this processor. Useful for debugging."
+              },
+              "mode" : {
+                "type" : "string",
+                "description" : "(Optional) When both from and to are defined for a field then mode controls whether to copy or rename the field when the type conversion is successful. Default is copy.",
+                "examples" : [ "copy" ]
+              }
+            }
+          },
+          "decode_base64_field" : {
+            "type" : "object",
+            "description" : "The decode_base64_field processor specifies a field to base64 decode. The field key contains a from: old-key and a to: new-key pair. from is the origin and to the target name of the field.",
+            "properties" : {
+              "when" : {
+                "$ref" : "#/definitions/condition"
+              },
+              "ignore_missing" : {
+                "type" : "boolean",
+                "description" : "(Optional) If set to true, no error is logged in case a key which should be base64 decoded is missing. Default is false.",
+                "examples" : [ "false" ]
+              },
+              "fail_on_error" : {
+                "type" : "boolean",
+                "description" : "(Optional) If set to true, in case of an error the base64 decode of fields is stopped and the original event is returned. If set to false, decoding continues also if an error happened during decoding. Default is true.",
+                "examples" : [ "true" ]
+              }
+            }
+          },
+          "decode_cef" : {
+            "type" : "object",
+            "description" : "The decode_cef processor decodes Common Event Format (CEF) messages. This processor is available in Filebeat.",
+            "properties" : {
+              "when" : {
+                "$ref" : "#/definitions/condition"
+              }
+            }
+          },
+          "decode_csv_fields" : {
+            "type" : "object",
+            "description" : "This functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.",
+            "properties" : {
+              "when" : {
+                "$ref" : "#/definitions/condition"
+              },
+              "fields" : {
+                "type" : "object",
+                "description" : "This is a mapping from the source field containing the CSV data to the destination field to which the decoded array will be written.",
+                "additionalItems" : true
+              },
+              "separator" : {
+                "type" : "string",
+                "description" : "(Optional) Character to be used as a column separator. The default is the comma character. For using a TAB character you must set it to \"\\t\"."
+              },
+              "ignore_missing" : {
+                "type" : "boolean",
+                "description" : "(Optional) Whether to ignore events which lack the source field. The default is false, which will fail processing of an event if a field is missing.",
+                "examples" : [ "false" ]
+              },
+              "overwrite_keys" : {
+                "type" : "boolean",
+                "description" : "Whether the target field is overwritten if it already exists. The default is false, which will fail processing of an event when target already exists.",
+                "examples" : [ "false" ]
+              },
+              "trim_leading_space" : {
+                "type" : "boolean",
+                "description" : "Whether extra space after the separator is trimmed from values. This works even if the separator is also a space. The default is false.",
+                "examples" : [ "false" ]
+              },
+              "fail_on_error" : {
+                "type" : "boolean",
+                "description" : "(Optional) If set to true, in case of an error the changes to the event are reverted, and the original event is returned. If set to false, processing continues also if an error happens. Default is true.",
+                "examples" : [ "true" ]
+              }
+            }
+          },
+          "decode_xml" : {
+            "type" : "object",
+            "description" : "This functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.",
+            "properties" : {
+              "when" : {
+                "$ref" : "#/definitions/condition"
+              },
+              "field" : {
+                "type" : "string",
+                "description" : "(Required) Source field containing the XML. Defaults to message.",
+                "examples" : [ "message" ]
+              },
+              "target_field" : {
+                "type" : "string",
+                "description" : "(Optional) The field under which the decoded XML will be written. By default the decoded XML object replaces the field from which it was read. To merge the decoded XML fields into the root of the event specify target_field with an empty string (target_field: \"\"). Note that the null value (target_field:) is treated as if the field was not set at all."
+              },
+              "overwrite_keys" : {
+                "type" : "boolean",
+                "description" : "(Optional) A boolean that specifies whether keys that already exist in the event are overwritten by keys from the decoded XML object. The default value is false.",
+                "examples" : [ "false" ]
+              },
+              "to_lower" : {
+                "type" : "boolean",
+                "description" : "(Optional) Converts all keys to lowercase. Accepts either true or false. The default value is true.",
+                "examples" : [ "true" ]
+              },
+              "document_id" : {
+                "type" : "string",
+                "description" : "(Optional) XML key to use as the document ID. If configured, the field will be removed from the original XML document and stored in @metadata._id."
+              },
+              "ignore_missing" : {
+                "type" : "boolean",
+                "description" : "(Optional) If true the processor will not return an error when a specified field does not exist. Defaults to false.",
+                "examples" : [ "false" ]
+              },
+              "ignore_failure" : {
+                "type" : "boolean",
+                "description" : "(Optional) Ignore all errors produced by the processor. Defaults to false.",
+                "examples" : [ "false" ]
+              }
+            }
+          },
+          "detect_mime_type" : {
+            "type" : "object",
+            "description" : "The detect_mime_type processor attempts to detect a mime type for a field that contains a given stream of bytes. The field key contains the field used as the data source and the target key contains the field to populate with the detected type",
+            "properties" : {
+              "when" : {
+                "$ref" : "#/definitions/condition"
+              }
+            }
+          },
+          "dissect" : {
+            "type" : "object",
+            "description" : "The dissect processor tokenizes incoming strings using defined patterns.",
+            "properties" : {
+              "when" : {
+                "$ref" : "#/definitions/condition"
+              },
+              "tokenizer" : {
+                "type" : "string",
+                "description" : "The field used to define the dissection pattern. Optional convert datatype can be provided after the key using | as separator to convert the value from string to integer, long, float, double, boolean or ip."
+              },
+              "field" : {
+                "type" : "string",
+                "description" : "(Optional) The event field to tokenize. Default is message.",
+                "examples" : [ "message" ]
+              },
+              "target_prefix" : {
+                "type" : "string",
+                "description" : "(Optional) The name of the field where the values will be extracted. When an empty string is defined, the processor will create the keys at the root of the event. Default is dissect. When the target key already exists in the event, the processor won’t replace it and log an error; you need to either drop or rename the key before using dissect, or enable the overwrite_keys flag.",
+                "examples" : [ "dissect" ]
+              },
+              "ignore_failure" : {
+                "type" : "string",
+                "description" : "(Optional) Flag to control whether the processor returns an error if the tokenizer fails to match the message field. If set to true, the processor will silently restore the original event, allowing execution of subsequent processors (if any). If set to false (default), the processor will log an error, preventing execution of other processors."
+              },
+              "overwrite_keys" : {
+                "type" : "boolean",
+                "description" : "(Optional) When set to true, the processor will overwrite existing keys in the event. The default is false, which causes the processor to fail when a key already exists.",
+                "examples" : [ "false" ]
+              },
+              "trim_values" : {
+                "type" : "string",
+                "description" : "(Optional) Enables the trimming of the extracted values. Useful to remove leading and/or trailing spaces. Possible values are: none: (default) no trimming is performed. left: values are trimmed on the left (leading). right: values are trimmed on the right (trailing). all: values are trimmed for leading and trailing."
+              },
+              "trim_chars" : {
+                "type" : "string",
+                "description" : "(Optional) Set of characters to trim from values, when trimming is enabled. The default is to trim the space character (\" \"). To trim multiple characters, simply set it to a string containing all characters to trim. For example, trim_chars: \" \\t\" will trim spaces and/or tabs."
+              }
+            }
+          },
+          "dns" : {
+            "type" : "object",
+            "description" : "The dns processor performs reverse DNS lookups of IP addresses. It caches the responses that it receives in accordance to the time-to-live (TTL) value contained in the response. It also caches failures that occur during lookups. Each instance of this processor maintains its own independent cache.",
+            "properties" : {
+              "when" : {
+                "$ref" : "#/definitions/condition"
+              },
+              "type" : {
+                "type" : "string",
+                "description" : "The type of DNS lookup to perform. The only supported type is reverse which queries for a PTR record."
+              },
+              "action" : {
+                "type" : "string",
+                "description" : "This defines the behavior of the processor when the target field already exists in the event. The options are append (default) and replace."
+              },
+              "fields" : {
+                "type" : "object",
+                "description" : "This is a mapping of source field names to target field names. The value of the source field will be used in the DNS query and result will be written to the target field.",
+                "additionalItems" : true
+              },
+              "success_cache.capacity.initial" : {
+                "type" : "string",
+                "description" : "The initial number of items that the success cache will be allocated to hold. When initialized the processor will allocate the memory for this number of items. Default value is 1000.",
+                "examples" : [ "1000" ]
+              },
+              "success_cache.capacity.max" : {
+                "type" : "string",
+                "description" : "The maximum number of items that the success cache can hold. When the maximum capacity is reached a random item is evicted. Default value is 10000.",
+                "examples" : [ "10000" ]
+              },
+              "success_cache.min_ttl" : {
+                "type" : "string",
+                "description" : "The duration of the minimum alternative cache TTL for successful DNS responses. Ensures that TTL=0 successful reverse DNS responses can be cached. Valid time units are \"ns\", \"us\" (or \"µs\"), \"ms\", \"s\", \"m\", \"h\". Default value is 1m.",
+                "examples" : [ "1m" ]
+              },
+              "failure_cache.capacity.initial" : {
+                "type" : "string",
+                "description" : "The initial number of items that the failure cache will be allocated to hold. When initialized the processor will allocate the memory for this number of items. Default value is 1000.",
+                "examples" : [ "1000" ]
+              },
+              "failure_cache.capacity.max" : {
+                "type" : "string",
+                "description" : "The maximum number of items that the failure cache can hold. When the maximum capacity is reached a random item is evicted. Default value is 10000.",
+                "examples" : [ "10000" ]
+              },
+              "failure_cache.ttl" : {
+                "type" : "string",
+                "description" : "The duration for which failures are cached. Valid time units are \"ns\", \"us\" (or \"µs\"), \"ms\", \"s\", \"m\", \"h\". Default value is 1m.",
+                "examples" : [ "1m" ]
+              },
+              "nameservers" : {
+                "type" : "array",
+                "description" : "A list of nameservers to query. If there are multiple servers, the resolver queries them in the order listed. If none are specified then it will read the nameservers listed in /etc/resolv.conf once at initialization. On Windows you must always supply at least one nameserver.",
+                "items" : {
+                  "type" : "string"
+                }
+              },
+              "timeout" : {
+                "type" : "string",
+                "description" : "The duration after which a DNS query will timeout. This is timeout for each DNS request so if you have 2 nameservers then the total timeout will be 2 times this value. Valid time units are \"ns\", \"us\" (or \"µs\"), \"ms\", \"s\", \"m\", \"h\". Default value is 500ms.",
+                "examples" : [ "500ms" ]
+              },
+              "tag_on_failure" : {
+                "type" : "array",
+                "description" : "A list of tags to add to the event when any lookup fails. The tags are only added once even if multiple lookups fail. By default no tags are added upon failure.",
+                "items" : {
+                  "type" : "string"
+                }
+              },
+              "transport" : {
+                "type" : "string",
+                "description" : "The type of transport connection that should be used can either be tls (DNS over TLS) or udp. Defaults to udp.",
+                "examples" : [ "udp" ]
+              }
+            }
+          },
+          "extract_array" : {
+            "type" : "object",
+            "description" : "This functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.",
+            "properties" : {
+              "when" : {
+                "$ref" : "#/definitions/condition"
+              },
+              "field" : {
+                "type" : "string",
+                "description" : "The array field whose elements are to be extracted."
+              },
+              "mappings" : {
+                "type" : "string",
+                "description" : "Maps each field name to an array index. Use 0 for the first element in the array. Multiple fields can be mapped to the same array element."
+              },
+              "ignore_missing" : {
+                "type" : "boolean",
+                "description" : "(Optional) Whether to ignore events where the array field is missing. The default is false, which will fail processing of an event if the specified field does not exist. Set it to true to ignore this condition.",
+                "examples" : [ "false" ]
+              },
+              "overwrite_keys" : {
+                "type" : "boolean",
+                "description" : "Whether the target fields specified in the mapping are overwritten if they already exist. The default is false, which will fail processing if a target field already exists.",
+                "examples" : [ "false" ]
+              },
+              "fail_on_error" : {
+                "type" : "boolean",
+                "description" : "(Optional) If set to true and an error happens, changes to the event are reverted, and the original event is returned. If set to false, processing continues despite errors. Default is true.",
+                "examples" : [ "true" ]
+              },
+              "omit_empty" : {
+                "type" : "boolean",
+                "description" : "(Optional) Whether empty values are extracted from the array. If set to true, instead of the target field being set to an empty value, it is left unset. The empty string (\"\"), an empty array ([]) or an empty object ({}) are considered empty values. Default is false.",
+                "examples" : [ "false" ]
+              }
+            }
+          },
+          "fingerprint" : {
+            "type" : "object",
+            "description" : "The fingerprint processor generates a fingerprint of an event based on a specified subset of its fields.",
+            "properties" : {
+              "when" : {
+                "$ref" : "#/definitions/condition"
+              },
+              "fields" : {
+                "type" : "array",
+                "description" : "List of fields to use as the source for the fingerprint.",
+                "items" : {
+                  "type" : "string"
+                }
+              },
+              "ignore_missing" : {
+                "type" : "boolean",
+                "description" : "(Optional) Whether to ignore missing fields. Default is false.",
+                "examples" : [ "false" ]
+              },
+              "target_field" : {
+                "type" : "string",
+                "description" : "(Optional) Field in which the generated fingerprint should be stored. Default is fingerprint.",
+                "examples" : [ "fingerprint" ]
+              },
+              "method" : {
+                "type" : "string",
+                "description" : "(Optional) Algorithm to use for computing the fingerprint. Must be one of: md5, sha1, sha256, sha384, sha512, xxhash. Default is sha256.",
+                "examples" : [ "sha256" ]
+              },
+              "encoding" : {
+                "type" : "string",
+                "description" : "(Optional) Encoding to use on the fingerprint value. Must be one of hex, base32, or base64. Default is hex.",
+                "examples" : [ "hex" ]
+              }
+            }
+          },
+          "rate_limit" : {
+            "type" : "object",
+            "description" : "This functionality is in beta and is subject to change. The design and code is less mature than official GA features and is being provided as-is with no warranties. Beta features are not subject to the support SLA of official GA features.",
+            "properties" : {
+              "when" : {
+                "$ref" : "#/definitions/condition"
+              },
+              "limit" : {
+                "type" : "string",
+                "description" : "The rate limit. Supported time units for the rate are s (per second), m (per minute), and h (per hour)."
+              },
+              "fields" : {
+                "type" : "array",
+                "description" : "(Optional) List of fields. The rate limit will be applied to each distinct value derived by combining the values of these fields.",
+                "items" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "registered_domain" : {
+            "type" : "object",
+            "description" : "The registered_domain processor reads a field containing a hostname and then writes the \"registered domain\" contained in the hostname to the target field. For example, given www.google.co.uk the processor would output google.co.uk. In other words the \"registered domain\" is the effective top-level domain (co.uk) plus one level (google). Optionally, it can store the rest of the domain, the subdomain into another target field.",
+            "properties" : {
+              "when" : {
+                "$ref" : "#/definitions/condition"
+              }
+            }
+          },
+          "script" : {
+            "type" : "object",
+            "description" : "The script processor executes Javascript code to process an event. The processor uses a pure Go implementation of ECMAScript 5.1 and has no external dependencies. This can be useful in situations where one of the other processors doesn’t provide the functionality you need to filter events.",
+            "properties" : {
+              "when" : {
+                "$ref" : "#/definitions/condition"
+              },
+              "lang" : {
+                "type" : "string",
+                "description" : "This field is required and its value must be javascript."
+              },
+              "tag" : {
+                "type" : "string",
+                "description" : "This is an optional identifier that is added to log messages. If defined it enables metrics logging for this instance of the processor. The metrics include the number of exceptions and a histogram of the execution times for the process function."
+              },
+              "source" : {
+                "type" : "string",
+                "description" : "Inline Javascript source code."
+              },
+              "file" : {
+                "type" : "string",
+                "description" : "Path to a script file to load. Relative paths are interpreted as relative to the path.config directory. Globs are expanded."
+              },
+              "files" : {
+                "type" : "array",
+                "description" : "List of script files to load. The scripts are concatenated together. Relative paths are interpreted as relative to the path.config directory. And globs are expanded.",
+                "items" : {
+                  "type" : "string"
+                }
+              },
+              "params" : {
+                "type" : "string",
+                "description" : "A dictionary of parameters that are passed to the register of the script."
+              },
+              "tag_on_exception" : {
+                "type" : "string",
+                "description" : "Tag to add to events in case the Javascript code causes an exception while processing an event. Defaults to _js_exception.",
+                "examples" : [ "_js_exception" ]
+              },
+              "timeout" : {
+                "type" : "string",
+                "description" : "This sets an execution timeout for the process function. When the process function takes longer than the timeout period the function is interrupted. You can set this option to prevent a script from running for too long (like preventing an infinite while loop). By default there is no timeout."
+              },
+              "max_cached_sessions" : {
+                "type" : "string",
+                "description" : "This sets the maximum number of Javascript VM sessions that will be cached to avoid reallocation. The default is 4.",
+                "examples" : [ "4" ]
+              }
+            }
+          },
+          "timestamp" : {
+            "type" : "object",
+            "description" : "This functionality is in beta and is subject to change. The design and code is less mature than official GA features and is being provided as-is with no warranties. Beta features are not subject to the support SLA of official GA features.",
+            "properties" : {
+              "when" : {
+                "$ref" : "#/definitions/condition"
+              }
+            }
+          },
+          "translate_sid" : {
+            "type" : "object",
+            "description" : "This functionality is in beta and is subject to change. The design and code is less mature than official GA features and is being provided as-is with no warranties. Beta features are not subject to the support SLA of official GA features.",
+            "properties" : {
+              "when" : {
+                "$ref" : "#/definitions/condition"
               }
             }
           }
@@ -9774,6 +10699,82 @@
         }
       }
     },
+    "add_resource_metadata" : {
+      "type" : "object",
+      "description" : "Specify labels and annotations filters for the extra metadata coming from Node and Namespace. add_resource_metadata can be done for node or namespace. By default all labels will be included while annotations are not added by default. This settings are useful when labels' and annotations' storing requires special handling to avoid overloading the storage output. The enrichment of node or namespace metadata can be individually disabled by setting enabled: false.",
+      "properties" : {
+        "namespace" : {
+          "$ref" : "#/definitions/add_resource_metadata_scope"
+        },
+        "node" : {
+          "$ref" : "#/definitions/add_resource_metadata_scope"
+        }
+      }
+    },
+    "add_resource_metadata_scope" : {
+      "type" : "object",
+      "properties" : {
+        "enabled" : {
+          "type" : "boolean",
+          "default" : "true",
+          "description" : "The enrichment of node or namespace metadata can be individually disabled by setting enabled: false."
+        },
+        "include_annotations" : {
+          "type" : "array",
+          "description" : "list of annotations to include in the event",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "include_labels" : {
+          "type" : "array",
+          "description" : "list of labels to include in the event",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "exclude_labels" : {
+          "type" : "array",
+          "description" : "list of labels to exclude from the event",
+          "items" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "handwritten_processors" : {
+      "properties" : {
+        "add_cloud_metadata" : {
+          "type" : "object",
+          "description" : "The add_cloud_metadata processor enriches each event with instance metadata from the machine’s hosting provider. At startup it will query a list of hosting providers and cache the instance metadata.",
+          "properties" : {
+            "timeout" : {
+              "type" : "string",
+              "description" : "specifies the maximum amount of time to wait for a successful response when detecting the hosting provider. The default timeout value is 3s.",
+              "examples" : [ "3s" ]
+            },
+            "providers" : {
+              "type" : "array",
+              "description" : "The providers settings accepts a list of cloud provider names to be used. If providers is not configured, then all providers that do not access a remote endpoint are enabled by default.\nPossible providers: alibaba, azure, digitalocean, aws, gcp, openstack, openstack-ssl, tencent",
+              "items" : {
+                "type" : "string",
+                "defaultSnippets" : [ {
+                  "body" : "gcp"
+                } ]
+              }
+            },
+            "overwrite" : {
+              "type" : "boolean",
+              "examples" : [ "true" ],
+              "description" : "When overwrite is true, add_cloud_metadata overwrites existing cloud.* fields (false by default)."
+            },
+            "ssl" : {
+              "$ref" : "#/definitions/ssl"
+            }
+          }
+        }
+      }
+    },
     "filebeatYmlRoot" : {
       "type" : "object",
       "properties" : {
@@ -9933,72 +10934,7 @@
                         "description" : "Specify at what level autodiscover needs to be done at. scope can either take node or cluster as values. node scope allows discovery of resources in the specified node. cluster scope allows cluster wide discovery. Only pod and node resources can be discovered at node scope."
                       },
                       "add_resource_metadata" : {
-                        "type" : "object",
-                        "description" : "Specify at what level autodiscover needs to be done at. scope can either take node or cluster as values. node scope allows discovery of resources in the specified node. cluster scope allows cluster wide discovery. Only pod and node resources can be discovered at node scope.",
-                        "properties" : {
-                          "namespace" : {
-                            "type" : "object",
-                            "properties" : {
-                              "enabled" : {
-                                "type" : "boolean",
-                                "default" : "true",
-                                "description" : "The enrichment of node or namespace metadata can be individually disabled by setting enabled: false."
-                              },
-                              "include_annotations" : {
-                                "type" : "array",
-                                "description" : "list of annotations to include in the event",
-                                "items" : {
-                                  "type" : "string"
-                                }
-                              },
-                              "include_labels" : {
-                                "type" : "array",
-                                "description" : "list of labels to include in the event",
-                                "items" : {
-                                  "type" : "string"
-                                }
-                              },
-                              "exclude_labels" : {
-                                "type" : "array",
-                                "description" : "list of labels to exclude from the event",
-                                "items" : {
-                                  "type" : "string"
-                                }
-                              }
-                            }
-                          },
-                          "node" : {
-                            "type" : "object",
-                            "properties" : {
-                              "enabled" : {
-                                "type" : "boolean",
-                                "default" : "true",
-                                "description" : "The enrichment of node or namespace metadata can be individually disabled by setting enabled: false."
-                              },
-                              "include_annotations" : {
-                                "type" : "array",
-                                "description" : "list of annotations to include in the event",
-                                "items" : {
-                                  "type" : "string"
-                                }
-                              },
-                              "include_labels" : {
-                                "type" : "array",
-                                "description" : "list of labels to include in the event",
-                                "items" : {
-                                  "type" : "string"
-                                }
-                              },
-                              "exclude_labels" : {
-                                "type" : "array",
-                                "description" : "list of labels to exclude from the event",
-                                "items" : {
-                                  "type" : "string"
-                                }
-                              }
-                            }
-                          }
-                        }
+                        "$ref" : "#/definitions/add_resource_metadata"
                       },
                       "unique" : {
                         "type" : "boolean",
