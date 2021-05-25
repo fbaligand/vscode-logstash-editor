@@ -18,7 +18,7 @@
               "description" : "Syslog",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.paths" : {
@@ -41,7 +41,7 @@
               "description" : "Authorization logs",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.paths" : {
@@ -77,7 +77,7 @@
               "description" : "Audit logs",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.paths" : {
@@ -100,7 +100,7 @@
               "description" : "Application logs",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.paths" : {
@@ -136,7 +136,7 @@
               "description" : "Access logs",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.paths" : {
@@ -159,7 +159,7 @@
               "description" : "Error logs",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.paths" : {
@@ -194,7 +194,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.paths" : {
@@ -229,7 +229,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "false" ]
                 },
                 "var.queue_url" : {
@@ -238,17 +238,17 @@
                   "examples" : [ "https://sqs.myregion.amazonaws.com/123456/myqueue" ]
                 },
                 "var.process_cloudtrail_logs" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "description" : "Process CloudTrail logs default is true, set to false to skip Cloudtrail logs",
                   "examples" : [ "false" ]
                 },
                 "var.process_digest_logs" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "description" : "Process CloudTrail Digest logs default true, set to false to skip CloudTrail Digest logs",
                   "examples" : [ "false" ]
                 },
                 "var.process_insight_logs" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "description" : "Process CloudTrail Insight logs default true, set to false to skip CloudTrail Insight logs",
                   "examples" : [ "false" ]
                 },
@@ -296,7 +296,7 @@
                   "examples" : [ "arn:aws:iam::123456789012:role/test-mb" ]
                 },
                 "var.fips_enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "description" : "Enabling this option changes the service name from `s3` to `s3-fips` for connecting to the correct service endpoint.",
                   "examples" : [ "false" ]
                 },
@@ -311,7 +311,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "false" ]
                 },
                 "var.queue_url" : {
@@ -363,7 +363,7 @@
                   "examples" : [ "arn:aws:iam::123456789012:role/test-mb" ]
                 },
                 "var.fips_enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "description" : "Enabling this option changes the service name from `s3` to `s3-fips` for connecting to the correct service endpoint.",
                   "examples" : [ "false" ]
                 },
@@ -378,7 +378,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "false" ]
                 },
                 "var.queue_url" : {
@@ -430,7 +430,7 @@
                   "examples" : [ "arn:aws:iam::123456789012:role/test-mb" ]
                 },
                 "var.fips_enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "description" : "Enabling this option changes the service name from `s3` to `s3-fips` for connecting to the correct service endpoint.",
                   "examples" : [ "false" ]
                 },
@@ -445,7 +445,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "false" ]
                 },
                 "var.queue_url" : {
@@ -497,7 +497,7 @@
                   "examples" : [ "arn:aws:iam::123456789012:role/test-mb" ]
                 },
                 "var.fips_enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "description" : "Enabling this option changes the service name from `s3` to `s3-fips` for connecting to the correct service endpoint.",
                   "examples" : [ "false" ]
                 },
@@ -512,7 +512,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "false" ]
                 },
                 "var.queue_url" : {
@@ -564,7 +564,7 @@
                   "examples" : [ "arn:aws:iam::123456789012:role/test-mb" ]
                 },
                 "var.fips_enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "description" : "Enabling this option changes the service name from `s3` to `s3-fips` for connecting to the correct service endpoint.",
                   "examples" : [ "false" ]
                 },
@@ -579,7 +579,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "false" ]
                 },
                 "var.queue_url" : {
@@ -631,7 +631,7 @@
                   "examples" : [ "arn:aws:iam::123456789012:role/test-mb" ]
                 },
                 "var.fips_enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "description" : "Enabling this option changes the service name from `s3` to `s3-fips` for connecting to the correct service endpoint.",
                   "examples" : [ "false" ]
                 },
@@ -660,7 +660,7 @@
               "description" : "All logs",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var" : {
@@ -696,7 +696,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "false" ]
                 },
                 "var" : {
@@ -726,7 +726,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "false" ]
                 },
                 "var" : {
@@ -757,7 +757,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "false" ]
                 },
                 "var" : {
@@ -801,7 +801,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.input" : {
@@ -831,7 +831,7 @@
                   "$ref" : "#/definitions/moduleInput"
                 },
                 "var.rsa_fields" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "description" : "Toggle output of non-ECS fields (default true).",
                   "examples" : [ "true" ]
                 },
@@ -846,7 +846,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.input" : {
@@ -876,7 +876,7 @@
                   "$ref" : "#/definitions/moduleInput"
                 },
                 "var.rsa_fields" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "description" : "Toggle output of non-ECS fields (default true).",
                   "examples" : [ "true" ]
                 },
@@ -904,7 +904,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.input" : {
@@ -934,7 +934,7 @@
                   "$ref" : "#/definitions/moduleInput"
                 },
                 "var.rsa_fields" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "description" : "Toggle output of non-ECS fields (default true).",
                   "examples" : [ "true" ]
                 },
@@ -962,7 +962,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var" : {
@@ -1017,7 +1017,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.input" : {
@@ -1074,7 +1074,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.input" : {
@@ -1123,7 +1123,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.input" : {
@@ -1172,7 +1172,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.input" : {
@@ -1209,7 +1209,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.input" : {
@@ -1239,7 +1239,7 @@
                   "$ref" : "#/definitions/moduleInput"
                 },
                 "var.rsa_fields" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "description" : "Toggle output of non-ECS fields (default true).",
                   "examples" : [ "true" ]
                 },
@@ -1254,7 +1254,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.input" : {
@@ -1284,7 +1284,7 @@
                   "$ref" : "#/definitions/moduleInput"
                 },
                 "var.rsa_fields" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "description" : "Toggle output of non-ECS fields (default true).",
                   "examples" : [ "true" ]
                 },
@@ -1299,7 +1299,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.input" : {
@@ -1337,7 +1337,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.input" : {
@@ -1390,7 +1390,7 @@
               "description" : "Fileset for native deployment",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.paths" : {
@@ -1425,7 +1425,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.paths" : {
@@ -1460,7 +1460,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.input" : {
@@ -1490,7 +1490,7 @@
                   "$ref" : "#/definitions/moduleInput"
                 },
                 "var.rsa_fields" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "description" : "Toggle output of non-ECS fields (default true).",
                   "examples" : [ "true" ]
                 },
@@ -1518,7 +1518,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.input" : {
@@ -1548,7 +1548,7 @@
                   "$ref" : "#/definitions/moduleInput"
                 },
                 "var.rsa_fields" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "description" : "Toggle output of non-ECS fields (default true).",
                   "examples" : [ "true" ]
                 },
@@ -1577,7 +1577,7 @@
               "description" : "Server log",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.paths" : {
@@ -1599,7 +1599,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.paths" : {
@@ -1621,7 +1621,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.paths" : {
@@ -1643,7 +1643,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.paths" : {
@@ -1665,7 +1665,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.paths" : {
@@ -1701,7 +1701,7 @@
               "description" : "Fileset for native deployment",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.paths" : {
@@ -1736,7 +1736,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.input" : {
@@ -1766,7 +1766,7 @@
                   "$ref" : "#/definitions/moduleInput"
                 },
                 "var.rsa_fields" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "description" : "Toggle output of non-ECS fields (default true).",
                   "examples" : [ "true" ]
                 },
@@ -1781,7 +1781,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.input" : {
@@ -1811,7 +1811,7 @@
                   "$ref" : "#/definitions/moduleInput"
                 },
                 "var.rsa_fields" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "description" : "Toggle output of non-ECS fields (default true).",
                   "examples" : [ "true" ]
                 },
@@ -1839,7 +1839,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.input" : {
@@ -1883,7 +1883,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.input" : {
@@ -1913,7 +1913,7 @@
                   "$ref" : "#/definitions/moduleInput"
                 },
                 "var.rsa_fields" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "description" : "Toggle output of non-ECS fields (default true).",
                   "examples" : [ "true" ]
                 },
@@ -1928,7 +1928,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.input" : {
@@ -1958,7 +1958,7 @@
                   "$ref" : "#/definitions/moduleInput"
                 },
                 "var.rsa_fields" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "description" : "Toggle output of non-ECS fields (default true).",
                   "examples" : [ "true" ]
                 },
@@ -1973,7 +1973,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.input" : {
@@ -2003,7 +2003,7 @@
                   "$ref" : "#/definitions/moduleInput"
                 },
                 "var.rsa_fields" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "description" : "Toggle output of non-ECS fields (default true).",
                   "examples" : [ "true" ]
                 },
@@ -2031,7 +2031,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.project_id" : {
@@ -2070,7 +2070,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.project_id" : {
@@ -2109,7 +2109,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.project_id" : {
@@ -2151,7 +2151,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.jwt_file" : {
@@ -2184,7 +2184,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.jwt_file" : {
@@ -2217,7 +2217,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.jwt_file" : {
@@ -2250,7 +2250,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.jwt_file" : {
@@ -2283,7 +2283,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.jwt_file" : {
@@ -2316,7 +2316,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.jwt_file" : {
@@ -2362,7 +2362,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.jwt_file" : {
@@ -2395,7 +2395,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.jwt_file" : {
@@ -2428,7 +2428,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.jwt_file" : {
@@ -2461,7 +2461,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.jwt_file" : {
@@ -2494,7 +2494,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.jwt_file" : {
@@ -2527,7 +2527,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.jwt_file" : {
@@ -2574,7 +2574,7 @@
               "description" : "All logs",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.input" : {
@@ -2615,7 +2615,7 @@
               "description" : "All logs",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.paths" : {
@@ -2651,7 +2651,7 @@
               "description" : "Main logs",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.paths" : {
@@ -2674,7 +2674,7 @@
               "description" : "Debug logs",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.paths" : {
@@ -2697,7 +2697,7 @@
               "description" : "Startup logs",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.paths" : {
@@ -2733,7 +2733,7 @@
               "description" : "Access logs",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.paths" : {
@@ -2756,7 +2756,7 @@
               "description" : "Error logs",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.paths" : {
@@ -2791,7 +2791,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.input" : {
@@ -2821,7 +2821,7 @@
                   "$ref" : "#/definitions/moduleInput"
                 },
                 "var.rsa_fields" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "description" : "Toggle output of non-ECS fields (default true).",
                   "examples" : [ "true" ]
                 },
@@ -2849,7 +2849,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.input" : {
@@ -2879,7 +2879,7 @@
                   "$ref" : "#/definitions/moduleInput"
                 },
                 "var.rsa_fields" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "description" : "Toggle output of non-ECS fields (default true).",
                   "examples" : [ "true" ]
                 },
@@ -2907,7 +2907,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.input" : {
@@ -2947,7 +2947,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.input" : {
@@ -2977,7 +2977,7 @@
                   "$ref" : "#/definitions/moduleInput"
                 },
                 "var.rsa_fields" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "description" : "Toggle output of non-ECS fields (default true).",
                   "examples" : [ "true" ]
                 },
@@ -2992,7 +2992,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.input" : {
@@ -3022,7 +3022,7 @@
                   "$ref" : "#/definitions/moduleInput"
                 },
                 "var.rsa_fields" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "description" : "Toggle output of non-ECS fields (default true).",
                   "examples" : [ "true" ]
                 },
@@ -3037,7 +3037,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.input" : {
@@ -3075,7 +3075,7 @@
               "description" : "All logs",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.kafka_home" : {
@@ -3116,7 +3116,7 @@
               "description" : "Server logs",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.paths" : {
@@ -3139,7 +3139,7 @@
               "description" : "Audit logs",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.paths" : {
@@ -3175,7 +3175,7 @@
               "description" : "logs",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.paths" : {
@@ -3198,7 +3198,7 @@
               "description" : "Slow logs",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.paths" : {
@@ -3234,7 +3234,7 @@
               "description" : "ATP configuration",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.interval" : {
@@ -3261,7 +3261,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.interval" : {
@@ -3288,7 +3288,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.input" : {
@@ -3318,7 +3318,7 @@
                   "$ref" : "#/definitions/moduleInput"
                 },
                 "var.rsa_fields" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "description" : "Toggle output of non-ECS fields (default true).",
                   "examples" : [ "true" ]
                 },
@@ -3346,7 +3346,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.api_key" : {
@@ -3374,7 +3374,7 @@
               "description" : "Logs",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.paths" : {
@@ -3410,7 +3410,7 @@
               "description" : "Fileset for native deployment",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.paths" : {
@@ -3446,7 +3446,7 @@
               "description" : "Error logs",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.paths" : {
@@ -3469,7 +3469,7 @@
               "description" : "Slow logs",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.paths" : {
@@ -3504,7 +3504,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.input" : {
@@ -3545,7 +3545,7 @@
               "description" : "All logs",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.paths" : {
@@ -3580,7 +3580,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var" : {
@@ -3629,7 +3629,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.input" : {
@@ -3659,7 +3659,7 @@
                   "$ref" : "#/definitions/moduleInput"
                 },
                 "var.rsa_fields" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "description" : "Toggle output of non-ECS fields (default true).",
                   "examples" : [ "true" ]
                 },
@@ -3688,7 +3688,7 @@
               "description" : "Access logs",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.paths" : {
@@ -3711,7 +3711,7 @@
               "description" : "Error logs",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.paths" : {
@@ -3734,7 +3734,7 @@
               "description" : "Ingress-nginx controller logs. This is disabled by default. It could be used in Kubernetes environments to parse ingress-nginx logs",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "false" ]
                 },
                 "var.paths" : {
@@ -3769,7 +3769,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.application_id" : {
@@ -3869,7 +3869,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.url" : {
@@ -3900,7 +3900,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.input" : {
@@ -3935,7 +3935,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.paths" : {
@@ -3952,7 +3952,7 @@
                   "$ref" : "#/definitions/moduleInput"
                 },
                 "var.use_namespace" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "description" : "If true, all fields created by this module are prefixed with `osquery.result`. Set to false to copy the fields in the root of the document. The default is true.",
                   "examples" : [ "true" ]
                 }
@@ -3975,7 +3975,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.input" : {
@@ -4026,7 +4026,7 @@
               "description" : "Firewall logs",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.syslog_host" : {
@@ -4070,7 +4070,7 @@
               "description" : "Logs",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.paths" : {
@@ -4105,7 +4105,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.input" : {
@@ -4135,7 +4135,7 @@
                   "$ref" : "#/definitions/moduleInput"
                 },
                 "var.rsa_fields" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "description" : "Toggle output of non-ECS fields (default true).",
                   "examples" : [ "true" ]
                 },
@@ -4164,7 +4164,7 @@
               "description" : "All logs",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.paths" : {
@@ -4199,7 +4199,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.input" : {
@@ -4229,7 +4229,7 @@
                   "$ref" : "#/definitions/moduleInput"
                 },
                 "var.rsa_fields" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "description" : "Toggle output of non-ECS fields (default true).",
                   "examples" : [ "true" ]
                 },
@@ -4258,7 +4258,7 @@
               "description" : "Main logs",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.paths" : {
@@ -4281,7 +4281,7 @@
               "description" : "Slow logs, retrieved via the Redis API (SLOWLOG)",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.hosts" : {
@@ -4318,7 +4318,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.paths" : {
@@ -4353,7 +4353,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.input" : {
@@ -4383,7 +4383,7 @@
                   "$ref" : "#/definitions/moduleInput"
                 },
                 "var.rsa_fields" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "description" : "Toggle output of non-ECS fields (default true).",
                   "examples" : [ "true" ]
                 },
@@ -4411,7 +4411,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.input" : {
@@ -4466,7 +4466,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.input" : {
@@ -4547,28 +4547,28 @@
                   }
                 },
                 "var.ignored" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "description" : "If set to true, only include issues which are ignored, if set to false, only include issues which are not ignored.",
                   "examples" : [ "false" ]
                 },
                 "var.patched" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "false" ]
                 },
                 "var.fixable" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "false" ]
                 },
                 "var.is_fixed" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "false" ]
                 },
                 "var.is_patchable" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "false" ]
                 },
                 "var.is_pinnable" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "false" ]
                 },
                 "var.min_priority_score" : {
@@ -4599,7 +4599,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.input" : {
@@ -4629,7 +4629,7 @@
                   "$ref" : "#/definitions/moduleInput"
                 },
                 "var.rsa_fields" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "description" : "Toggle output of non-ECS fields (default true).",
                   "examples" : [ "true" ]
                 },
@@ -4657,7 +4657,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.input" : {
@@ -4704,7 +4704,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.input" : {
@@ -4734,7 +4734,7 @@
                   "$ref" : "#/definitions/moduleInput"
                 },
                 "var.rsa_fields" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "description" : "Toggle output of non-ECS fields (default true).",
                   "examples" : [ "true" ]
                 },
@@ -4762,7 +4762,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.input" : {
@@ -4792,7 +4792,7 @@
                   "$ref" : "#/definitions/moduleInput"
                 },
                 "var.rsa_fields" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "description" : "Toggle output of non-ECS fields (default true).",
                   "examples" : [ "true" ]
                 },
@@ -4821,7 +4821,7 @@
               "description" : "All logs",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.paths" : {
@@ -4856,7 +4856,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.input" : {
@@ -4880,7 +4880,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.input" : {
@@ -4904,7 +4904,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.input" : {
@@ -4935,7 +4935,7 @@
                   }
                 },
                 "to_ids" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.first_interval" : {
@@ -4954,7 +4954,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.input" : {
@@ -5003,7 +5003,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.input" : {
@@ -5055,7 +5055,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.input" : {
@@ -5085,7 +5085,7 @@
                   "$ref" : "#/definitions/moduleInput"
                 },
                 "var.rsa_fields" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "description" : "Toggle output of non-ECS fields (default true).",
                   "examples" : [ "true" ]
                 },
@@ -5114,7 +5114,7 @@
               "description" : "Access logs",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.paths" : {
@@ -5149,7 +5149,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 }
               }
@@ -5158,7 +5158,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 }
               }
@@ -5167,7 +5167,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 }
               }
@@ -5176,7 +5176,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 }
               }
@@ -5185,7 +5185,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 }
               }
@@ -5194,7 +5194,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 }
               }
@@ -5203,7 +5203,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 }
               }
@@ -5212,7 +5212,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 }
               }
@@ -5221,7 +5221,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 }
               }
@@ -5230,7 +5230,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 }
               }
@@ -5239,7 +5239,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 }
               }
@@ -5248,7 +5248,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 }
               }
@@ -5257,7 +5257,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 }
               }
@@ -5266,7 +5266,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 }
               }
@@ -5275,7 +5275,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 }
               }
@@ -5284,7 +5284,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 }
               }
@@ -5293,7 +5293,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 }
               }
@@ -5302,7 +5302,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 }
               }
@@ -5311,7 +5311,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 }
               }
@@ -5320,7 +5320,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 }
               }
@@ -5329,7 +5329,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 }
               }
@@ -5338,7 +5338,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 }
               }
@@ -5347,7 +5347,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 }
               }
@@ -5356,7 +5356,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 }
               }
@@ -5365,7 +5365,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 }
               }
@@ -5374,7 +5374,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 }
               }
@@ -5383,7 +5383,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 }
               }
@@ -5392,7 +5392,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 }
               }
@@ -5401,7 +5401,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 }
               }
@@ -5410,7 +5410,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 }
               }
@@ -5419,7 +5419,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 }
               }
@@ -5428,14 +5428,14 @@
               "$ref" : "#/definitions/ssl"
             },
             "enabled" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "examples" : [ "true" ]
             },
             "syslog" : {
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 }
               }
@@ -5444,7 +5444,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 }
               }
@@ -5453,7 +5453,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 }
               }
@@ -5462,7 +5462,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 }
               }
@@ -5471,7 +5471,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.paths" : {
@@ -5506,7 +5506,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.input" : {
@@ -5553,7 +5553,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "var.input" : {
@@ -5583,7 +5583,7 @@
                   "$ref" : "#/definitions/moduleInput"
                 },
                 "var.rsa_fields" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "description" : "Toggle output of non-ECS fields (default true).",
                   "examples" : [ "true" ]
                 },
@@ -5686,7 +5686,7 @@
               "examples" : [ "auto" ]
             },
             "recursive_glob.enabled" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "Expand \"**\" patterns into regular glob patterns.",
               "examples" : [ "true" ]
             },
@@ -5696,22 +5696,22 @@
               "properties" : { }
             },
             "json.keys_under_root" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "By default, the decoded JSON is placed under a \"json\" key in the output document. If you enable this setting, the keys are copied top level in the output document.",
               "examples" : [ "false" ]
             },
             "json.overwrite_keys" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "If keys_under_root and this setting are enabled, then the values from the decoded JSON object overwrite the fields that Filebeat normally adds (type, source, offset, etc.) in case of conflicts.",
               "examples" : [ "false" ]
             },
             "json.expand_keys" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "If this setting is enabled, then keys in the decoded JSON object will be recursively de-dotted, and expanded into a hierarchical object structure. For example, `{\"a.b.c\": 123}` would be expanded into `{\"a\":{\"b\":{\"c\":123}}}`.",
               "examples" : [ "false" ]
             },
             "json.add_error_key" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "If this setting is enabled, Filebeat adds a \"error.message\" and \"error.key: json\" key in case of JSON unmarshaling errors or when a text key is defined in the configuration but cannot be used.",
               "examples" : [ "false" ]
             },
@@ -5719,12 +5719,12 @@
               "$ref" : "#/definitions/multiline"
             },
             "tail_files" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "Setting tail_files to true means filebeat starts reading new files at the end instead of the beginning. If this is used in combination with log rotation this can mean that the first entries of a new file are skipped.",
               "examples" : [ "false" ]
             },
             "symlinks" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "If symlinks is enabled, symlinks are opened and harvested. The harvester is opening the original for harvesting but will report the symlink name as source.",
               "examples" : [ "false" ]
             },
@@ -5754,17 +5754,17 @@
               "examples" : [ "5m" ]
             },
             "close_renamed" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "Close renamed closes a file handler when the file is renamed or rotated. Note: Potential data loss. Make sure to read and understand the docs for this option.",
               "examples" : [ "false" ]
             },
             "close_removed" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "When enabling this option, a file handler is closed immediately in case a file can't be found any more. In case the file shows up again later, harvesting will continue at the last known position after scan_frequency.",
               "examples" : [ "true" ]
             },
             "close_eof" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "Closes the file handler as soon as the harvesters reaches the end of the file. By default this option is disabled. Note: Potential data loss. Make sure to read and understand the docs for this option.",
               "examples" : [ "false" ]
             },
@@ -5774,7 +5774,7 @@
               "examples" : [ "0" ]
             },
             "clean_removed" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "Removes the state for file which cannot be found on disk anymore immediately",
               "examples" : [ "true" ]
             },
@@ -5847,12 +5847,12 @@
               }
             },
             "prospector.scanner.recursive_glob" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "Expand \"**\" patterns into regular glob patterns.",
               "examples" : [ "true" ]
             },
             "prospector.scanner.symlinks" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "If symlinks is enabled, symlinks are opened and harvested. The harvester is opening the original for harvesting but will report the symlink name as source.",
               "examples" : [ "false" ]
             },
@@ -5862,7 +5862,7 @@
               "examples" : [ "0" ]
             },
             "clean_removed" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "Removes the state for file which cannot be found on disk anymore immediately",
               "examples" : [ "true" ]
             },
@@ -5907,17 +5907,17 @@
               "examples" : [ "5m" ]
             },
             "close.on_state_change.renamed" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "Close renamed closes a file handler when the file is renamed or rotated. Note: Potential data loss. Make sure to read and understand the docs for this option.",
               "examples" : [ "false" ]
             },
             "close.on_state_change.removed" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "When enabling this option, a file handler is closed immediately in case a file can't be found any more. In case the file shows up again later, harvesting will continue at the last known position after scan_frequency.",
               "examples" : [ "true" ]
             },
             "close.reader.eof" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "Closes the file handler as soon as the harvesters reaches the end of the file. By default this option is disabled. Note: Potential data loss. Make sure to read and understand the docs for this option.",
               "examples" : [ "false" ]
             },
@@ -6206,7 +6206,7 @@
               "examples" : [ "my-gcp-pubsub-subscription-name" ]
             },
             "subscription.create" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "Create subscription if it does not exist.",
               "examples" : [ "true" ]
             },
@@ -6279,14 +6279,12 @@
           "description" : "AWS CloudWatch",
           "properties" : {
             "log_group_arn" : {
-              "type" : "object",
-              "description" : "ARN of the log group to collect logs from.",
-              "properties" : {
-                "log_group_name" : {
-                  "type" : "string",
-                  "description" : "Name of the log group to collect logs from. Note: region_name is required when log_group_name is given."
-                }
-              }
+              "type" : "string",
+              "description" : "ARN of the log group to collect logs from."
+            },
+            "log_group_name" : {
+              "type" : "string",
+              "description" : "Name of the log group to collect logs from. Note: region_name is required when log_group_name is given."
             },
             "region_name" : {
               "type" : "string",
@@ -6456,7 +6454,7 @@
               "examples" : [ "all" ]
             },
             "combine_partial" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "Enable partial messages joining. Docker json-file driver splits log lines larger than 16k bytes, end of line (\\n) is present for common lines in the resulting file, while it’s not the for the lines that have been split. combine_partial joins them back together when enabled. It is enabled by default.",
               "examples" : [ "true" ]
             },
@@ -6465,7 +6463,7 @@
               "description" : "Enable CRI flags parsing from the log file. CRI uses flags to signal a partial line, enabling this will ensure partial lines are rejoined. It is disabled by default.\nThe following input configures Filebeat to read the stdout stream from all containers under the default Docker containers path:"
             },
             "cri.force" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "Force CRI format parsing. This disables automatic format detection, use it when you know format is CRI to gain some performance. This is false by default.",
               "examples" : [ "true" ]
             },
@@ -6501,22 +6499,22 @@
               "description" : "These options make it possible for Filebeat to decode logs structured as JSON messages. Filebeat processes the logs line by line, so the JSON decoding only works if there is one JSON object per line.",
               "properties" : {
                 "keys_under_root" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "description" : "By default, the decoded JSON is placed under a \"json\" key in the output document. If you enable this setting, the keys are copied top level in the output document. The default is false.",
                   "examples" : [ "false" ]
                 },
                 "overwrite_keys" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "description" : "If keys_under_root and this setting are enabled, then the values from the decoded JSON object overwrite the fields that Filebeat normally adds (type, source, offset, etc.) in case of conflicts.",
                   "examples" : [ "true" ]
                 },
                 "expand_keys" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "description" : "If this setting is enabled, Filebeat will recursively de-dot keys in the decoded JSON, and expand them into a hierarchical object structure. For example, {\"a.b.c\": 123} would be expanded into {\"a\":{\"b\":{\"c\":123}}}. This setting should be enabled when the input is produced by an ECS logger.",
                   "examples" : [ "true" ]
                 },
                 "add_error_key" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "description" : "If this setting is enabled, Filebeat adds a \"error.message\" and \"error.type: json\" key in case of JSON unmarshalling errors or when a message_key is defined in the configuration but cannot be used.",
                   "examples" : [ "true" ]
                 },
@@ -6529,7 +6527,7 @@
                   "description" : "Option configuration setting that specifies the JSON key to set the document id. If configured, the field will be removed from the original json document and stored in @metadata._id"
                 },
                 "ignore_decoding_error" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "description" : "An optional configuration setting that specifies if JSON decoding errors should be logged or not. If set to true, errors will not be logged. The default is false.",
                   "examples" : [ "false" ]
                 }
@@ -6568,7 +6566,7 @@
               "description" : "When this option is enabled, Filebeat closes the harvester when a file is removed. Normally a file should only be removed after it’s inactive for the duration specified by close_inactive. However, if a file is removed early and you don’t enable close_removed, Filebeat keeps the file open to make sure the harvester has completed. If this setting results in files that are not completely read because they are removed from disk too early, disable this option.\nThis option is enabled by default. If you disable this option, you must also disable clean_removed.\nWINDOWS: If your Windows log rotation system shows errors because it can’t rotate files, make sure this option is enabled."
             },
             "close_eof" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "When this option is enabled, Filebeat closes a file as soon as the end of a file is reached. This is useful when your files are only written once and not updated from time to time. For example, this happens when you are writing every single log event to a new file. This option is disabled by default.",
               "examples" : [ "true" ]
             },
@@ -6603,7 +6601,7 @@
               "examples" : [ "asc" ]
             },
             "tail_files" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "If this option is set to true, Filebeat starts reading new files at the end of each file instead of the beginning. When this option is used in combination with log rotation, it’s possible that the first log entries in a new file might be skipped. The default setting is false.\nThis option applies to files that Filebeat has not already processed. If you ran Filebeat previously and the state of the file was already persisted, tail_files will not apply. Harvesting will continue at the previous offset. To apply tail_files to all files, you must stop Filebeat and remove the registry file. Be aware that doing this removes ALL previous states.",
               "examples" : [ "false" ]
             },
@@ -6727,8 +6725,8 @@
           "description" : "HTTP JSON",
           "properties" : {
             "append" : {
-              "type" : "boolean",
-              "description" : "Appends a value to a list. If the field does not exist, the first entry will be a scalar value, and subsequent additions will convert the value to a list.\n- target defines the destination field where the value is stored.\n- value defines the value that will be stored and it is a value template.\n- default defines the fallback value whenever value is empty or the template parsing fails. Default templates do not have access to any state, only to functions.\n- fail_on_template_error if set to true an error will be returned and the request will be aborted when the template evaluation fails. Default is false.",
+              "$ref" : "#/definitions/booleanOrString",
+              "description" : "Appends a value to an array. If the field does not exist, the first entry will create a new array. If the field exists, the value is appended to the existing field and converted to a list.\n- target defines the destination field where the value is stored.\n- value defines the value that will be stored and it is a value template.\n- default defines the fallback value whenever value is empty or the template parsing fails. Default templates do not have access to any state, only to functions.\n- fail_on_template_error if set to true an error will be returned and the request will be aborted when the template evaluation fails. Default is false.",
               "examples" : [ "false" ]
             },
             "delete" : {
@@ -6736,7 +6734,7 @@
               "description" : "Deletes the target field.\n- target defines the destination field to delete. If target is a list and not a single element, the complete list will be deleted."
             },
             "set" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "Sets a value.\n- target defines the destination field where the value is stored.\n- value defines the value that will be stored and it is a value template.\n- default defines the fallback value whenever value is empty or the template parsing fails. Default templates do not have access to any state, only to functions.\n- fail_on_template_error if set to true an error will be returned and the request will be aborted when the template evaluation fails. Default is false.",
               "examples" : [ "false" ]
             },
@@ -6751,7 +6749,7 @@
               "examples" : [ "60s" ]
             },
             "auth.basic.enabled" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "When set to false, disables the basic auth configuration. Default: true.",
               "examples" : [ "true" ]
             },
@@ -6764,7 +6762,7 @@
               "description" : "The password to use."
             },
             "auth.oauth2.enabled" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "When set to false, disables the oauth2 configuration. Default: true.",
               "examples" : [ "true" ]
             },
@@ -6843,6 +6841,10 @@
               "description" : "This specifies SSL/TLS configuration. If the ssl section is missing, the host’s CAs are used for HTTPS connections. See SSL for more information.",
               "$ref" : "#/definitions/ssl"
             },
+            "request.proxy_url" : {
+              "type" : "string",
+              "description" : "This specifies proxy configuration in the form of http[s]://<user>:<password>@<server name/ip>:<port>"
+            },
             "request.retry.max_attempts" : {
               "type" : "string",
               "description" : "The maximum number of retries for the HTTP client. Default: 5.",
@@ -6859,7 +6861,7 @@
               "examples" : [ "60s" ]
             },
             "request.redirect.forward_headers" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "When set to true request headers are forwarded in case of a redirect. Default: false.",
               "examples" : [ "false" ]
             },
@@ -6892,15 +6894,18 @@
               "description" : "ContentType used for decoding the response body. If set it will force the decoding in the specified format regardless of the Content-Type header value, otherwise it will honor it if possible or fallback to application/json. Supported values: application/json, application/x-ndjson. It is not set by default."
             },
             "response.request_body_on_pagination" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "If set to true, the values in request.body are sent for pagination requests. Default: false.",
               "examples" : [ "false" ]
             },
             "cursor" : {
               "type" : "array",
-              "description" : "Cursor is a list of key value objects where arbitrary values are defined. The values are interpreted as value templates and a default template can be set. Cursor state is kept between input restarts and updated once all the events for a request are published.\nCan read state from: [.last_response.*, .first_event.*, .last_event.*].",
+              "description" : "Cursor is a list of key value objects where arbitrary values are defined. The values are interpreted as value templates and a default template can be set. Cursor state is kept between input restarts and updated once all the events for a request are published.\nEach cursor entry is formed by:\n- A value template, which will define the value to store when evaluated.\n- A default template, which will define the value to store when the value template fails or is empty.\n- An ignore_empty_value flag. When set to true, will not store empty values, preserving the previous one, if any. Default: true.\nCan read state from: [.last_response.*, .first_event.*, .last_event.*].",
               "items" : {
-                "type" : "string"
+                "type" : "string",
+                "defaultSnippets" : [ {
+                  "body" : "true"
+                } ]
               }
             },
             "api_key" : {
@@ -7234,22 +7239,22 @@
               "description" : "These options make it possible for Filebeat to decode logs structured as JSON messages. Filebeat processes the logs line by line, so the JSON decoding only works if there is one JSON object per line.",
               "properties" : {
                 "keys_under_root" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "description" : "By default, the decoded JSON is placed under a \"json\" key in the output document. If you enable this setting, the keys are copied top level in the output document. The default is false.",
                   "examples" : [ "false" ]
                 },
                 "overwrite_keys" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "description" : "If keys_under_root and this setting are enabled, then the values from the decoded JSON object overwrite the fields that Filebeat normally adds (type, source, offset, etc.) in case of conflicts.",
                   "examples" : [ "true" ]
                 },
                 "expand_keys" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "description" : "If this setting is enabled, Filebeat will recursively de-dot keys in the decoded JSON, and expand them into a hierarchical object structure. For example, {\"a.b.c\": 123} would be expanded into {\"a\":{\"b\":{\"c\":123}}}. This setting should be enabled when the input is produced by an ECS logger.",
                   "examples" : [ "true" ]
                 },
                 "add_error_key" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "description" : "If this setting is enabled, Filebeat adds a \"error.message\" and \"error.type: json\" key in case of JSON unmarshalling errors or when a message_key is defined in the configuration but cannot be used.",
                   "examples" : [ "true" ]
                 },
@@ -7262,7 +7267,7 @@
                   "description" : "Option configuration setting that specifies the JSON key to set the document id. If configured, the field will be removed from the original json document and stored in @metadata._id"
                 },
                 "ignore_decoding_error" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "description" : "An optional configuration setting that specifies if JSON decoding errors should be logged or not. If set to true, errors will not be logged. The default is false.",
                   "examples" : [ "false" ]
                 }
@@ -7357,7 +7362,7 @@
           }
         },
         "filebeat.overwrite_pipelines" : {
-          "type" : "boolean",
+          "$ref" : "#/definitions/booleanOrString",
           "description" : "By default Ingest pipelines are not updated if a pipeline with the same ID already exists. If this option is enabled Filebeat overwrites pipelines everytime a new Elasticsearch connection is established.",
           "examples" : [ "false" ]
         },
@@ -7374,7 +7379,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "false" ]
                 },
                 "path" : {
@@ -7382,7 +7387,7 @@
                   "examples" : [ "inputs.d/*.yml" ]
                 },
                 "reload.enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "reload.period" : {
@@ -7395,7 +7400,7 @@
               "type" : "object",
               "properties" : {
                 "enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "false" ]
                 },
                 "path" : {
@@ -7403,7 +7408,7 @@
                   "examples" : [ "modules.d/*.yml" ]
                 },
                 "reload.enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "examples" : [ "true" ]
                 },
                 "reload.period" : {
@@ -7439,7 +7444,7 @@
           "additionalItems" : true
         },
         "fields_under_root" : {
-          "type" : "boolean",
+          "$ref" : "#/definitions/booleanOrString",
           "description" : "If this option is set to true, the custom fields are stored as top-level fields in the output document instead of being grouped under a fields sub-dictionary. Default is false.",
           "examples" : [ "false" ]
         },
@@ -7538,7 +7543,7 @@
                       "examples" : [ "4KiB" ]
                     },
                     "prealloc" : {
-                      "type" : "boolean",
+                      "$ref" : "#/definitions/booleanOrString",
                       "description" : "If prealloc is set, the required space for the file is reserved using truncate. The default value is true.",
                       "examples" : [ "true" ]
                     }
@@ -7714,7 +7719,7 @@
                 }
               },
               "match_source" : {
-                "type" : "boolean",
+                "$ref" : "#/definitions/booleanOrString",
                 "examples" : [ "true" ]
               },
               "match_source_index" : {
@@ -7722,7 +7727,7 @@
                 "examples" : [ "4" ]
               },
               "match_short_id" : {
-                "type" : "boolean",
+                "$ref" : "#/definitions/booleanOrString",
                 "examples" : [ "false" ]
               },
               "cleanup_timeout" : {
@@ -7730,7 +7735,7 @@
                 "examples" : [ "60" ]
               },
               "labels.dedot" : {
-                "type" : "boolean",
+                "$ref" : "#/definitions/booleanOrString",
                 "examples" : [ "false" ]
               }
             }
@@ -7752,7 +7757,7 @@
                 }
               },
               "process_array" : {
-                "type" : "boolean",
+                "$ref" : "#/definitions/booleanOrString",
                 "examples" : [ "false" ]
               },
               "max_depth" : {
@@ -7763,7 +7768,7 @@
                 "type" : "string"
               },
               "overwrite_keys" : {
-                "type" : "boolean",
+                "$ref" : "#/definitions/booleanOrString",
                 "examples" : [ "false" ]
               }
             }
@@ -7784,11 +7789,11 @@
                 "examples" : [ "field2" ]
               },
               "ignore_missing" : {
-                "type" : "boolean",
+                "$ref" : "#/definitions/booleanOrString",
                 "examples" : [ "false" ]
               },
               "fail_on_error" : {
-                "type" : "boolean",
+                "$ref" : "#/definitions/booleanOrString",
                 "examples" : [ "true" ]
               }
             }
@@ -7817,11 +7822,11 @@
                 }
               },
               "fail_on_error" : {
-                "type" : "boolean",
+                "$ref" : "#/definitions/booleanOrString",
                 "examples" : [ "true" ]
               },
               "ignore_missing" : {
-                "type" : "boolean",
+                "$ref" : "#/definitions/booleanOrString",
                 "examples" : [ "false" ]
               }
             }
@@ -7843,11 +7848,11 @@
                 }
               },
               "fail_on_error" : {
-                "type" : "boolean",
+                "$ref" : "#/definitions/booleanOrString",
                 "examples" : [ "false" ]
               },
               "ignore_missing" : {
-                "type" : "boolean",
+                "$ref" : "#/definitions/booleanOrString",
                 "examples" : [ "true" ]
               }
             }
@@ -7876,11 +7881,11 @@
                 }
               },
               "ignore_missing" : {
-                "type" : "boolean",
+                "$ref" : "#/definitions/booleanOrString",
                 "examples" : [ "false" ]
               },
               "fail_on_error" : {
-                "type" : "boolean",
+                "$ref" : "#/definitions/booleanOrString",
                 "examples" : [ "true" ]
               }
             }
@@ -8023,7 +8028,7 @@
           },
           "add_kubernetes_metadata" : {
             "type" : "object",
-            "description" : "The add_kubernetes_metadata processor annotates each event with relevant metadata based on which Kubernetes pod the event originated from. At startup it detects an in_cluster environment and caches the Kubernetes-related metadata. Events are only annotated if a valid configuration is detected. If it’s not able to detect a valid Kubernetes configuration, the events are not annotated with Kubernetes-related metadata.",
+            "description" : "The add_kubernetes_metadata processor annotates each event with relevant metadata based on which Kubernetes pod the event originated from. At startup, it detects an in_cluster environment and caches the Kubernetes-related metadata. Events are only annotated if a valid configuration is detected. If it’s not able to detect a valid Kubernetes configuration, the events are not annotated with Kubernetes-related metadata.",
             "properties" : {
               "when" : {
                 "$ref" : "#/definitions/condition"
@@ -8044,14 +8049,12 @@
                 "description" : "(Optional) Use given config file as configuration for Kubernetes client. It defaults to KUBECONFIG environment variable if present."
               },
               "default_indexers.enabled" : {
-                "type" : "boolean",
-                "description" : "(Optional) Enable/Disable default pod indexers, in case you want to specify your own.",
-                "examples" : [ "true" ]
+                "type" : "string",
+                "description" : "(Optional) Enable or disable default pod indexers when you want to specify your own."
               },
               "default_matchers.enabled" : {
-                "type" : "boolean",
-                "description" : "(Optional) Enable/Disable default pod matchers, in case you want to specify your own.",
-                "examples" : [ "true" ]
+                "type" : "string",
+                "description" : "(Optional) Enable or disable default pod matchers when you want to specify your own."
               },
               "indexers" : {
                 "type" : "array",
@@ -8124,6 +8127,78 @@
               "labels" : {
                 "type" : "string",
                 "description" : "dictionaries of labels to be added."
+              }
+            }
+          },
+          "add_nomad_metadata" : {
+            "type" : "object",
+            "description" : "This functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.",
+            "properties" : {
+              "when" : {
+                "$ref" : "#/definitions/condition"
+              },
+              "address" : {
+                "type" : "string",
+                "description" : "(Optional) The URL of the agent API used to request the metadata. It uses http://127.0.0.1:4646 by default."
+              },
+              "namespace" : {
+                "type" : "string",
+                "description" : "(Optional) Namespace to watch. If set, only events for allocations in this namespace will be annotated."
+              },
+              "region" : {
+                "type" : "string",
+                "description" : "(Optional) Region to watch. If set, only events for allocations in this region will be annotated."
+              },
+              "secretID" : {
+                "type" : "string",
+                "description" : "(Optional) SecretID to use when connecting with the agent API."
+              },
+              "refresh_interval" : {
+                "type" : "string",
+                "description" : "(Optional) Interval used to updated the cached metadata. It defaults to 30 seconds."
+              },
+              "cleanup_timeout" : {
+                "type" : "string",
+                "description" : "(Optional) After an allocation has been removed, time to wait before cleaning up their associated resources. This is useful if you expect to receive events after an allocation has been removed, what can happen when collecting logs. It defaults to 60 seconds."
+              },
+              "scope" : {
+                "type" : "string",
+                "description" : "(Optional) Scope of the resources to watch. It can be node to get metadata only for the allocations in a single agent, or global, to get metadata for allocations running on any agent. It defaults to node.",
+                "examples" : [ "node" ]
+              },
+              "node" : {
+                "type" : "string",
+                "description" : "(Optional) When using scope: node, use node to specify the name of the local node if it cannot be discovered automatically."
+              },
+              "indexers" : {
+                "type" : "array",
+                "description" : "Indexers use allocation metadata to create unique identifiers for each one of the pods.",
+                "items" : {
+                  "type" : "object",
+                  "properties" : { }
+                }
+              },
+              "matchers" : {
+                "type" : "array",
+                "description" : "Matchers are used to construct the lookup keys that match with the identifiers created by indexes.",
+                "items" : {
+                  "type" : "object",
+                  "properties" : { }
+                }
+              },
+              "field_format" : {
+                "type" : "object",
+                "description" : "Looks up allocation metadata using a key created with a string format that can include event fields.\nThis matcher has an option format to define the string format. This string format can contain placeholders for any field in the event.\nFor example, the following configuration uses the allocation_name indexer to identify the allocation metadata by its name and namespace, and uses custom fields existing in the event as match keys:",
+                "additionalItems" : true
+              },
+              "fields" : {
+                "type" : "object",
+                "description" : "Looks up allocation metadata using as key the value of some specific fields. When multiple fields are defined, the first one included in the event is used.\nThis matcher has an option lookup_fields to define the fields whose value will be used for lookup.\nFor example, the following configuration uses the allocation_uuid indexer to identify allocations, and defines a matcher that uses some fields where the allocation UUID can be found for lookup, the first it finds in the event:",
+                "additionalItems" : true
+              },
+              "logs_path" : {
+                "type" : "string",
+                "description" : "Looks up allocation metadata using identifiers extracted from the log path stored in the log.file.path field.\nThis matcher has an optional logs_path option with the base path of the directory containing the logs for the local agent.\nThe default configuration is able to lookup the metadata using the allocation UUID when the logs are collected under /var/lib/nomad.\nFor example the following configuration would use the allocation UUID when the logs are collected from /var/lib/NomadClient001/alloc/<alloc UUID>/alloc/logs/...."
               }
             }
           },
@@ -8277,12 +8352,12 @@
                 }
               },
               "ignore_missing" : {
-                "type" : "boolean",
+                "$ref" : "#/definitions/booleanOrString",
                 "description" : "(Optional) If true the processor continues to the next field when the from key is not found in the event. If false then the processor returns an error and does not process the remaining fields. Default is false.",
                 "examples" : [ "false" ]
               },
               "fail_on_error" : {
-                "type" : "boolean",
+                "$ref" : "#/definitions/booleanOrString",
                 "description" : "(Optional) If false type conversion failures are ignored and the processor continues to the next field. Default is true.",
                 "examples" : [ "true" ]
               },
@@ -8305,12 +8380,12 @@
                 "$ref" : "#/definitions/condition"
               },
               "ignore_missing" : {
-                "type" : "boolean",
+                "$ref" : "#/definitions/booleanOrString",
                 "description" : "(Optional) If set to true, no error is logged in case a key which should be base64 decoded is missing. Default is false.",
                 "examples" : [ "false" ]
               },
               "fail_on_error" : {
-                "type" : "boolean",
+                "$ref" : "#/definitions/booleanOrString",
                 "description" : "(Optional) If set to true, in case of an error the base64 decode of fields is stopped and the original event is returned. If set to false, decoding continues also if an error happened during decoding. Default is true.",
                 "examples" : [ "true" ]
               }
@@ -8342,22 +8417,22 @@
                 "description" : "(Optional) Character to be used as a column separator. The default is the comma character. For using a TAB character you must set it to \"\\t\"."
               },
               "ignore_missing" : {
-                "type" : "boolean",
+                "$ref" : "#/definitions/booleanOrString",
                 "description" : "(Optional) Whether to ignore events which lack the source field. The default is false, which will fail processing of an event if a field is missing.",
                 "examples" : [ "false" ]
               },
               "overwrite_keys" : {
-                "type" : "boolean",
+                "$ref" : "#/definitions/booleanOrString",
                 "description" : "Whether the target field is overwritten if it already exists. The default is false, which will fail processing of an event when target already exists.",
                 "examples" : [ "false" ]
               },
               "trim_leading_space" : {
-                "type" : "boolean",
+                "$ref" : "#/definitions/booleanOrString",
                 "description" : "Whether extra space after the separator is trimmed from values. This works even if the separator is also a space. The default is false.",
                 "examples" : [ "false" ]
               },
               "fail_on_error" : {
-                "type" : "boolean",
+                "$ref" : "#/definitions/booleanOrString",
                 "description" : "(Optional) If set to true, in case of an error the changes to the event are reverted, and the original event is returned. If set to false, processing continues also if an error happens. Default is true.",
                 "examples" : [ "true" ]
               }
@@ -8380,12 +8455,12 @@
                 "description" : "(Optional) The field under which the decoded XML will be written. By default the decoded XML object replaces the field from which it was read. To merge the decoded XML fields into the root of the event specify target_field with an empty string (target_field: \"\"). Note that the null value (target_field:) is treated as if the field was not set at all."
               },
               "overwrite_keys" : {
-                "type" : "boolean",
-                "description" : "(Optional) A boolean that specifies whether keys that already exist in the event are overwritten by keys from the decoded XML object. The default value is false.",
-                "examples" : [ "false" ]
+                "$ref" : "#/definitions/booleanOrString",
+                "description" : "(Optional) A boolean that specifies whether keys that already exist in the event are overwritten by keys from the decoded XML object. The default value is true.",
+                "examples" : [ "true" ]
               },
               "to_lower" : {
-                "type" : "boolean",
+                "$ref" : "#/definitions/booleanOrString",
                 "description" : "(Optional) Converts all keys to lowercase. Accepts either true or false. The default value is true.",
                 "examples" : [ "true" ]
               },
@@ -8394,12 +8469,51 @@
                 "description" : "(Optional) XML key to use as the document ID. If configured, the field will be removed from the original XML document and stored in @metadata._id."
               },
               "ignore_missing" : {
-                "type" : "boolean",
+                "$ref" : "#/definitions/booleanOrString",
                 "description" : "(Optional) If true the processor will not return an error when a specified field does not exist. Defaults to false.",
                 "examples" : [ "false" ]
               },
               "ignore_failure" : {
-                "type" : "boolean",
+                "$ref" : "#/definitions/booleanOrString",
+                "description" : "(Optional) Ignore all errors produced by the processor. Defaults to false.",
+                "examples" : [ "false" ]
+              }
+            }
+          },
+          "decode_xml_wineventlog" : {
+            "type" : "object",
+            "description" : "This functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.",
+            "properties" : {
+              "when" : {
+                "$ref" : "#/definitions/condition"
+              },
+              "field" : {
+                "type" : "string",
+                "description" : "(Required) Source field containing the XML. Defaults to message.",
+                "examples" : [ "message" ]
+              },
+              "target_field" : {
+                "type" : "string",
+                "description" : "(Required) The field under which the decoded XML will be written. To merge the decoded XML fields into the root of the event specify target_field with an empty string (target_field: \"\"). The default value is winlog.",
+                "examples" : [ "winlog" ]
+              },
+              "overwrite_keys" : {
+                "$ref" : "#/definitions/booleanOrString",
+                "description" : "(Optional) A boolean that specifies whether keys that already exist in the event are overwritten by keys from the decoded XML object. The default value is true.",
+                "examples" : [ "true" ]
+              },
+              "map_ecs_fields" : {
+                "$ref" : "#/definitions/booleanOrString",
+                "description" : "(Optional) A boolean that specifies whether to map additional ECS fields when possible. Note that ECS field keys are placed outside of target_field. The default value is true.",
+                "examples" : [ "true" ]
+              },
+              "ignore_missing" : {
+                "$ref" : "#/definitions/booleanOrString",
+                "description" : "(Optional) If true the processor will not return an error when a specified field does not exist. Defaults to false.",
+                "examples" : [ "false" ]
+              },
+              "ignore_failure" : {
+                "$ref" : "#/definitions/booleanOrString",
                 "description" : "(Optional) Ignore all errors produced by the processor. Defaults to false.",
                 "examples" : [ "false" ]
               }
@@ -8440,7 +8554,7 @@
                 "description" : "(Optional) Flag to control whether the processor returns an error if the tokenizer fails to match the message field. If set to true, the processor will silently restore the original event, allowing execution of subsequent processors (if any). If set to false (default), the processor will log an error, preventing execution of other processors."
               },
               "overwrite_keys" : {
-                "type" : "boolean",
+                "$ref" : "#/definitions/booleanOrString",
                 "description" : "(Optional) When set to true, the processor will overwrite existing keys in the event. The default is false, which causes the processor to fail when a key already exists.",
                 "examples" : [ "false" ]
               },
@@ -8546,22 +8660,22 @@
                 "description" : "Maps each field name to an array index. Use 0 for the first element in the array. Multiple fields can be mapped to the same array element."
               },
               "ignore_missing" : {
-                "type" : "boolean",
+                "$ref" : "#/definitions/booleanOrString",
                 "description" : "(Optional) Whether to ignore events where the array field is missing. The default is false, which will fail processing of an event if the specified field does not exist. Set it to true to ignore this condition.",
                 "examples" : [ "false" ]
               },
               "overwrite_keys" : {
-                "type" : "boolean",
+                "$ref" : "#/definitions/booleanOrString",
                 "description" : "Whether the target fields specified in the mapping are overwritten if they already exist. The default is false, which will fail processing if a target field already exists.",
                 "examples" : [ "false" ]
               },
               "fail_on_error" : {
-                "type" : "boolean",
+                "$ref" : "#/definitions/booleanOrString",
                 "description" : "(Optional) If set to true and an error happens, changes to the event are reverted, and the original event is returned. If set to false, processing continues despite errors. Default is true.",
                 "examples" : [ "true" ]
               },
               "omit_empty" : {
-                "type" : "boolean",
+                "$ref" : "#/definitions/booleanOrString",
                 "description" : "(Optional) Whether empty values are extracted from the array. If set to true, instead of the target field being set to an empty value, it is left unset. The empty string (\"\"), an empty array ([]) or an empty object ({}) are considered empty values. Default is false.",
                 "examples" : [ "false" ]
               }
@@ -8582,7 +8696,7 @@
                 }
               },
               "ignore_missing" : {
-                "type" : "boolean",
+                "$ref" : "#/definitions/booleanOrString",
                 "description" : "(Optional) Whether to ignore missing fields. Default is false.",
                 "examples" : [ "false" ]
               },
@@ -8711,7 +8825,7 @@
           "description" : "Elasticsearch Output",
           "properties" : {
             "enabled" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "Boolean flag to enable or disable the output module.",
               "examples" : [ "true" ]
             },
@@ -8731,7 +8845,7 @@
               "examples" : [ "0" ]
             },
             "escape_html" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "Configure escaping HTML symbols in strings.",
               "examples" : [ "false" ]
             },
@@ -8797,7 +8911,7 @@
               "examples" : [ "http://proxy:3128" ]
             },
             "proxy_disable" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "Whether to disable proxy settings for outgoing connections. If true, this takes precedence over both the proxy_url field and any environment settings (HTTP_PROXY, HTTPS_PROXY). The default is false.",
               "examples" : [ "false" ]
             },
@@ -8831,7 +8945,7 @@
               "$ref" : "#/definitions/ssl"
             },
             "kerberos.enabled" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "Enable Kerberos support. Kerberos is automatically enabled if any Kerberos setting is set.",
               "examples" : [ "true" ]
             },
@@ -8872,7 +8986,7 @@
           "description" : "Logstash Output",
           "properties" : {
             "enabled" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "Boolean flag to enable or disable the output module.",
               "examples" : [ "true" ]
             },
@@ -8897,7 +9011,7 @@
               "examples" : [ "3" ]
             },
             "escape_html" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "Configure escaping HTML symbols in strings.",
               "examples" : [ "false" ]
             },
@@ -8907,7 +9021,7 @@
               "examples" : [ "30s" ]
             },
             "loadbalance" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "Optionally load-balance events between Logstash hosts. Default is false.",
               "examples" : [ "false" ]
             },
@@ -8917,7 +9031,7 @@
               "examples" : [ "2" ]
             },
             "slow_start" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "If enabled only a subset of events in a batch of events is transferred per transaction.  The number of events to be sent increases up to `bulk_max_size` if no error is encountered.",
               "examples" : [ "false" ]
             },
@@ -8942,7 +9056,7 @@
               "examples" : [ "socks5://user:password@socks5-server:2233" ]
             },
             "proxy_use_local_resolver" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "Resolve names locally when using a proxy server. Defaults to false.",
               "examples" : [ "false" ]
             },
@@ -8972,7 +9086,7 @@
           "description" : "Kafka Output",
           "properties" : {
             "enabled" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "Boolean flag to enable or disable the output module.",
               "examples" : [ "true" ]
             },
@@ -9001,7 +9115,7 @@
               "description" : "The Kafka event partitioning strategy. Default hashing strategy is `hash` using the `output.kafka.key` setting or randomly distributes events if `output.kafka.key` is not configured.",
               "properties" : {
                 "reachable_only" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "description" : "If enabled, events will only be published to partitions with reachable leaders. Default is false.",
                   "examples" : [ "false" ]
                 },
@@ -9038,12 +9152,12 @@
               "description" : "Configure JSON encoding",
               "properties" : {
                 "pretty" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "description" : "Pretty-print JSON event",
                   "examples" : [ "false" ]
                 },
                 "escape_html" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "description" : "Configure escaping HTML symbols in strings.",
                   "examples" : [ "false" ]
                 }
@@ -9069,7 +9183,7 @@
                   "examples" : [ "10m" ]
                 },
                 "full" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "description" : "Strategy for fetching the topics metadata from the broker. Default is false.",
                   "examples" : [ "false" ]
                 }
@@ -9151,7 +9265,7 @@
               "examples" : [ "beats" ]
             },
             "enable_krb5_fast" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "Enables Kerberos FAST authentication in the Kafka output. This may conflict with certain Active Directory configurations.",
               "examples" : [ "false" ]
             },
@@ -9160,7 +9274,7 @@
               "$ref" : "#/definitions/ssl"
             },
             "kerberos.enabled" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "Enable Kerberos support. Kerberos is automatically enabled if any Kerberos setting is set.",
               "examples" : [ "true" ]
             },
@@ -9206,7 +9320,7 @@
           "description" : "Redis Output",
           "properties" : {
             "enabled" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "Boolean flag to enable or disable the output module.",
               "examples" : [ "true" ]
             },
@@ -9215,12 +9329,12 @@
               "description" : "Configure JSON encoding",
               "properties" : {
                 "pretty" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "description" : "Pretty print json event",
                   "examples" : [ "false" ]
                 },
                 "escape_html" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "description" : "Configure escaping HTML symbols in strings.",
                   "examples" : [ "false" ]
                 }
@@ -9262,7 +9376,7 @@
               "examples" : [ "1" ]
             },
             "loadbalance" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "If set to true and multiple hosts or workers are configured, the output plugin load balances published events onto all Redis hosts. If set to false, the output plugin sends all events to only one host (determined at random) and will switch to another host if the currently selected one becomes unreachable. The default value is true.",
               "examples" : [ "true" ]
             },
@@ -9297,7 +9411,7 @@
               "properties" : { }
             },
             "proxy_use_local_resolver" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "This option determines whether Redis hostnames are resolved locally when using a proxy. The default value is false, which means that name resolution occurs on the proxy server.",
               "examples" : [ "false" ]
             },
@@ -9312,7 +9426,7 @@
           "description" : "File Output",
           "properties" : {
             "enabled" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "Boolean flag to enable or disable the output module.",
               "examples" : [ "true" ]
             },
@@ -9321,12 +9435,12 @@
               "description" : "Configure JSON encoding",
               "properties" : {
                 "pretty" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "description" : "Pretty-print JSON event",
                   "examples" : [ "false" ]
                 },
                 "escape_html" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "description" : "Configure escaping HTML symbols in strings.",
                   "examples" : [ "false" ]
                 }
@@ -9364,7 +9478,7 @@
           "description" : "Console Output",
           "properties" : {
             "enabled" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "Boolean flag to enable or disable the output module.",
               "examples" : [ "true" ]
             },
@@ -9373,12 +9487,12 @@
               "description" : "Configure JSON encoding",
               "properties" : {
                 "pretty" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "description" : "Pretty-print JSON event",
                   "examples" : [ "false" ]
                 },
                 "escape_html" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "description" : "Configure escaping HTML symbols in strings.",
                   "examples" : [ "false" ]
                 }
@@ -9432,7 +9546,7 @@
           "description" : "Dashboards",
           "properties" : {
             "enabled" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "These settings control loading the sample dashboards to the Kibana index. Loading the dashboards are disabled by default and can be enabled either by setting the options here, or by using the `-setup` CLI flag or the `setup` command.",
               "examples" : [ "false" ]
             },
@@ -9467,12 +9581,12 @@
               "properties" : { }
             },
             "always_kibana" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "Always use the Kibana API for loading the dashboards instead of autodetecting how to install the dashboards by first querying Elasticsearch.",
               "examples" : [ "false" ]
             },
             "retry.enabled" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "If true and Kibana is not reachable at the time when dashboards are loaded, it will retry to reconnect to Kibana instead of exiting with an error.",
               "examples" : [ "false" ]
             },
@@ -9496,7 +9610,7 @@
           "description" : "Template",
           "properties" : {
             "enabled" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "A template is used to set the mapping in Elasticsearch By default template loading is enabled and the template is loaded. These settings can be adjusted to load your own template or overwrite existing ones. Set to false to disable template loading.",
               "examples" : [ "true" ]
             },
@@ -9538,7 +9652,7 @@
               }
             },
             "json.enabled" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "Enable JSON template loading. If this is enabled, the fields.yml is ignored.",
               "examples" : [ "false" ]
             },
@@ -9552,7 +9666,7 @@
               "description" : "Name under which the template is stored in Elasticsearch"
             },
             "overwrite" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "Overwrite existing template Do not enable this option for more than one instance of filebeat as it might overload your Elasticsearch with too many update requests.",
               "examples" : [ "false" ]
             },
@@ -9579,7 +9693,7 @@
                   "description" : "A dictionary of settings for the _source field. For more details, please check https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-source-field.html",
                   "properties" : {
                     "enabled" : {
-                      "type" : "boolean",
+                      "$ref" : "#/definitions/booleanOrString",
                       "examples" : [ "false" ]
                     }
                   }
@@ -9621,12 +9735,12 @@
               "properties" : { }
             },
             "check_exists" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "Disable the check for an existing lifecycle policy. The default is true. If you disable this check, set setup.ilm.overwrite: true so the lifecycle policy can be installed.",
               "examples" : [ "true" ]
             },
             "overwrite" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "Overwrite the lifecycle policy at startup. The default is false.",
               "examples" : [ "false" ]
             }
@@ -9695,22 +9809,22 @@
               }
             },
             "to_stderr" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "Send all logging output to stderr. The default is false.",
               "examples" : [ "false" ]
             },
             "to_syslog" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "Send all logging output to syslog. The default is false.",
               "examples" : [ "false" ]
             },
             "to_eventlog" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "Send all logging output to Windows Event Logs. The default is false.",
               "examples" : [ "false" ]
             },
             "metrics.enabled" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "If enabled, Filebeat periodically logs its internal metrics that have changed in the last period. For each metric that changed, the delta from the value at the beginning of the period is logged. Also, the total values for all non-zero internal metrics are logged on shutdown. The default is true.",
               "examples" : [ "true" ]
             },
@@ -9720,7 +9834,7 @@
               "examples" : [ "30s" ]
             },
             "to_files" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "Logging to rotating files. Set logging.to_files to false to disable logging to files.",
               "examples" : [ "true" ]
             },
@@ -9758,19 +9872,19 @@
                   "examples" : [ "0" ]
                 },
                 "rotateonstartup" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "description" : "Rotate existing logs on startup rather than appending to the existing file. Defaults to true.",
                   "examples" : [ "true" ]
                 }
               }
             },
             "json" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "Set to true to log messages in JSON format.",
               "examples" : [ "false" ]
             },
             "ecs" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "Set to true, to log messages with minimal required Elastic Common Schema (ECS) information. Recommended to use in combination with `logging.json=true` Defaults to false.",
               "examples" : [ "false" ]
             }
@@ -9784,7 +9898,7 @@
           "description" : "X-Pack Monitoring",
           "properties" : {
             "enabled" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "Filebeat can export internal metrics to a central Elasticsearch monitoring cluster.  This requires xpack monitoring to be enabled in Elasticsearch.  The reporting is disabled by default. Set to true to enable the monitoring reporter.",
               "examples" : [ "false" ]
             },
@@ -9884,7 +9998,7 @@
                   "$ref" : "#/definitions/ssl"
                 },
                 "kerberos.enabled" : {
-                  "type" : "boolean",
+                  "$ref" : "#/definitions/booleanOrString",
                   "description" : "Enable Kerberos support. Kerberos is automatically enabled if any Kerberos setting is set.",
                   "examples" : [ "true" ]
                 },
@@ -9948,7 +10062,7 @@
           "description" : "HTTP Endpoint",
           "properties" : {
             "enabled" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "Each beat can expose internal metrics through a HTTP endpoint. For security reasons the endpoint is disabled by default. This feature is currently experimental. Stats can be access through http://localhost:5066/stats . For pretty JSON output append ?pretty to the URL. Defines if the HTTP endpoint is enabled.",
               "examples" : [ "false" ]
             },
@@ -9982,7 +10096,7 @@
           "description" : "Process Security",
           "properties" : {
             "enabled" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "Enable or disable seccomp system call filtering on Linux. Default is enabled.",
               "examples" : [ "true" ]
             }
@@ -9997,7 +10111,7 @@
           "description" : "Instrumentation support for the filebeat.",
           "properties" : {
             "enabled" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "Set to true to enable instrumentation of filebeat.",
               "examples" : [ "false" ]
             },
@@ -10033,7 +10147,7 @@
                   "type" : "object",
                   "properties" : {
                     "enabled" : {
-                      "type" : "boolean",
+                      "$ref" : "#/definitions/booleanOrString",
                       "description" : "Set to true to enable CPU profiling.",
                       "examples" : [ "false" ]
                     },
@@ -10051,7 +10165,7 @@
                   "type" : "object",
                   "properties" : {
                     "enabled" : {
-                      "type" : "boolean",
+                      "$ref" : "#/definitions/booleanOrString",
                       "description" : "Set to true to enable heap profiling.",
                       "examples" : [ "false" ]
                     },
@@ -10073,7 +10187,7 @@
           "description" : "Migration",
           "properties" : {
             "6_to_7.enabled" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "description" : "This allows to enable 6.7 migration aliases",
               "examples" : [ "false" ]
             }
@@ -10110,6 +10224,20 @@
         "$ref" : "#/definitions/instrumentation"
       }, {
         "$ref" : "#/definitions/migration"
+      } ]
+    },
+    "booleanOrString" : {
+      "oneOf" : [ {
+        "type" : "boolean"
+      }, {
+        "type" : "string"
+      } ]
+    },
+    "numberOrString" : {
+      "oneOf" : [ {
+        "type" : "number"
+      }, {
+        "type" : "string"
       } ]
     },
     "modulesArray" : {
@@ -10267,7 +10395,7 @@
     "inputCommonProperties" : {
       "properties" : {
         "enabled" : {
-          "type" : "boolean",
+          "$ref" : "#/definitions/booleanOrString",
           "description" : "Use the enabled option to enable and disable inputs. By default, enabled is set to true.",
           "examples" : [ "true" ]
         },
@@ -10292,7 +10420,7 @@
           } ]
         },
         "fields_under_root" : {
-          "type" : "boolean",
+          "$ref" : "#/definitions/booleanOrString",
           "description" : "If this option is set to true, the custom fields are stored as top-level fields in the output document instead of being grouped under a fields sub-dictionary. If the custom field names conflict with other field names added by Filebeat, then the custom fields overwrite the other fields.",
           "examples" : [ "true" ]
         },
@@ -10306,7 +10434,7 @@
           "examples" : [ "target-elasticsearch-pipeline" ]
         },
         "keep_null" : {
-          "type" : "boolean",
+          "$ref" : "#/definitions/booleanOrString",
           "examples" : [ "true" ],
           "description" : "If this option is set to true, fields with null values will be published in the output document. By default, keep_null is set to false."
         },
@@ -10316,7 +10444,7 @@
           "examples" : [ "target-elasticsearch-index" ]
         },
         "publisher_pipeline.disable_host" : {
-          "type" : "boolean",
+          "$ref" : "#/definitions/booleanOrString",
           "examples" : [ "true" ],
           "description" : "By default, all events contain host.name. This option can be set to true to disable the addition of this field to all events. The default value is false."
         }
@@ -10499,7 +10627,7 @@
           "$ref" : "#/definitions/httpjsonInputTransforms"
         },
         "keep_parent" : {
-          "type" : "boolean",
+          "$ref" : "#/definitions/booleanOrString",
           "description" : "If set to true, the fields from the parent document (at the same level as target) will be kept. Otherwise a new document will be created using target as the root. Default: false.",
           "examples" : [ "false" ]
         },
@@ -10581,7 +10709,7 @@
       "description" : "HTTPS settings",
       "properties" : {
         "enabled" : {
-          "type" : "boolean",
+          "$ref" : "#/definitions/booleanOrString",
           "description" : "Use SSL settings for HTTPS.",
           "examples" : [ "true" ]
         },
@@ -10664,7 +10792,7 @@
           "description" : "Specifies the regular expression pattern to match. Note that the regexp patterns supported by Filebeat differ somewhat from the patterns supported by Logstash. See Regular expression support for a list of supported regexp patterns. Depending on how you configure other multiline options, lines that match the specified regular expression are considered either continuations of a previous line or the start of a new multiline event. You can set the negate option to negate the pattern."
         },
         "negate" : {
-          "type" : "boolean",
+          "$ref" : "#/definitions/booleanOrString",
           "description" : "Defines whether the pattern is negated. The default is false.",
           "examples" : [ "false" ]
         },
@@ -10678,7 +10806,7 @@
           "description" : "Specifies a regular expression, in which the current multiline will be flushed from memory, ending the multiline-message."
         },
         "max_lines" : {
-          "type" : "number",
+          "$ref" : "#/definitions/numberOrString",
           "description" : "The maximum number of lines that can be combined into one event. If the multiline message contains more than max_lines, any additional lines are discarded. The default is 500.",
           "examples" : [ 500 ]
         },
@@ -10688,14 +10816,14 @@
           "examples" : [ "5s" ]
         },
         "count_lines" : {
-          "type" : "number",
+          "$ref" : "#/definitions/numberOrString",
           "description" : "The number of lines to aggregate into a single event.",
           "examples" : [ 3 ]
         },
         "skip_newline" : {
-          "type" : "boolean",
+          "$ref" : "#/definitions/booleanOrString",
           "description" : "When set, multiline events are concatenated without a line separator.",
-          "examples" : [ false ]
+          "examples" : [ "false" ]
         }
       }
     },
@@ -10715,8 +10843,8 @@
       "type" : "object",
       "properties" : {
         "enabled" : {
-          "type" : "boolean",
-          "default" : "true",
+          "$ref" : "#/definitions/booleanOrString",
+          "examples" : [ "true" ],
           "description" : "The enrichment of node or namespace metadata can be individually disabled by setting enabled: false."
         },
         "include_annotations" : {
@@ -10764,7 +10892,7 @@
               }
             },
             "overwrite" : {
-              "type" : "boolean",
+              "$ref" : "#/definitions/booleanOrString",
               "examples" : [ "true" ],
               "description" : "When overwrite is true, add_cloud_metadata overwrites existing cloud.* fields (false by default)."
             },
@@ -10879,8 +11007,8 @@
                         "description" : "Specify the time of inactivity before stopping the running configuration for a container, 60s by default."
                       },
                       "labels.dedot" : {
-                        "type" : "boolean",
-                        "default" : "false",
+                        "$ref" : "#/definitions/booleanOrString",
+                        "examples" : [ "false" ],
                         "description" : "Default to be false. If set to true, replace dots in labels with _."
                       }
                     }
@@ -10896,13 +11024,13 @@
                   "then" : {
                     "properties" : {
                       "labels.dedot" : {
-                        "type" : "boolean",
-                        "default" : "true",
+                        "$ref" : "#/definitions/booleanOrString",
+                        "examples" : [ "true" ],
                         "description" : "Default to be true. If set to true, replace dots in labels with _."
                       },
                       "annotations.dedot" : {
-                        "type" : "boolean",
-                        "default" : "true",
+                        "$ref" : "#/definitions/booleanOrString",
+                        "examples" : [ "true" ],
                         "description" : "Default to be true. If set to true, replace dots in labels with _."
                       },
                       "node" : {
@@ -10937,8 +11065,8 @@
                         "$ref" : "#/definitions/add_resource_metadata"
                       },
                       "unique" : {
-                        "type" : "boolean",
-                        "default" : "false",
+                        "$ref" : "#/definitions/booleanOrString",
+                        "examples" : [ "false" ],
                         "description" : "Defaults to false. Marking an autodiscover provider as unique results into making the provider to enable the provided templates only when it will gain the leader lease. This setting can only be combined with cluster scope. When unique is enabled enabled, resource and add_resource_metadata settings are not taken into account."
                       },
                       "leader_lease" : {
