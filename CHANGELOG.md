@@ -1,6 +1,12 @@
 # Change Log
 
 
+## 1.1.2
+
+- filebeat.yml completion: allow to set environment variables references for 'boolean' and 'number' types (no more validation warning)
+- elasticsearch index template completion: complete field parameters list
+
+
 ## 1.1.1
 
 - filebeat.yml: fix and complete 'processors' completion
