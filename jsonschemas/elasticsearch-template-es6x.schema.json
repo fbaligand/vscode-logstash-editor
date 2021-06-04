@@ -187,7 +187,51 @@
             "with_positions_offsets_payloads"
           ],
           "default": "no"
+        },
+        "path": {
+          "type": "string",
+          "examples": ["field_path"]
+        },
+        "boost": {
+          "type": "number",
+          "default": 1.0
+        },
+        "split_queries_on_whitespace": {
+          "type": "boolean",
+          "default": false
+        },
+        "ignore_z_value": {
+          "type": "boolean",
+          "default": true
+        },
+        "orientation": {
+          "type": "string",
+          "examples": [
+            "left",
+            "right"
+          ]
+        },
+        "relations": {
+          "type": "object",
+          "additionalProperties": true,
+          "defaultSnippets": [
+            {
+              "label": "add new relation",
+              "body": {
+                "${1:PARENT}": "${2:CHILD}"
+              }
+            }
+          ]
+        },
+        "scaling_factor": {
+          "type": "integer",
+          "examples": [100]
+        },
+        "enable_position_increments": {
+          "type": "boolean",
+          "default": true
         }
+
       }
     },
     "field": {
@@ -784,10 +828,13 @@
   ],
   "properties": {
     "index_patterns": {
-      "examples": [
-        [
-          "logstash-*"
-        ]
+      "defaultSnippets": [
+        {
+          "label": "define associated index patterns",
+          "body": [
+            "${1:logstash-*}"
+          ]
+        }
       ],
       "anyOf": [
         {

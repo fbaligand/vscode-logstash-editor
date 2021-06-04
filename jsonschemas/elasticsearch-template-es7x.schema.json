@@ -178,6 +178,9 @@
         "search_analyzer": {
           "$ref": "#/definitions/analyzers"
         },
+        "search_quote_analyzer": {
+          "$ref": "#/definitions/analyzers"
+        },
         "similarity": {
           "type": "string",
           "enum": [
@@ -203,6 +206,90 @@
             "with_positions_offsets_payloads"
           ],
           "default": "no"
+        },
+        "path": {
+          "type": "string",
+          "examples": ["field_path"]
+        },
+        "dims": {
+          "type": "integer",
+          "examples": [3]
+        },
+        "boost": {
+          "type": "number",
+          "default": 1.0
+        },
+        "depth_limit": {
+          "type": "integer",
+          "default": 20
+        },
+        "split_queries_on_whitespace": {
+          "type": "boolean",
+          "default": false
+        },
+        "ignore_z_value": {
+          "type": "boolean",
+          "default": true
+        },
+        "on_script_error": {
+          "type": "string",
+          "enum": ["fail", "continue"],
+          "default": "fail"
+        },
+        "script": {
+          "type": "object",
+          "properties": {
+            "source": {
+              "type": "string",
+              "examples": [""]
+            }
+          }
+        },
+        "orientation": {
+          "type": "string",
+          "examples": [
+            "left",
+            "right"
+          ]
+        },
+        "relations": {
+          "type": "object",
+          "additionalProperties": true,
+          "defaultSnippets": [
+            {
+              "label": "add new relation",
+              "body": {
+                "${1:PARENT}": "${2:CHILD}"
+              }
+            }
+          ]
+        },
+        "meta": {
+          "type": "object"
+        },
+        "include_in_parent": {
+          "type": "boolean",
+          "default": false
+        },
+        "include_in_root": {
+          "type": "boolean",
+          "default": false
+        },
+        "scaling_factor": {
+          "type": "integer",
+          "examples": [100]
+        },
+        "positive_score_impact": {
+          "type": "boolean",
+          "default": true
+        },
+        "max_shingle_size": {
+          "type": "integer",
+          "default": 3
+        },
+        "enable_position_increments": {
+          "type": "boolean",
+          "default": true
         }
       }
     },
@@ -226,6 +313,15 @@
           "examples": [
             "yyyy-MM-dd"
           ]
+        },
+        "script": {
+          "type": "object",
+          "properties": {
+            "source": {
+              "type": "string",
+              "examples": [""]
+            }
+          }
         }
       }
     },
@@ -948,10 +1044,13 @@
   ],
   "properties": {
     "index_patterns": {
-      "examples": [
-        [
-          "logstash-*"
-        ]
+      "defaultSnippets": [
+        {
+          "label": "define associated index patterns",
+          "body": [
+            "${1:logstash-*}"
+          ]
+        }
       ],
       "anyOf": [
         {
