@@ -1,5 +1,27 @@
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
+	"definitions": {
+		"integerOrString": {
+			"oneOf": [
+				{
+					"type": "integer"
+				},
+				{
+					"type": "string"
+				}
+			]
+		},
+		"booleanOrString": {
+			"oneOf": [
+				{
+					"type": "boolean"
+				},
+				{
+					"type": "string"
+				}
+			]
+		}
+	},
 	"type": "array",
 	"defaultSnippets": [
 		{
@@ -34,7 +56,7 @@
 				"examples": [ "pipeline1" ]
 			},
 			"pipeline.java_execution": {
-				"type": "boolean",
+				"$ref": "#/definitions/booleanOrString",
 				"description": "Use the Java execution engine.",
 				"default": "true",
 				"examples": ["false"]
@@ -58,19 +80,19 @@
 				"examples": [ "\"input { generator {} } filter { dns {} } output { stdout { codec => rubydebug } }\"" ]
 			},
 			"config.debug": {
-				"type": "boolean",
+				"$ref": "#/definitions/booleanOrString",
 				"description": "When set to true, shows the fully compiled configuration as a debug log message. You must also set log.level: debug. WARNING: The log message will include any password options passed to plugin configs as plaintext, and may result in plaintext passwords appearing in your logs!",
 				"default": "false",
 				"examples": ["true"]
 			},
 			"config.support_escapes": {
-				"type": "boolean",
+				"$ref": "#/definitions/booleanOrString",
 				"description": "When set to true, quoted strings will process the following escape sequences: \\n becomes a literal newline (ASCII 10). \\r becomes a literal carriage return (ASCII 13). \\t becomes a literal tab (ASCII 9). \\\\ becomes a literal backslash \\. \" becomes a literal double quotation mark. \\' becomes a literal quotation mark.",
 				"default": "false",
 				"examples": ["true"]
 			},
 			"config.reload.automatic": {
-				"type": "boolean",
+				"$ref": "#/definitions/booleanOrString",
 				"description": "When set to true, periodically checks if the configuration has changed and reloads the configuration whenever it is changed. This can also be triggered manually through the SIGHUP signal.",
 				"default": "false",
 				"examples": ["true"]
@@ -82,25 +104,25 @@
 				"examples": ["3s"]
 			},
 			"pipeline.workers": {
-				"type": "integer",
+				"$ref": "#/definitions/integerOrString",
 				"description": "The number of workers that will, in parallel, execute the filter and output stages of the pipeline. This setting uses the java.lang.Runtime.getRuntime.availableProcessors value as a default if not overridden by pipeline.workers in pipelines.yml or pipeline.workers from logstash.yml. If you have modified this setting and see that events are backing up, or that the CPU is not saturated, consider increasing this number to better utilize machine processing power. Default value is the number of the host’s CPU cores.",
 				"default": "",
 				"examples": [ "1" ]
 			},
 			"pipeline.batch.size": {
-				"type": "integer",
+				"$ref": "#/definitions/integerOrString",
 				"description": "The maximum number of events an individual worker thread will collect from inputs before attempting to execute its filters and outputs. Larger batch sizes are generally more efficient, but come at the cost of increased memory overhead. You may need to increase JVM heap space in the jvm.options config file. See Logstash Configuration Files for more info.",
 				"default": "125",
 				"examples": [ "125" ]
 			},
 			"pipeline.batch.delay": {
-				"type": "integer",
+				"$ref": "#/definitions/integerOrString",
 				"description": "When creating pipeline event batches, how long in milliseconds to wait for each event before dispatching an undersized batch to pipeline workers.",
 				"default": "50",
 				"examples": [ "50" ]
 			},
 			"pipeline.plugin_classloaders": {
-				"type": "boolean",
+				"$ref": "#/definitions/booleanOrString",
 				"description": "(Beta) Load Java plugins in independent classloaders to isolate their dependencies.",
 				"default": "false",
 				"examples": [ "true" ]
@@ -118,7 +140,7 @@
 				"examples": [ "64mb" ]
 			},
 			"queue.max_events": {
-				"type": "integer",
+				"$ref": "#/definitions/integerOrString",
 				"description": "The maximum number of unread events in the queue when persistent queues are enabled (queue.type: persisted). Default is 0, that is to say unlimited.",
 				"default": "0",
 				"examples": [ "0" ]
@@ -130,31 +152,31 @@
 				"examples": [ "1024mb" ]
 			},
 			"queue.checkpoint.acks": {
-				"type": "integer",
+				"$ref": "#/definitions/integerOrString",
 				"description": "The maximum number of ACKed events before forcing a checkpoint when persistent queues are enabled (queue.type: persisted). Specify queue.checkpoint.acks: 0 to set this value to unlimited.",
 				"default": "1024",
 				"examples": [ "1024" ]
 			},
 			"queue.checkpoint.interval": {
-				"type": "integer",
+				"$ref": "#/definitions/integerOrString",
 				"description": "If using 'queue.type: persisted', the interval in milliseconds when a checkpoint is forced on the head page. Default is 1000, 0 for no periodic checkpoint.",
 				"default": "1000",
 				"examples": [ "1000" ]
 			},
 			"queue.checkpoint.writes": {
-				"type": "integer",
+				"$ref": "#/definitions/integerOrString",
 				"description": "The maximum number of written events before forcing a checkpoint when persistent queues are enabled (queue.type: persisted). Specify queue.checkpoint.writes: 0 to set this value to unlimited.",
 				"default": "1024",
 				"examples": [ "1024" ]
 			},
 			"queue.checkpoint.retry": {
-				"type": "boolean",
+				"$ref": "#/definitions/booleanOrString",
 				"description": "When enabled, Logstash will retry once per attempted checkpoint write for any checkpoint writes that fail. Any subsequent errors are not retried. This is a workaround for failed checkpoint writes that have been seen only on filesystems with non-standard behavior such as SANs and is not recommended except in those specific circumstances.",
 				"default": "false",
 				"examples": [ "true" ]
 			},
 			"queue.drain": {
-				"type": "boolean",
+				"$ref": "#/definitions/booleanOrString",
 				"description": "When enabled, Logstash waits until the persistent queue is drained before shutting down.",
 				"default": "false",
 				"examples": [ "true" ]
@@ -168,7 +190,7 @@
 				]
 			},
 			"dead_letter_queue.enable": {
-				"type": "boolean",
+				"$ref": "#/definitions/booleanOrString",
 				"description": "Flag to instruct Logstash to enable the DLQ feature supported by plugins.",
 				"default": "true",
 				"examples": [ "false" ]
