@@ -231,20 +231,6 @@
           "type": "boolean",
           "default": true
         },
-        "on_script_error": {
-          "type": "string",
-          "enum": ["fail", "continue"],
-          "default": "fail"
-        },
-        "script": {
-          "type": "object",
-          "properties": {
-            "source": {
-              "type": "string",
-              "examples": [""]
-            }
-          }
-        },
         "orientation": {
           "type": "string",
           "examples": [
