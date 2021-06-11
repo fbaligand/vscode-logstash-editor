@@ -1,6 +1,12 @@
 # Change Log
 
 
+## 1.1.3
+
+- logstash.yml and pipelines.yml completion: allow to set environment variables references for 'boolean' and 'integer' types (no more validation warning)
+- elasticsearch index template completion: remove field parameters not available in ES 7.12
+
+
 ## 1.1.2
 
 - filebeat.yml completion: allow to set environment variables references for 'boolean' and 'number' types (no more validation warning)
