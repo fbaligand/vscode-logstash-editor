@@ -63,7 +63,7 @@
 			},
 			"pipeline.ordered": {
 				"type": "string",
-				"description": "(Beta) Load Java plugins in independent classloaders to isolate their dependencies.",
+				"description": "When set to true, event ordering is enforced on the pipeline and prevents logstash from starting if there are multiple workers configured. False, disables the processing required to preserve event order. When set to auto, logstash enables event ordering if the pipeline.workers setting is set to 1 otherwise it is disabled.",
 				"default": "auto",
 				"examples": ["true", "false"]
 			},
