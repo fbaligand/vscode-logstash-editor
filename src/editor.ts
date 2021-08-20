@@ -10,9 +10,9 @@ const CODEC_PARENT_REGEX = /^\s*codec\s*=>\s*\w*/;
 const COMPLETION_AVAILABLE_PREFIX_REGEX = /^\s*(codec\s*=>\s*)?\w*$/;
 const OPTION_SNIPPET_COMPLETION_AVAILABLE_PREFIX_REGEX = /^(\s*(\w+))(\s+|\s*=|\s*=>.*)$/;
 const LAST_TOKEN_REGEX = /^.*\b(\w+)$/;
-const FRAGMENTS_TO_IGNORE_REGEX = /"[^"]*"|'[^']*'|#.*$/g;
-const QUOTE_BLOCK_START_REGEX = /=>\s*('[^']*|"[^"]*)$/;
-const QUOTE_BLOCK_END_REGEX = /([^']*'|[^"]*")\s*$/;
+const FRAGMENTS_TO_IGNORE_REGEX = /"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'|#.*$/g;
+const QUOTE_BLOCK_START_REGEX = /=>\s*('(?:[^'\\]|\\.)*|"(?:[^"\\]|\\.)*)$/;
+const QUOTE_BLOCK_END_REGEX = /((?:[^'\\]|\\.)*'|(?:[^"\\]|\\.)*")\s*$/;
 const OPEN_PARENTHESIS_REGEX = /\{/g;
 const CLOSED_PARENTHESIS_REGEX = /\}/g;
 
