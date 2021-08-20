@@ -44,13 +44,17 @@
 			"type": "string",
 			"description": "The ID of the pipeline.",
 			"default": "main",
-			"examples": ["main"]
+			"examples": [
+				"main"
+			]
 		},
 		"pipeline.java_execution": {
 			"$ref": "#/definitions/booleanOrString",
 			"description": "Use the Java execution engine.",
 			"default": "true",
-			"examples": ["false"]
+			"examples": [
+				"false"
+			]
 		},
 		"pipeline.workers": {
 			"$ref": "#/definitions/integerOrString",
@@ -64,46 +68,59 @@
 			"$ref": "#/definitions/integerOrString",
 			"description": "The maximum number of events an individual worker thread will collect from inputs before attempting to execute its filters and outputs. Larger batch sizes are generally more efficient, but come at the cost of increased memory overhead. You may need to increase JVM heap space in the jvm.options config file. See Logstash Configuration Files for more info.",
 			"default": "125",
-			"examples": ["125"]
+			"examples": [
+				"125"
+			]
 		},
 		"pipeline.batch.delay": {
 			"$ref": "#/definitions/integerOrString",
 			"description": "When creating pipeline event batches, how long in milliseconds to wait for each event before dispatching an undersized batch to pipeline workers.",
 			"default": "50",
-			"examples": ["50"]
+			"examples": [
+				"50"
+			]
 		},
 		"pipeline.unsafe_shutdown": {
 			"$ref": "#/definitions/booleanOrString",
 			"description": "When set to true, forces Logstash to exit during shutdown even if there are still inflight events in memory. By default, Logstash will refuse to quit until all received events have been pushed to the outputs. Enabling this option can lead to data loss during shutdown.",
 			"default": "false",
-			"examples": ["true"]
+			"examples": [
+				"true"
+			]
 		},
 		"pipeline.plugin_classloaders": {
 			"$ref": "#/definitions/booleanOrString",
 			"description": "(Beta) Load Java plugins in independent classloaders to isolate their dependencies.",
 			"default": "false",
-			"examples": ["true"]
+			"examples": [
+				"true"
+			]
 		},
 		"pipeline.ordered": {
 			"type": "string",
-			"description": "(Beta) Load Java plugins in independent classloaders to isolate their dependencies.",
+			"description": "Set the pipeline event ordering. Valid options are: 'auto', 'true' and 'false'. 'auto' will automatically enable ordering if the pipeline.workers setting is also set to 1. 'true' will enforce ordering on the pipeline and prevent logstash from starting if there are multiple workers. 'false' will disable the processing required to preserve order. When 'false', ordering is not guaranteed, but you save the processing cost of preserving order.",
 			"default": "auto",
-			"examples": ["true", "false"]
+			"examples": [
+				"true",
+				"false"
+			]
 		},
 		"path.config": {
 			"type": "string",
 			"description": "The path to the Logstash config for the main pipeline. If you specify a directory or wildcard, config files are read from the directory in alphabetical order. Default value is platform-specific, see Logstash Directory Layout.",
 			"default": "",
 			"examples": [
-				"\"${LOGSTASH_HOME}/pipelines\""
+				"\"pipeline-config/logstash-*.conf\""
 			]
 		},
 		"config.string": {
 			"type": "string",
 			"description": "A string that contains the pipeline configuration to use for the main pipeline. Use the same syntax as the config file. There is no default value.",
 			"default": "",
-			"examples": [ "\"input { generator {} } filter { dns {} } output { stdout { codec => rubydebug } }\"" ]
-	},
+			"examples": [
+				"\"input { generator {} } filter { dns {} } output { stdout { codec => rubydebug } }\""
+			]
+		},
 		"config.test_and_exit": {
 			"$ref": "#/definitions/booleanOrString",
 			"description": "When set to true, checks that the configuration is valid and then exits. Note that grok patterns are not checked for correctness with this setting. Logstash can read multiple config files from a directory. If you combine this setting with log.level: debug, Logstash will log the combined config file, annotating each config block with the source file it came from.",
@@ -122,7 +139,7 @@
 		},
 		"config.reload.interval": {
 			"type": "string",
-			"description": "How often in seconds Logstash checks the config files for changes.",
+			"description": "How often in seconds Logstash checks the config files for changes. Note that the unit qualifier (s) is required.",
 			"default": "3s",
 			"examples": [
 				"3s"
@@ -132,13 +149,17 @@
 			"$ref": "#/definitions/booleanOrString",
 			"description": "When set to true, shows the fully compiled configuration as a debug log message. You must also set log.level: debug. WARNING: The log message will include any password options passed to plugin configs as plaintext, and may result in plaintext passwords appearing in your logs!",
 			"default": "false",
-			"examples": ["true"]
+			"examples": [
+				"true"
+			]
 		},
 		"config.support_escapes": {
 			"$ref": "#/definitions/booleanOrString",
-			"description": "When set to true, quoted strings will process the following escape sequences: \\n becomes a literal newline (ASCII 10). \\r becomes a literal carriage return (ASCII 13). \\t becomes a literal tab (ASCII 9). \\\\ becomes a literal backslash \\. \" becomes a literal double quotation mark. \\' becomes a literal quotation mark.",
+			"description": "When set to true, quoted strings will process the following escape sequences: \\n becomes a literal newline (ASCII 10). \\r becomes a literal carriage return (ASCII 13). \\t becomes a literal tab (ASCII 9). \\\\ becomes a literal backslash \\. \\\" becomes a literal double quotation mark. \\' becomes a literal quotation mark.",
 			"default": "false",
-			"examples": [ "true" ]
+			"examples": [
+				"true"
+			]
 		},
 		"modules": {
 			"type": "array",
@@ -161,7 +182,6 @@
 			"description": "The internal queuing model to use for event buffering. Specify memory for legacy in-memory based queuing, or persisted for disk-based ACKed queueing (persistent queues).",
 			"default": "memory",
 			"examples": [
-				"memory",
 				"persisted"
 			]
 		},
@@ -209,7 +229,9 @@
 			"$ref": "#/definitions/integerOrString",
 			"description": "If using 'queue.type: persisted', the interval in milliseconds when a checkpoint is forced on the head page. Default is 1000, 0 for no periodic checkpoint.",
 			"default": "1000",
-			"examples": ["1000"]
+			"examples": [
+				"1000"
+			]
 		},
 		"queue.checkpoint.writes": {
 			"$ref": "#/definitions/integerOrString",
@@ -279,13 +301,23 @@
 			"type": "string",
 			"description": "The log level. Valid options are: fatal, error, warn, info, debug, trace",
 			"default": "info",
-			"examples": ["fatal", "error", "warn", "info", "debug", "trace"]
+			"examples": [
+				"fatal",
+				"error",
+				"warn",
+				"info",
+				"debug",
+				"trace"
+			]
 		},
 		"log.format": {
 			"type": "string",
 			"description": "The log format. Set to json to log in JSON format, or plain to use Object#.inspect.",
 			"default": "plain",
-			"examples": ["plain", "json"]
+			"examples": [
+				"plain",
+				"json"
+			]
 		},
 		"path.logs": {
 			"type": "string",

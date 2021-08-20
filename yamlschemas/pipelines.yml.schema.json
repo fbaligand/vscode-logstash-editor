@@ -42,10 +42,14 @@
 		],
 		"anyOf": [
 			{
-				"required": [ "path.config" ]
+				"required": [
+					"path.config"
+				]
 			},
 			{
-				"required": [ "config.string" ]
+				"required": [
+					"config.string"
+				]
 			}
 		],
 		"properties": {
@@ -53,133 +57,114 @@
 				"type": "string",
 				"description": "The ID of the pipeline.",
 				"default": "",
-				"examples": [ "pipeline1" ]
+				"examples": [
+					"pipeline1"
+				]
 			},
 			"pipeline.java_execution": {
 				"$ref": "#/definitions/booleanOrString",
 				"description": "Use the Java execution engine.",
 				"default": "true",
-				"examples": ["false"]
-			},
-			"pipeline.ordered": {
-				"type": "string",
-				"description": "When set to true, event ordering is enforced on the pipeline and prevents logstash from starting if there are multiple workers configured. False, disables the processing required to preserve event order. When set to auto, logstash enables event ordering if the pipeline.workers setting is set to 1 otherwise it is disabled.",
-				"default": "auto",
-				"examples": ["true", "false"]
-			},
-			"path.config": {
-				"type": "string",
-				"description": "The path to the Logstash config for the main pipeline. If you specify a directory or wildcard, config files are read from the directory in alphabetical order. Default value is platform-specific, see Logstash Directory Layout.",
-				"default": "",
-				"examples": ["\"pipeline-config/pipeline1/logstash-*.conf\""]
-			},
-			"config.string": {
-				"type": "string",
-				"description": "A string that contains the pipeline configuration to use for the main pipeline. Use the same syntax as the config file. There is no default value.",
-				"default": "",
-				"examples": [ "\"input { generator {} } filter { dns {} } output { stdout { codec => rubydebug } }\"" ]
-			},
-			"config.debug": {
-				"$ref": "#/definitions/booleanOrString",
-				"description": "When set to true, shows the fully compiled configuration as a debug log message. You must also set log.level: debug. WARNING: The log message will include any password options passed to plugin configs as plaintext, and may result in plaintext passwords appearing in your logs!",
-				"default": "false",
-				"examples": ["true"]
-			},
-			"config.support_escapes": {
-				"$ref": "#/definitions/booleanOrString",
-				"description": "When set to true, quoted strings will process the following escape sequences: \\n becomes a literal newline (ASCII 10). \\r becomes a literal carriage return (ASCII 13). \\t becomes a literal tab (ASCII 9). \\\\ becomes a literal backslash \\. \" becomes a literal double quotation mark. \\' becomes a literal quotation mark.",
-				"default": "false",
-				"examples": ["true"]
-			},
-			"config.reload.automatic": {
-				"$ref": "#/definitions/booleanOrString",
-				"description": "When set to true, periodically checks if the configuration has changed and reloads the configuration whenever it is changed. This can also be triggered manually through the SIGHUP signal.",
-				"default": "false",
-				"examples": ["true"]
-			},
-			"config.reload.interval": {
-				"type": "string",
-				"description": "How often in seconds Logstash checks the config files for changes.",
-				"default": "3s",
-				"examples": ["3s"]
+				"examples": [
+					"false"
+				]
 			},
 			"pipeline.workers": {
 				"$ref": "#/definitions/integerOrString",
 				"description": "The number of workers that will, in parallel, execute the filter and output stages of the pipeline. This setting uses the java.lang.Runtime.getRuntime.availableProcessors value as a default if not overridden by pipeline.workers in pipelines.yml or pipeline.workers from logstash.yml. If you have modified this setting and see that events are backing up, or that the CPU is not saturated, consider increasing this number to better utilize machine processing power. Default value is the number of the host’s CPU cores.",
 				"default": "",
-				"examples": [ "1" ]
+				"examples": [
+					"1"
+				]
 			},
 			"pipeline.batch.size": {
 				"$ref": "#/definitions/integerOrString",
 				"description": "The maximum number of events an individual worker thread will collect from inputs before attempting to execute its filters and outputs. Larger batch sizes are generally more efficient, but come at the cost of increased memory overhead. You may need to increase JVM heap space in the jvm.options config file. See Logstash Configuration Files for more info.",
 				"default": "125",
-				"examples": [ "125" ]
+				"examples": [
+					"125"
+				]
 			},
 			"pipeline.batch.delay": {
 				"$ref": "#/definitions/integerOrString",
 				"description": "When creating pipeline event batches, how long in milliseconds to wait for each event before dispatching an undersized batch to pipeline workers.",
 				"default": "50",
-				"examples": [ "50" ]
+				"examples": [
+					"50"
+				]
 			},
 			"pipeline.plugin_classloaders": {
 				"$ref": "#/definitions/booleanOrString",
 				"description": "(Beta) Load Java plugins in independent classloaders to isolate their dependencies.",
 				"default": "false",
-				"examples": [ "true" ]
+				"examples": [
+					"true"
+				]
+			},
+			"pipeline.ordered": {
+				"type": "string",
+				"description": "Set the pipeline event ordering. Valid options are: 'auto', 'true' and 'false'. 'auto' will automatically enable ordering if the pipeline.workers setting is also set to 1. 'true' will enforce ordering on the pipeline and prevent logstash from starting if there are multiple workers. 'false' will disable the processing required to preserve order. When 'false', ordering is not guaranteed, but you save the processing cost of preserving order.",
+				"default": "auto",
+				"examples": [
+					"true",
+					"false"
+				]
+			},
+			"path.config": {
+				"type": "string",
+				"description": "The path to the Logstash config for the main pipeline. If you specify a directory or wildcard, config files are read from the directory in alphabetical order. Default value is platform-specific, see Logstash Directory Layout.",
+				"default": "",
+				"examples": [
+					"\"pipeline-config/pipeline1/logstash-*.conf\""
+				]
+			},
+			"config.string": {
+				"type": "string",
+				"description": "A string that contains the pipeline configuration to use for the main pipeline. Use the same syntax as the config file. There is no default value.",
+				"default": "",
+				"examples": [
+					"\"input { generator {} } filter { dns {} } output { stdout { codec => rubydebug } }\""
+				]
+			},
+			"config.reload.automatic": {
+				"$ref": "#/definitions/booleanOrString",
+				"description": "When set to true, periodically checks if the configuration has changed and reloads the configuration whenever it is changed. This can also be triggered manually through the SIGHUP signal.",
+				"default": "false",
+				"examples": [
+					"true"
+				]
+			},
+			"config.reload.interval": {
+				"type": "string",
+				"description": "How often in seconds Logstash checks the config files for changes. Note that the unit qualifier (s) is required.",
+				"default": "3s",
+				"examples": [
+					"3s"
+				]
+			},
+			"config.debug": {
+				"$ref": "#/definitions/booleanOrString",
+				"description": "When set to true, shows the fully compiled configuration as a debug log message. You must also set log.level: debug. WARNING: The log message will include any password options passed to plugin configs as plaintext, and may result in plaintext passwords appearing in your logs!",
+				"default": "false",
+				"examples": [
+					"true"
+				]
+			},
+			"config.support_escapes": {
+				"$ref": "#/definitions/booleanOrString",
+				"description": "When set to true, quoted strings will process the following escape sequences: \\n becomes a literal newline (ASCII 10). \\r becomes a literal carriage return (ASCII 13). \\t becomes a literal tab (ASCII 9). \\\\ becomes a literal backslash \\. \\\" becomes a literal double quotation mark. \\' becomes a literal quotation mark.",
+				"default": "false",
+				"examples": [
+					"true"
+				]
 			},
 			"queue.type": {
 				"type": "string",
 				"description": "The internal queuing model to use for event buffering. Specify memory for legacy in-memory based queuing, or persisted for disk-based ACKed queueing (persistent queues).",
 				"default": "memory",
-				"examples": ["persisted"]
-			},
-			"queue.page_capacity": {
-				"type": "string",
-				"description": "The size of the page data files used when persistent queues are enabled (queue.type: persisted). The queue data consists of append-only data files separated into pages.",
-				"default": "64mb",
-				"examples": [ "64mb" ]
-			},
-			"queue.max_events": {
-				"$ref": "#/definitions/integerOrString",
-				"description": "The maximum number of unread events in the queue when persistent queues are enabled (queue.type: persisted). Default is 0, that is to say unlimited.",
-				"default": "0",
-				"examples": [ "0" ]
-			},
-			"queue.max_bytes": {
-				"type": "string",
-				"description": "The total capacity of the queue in number of bytes. Make sure the capacity of your disk drive is greater than the value you specify here. If both queue.max_events and queue.max_bytes are specified, Logstash uses whichever criteria is reached first.",
-				"default": "1024mb",
-				"examples": [ "1024mb" ]
-			},
-			"queue.checkpoint.acks": {
-				"$ref": "#/definitions/integerOrString",
-				"description": "The maximum number of ACKed events before forcing a checkpoint when persistent queues are enabled (queue.type: persisted). Specify queue.checkpoint.acks: 0 to set this value to unlimited.",
-				"default": "1024",
-				"examples": [ "1024" ]
-			},
-			"queue.checkpoint.interval": {
-				"$ref": "#/definitions/integerOrString",
-				"description": "If using 'queue.type: persisted', the interval in milliseconds when a checkpoint is forced on the head page. Default is 1000, 0 for no periodic checkpoint.",
-				"default": "1000",
-				"examples": [ "1000" ]
-			},
-			"queue.checkpoint.writes": {
-				"$ref": "#/definitions/integerOrString",
-				"description": "The maximum number of written events before forcing a checkpoint when persistent queues are enabled (queue.type: persisted). Specify queue.checkpoint.writes: 0 to set this value to unlimited.",
-				"default": "1024",
-				"examples": [ "1024" ]
-			},
-			"queue.checkpoint.retry": {
-				"$ref": "#/definitions/booleanOrString",
-				"description": "When enabled, Logstash will retry once per attempted checkpoint write for any checkpoint writes that fail. Any subsequent errors are not retried. This is a workaround for failed checkpoint writes that have been seen only on filesystems with non-standard behavior such as SANs and is not recommended except in those specific circumstances.",
-				"default": "false",
-				"examples": [ "true" ]
-			},
-			"queue.drain": {
-				"$ref": "#/definitions/booleanOrString",
-				"description": "When enabled, Logstash waits until the persistent queue is drained before shutting down.",
-				"default": "false",
-				"examples": [ "true" ]
+				"examples": [
+					"persisted"
+				]
 			},
 			"path.queue": {
 				"type": "string",
@@ -189,24 +174,92 @@
 					"\"<path.data>/queue\""
 				]
 			},
+			"queue.page_capacity": {
+				"type": "string",
+				"description": "The size of the page data files used when persistent queues are enabled (queue.type: persisted). The queue data consists of append-only data files separated into pages.",
+				"default": "64mb",
+				"examples": [
+					"64mb"
+				]
+			},
+			"queue.max_events": {
+				"$ref": "#/definitions/integerOrString",
+				"description": "The maximum number of unread events in the queue when persistent queues are enabled (queue.type: persisted). Default is 0, that is to say unlimited.",
+				"default": "0",
+				"examples": [
+					"0"
+				]
+			},
+			"queue.max_bytes": {
+				"type": "string",
+				"description": "The total capacity of the queue in number of bytes. Make sure the capacity of your disk drive is greater than the value you specify here. If both queue.max_events and queue.max_bytes are specified, Logstash uses whichever criteria is reached first.",
+				"default": "1024mb",
+				"examples": [
+					"1024mb"
+				]
+			},
+			"queue.checkpoint.acks": {
+				"$ref": "#/definitions/integerOrString",
+				"description": "The maximum number of ACKed events before forcing a checkpoint when persistent queues are enabled (queue.type: persisted). Specify queue.checkpoint.acks: 0 to set this value to unlimited.",
+				"default": "1024",
+				"examples": [
+					"1024"
+				]
+			},
+			"queue.checkpoint.interval": {
+				"$ref": "#/definitions/integerOrString",
+				"description": "If using 'queue.type: persisted', the interval in milliseconds when a checkpoint is forced on the head page. Default is 1000, 0 for no periodic checkpoint.",
+				"default": "1000",
+				"examples": [
+					"1000"
+				]
+			},
+			"queue.checkpoint.writes": {
+				"$ref": "#/definitions/integerOrString",
+				"description": "The maximum number of written events before forcing a checkpoint when persistent queues are enabled (queue.type: persisted). Specify queue.checkpoint.writes: 0 to set this value to unlimited.",
+				"default": "1024",
+				"examples": [
+					"1024"
+				]
+			},
+			"queue.checkpoint.retry": {
+				"$ref": "#/definitions/booleanOrString",
+				"description": "When enabled, Logstash will retry once per attempted checkpoint write for any checkpoint writes that fail. Any subsequent errors are not retried. This is a workaround for failed checkpoint writes that have been seen only on filesystems with non-standard behavior such as SANs and is not recommended except in those specific circumstances.",
+				"default": "false",
+				"examples": [
+					"true"
+				]
+			},
+			"queue.drain": {
+				"$ref": "#/definitions/booleanOrString",
+				"description": "When enabled, Logstash waits until the persistent queue is drained before shutting down.",
+				"default": "false",
+				"examples": [
+					"true"
+				]
+			},
 			"dead_letter_queue.enable": {
 				"$ref": "#/definitions/booleanOrString",
 				"description": "Flag to instruct Logstash to enable the DLQ feature supported by plugins.",
-				"default": "true",
-				"examples": [ "false" ]
+				"default": "false",
+				"examples": [
+					"true"
+				]
 			},
 			"dead_letter_queue.max_bytes": {
 				"type": "string",
 				"description": "The maximum size of each dead letter queue. Entries will be dropped if they would increase the size of the dead letter queue beyond this setting.",
 				"default": "1024mb",
-				"examples": [ "1024mb" ]
+				"examples": [
+					"1024mb"
+				]
 			},
 			"path.dead_letter_queue": {
 				"type": "string",
 				"description": "The directory path where the data files will be stored for the dead-letter queue.  \nDefault value is: ${path.data}/dead_letter_queue",
-				"default": "",
+				"default": "\"<path.data>/dead_letter_queue\"",
 				"examples": [
-					"\"/path/to/dlq_directory\""
+					"\"<path.data>/dead_letter_queue\""
 				]
 			}
 		}
