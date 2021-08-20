@@ -152,8 +152,8 @@ export const logstashDocumentRangeFormattingEditProvider: vscode.DocumentRangeFo
 
 			// *** check and reformat indentation (if necessary)
 			if (checkIndentation) {
-				let expectedIndentationText = generateExpectedIndentationText(options, indentation);
-				let actualIndentationText = currentLineText.substring(0, currentLine.firstNonWhitespaceCharacterIndex);
+				const expectedIndentationText = generateExpectedIndentationText(options, indentation);
+				const actualIndentationText = currentLineText.substring(0, currentLine.firstNonWhitespaceCharacterIndex);
 				if (
 					(!inDoubleQuoteBlock && !inSingleQuoteBlock && expectedIndentationText !== actualIndentationText)
 					|| ((inDoubleQuoteBlock || inSingleQuoteBlock) && !actualIndentationText.startsWith(expectedIndentationText))

@@ -3,7 +3,7 @@ import * as vscode from 'vscode';
 import { getSnippets } from './snippets/snippetsProvider';
 
 /**
- * CONSTANTS 
+ * CONSTANTS
  */
 const PARENT_REGEX = /^\s*((codec\s*=>\s*)?\w+)\s*\{/;
 const CODEC_PARENT_REGEX = /^\s*codec\s*=>\s*\w*/;
@@ -52,7 +52,7 @@ function getLogstashParent(document: vscode.TextDocument, currentLineNumber: num
 	let line: string;
 	let parenthesisCount = 0;
 	let inQuoteBlock = false;
-	
+
 	while (lineNumber >= 0) {
 
 		// ignore comments or quote fragments
@@ -118,7 +118,7 @@ function getLogstashParent(document: vscode.TextDocument, currentLineNumber: num
 function getLogstashContext(document: vscode.TextDocument, currentLineNumber: number, currentLinePrefix?: string): LogstashContext {
 	const parent = getLogstashParent(document, currentLineNumber, currentLinePrefix);
 
-	// parent is 'codec/plugin' 
+	// parent is 'codec/plugin'
 	if (parent && parent.label.includes('=>')) {
 		return { section: 'codec', plugin: parent.label.replace(LAST_TOKEN_REGEX, '$1') };
 	}

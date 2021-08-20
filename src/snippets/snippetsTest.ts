@@ -11,14 +11,14 @@ export const snippetsTest: Record<string, vscode.CompletionItem[]> = {
 		),
 
 		createSnippet(
-			'filter', 
+			'filter',
 			'section',
 			'filter {\n\t$0\n}',
 			'Filter section'
 		),
 
 		createSnippet(
-			'output', 
+			'output',
 			'section',
 			'output {\n\t$0\n}',
 			'Output section'

@@ -130,14 +130,21 @@
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
 		"compile": "tsc -p ./",
-		"lint": "tslint -p ./",
+		"lint": "eslint -c .eslintrc.js --ext .ts src",
 		"watch": "tsc -watch -p ./"
 	},
-	"extensionDependencies": ["redhat.vscode-yaml"],
+	"extensionDependencies": [
+		"redhat.vscode-yaml"
+	],
 	"devDependencies": {
 		"@types/node": "^10.12.18",
-		"tslint": "^5.16.0",
-		"typescript": "^3.5.1",
+		"@typescript-eslint/eslint-plugin": "^4.16.1",
+		"@typescript-eslint/parser": "^4.16.1",
+		"eslint": "^7.6.0",
+		"eslint-config-prettier": "^6.11.0",
+		"eslint-plugin-prettier": "^3.1.4",
+		"prettier": "^2.0.5",
+		"typescript": "4.1.2",
 		"@types/vscode": "^1.52.0"
 	}
 }
