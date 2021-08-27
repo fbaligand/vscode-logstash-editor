@@ -273,6 +273,14 @@
 				"1024mb"
 			]
 		},
+		"dead_letter_queue.flush_interval": {
+			"$ref": "#/definitions/integerOrString",
+			"description": "Interval of time to flush current dead letter queue file. This setting is in milliseconds, and defaults to 5000ms. A low value here will mean in the event of infrequent writes to the dead letter queue more, smaller, queue files may be written, while a larger value will introduce more latency between items being written to the dead letter queue, and being made available for reading by the dead_letter_queue input. Note that this value cannot be set to lower than 1000ms.",
+			"default": "5000",
+			"examples": [
+				"5000"
+			]
+		},
 		"path.dead_letter_queue": {
 			"type": "string",
 			"description": "The directory path where the data files will be stored for the dead-letter queue.",
