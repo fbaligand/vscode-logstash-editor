@@ -51,6 +51,13 @@ function obfuscateDelimitedContent(contentWithDelimiters: string, delimitedConte
 }
 
 /**
+ * compute and return obfuscated curly braces in input content
+ */
+function obfuscateCurlyBraces(contentToObfuscate: string): string {
+	return contentToObfuscate.replace(/[{}]/g, 'x');
+}
+
+/**
  * create and return a text range that begins and ends on the same line
  */
 function createLineRange(lineNumber: number, startIndex: number, endIndex: number): vscode.Range {
@@ -115,18 +122,30 @@ export const logstashDocumentRangeFormattingEditProvider: vscode.DocumentRangeFo
 				indentation--;
 			}
 
-			// close double quote: decrement indentation
+			// open double quote: obfuscate curly braces
+			if (!inDoubleQuoteBlock && currentLineText.match(LINE_WITH_ONE_DOUBLE_QUOTE_REGEX)) {
+				currentLineText = currentLineText.replace(/"[^"]*$/, obfuscateCurlyBraces);
+			}
+
+			// open single quote: obfuscate curly braces
+			if (!inSingleQuoteBlock && currentLineText.match(LINE_WITH_ONE_SINGLE_QUOTE_REGEX)) {
+				currentLineText = currentLineText.replace(/'[^']*$/, obfuscateCurlyBraces);
+			}
+
+			// close double quote: decrement indentation & obfuscate curly braces
 			if (inDoubleQuoteBlock && currentLineText.match(LINE_WITH_ONE_DOUBLE_QUOTE_REGEX)) {
 				inDoubleQuoteBlock = false;
 				closeQuoteOnThisLine = true;
 				indentation--;
+				currentLineText = currentLineText.replace(/^[^"]*"/, obfuscateCurlyBraces);
 			}
 
-			// close single quote: decrement indentation
+			// close single quote: decrement indentation & obfuscate curly braces
 			if (inSingleQuoteBlock && currentLineText.match(LINE_WITH_ONE_SINGLE_QUOTE_REGEX)) {
 				inSingleQuoteBlock = false;
 				closeQuoteOnThisLine = true;
 				indentation--;
+				currentLineText = currentLineText.replace(/^[^']*'/, obfuscateCurlyBraces);
 			}
 
 			// indentation should be checked?
@@ -222,13 +241,13 @@ export const logstashDocumentRangeFormattingEditProvider: vscode.DocumentRangeFo
 			}
 
 			// open double quote: increment indentation
-			if (!closeQuoteOnThisLine && currentLineText.match(LINE_WITH_ONE_DOUBLE_QUOTE_REGEX)) {
+			if (!closeQuoteOnThisLine && !inDoubleQuoteBlock && !inSingleQuoteBlock && currentLineText.match(LINE_WITH_ONE_DOUBLE_QUOTE_REGEX)) {
 				inDoubleQuoteBlock = true;
 				indentation++;
 			}
 
 			// open single quote: increment indentation
-			if (!closeQuoteOnThisLine && currentLineText.match(LINE_WITH_ONE_SINGLE_QUOTE_REGEX)) {
+			if (!closeQuoteOnThisLine && !inDoubleQuoteBlock && !inSingleQuoteBlock && currentLineText.match(LINE_WITH_ONE_SINGLE_QUOTE_REGEX)) {
 				inSingleQuoteBlock = true;
 				indentation++;
 			}
