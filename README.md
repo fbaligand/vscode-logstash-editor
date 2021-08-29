@@ -50,7 +50,7 @@ Both extensions complement each other perfectly.
 ## Troubleshooting
 
 - if completion does not work and your Visual Studio Code version is less than 1.52, upgrade your Visual Studio Code version.
-- if you don't see documentation associated to completion suggestions, click on the ">" (or "i") button:
+- if you don't see documentation associated to completion suggestions, type "Ctrl + Space" once again or click on the ">" (or "i") button:
 ![Example](images/troubleshooting.png)
 
 
