@@ -1,6 +1,17 @@
 # Change Log
 
 
+## 1.2.0
+
+- logstash.yml and pipelines.yml: fix 'pipeline.ordered' description (thanks to camAtGitHub)
+- logstash.yml and pipelines.yml: fix documentation and default values
+- logstash.yml and pipelines.yml: add 'dead_letter_queue.flush_interval' setting
+- Logstash pipeline configuration: fix formatting when there are curly braces between quotes
+- Logstash pipeline configuration: fix completion when there is an escaped quote in configuration
+- Logstash pipeline configuration: process backslashes correctly in default values and documentation
+- code quality: migrate from tslint to eslint
+
+
 ## 1.1.3
 
 - logstash.yml and pipelines.yml completion: allow to set environment variables references for 'boolean' and 'integer' types (no more validation warning)
