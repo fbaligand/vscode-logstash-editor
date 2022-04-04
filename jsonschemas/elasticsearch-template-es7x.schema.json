@@ -1535,6 +1535,10 @@
               "type": "boolean",
               "default": false
             },
+            "is_hidden": {
+              "type": "boolean",
+              "default": false
+            },
             "routing": {
               "type": "string"
             },
