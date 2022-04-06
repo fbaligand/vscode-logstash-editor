@@ -1,6 +1,494 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
+    "settings": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/index_settings"
+        },
+        {
+          "properties": {
+            "index": {
+              "$ref": "#/definitions/index_settings"
+            },
+            "analysis": {
+              "type": "object",
+              "properties": {
+                "analyzer": {
+                  "type": "object",
+                  "defaultSnippets": [
+                    {
+                      "label": "add new analyzer",
+                      "body": {
+                        "${1:ANALYZER}": {}
+                      }
+                    }
+                  ],
+                  "patternProperties": {
+                    "^.*$": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "anyOf": [
+                            {
+                              "type": "string",
+                              "enum": [
+                                "custom"
+                              ]
+                            },
+                            {
+                              "$ref": "#/definitions/analyzers"
+                            }
+                          ]
+                        },
+                        "char_filter": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "examples": [
+                              "html_strip"
+                            ]
+                          }
+                        },
+                        "tokenizer": {
+                          "$ref": "#/definitions/tokenizers"
+                        },
+                        "filter": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/definitions/token_filters"
+                          }
+                        },
+                        "position_increment_gap": {
+                          "type": "integer",
+                          "default": 100
+                        }
+                      }
+                    }
+                  }
+                },
+                "normalizer": {
+                  "type": "object",
+                  "defaultSnippets": [
+                    {
+                      "label": "add new normalizer",
+                      "body": {
+                        "${1:NORMALIZER}": {}
+                      }
+                    }
+                  ],
+                  "patternProperties": {
+                    "^.*$": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "examples": [
+                            "custom"
+                          ]
+                        },
+                        "char_filter": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "examples": [
+                              "html_strip"
+                            ]
+                          }
+                        },
+                        "filter": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "examples": [
+                              "arabic_normalization",
+                              "asciifolding",
+                              "bengali_normalization",
+                              "cjk_width",
+                              "decimal_digit",
+                              "elision",
+                              "german_normalization",
+                              "hindi_normalization",
+                              "indic_normalization",
+                              "lowercase",
+                              "persian_normalization",
+                              "scandinavian_folding",
+                              "serbian_normalization",
+                              "sorani_normalization",
+                              "uppercase"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "tokenizer": {
+                  "type": "object",
+                  "defaultSnippets": [
+                    {
+                      "label": "add new tokenizer",
+                      "body": {
+                        "${1:TOKENIZER}": {}
+                      }
+                    }
+                  ],
+                  "patternProperties": {
+                    "^.*$": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "$ref": "#/definitions/tokenizers"
+                        }
+                      }
+                    }
+                  }
+                },
+                "filter": {
+                  "type": "object",
+                  "defaultSnippets": [
+                    {
+                      "label": "add new filter",
+                      "body": {
+                        "${1:FILTER}": {}
+                      }
+                    }
+                  ],
+                  "patternProperties": {
+                    "^.*$": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "$ref": "#/definitions/token_filters"
+                        }
+                      }
+                    }
+                  }
+                },
+                "char_filter": {
+                  "type": "object",
+                  "defaultSnippets": [
+                    {
+                      "label": "add new char filter",
+                      "body": {
+                        "${1:CHAR_FILTER}": {}
+                      }
+                    }
+                  ],
+                  "patternProperties": {
+                    "^.*$": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "html_strip",
+                            "mapping",
+                            "pattern_replace"
+                          ]
+                        }
+                      },
+                      "allOf": [
+                        {
+                          "if": {
+                            "properties": {
+                              "type": {
+                                "const": "html_strip"
+                              }
+                            }
+                          },
+                          "then": {
+                            "properties": {
+                              "escaped_tags": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string",
+                                  "examples": [
+                                    "b"
+                                  ]
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "if": {
+                            "properties": {
+                              "type": {
+                                "const": "mapping"
+                              }
+                            }
+                          },
+                          "then": {
+                            "properties": {
+                              "mappings": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string",
+                                  "examples": [
+                                    ":) => _happy_"
+                                  ]
+                                }
+                              },
+                              "mappings_path": {
+                                "type": "string",
+                                "examples": [
+                                  "/path/to/mappings_file"
+                                ]
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "if": {
+                            "properties": {
+                              "type": {
+                                "const": "pattern_replace"
+                              }
+                            }
+                          },
+                          "then": {
+                            "properties": {
+                              "pattern": {
+                                "type": "string",
+                                "examples": [
+                                  "[0-9]"
+                                ]
+                              },
+                              "replacement": {
+                                "type": "string",
+                                "examples": [
+                                  "-$1-"
+                                ]
+                              },
+                              "flags": {
+                                "type": "string",
+                                "examples": [
+                                  "CASE_INSENSITIVE|COMMENTS"
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "mappings": {
+      "type": "object",
+      "properties": {
+        "dynamic_templates": {
+          "type": "array",
+          "defaultSnippets": [
+            {
+              "label": "add new dynamic template",
+              "body": [
+                {
+                  "${1:DYNAMIC_TEMPLATE}": {}
+                }
+              ]
+            }
+          ],
+          "items": {
+            "type": "object",
+            "patternProperties": {
+              "^.*$": {
+                "type": "object",
+                "properties": {
+                  "match": {
+                    "type": "string",
+                    "default": "",
+                    "examples": [
+                      "long_*"
+                    ]
+                  },
+                  "unmatch": {
+                    "type": "string",
+                    "default": "",
+                    "examples": [
+                      "*_text"
+                    ]
+                  },
+                  "path_match": {
+                    "type": "string",
+                    "default": "",
+                    "examples": [
+                      "name.*"
+                    ]
+                  },
+                  "path_unmatch": {
+                    "type": "string",
+                    "default": "",
+                    "examples": [
+                      "*.name"
+                    ]
+                  },
+                  "match_pattern": {
+                    "type": "string",
+                    "default": "",
+                    "examples": [
+                      "regex"
+                    ]
+                  },
+                  "match_mapping_type": {
+                    "type": "string",
+                    "enum": [
+                      "boolean",
+                      "date",
+                      "double",
+                      "long",
+                      "object",
+                      "string",
+                      "*"
+                    ]
+                  },
+                  "mapping": {
+                    "$ref": "#/definitions/field_mapping"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "date_detection": {
+          "type": "boolean",
+          "default": true
+        },
+        "dynamic_date_formats": {
+          "type": "array",
+          "default": [
+            "strict_date_optional_time",
+            "yyyy/MM/dd HH:mm:ss Z||yyyy/MM/dd Z"
+          ],
+          "items": {
+            "type": "string",
+            "examples": [
+              "strict_date",
+              "epoch_millis",
+              "yyyy-MM-dd"
+            ]
+          }
+        },
+        "numeric_detection": {
+          "type": "boolean",
+          "default": false
+        },
+        "dynamic": {
+          "$ref": "#/definitions/dynamic"
+        },
+        "properties": {
+          "type": "object",
+          "$ref": "#/definitions/field",
+          "defaultSnippets": [
+            {
+              "label": "add new property",
+              "body": {
+                "${1:PROPERTY}": {}
+              }
+            }
+          ]
+        },
+        "runtime": {
+          "type": "object",
+          "$ref": "#/definitions/runtime_field",
+          "defaultSnippets": [
+            {
+              "label": "add new runtime property",
+              "body": {
+                "${1:RUNTIME_PROPERTY}": {}
+              }
+            }
+          ]
+        },
+        "_meta": {
+          "type": "object"
+        },
+        "_source": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "default": true
+            },
+            "includes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "excludes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "_field_names": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "default": true
+            }
+          }
+        },
+        "_routing": {
+          "type": "object",
+          "properties": {
+            "required": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        }
+      }
+    },
+    "aliases": {
+      "type": "object",
+      "defaultSnippets": [
+        {
+          "label": "add new alias",
+          "body": {
+            "${1:ALIAS}": {}
+          }
+        }
+      ],
+      "patternProperties": {
+        "^.*$": {
+          "type": "object",
+          "properties": {
+            "filter": {
+              "type": "object"
+            },
+            "is_write_index": {
+              "type": "boolean",
+              "default": false
+            },
+            "is_hidden": {
+              "type": "boolean",
+              "default": false
+            },
+            "routing": {
+              "type": "string"
+            },
+            "index_routing": {
+              "type": "string"
+            },
+            "search_routing": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
     "field_mapping": {
       "type": "object",
       "properties": {
@@ -1070,11 +1558,32 @@
       ]
     },
     "template": {
-      "type": "string",
-      "description": "deprecated",
-      "examples": [
-        "logstash-*"
-      ]
+      "oneOf": [
+        {
+          "type": "string",
+          "description": "deprecated",
+          "examples": [
+            "logstash-*"
+          ]
+        },
+        {
+          "type": "object",
+          "description": "specific to composable index templates",
+          "properties": {
+            "settings": {
+              "$ref": "#/definitions/settings"
+            },
+            "mappings": {
+              "$ref": "#/definitions/mappings"
+            },
+            "aliases": {
+              "$ref": "#/definitions/aliases"
+            }
+          }
+        }
+      ],
+      "default": {},
+      "description": "specific to composable index templates"
     },
     "order": {
       "type": "integer",
@@ -1085,490 +1594,37 @@
       "default": 1
     },
     "settings": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/index_settings"
-        },
-        {
-          "properties": {
-            "index": {
-              "$ref": "#/definitions/index_settings"
-            },
-            "analysis": {
-              "type": "object",
-              "properties": {
-                "analyzer": {
-                  "type": "object",
-                  "defaultSnippets": [
-                    {
-                      "label": "add new analyzer",
-                      "body": {
-                        "${1:ANALYZER}": {}
-                      }
-                    }
-                  ],
-                  "patternProperties": {
-                    "^.*$": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "anyOf": [
-                            {
-                              "type": "string",
-                              "enum": [
-                                "custom"
-                              ]
-                            },
-                            {
-                              "$ref": "#/definitions/analyzers"
-                            }
-                          ]
-                        },
-                        "char_filter": {
-                          "type": "array",
-                          "items": {
-                            "type": "string",
-                            "examples": [
-                              "html_strip"
-                            ]
-                          }
-                        },
-                        "tokenizer": {
-                          "$ref": "#/definitions/tokenizers"
-                        },
-                        "filter": {
-                          "type": "array",
-                          "items": {
-                            "$ref": "#/definitions/token_filters"
-                          }
-                        },
-                        "position_increment_gap": {
-                          "type": "integer",
-                          "default": 100
-                        }
-                      }
-                    }
-                  }
-                },
-                "normalizer": {
-                  "type": "object",
-                  "defaultSnippets": [
-                    {
-                      "label": "add new normalizer",
-                      "body": {
-                        "${1:NORMALIZER}": {}
-                      }
-                    }
-                  ],
-                  "patternProperties": {
-                    "^.*$": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "examples": [
-                            "custom"
-                          ]
-                        },
-                        "char_filter": {
-                          "type": "array",
-                          "items": {
-                            "type": "string",
-                            "examples": [
-                              "html_strip"
-                            ]
-                          }
-                        },
-                        "filter": {
-                          "type": "array",
-                          "items": {
-                            "type": "string",
-                            "examples": [
-                              "arabic_normalization",
-                              "asciifolding",
-                              "bengali_normalization",
-                              "cjk_width",
-                              "decimal_digit",
-                              "elision",
-                              "german_normalization",
-                              "hindi_normalization",
-                              "indic_normalization",
-                              "lowercase",
-                              "persian_normalization",
-                              "scandinavian_folding",
-                              "serbian_normalization",
-                              "sorani_normalization",
-                              "uppercase"
-                            ]
-                          }
-                        }
-                      }
-                    }
-                  }
-                },
-                "tokenizer": {
-                  "type": "object",
-                  "defaultSnippets": [
-                    {
-                      "label": "add new tokenizer",
-                      "body": {
-                        "${1:TOKENIZER}": {}
-                      }
-                    }
-                  ],
-                  "patternProperties": {
-                    "^.*$": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "$ref": "#/definitions/tokenizers"
-                        }
-                      }
-                    }
-                  }
-                },
-                "filter": {
-                  "type": "object",
-                  "defaultSnippets": [
-                    {
-                      "label": "add new filter",
-                      "body": {
-                        "${1:FILTER}": {}
-                      }
-                    }
-                  ],
-                  "patternProperties": {
-                    "^.*$": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "$ref": "#/definitions/token_filters"
-                        }
-                      }
-                    }
-                  }
-                },
-                "char_filter": {
-                  "type": "object",
-                  "defaultSnippets": [
-                    {
-                      "label": "add new char filter",
-                      "body": {
-                        "${1:CHAR_FILTER}": {}
-                      }
-                    }
-                  ],
-                  "patternProperties": {
-                    "^.*$": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "enum": [
-                            "html_strip",
-                            "mapping",
-                            "pattern_replace"
-                          ]
-                        }
-                      },
-                      "allOf": [
-                        {
-                          "if": {
-                            "properties": {
-                              "type": {
-                                "const": "html_strip"
-                              }
-                            }
-                          },
-                          "then": {
-                            "properties": {
-                              "escaped_tags": {
-                                "type": "array",
-                                "items": {
-                                  "type": "string",
-                                  "examples": [
-                                    "b"
-                                  ]
-                                }
-                              }
-                            }
-                          }
-                        },
-                        {
-                          "if": {
-                            "properties": {
-                              "type": {
-                                "const": "mapping"
-                              }
-                            }
-                          },
-                          "then": {
-                            "properties": {
-                              "mappings": {
-                                "type": "array",
-                                "items": {
-                                  "type": "string",
-                                  "examples": [
-                                    ":) => _happy_"
-                                  ]
-                                }
-                              },
-                              "mappings_path": {
-                                "type": "string",
-                                "examples": [
-                                  "/path/to/mappings_file"
-                                ]
-                              }
-                            }
-                          }
-                        },
-                        {
-                          "if": {
-                            "properties": {
-                              "type": {
-                                "const": "pattern_replace"
-                              }
-                            }
-                          },
-                          "then": {
-                            "properties": {
-                              "pattern": {
-                                "type": "string",
-                                "examples": [
-                                  "[0-9]"
-                                ]
-                              },
-                              "replacement": {
-                                "type": "string",
-                                "examples": [
-                                  "-$1-"
-                                ]
-                              },
-                              "flags": {
-                                "type": "string",
-                                "examples": [
-                                  "CASE_INSENSITIVE|COMMENTS"
-                                ]
-                              }
-                            }
-                          }
-                        }
-                      ]
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      ]
+      "$ref": "#/definitions/settings"
     },
     "mappings": {
-      "type": "object",
-      "properties": {
-        "dynamic_templates": {
-          "type": "array",
-          "defaultSnippets": [
-            {
-              "label": "add new dynamic template",
-              "body": [
-                {
-                  "${1:DYNAMIC_TEMPLATE}": {}
-                }
-              ]
-            }
-          ],
-          "items": {
-            "type": "object",
-            "patternProperties": {
-              "^.*$": {
-                "type": "object",
-                "properties": {
-                  "match": {
-                    "type": "string",
-                    "default": "",
-                    "examples": [
-                      "long_*"
-                    ]
-                  },
-                  "unmatch": {
-                    "type": "string",
-                    "default": "",
-                    "examples": [
-                      "*_text"
-                    ]
-                  },
-                  "path_match": {
-                    "type": "string",
-                    "default": "",
-                    "examples": [
-                      "name.*"
-                    ]
-                  },
-                  "path_unmatch": {
-                    "type": "string",
-                    "default": "",
-                    "examples": [
-                      "*.name"
-                    ]
-                  },
-                  "match_pattern": {
-                    "type": "string",
-                    "default": "",
-                    "examples": [
-                      "regex"
-                    ]
-                  },
-                  "match_mapping_type": {
-                    "type": "string",
-                    "enum": [
-                      "boolean",
-                      "date",
-                      "double",
-                      "long",
-                      "object",
-                      "string",
-                      "*"
-                    ]
-                  },
-                  "mapping": {
-                    "$ref": "#/definitions/field_mapping"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "date_detection": {
-          "type": "boolean",
-          "default": true
-        },
-        "dynamic_date_formats": {
-          "type": "array",
-          "default": [
-            "strict_date_optional_time",
-            "yyyy/MM/dd HH:mm:ss Z||yyyy/MM/dd Z"
-          ],
-          "items": {
-            "type": "string",
-            "examples": [
-              "strict_date",
-              "epoch_millis",
-              "yyyy-MM-dd"
-            ]
-          }
-        },
-        "numeric_detection": {
-          "type": "boolean",
-          "default": false
-        },
-        "dynamic": {
-          "$ref": "#/definitions/dynamic"
-        },
-        "properties": {
-          "type": "object",
-          "$ref": "#/definitions/field",
-          "defaultSnippets": [
-            {
-              "label": "add new property",
-              "body": {
-                "${1:PROPERTY}": {}
-              }
-            }
-          ]
-        },
-        "runtime": {
-          "type": "object",
-          "$ref": "#/definitions/runtime_field",
-          "defaultSnippets": [
-            {
-              "label": "add new runtime property",
-              "body": {
-                "${1:RUNTIME_PROPERTY}": {}
-              }
-            }
-          ]
-        },
-        "_meta": {
-          "type": "object"
-        },
-        "_source": {
-          "type": "object",
-          "properties": {
-            "enabled": {
-              "type": "boolean",
-              "default": true
-            },
-            "includes": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
-            "excludes": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            }
-          }
-        },
-        "_field_names": {
-          "type": "object",
-          "properties": {
-            "enabled": {
-              "type": "boolean",
-              "default": true
-            }
-          }
-        },
-        "_routing": {
-          "type": "object",
-          "properties": {
-            "required": {
-              "type": "boolean",
-              "default": false
-            }
-          }
-        }
-      }
+      "$ref": "#/definitions/mappings"
     },
     "aliases": {
+      "$ref": "#/definitions/aliases"
+    },
+    "priority": {
+      "type": "integer",
+      "description": "specific to composable index templates",
+      "examples": [
+        100
+      ]
+    },
+    "composed_of": {
+      "type": "array",
+      "description": "specific to composable index templates",
+      "items": {
+        "type": "string",
+        "examples": [
+          "component_template1"
+        ]
+      }
+    },
+    "_meta": {
       "type": "object",
-      "defaultSnippets": [
-        {
-          "label": "add new alias",
-          "body": {
-            "${1:ALIAS}": {}
-          }
-        }
-      ],
-      "patternProperties": {
-        "^.*$": {
-          "type": "object",
-          "properties": {
-            "filter": {
-              "type": "object"
-            },
-            "is_write_index": {
-              "type": "boolean",
-              "default": false
-            },
-            "is_hidden": {
-              "type": "boolean",
-              "default": false
-            },
-            "routing": {
-              "type": "string"
-            },
-            "index_routing": {
-              "type": "string"
-            },
-            "search_routing": {
-              "type": "string"
-            }
-          }
+      "description": "specific to composable index templates",
+      "properties": {
+        "description": {
+          "type": "string"
         }
       }
     }
