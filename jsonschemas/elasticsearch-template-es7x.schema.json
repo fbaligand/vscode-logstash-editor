@@ -88,13 +88,24 @@
           "default": true
         },
         "copy_to": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "examples": [
-              "other_field"
-            ]
-          }
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "examples": [
+                  "other_field"
+                ]
+              }
+            },
+            {
+              "type": "string",
+              "examples": [
+                "other_field"
+              ]
+            }
+          ],
+          "default": []
         },
         "doc_values": {
           "type": "boolean",
@@ -209,11 +220,15 @@
         },
         "path": {
           "type": "string",
-          "examples": ["field_path"]
+          "examples": [
+            "field_path"
+          ]
         },
         "dims": {
           "type": "integer",
-          "examples": [3]
+          "examples": [
+            3
+          ]
         },
         "boost": {
           "type": "number",
@@ -263,7 +278,9 @@
         },
         "scaling_factor": {
           "type": "integer",
-          "examples": [100]
+          "examples": [
+            100
+          ]
         },
         "positive_score_impact": {
           "type": "boolean",
@@ -305,7 +322,9 @@
           "properties": {
             "source": {
               "type": "string",
-              "examples": [""]
+              "examples": [
+                ""
+              ]
             }
           }
         }
@@ -1409,7 +1428,8 @@
                       "double",
                       "long",
                       "object",
-                      "string"
+                      "string",
+                      "*"
                     ]
                   },
                   "mapping": {
