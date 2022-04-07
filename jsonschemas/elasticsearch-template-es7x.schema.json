@@ -540,7 +540,8 @@
             "rank_features",
             "flattened",
             "version",
-            "aggregate_metric_double"
+            "aggregate_metric_double",
+            "match_only_text"
           ]
         },
         "fields": {
@@ -781,6 +782,35 @@
         "enable_position_increments": {
           "type": "boolean",
           "default": true
+        },
+        "script": {
+          "type": "object",
+          "properties": {
+            "source": {
+              "type": "string"
+            }
+          }
+        },
+        "on_script_error": {
+          "type": "string",
+          "examples": [
+            "fail",
+            "continue"
+          ],
+          "default": "fail"
+        },
+        "time_series_dimension": {
+          "type": "boolean",
+          "default": false
+        },
+        "time_series_metric": {
+          "type": "string",
+          "examples": [
+            "gauge",
+            "counter",
+            "histogram",
+            "summary"
+          ]
         }
       }
     },
@@ -998,6 +1028,10 @@
           "type": "string",
           "default": ""
         },
+        "lifecycle.step.wait_time_threshold": {
+          "type": "string",
+          "default": "12h"
+        },
         "load_fixed_bitset_filters_eagerly": {
           "type": "string",
           "default": "true"
@@ -1013,6 +1047,10 @@
         "mapping.depth.limit": {
           "type": "string",
           "default": "20"
+        },
+        "mapping.dimension_fields.limit": {
+          "type": "string",
+          "default": "16"
         },
         "mapping.field_name_length.limit": {
           "type": "string",
@@ -1173,6 +1211,14 @@
           "type": "string",
           "default": "true"
         },
+        "rollup.source.name": {
+          "type": "string",
+          "default": ""
+        },
+        "rollup.source.uuid": {
+          "type": "string",
+          "default": ""
+        },
         "routing.allocation.disk.watermark.ignore": {
           "type": "string",
           "default": "false"
@@ -1252,6 +1298,10 @@
         "shard.check_on_startup": {
           "type": "string",
           "default": "false"
+        },
+        "shard_limit.group": {
+          "type": "string",
+          "default": "normal"
         },
         "soft_deletes.enabled": {
           "type": "string",
