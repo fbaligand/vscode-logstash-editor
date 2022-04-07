@@ -105,6 +105,15 @@
 				"false"
 			]
 		},
+		"pipeline.ecs_compatibility": {
+			"type": "string",
+			"description": "Sets the pipeline’s default value for ecs_compatibility, a setting that is available to plugins that implement an ECS compatibility mode for use with the Elastic Common Schema.",
+			"default": "disabled",
+			"examples": [
+				"v1",
+				"v8"
+			]
+		},
 		"path.config": {
 			"type": "string",
 			"description": "The path to the Logstash config for the main pipeline. If you specify a directory or wildcard, config files are read from the directory in alphabetical order. Default value is platform-specific, see Logstash Directory Layout.",
@@ -225,14 +234,6 @@
 				"1024"
 			]
 		},
-		"queue.checkpoint.interval": {
-			"$ref": "#/definitions/integerOrString",
-			"description": "If using 'queue.type: persisted', the interval in milliseconds when a checkpoint is forced on the head page. Default is 1000, 0 for no periodic checkpoint.",
-			"default": "1000",
-			"examples": [
-				"1000"
-			]
-		},
 		"queue.checkpoint.writes": {
 			"$ref": "#/definitions/integerOrString",
 			"description": "The maximum number of written events before forcing a checkpoint when persistent queues are enabled (queue.type: persisted). Specify queue.checkpoint.writes: 0 to set this value to unlimited.",
@@ -273,14 +274,6 @@
 				"1024mb"
 			]
 		},
-		"dead_letter_queue.flush_interval": {
-			"$ref": "#/definitions/integerOrString",
-			"description": "Interval of time to flush current dead letter queue file. This setting is in milliseconds, and defaults to 5000ms. A low value here will mean in the event of infrequent writes to the dead letter queue more, smaller, queue files may be written, while a larger value will introduce more latency between items being written to the dead letter queue, and being made available for reading by the dead_letter_queue input. Note that this value cannot be set to lower than 1000ms.",
-			"default": "5000",
-			"examples": [
-				"5000"
-			]
-		},
 		"path.dead_letter_queue": {
 			"type": "string",
 			"description": "The directory path where the data files will be stored for the dead-letter queue.",
@@ -291,7 +284,7 @@
 		},
 		"http.host": {
 			"type": "string",
-			"description": "The bind address for the metrics REST endpoint.",
+			"description": "The bind address for the metrics REST endpoint. Since Logstash 7.16, use 'api.http.host' setting instead.",
 			"default": "127.0.0.1",
 			"examples": [
 				"127.0.0.1"
@@ -299,10 +292,79 @@
 		},
 		"http.port": {
 			"$ref": "#/definitions/integerOrString",
-			"description": "The bind port for the metrics REST endpoint.",
+			"description": "The bind port for the metrics REST endpoint. Since Logstash 7.16, use 'api.http.port' setting instead.",
 			"default": "9600",
 			"examples": [
 				"9600"
+			]
+		},
+		"api.enabled": {
+			"type": "string",
+			"description": "The HTTP API is enabled by default. It can be disabled, but features that rely on it will not work as intended.",
+			"default": "true",
+			"examples": [
+				"false"
+			]
+		},
+		"api.environment": {
+			"type": "string",
+			"description": "The API returns the provided string as a part of its response. Setting your environment may help to disambiguate between similarly-named nodes in production vs test environments.",
+			"default": "production"
+		},
+		"api.http.host": {
+			"type": "string",
+			"description": "The bind address for the HTTP API endpoint. By default, the Logstash HTTP API binds only to the local loopback interface. When configured securely (api.ssl.enabled: true and api.auth.type: basic), the HTTP API binds to all available interfaces.",
+			"default": "\"127.0.0.1\""
+		},
+		"api.http.port": {
+			"type": "string",
+			"description": "The bind port for the HTTP API endpoint.",
+			"default": "9600-9700"
+		},
+		"api.ssl.enabled": {
+			"$ref": "#/definitions/booleanOrString",
+			"description": "Set to true to enable SSL on the HTTP API. Doing so requires both api.ssl.keystore.path and api.ssl.keystore.password to be set.",
+			"default": "false",
+			"examples": [
+				"true"
+			]
+		},
+		"api.ssl.keystore.path": {
+			"type": "string",
+			"description": "The path to a valid JKS or PKCS12 keystore for use in securing the Logstash API. The keystore must be password-protected, and must contain a single certificate chain and a private key. This setting is ignored unless api.ssl.enabled is set to true.",
+			"default": "",
+			"examples": [
+				"/path/to/keystore.p12"
+			]
+		},
+		"api.ssl.keystore.password": {
+			"type": "string",
+			"description": "The password to the keystore provided with api.ssl.keystore.path. This setting is ignored unless api.ssl.enabled is set to true.",
+			"default": "",
+			"examples": [
+				"password"
+			]
+		},
+		"api.auth.type": {
+			"type": "string",
+			"description": "Set to 'basic' to require HTTP Basic auth on the API using the credentials supplied with api.auth.basic.username and api.auth.basic.password.",
+			"default": "none",
+			"examples": [
+				"basic"
+			]
+		},
+		"api.auth.basic.username": {
+			"type": "string",
+			"description": "The username to require for HTTP Basic auth Ignored unless api.auth.type is set to basic.",
+			"examples": [
+				"username"
+			]
+		},
+		"api.auth.basic.password": {
+			"type": "string",
+			"description": "The password to require for HTTP Basic auth Ignored unless api.auth.type is set to basic.",
+			"examples": [
+				"password"
 			]
 		},
 		"log.level": {
