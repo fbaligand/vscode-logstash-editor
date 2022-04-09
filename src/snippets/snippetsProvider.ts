@@ -4,6 +4,7 @@ import { snippets72 } from './snippets72';
 import { snippets75 } from './snippets75';
 import { snippets79 } from './snippets79';
 import { snippets712 } from './snippets712';
+import { snippets717 } from './snippets717';
 
 
 // CONSTANTS //
@@ -22,7 +23,8 @@ const snippetsByVersion: Record<string, Record<string, vscode.CompletionItem[]>>
 	'7.2': snippets72,
 	'7.5': snippets75,
 	'7.9': snippets79,
-	'7.12': snippets712
+	'7.12': snippets712,
+	'7.17': snippets717
 };
 
 /** Current snippets base, for configured Logstash version */
