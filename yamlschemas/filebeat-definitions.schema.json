@@ -6726,7 +6726,7 @@
           "properties" : {
             "append" : {
               "$ref" : "#/definitions/booleanOrString",
-              "description" : "Appends a value to an array. If the field does not exist, the first entry will create a new array. If the field exists, the value is appended to the existing field and converted to a list.\n- target defines the destination field where the value is stored.\n- value defines the value that will be stored and it is a value template.\n- default defines the fallback value whenever value is empty or the template parsing fails. Default templates do not have access to any state, only to functions.\n- fail_on_template_error if set to true an error will be returned and the request will be aborted when the template evaluation fails. Default is false.",
+              "description" : "Appends a value to a list. If the field does not exist, the first entry will be a scalar value, and subsequent additions will convert the value to a list.\n- target defines the destination field where the value is stored.\n- value defines the value that will be stored and it is a value template.\n- default defines the fallback value whenever value is empty or the template parsing fails. Default templates do not have access to any state, only to functions.\n- fail_on_template_error if set to true an error will be returned and the request will be aborted when the template evaluation fails. Default is false.",
               "examples" : [ "false" ]
             },
             "delete" : {
@@ -6841,10 +6841,6 @@
               "description" : "This specifies SSL/TLS configuration. If the ssl section is missing, the host’s CAs are used for HTTPS connections. See SSL for more information.",
               "$ref" : "#/definitions/ssl"
             },
-            "request.proxy_url" : {
-              "type" : "string",
-              "description" : "This specifies proxy configuration in the form of http[s]://<user>:<password>@<server name/ip>:<port>"
-            },
             "request.retry.max_attempts" : {
               "type" : "string",
               "description" : "The maximum number of retries for the HTTP client. Default: 5.",
@@ -6900,12 +6896,9 @@
             },
             "cursor" : {
               "type" : "array",
-              "description" : "Cursor is a list of key value objects where arbitrary values are defined. The values are interpreted as value templates and a default template can be set. Cursor state is kept between input restarts and updated once all the events for a request are published.\nEach cursor entry is formed by:\n- A value template, which will define the value to store when evaluated.\n- A default template, which will define the value to store when the value template fails or is empty.\n- An ignore_empty_value flag. When set to true, will not store empty values, preserving the previous one, if any. Default: true.\nCan read state from: [.last_response.*, .first_event.*, .last_event.*].",
+              "description" : "Cursor is a list of key value objects where arbitrary values are defined. The values are interpreted as value templates and a default template can be set. Cursor state is kept between input restarts and updated once all the events for a request are published.\nCan read state from: [.last_response.*, .first_event.*, .last_event.*].",
               "items" : {
-                "type" : "string",
-                "defaultSnippets" : [ {
-                  "body" : "true"
-                } ]
+                "type" : "string"
               }
             },
             "api_key" : {
@@ -8028,7 +8021,7 @@
           },
           "add_kubernetes_metadata" : {
             "type" : "object",
-            "description" : "The add_kubernetes_metadata processor annotates each event with relevant metadata based on which Kubernetes pod the event originated from. At startup, it detects an in_cluster environment and caches the Kubernetes-related metadata. Events are only annotated if a valid configuration is detected. If it’s not able to detect a valid Kubernetes configuration, the events are not annotated with Kubernetes-related metadata.",
+            "description" : "The add_kubernetes_metadata processor annotates each event with relevant metadata based on which Kubernetes pod the event originated from. At startup it detects an in_cluster environment and caches the Kubernetes-related metadata. Events are only annotated if a valid configuration is detected. If it’s not able to detect a valid Kubernetes configuration, the events are not annotated with Kubernetes-related metadata.",
             "properties" : {
               "when" : {
                 "$ref" : "#/definitions/condition"
@@ -8049,12 +8042,14 @@
                 "description" : "(Optional) Use given config file as configuration for Kubernetes client. It defaults to KUBECONFIG environment variable if present."
               },
               "default_indexers.enabled" : {
-                "type" : "string",
-                "description" : "(Optional) Enable or disable default pod indexers when you want to specify your own."
+                "$ref" : "#/definitions/booleanOrString",
+                "description" : "(Optional) Enable/Disable default pod indexers, in case you want to specify your own.",
+                "examples" : [ "true" ]
               },
               "default_matchers.enabled" : {
-                "type" : "string",
-                "description" : "(Optional) Enable or disable default pod matchers when you want to specify your own."
+                "$ref" : "#/definitions/booleanOrString",
+                "description" : "(Optional) Enable/Disable default pod matchers, in case you want to specify your own.",
+                "examples" : [ "true" ]
               },
               "indexers" : {
                 "type" : "array",
@@ -8127,78 +8122,6 @@
               "labels" : {
                 "type" : "string",
                 "description" : "dictionaries of labels to be added."
-              }
-            }
-          },
-          "add_nomad_metadata" : {
-            "type" : "object",
-            "description" : "This functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.",
-            "properties" : {
-              "when" : {
-                "$ref" : "#/definitions/condition"
-              },
-              "address" : {
-                "type" : "string",
-                "description" : "(Optional) The URL of the agent API used to request the metadata. It uses http://127.0.0.1:4646 by default."
-              },
-              "namespace" : {
-                "type" : "string",
-                "description" : "(Optional) Namespace to watch. If set, only events for allocations in this namespace will be annotated."
-              },
-              "region" : {
-                "type" : "string",
-                "description" : "(Optional) Region to watch. If set, only events for allocations in this region will be annotated."
-              },
-              "secretID" : {
-                "type" : "string",
-                "description" : "(Optional) SecretID to use when connecting with the agent API."
-              },
-              "refresh_interval" : {
-                "type" : "string",
-                "description" : "(Optional) Interval used to updated the cached metadata. It defaults to 30 seconds."
-              },
-              "cleanup_timeout" : {
-                "type" : "string",
-                "description" : "(Optional) After an allocation has been removed, time to wait before cleaning up their associated resources. This is useful if you expect to receive events after an allocation has been removed, what can happen when collecting logs. It defaults to 60 seconds."
-              },
-              "scope" : {
-                "type" : "string",
-                "description" : "(Optional) Scope of the resources to watch. It can be node to get metadata only for the allocations in a single agent, or global, to get metadata for allocations running on any agent. It defaults to node.",
-                "examples" : [ "node" ]
-              },
-              "node" : {
-                "type" : "string",
-                "description" : "(Optional) When using scope: node, use node to specify the name of the local node if it cannot be discovered automatically."
-              },
-              "indexers" : {
-                "type" : "array",
-                "description" : "Indexers use allocation metadata to create unique identifiers for each one of the pods.",
-                "items" : {
-                  "type" : "object",
-                  "properties" : { }
-                }
-              },
-              "matchers" : {
-                "type" : "array",
-                "description" : "Matchers are used to construct the lookup keys that match with the identifiers created by indexes.",
-                "items" : {
-                  "type" : "object",
-                  "properties" : { }
-                }
-              },
-              "field_format" : {
-                "type" : "object",
-                "description" : "Looks up allocation metadata using a key created with a string format that can include event fields.\nThis matcher has an option format to define the string format. This string format can contain placeholders for any field in the event.\nFor example, the following configuration uses the allocation_name indexer to identify the allocation metadata by its name and namespace, and uses custom fields existing in the event as match keys:",
-                "additionalItems" : true
-              },
-              "fields" : {
-                "type" : "object",
-                "description" : "Looks up allocation metadata using as key the value of some specific fields. When multiple fields are defined, the first one included in the event is used.\nThis matcher has an option lookup_fields to define the fields whose value will be used for lookup.\nFor example, the following configuration uses the allocation_uuid indexer to identify allocations, and defines a matcher that uses some fields where the allocation UUID can be found for lookup, the first it finds in the event:",
-                "additionalItems" : true
-              },
-              "logs_path" : {
-                "type" : "string",
-                "description" : "Looks up allocation metadata using identifiers extracted from the log path stored in the log.file.path field.\nThis matcher has an optional logs_path option with the base path of the directory containing the logs for the local agent.\nThe default configuration is able to lookup the metadata using the allocation UUID when the logs are collected under /var/lib/nomad.\nFor example the following configuration would use the allocation UUID when the logs are collected from /var/lib/NomadClient001/alloc/<alloc UUID>/alloc/logs/...."
               }
             }
           },
@@ -8402,7 +8325,7 @@
           },
           "decode_csv_fields" : {
             "type" : "object",
-            "description" : "This functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.",
+            "description" : "This functionality is in technical preview and may be changed or removed in a future release. Elastic will apply best effort to fix any issues, but features in technical preview are not subject to the support SLA of official GA features.",
             "properties" : {
               "when" : {
                 "$ref" : "#/definitions/condition"
@@ -8440,7 +8363,7 @@
           },
           "decode_xml" : {
             "type" : "object",
-            "description" : "This functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.",
+            "description" : "This functionality is in technical preview and may be changed or removed in a future release. Elastic will apply best effort to fix any issues, but features in technical preview are not subject to the support SLA of official GA features.",
             "properties" : {
               "when" : {
                 "$ref" : "#/definitions/condition"
@@ -8467,45 +8390,6 @@
               "document_id" : {
                 "type" : "string",
                 "description" : "(Optional) XML key to use as the document ID. If configured, the field will be removed from the original XML document and stored in @metadata._id."
-              },
-              "ignore_missing" : {
-                "$ref" : "#/definitions/booleanOrString",
-                "description" : "(Optional) If true the processor will not return an error when a specified field does not exist. Defaults to false.",
-                "examples" : [ "false" ]
-              },
-              "ignore_failure" : {
-                "$ref" : "#/definitions/booleanOrString",
-                "description" : "(Optional) Ignore all errors produced by the processor. Defaults to false.",
-                "examples" : [ "false" ]
-              }
-            }
-          },
-          "decode_xml_wineventlog" : {
-            "type" : "object",
-            "description" : "This functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.",
-            "properties" : {
-              "when" : {
-                "$ref" : "#/definitions/condition"
-              },
-              "field" : {
-                "type" : "string",
-                "description" : "(Required) Source field containing the XML. Defaults to message.",
-                "examples" : [ "message" ]
-              },
-              "target_field" : {
-                "type" : "string",
-                "description" : "(Required) The field under which the decoded XML will be written. To merge the decoded XML fields into the root of the event specify target_field with an empty string (target_field: \"\"). The default value is winlog.",
-                "examples" : [ "winlog" ]
-              },
-              "overwrite_keys" : {
-                "$ref" : "#/definitions/booleanOrString",
-                "description" : "(Optional) A boolean that specifies whether keys that already exist in the event are overwritten by keys from the decoded XML object. The default value is true.",
-                "examples" : [ "true" ]
-              },
-              "map_ecs_fields" : {
-                "$ref" : "#/definitions/booleanOrString",
-                "description" : "(Optional) A boolean that specifies whether to map additional ECS fields when possible. Note that ECS field keys are placed outside of target_field. The default value is true.",
-                "examples" : [ "true" ]
               },
               "ignore_missing" : {
                 "$ref" : "#/definitions/booleanOrString",
@@ -8646,7 +8530,7 @@
           },
           "extract_array" : {
             "type" : "object",
-            "description" : "This functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.",
+            "description" : "This functionality is in technical preview and may be changed or removed in a future release. Elastic will apply best effort to fix any issues, but features in technical preview are not subject to the support SLA of official GA features.",
             "properties" : {
               "when" : {
                 "$ref" : "#/definitions/condition"
