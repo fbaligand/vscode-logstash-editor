@@ -10142,11 +10142,10 @@
       }
     },
     "moduleProperties" : {
-      "required" : [ "module" ],
       "properties" : {
         "module" : {
           "type" : "string",
-          "enum" : [ "system", "activemq", "apache", "auditd", "aws", "azure", "barracuda", "bluecoat", "cef", "checkpoint", "cisco", "coredns", "crowdstrike", "cyberark", "cylance", "elasticsearch", "envoyproxy", "f5", "fortinet", "gcp", "google_workspace", "gsuite", "haproxy", "ibmmq", "icinga", "iis", "imperva", "infoblox", "iptables", "juniper", "kafka", "kibana", "logstash", "microsoft", "misp", "mssql", "mysql", "mysqlenterprise", "nats", "netflow", "netscout", "nginx", "o365", "okta", "oracle", "osquery", "panw", "pensando", "postgresql", "proofpoint", "rabbitmq", "radware", "redis", "santa", "snort", "snyk", "sonicwall", "sophos", "squid", "suricata", "threatintel", "tomcat", "traefik", "zeek", "zoom", "zscaler" ],
+          "examples" : [ "system", "activemq", "apache", "auditd", "aws", "azure", "barracuda", "bluecoat", "cef", "checkpoint", "cisco", "coredns", "crowdstrike", "cyberark", "cylance", "elasticsearch", "envoyproxy", "f5", "fortinet", "gcp", "google_workspace", "gsuite", "haproxy", "ibmmq", "icinga", "iis", "imperva", "infoblox", "iptables", "juniper", "kafka", "kibana", "logstash", "microsoft", "misp", "mssql", "mysql", "mysqlenterprise", "nats", "netflow", "netscout", "nginx", "o365", "okta", "oracle", "osquery", "panw", "pensando", "postgresql", "proofpoint", "rabbitmq", "radware", "redis", "santa", "snort", "snyk", "sonicwall", "sophos", "squid", "suricata", "threatintel", "tomcat", "traefik", "zeek", "zoom", "zscaler" ],
           "description" : "module type"
         }
       },
@@ -10176,11 +10175,10 @@
       }
     },
     "inputProperties" : {
-      "required" : [ "type" ],
       "properties" : {
         "type" : {
           "type" : "string",
-          "enum" : [ "log", "filestream", "redis", "udp", "tcp", "syslog", "container", "netflow", "gcp-pubsub", "aws-s3", "aws-cloudwatch", "azure-eventhub", "cloudfoundry", "docker", "http_endpoint", "httpjson", "kafka", "mqtt", "o365audit", "stdin" ],
+          "examples" : [ "log", "filestream", "redis", "udp", "tcp", "syslog", "container", "netflow", "gcp-pubsub", "aws-s3", "aws-cloudwatch", "azure-eventhub", "cloudfoundry", "docker", "http_endpoint", "httpjson", "kafka", "mqtt", "o365audit", "stdin" ],
           "description" : "input type"
         }
       },
@@ -10843,21 +10841,33 @@
                           "type" : "array",
                           "description" : "Configuration contains a list of inputs and modules that are applied when template condition is matched.",
                           "defaultSnippets" : [ {
-                            "label" : "- (array item)",
+                            "label" : "- (module item)",
                             "type" : "array",
-                            "description" : "add new config (input or module)",
+                            "description" : "add new config module",
                             "suggestionKind" : 9,
                             "body" : {
-                              "${1|type,module|}" : "$2"
+                              "module" : "${1|system,activemq,apache,auditd,aws,azure,barracuda,bluecoat,cef,checkpoint,cisco,coredns,crowdstrike,cyberark,cylance,elasticsearch,envoyproxy,f5,fortinet,gcp,google_workspace,gsuite,haproxy,ibmmq,icinga,iis,imperva,infoblox,iptables,juniper,kafka,kibana,logstash,microsoft,misp,mssql,mysql,mysqlenterprise,nats,netflow,netscout,nginx,o365,okta,oracle,osquery,panw,pensando,postgresql,proofpoint,rabbitmq,radware,redis,santa,snort,snyk,sonicwall,sophos,squid,suricata,threatintel,tomcat,traefik,zeek,zoom,zscaler|}"
+                            }
+                          },
+                          {
+                            "label" : "- (input item)",
+                            "type" : "array",
+                            "description" : "add new config input",
+                            "suggestionKind" : 9,
+                            "body" : {
+                              "type" : "${1|log,filestream,redis,udp,tcp,syslog,container,netflow,gcp-pubsub,aws-s3,aws-cloudwatch,azure-eventhub,cloudfoundry,docker,http_endpoint,httpjson,kafka,mqtt,o365audit,stdin|}"
                             }
                           } ],
                           "items" : {
                             "type" : "object",
-                            "oneOf" : [ {
-                              "$ref" : "#/definitions/moduleProperties"
-                            }, {
-                              "$ref" : "#/definitions/inputProperties"
-                            } ]
+                            "oneOf": [
+                              {
+                                "$ref": "#/definitions/moduleProperties"
+                              },
+                              {
+                                "$ref": "#/definitions/inputProperties"
+                              }
+                            ]
                           }
                         }
                       }
