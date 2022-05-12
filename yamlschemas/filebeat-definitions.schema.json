@@ -9386,6 +9386,28 @@
         }
       }
     },
+    "outputShortcuts" : {
+      "properties" : {
+        "output.elasticsearch" : {
+          "$ref" : "#/definitions/output/properties/elasticsearch"
+        },
+        "output.logstash" : {
+          "$ref" : "#/definitions/output/properties/logstash"
+        },
+        "output.kafka" : {
+          "$ref" : "#/definitions/output/properties/kafka"
+        },
+        "output.redis" : {
+          "$ref" : "#/definitions/output/properties/redis"
+        },
+        "output.file" : {
+          "$ref" : "#/definitions/output/properties/file"
+        },
+        "output.console" : {
+          "$ref" : "#/definitions/output/properties/console"
+        }
+      }
+    },
     "path" : {
       "properties" : {
         "path" : {
@@ -10784,6 +10806,55 @@
         }
       }
     },
+    "handwrittenShortcuts" : {
+      "properties" : {
+        "filebeat.config.modules" : {
+          "$ref" : "#/definitions/globalOptions/properties/filebeat.config/properties/modules"
+        },
+        "filebeat.config.inputs" : {
+          "$ref" : "#/definitions/globalOptions/properties/filebeat.config/properties/inputs"
+        },
+        "setup.template.settings" : {
+          "$ref" : "#/definitions/template/properties/setup.template/properties/settings"
+        },
+        "setup.dashboards.enabled" : {
+          "$ref" : "#/definitions/dashboards/properties/setup.dashboards/properties/enabled"
+        },
+        "setup.dashboards.url" : {
+          "$ref" : "#/definitions/dashboards/properties/setup.dashboards/properties/url"
+        },
+        "cloud.id" : {
+          "$ref" : "#/definitions/cloud/properties/id"
+        },
+        "cloud.auth" : {
+          "$ref" : "#/definitions/cloud/properties/auth"
+        },
+        "logging.level" : {
+          "$ref" : "#/definitions/logging/properties/logging/properties/level"
+        },
+        "logging.selectors" : {
+          "$ref" : "#/definitions/logging/properties/logging/properties/selectors"
+        },
+        "monitoring.cloud.auth" : {
+          "$ref" : "#/definitions/monitoring/properties/monitoring/properties/cloud.auth"
+        },
+        "monitoring.cloud.id" : {
+          "$ref" : "#/definitions/monitoring/properties/monitoring/properties/cloud.id"
+        },
+        "monitoring.cluster_uuid" : {
+          "$ref" : "#/definitions/monitoring/properties/monitoring/properties/cluster_uuid"
+        },
+        "monitoring.elasticsearch" : {
+          "$ref" : "#/definitions/monitoring/properties/monitoring/properties/elasticsearch"
+        },
+        "monitoring.enabled" : {
+          "$ref" : "#/definitions/monitoring/properties/monitoring/properties/enabled"
+        },
+        "migration.6_to_7.enabled" : {
+          "$ref" : "#/definitions/migration/properties/migration/properties/6_to_7.enabled"
+        }
+      }
+    },
     "filebeatYmlRoot" : {
       "type" : "object",
       "properties" : {
@@ -10848,8 +10919,7 @@
                             "body" : {
                               "module" : "${1|system,activemq,apache,auditd,aws,azure,barracuda,bluecoat,cef,checkpoint,cisco,coredns,crowdstrike,cyberark,cylance,elasticsearch,envoyproxy,f5,fortinet,gcp,google_workspace,gsuite,haproxy,ibmmq,icinga,iis,imperva,infoblox,iptables,juniper,kafka,kibana,logstash,microsoft,misp,mssql,mysql,mysqlenterprise,nats,netflow,netscout,nginx,o365,okta,oracle,osquery,panw,pensando,postgresql,proofpoint,rabbitmq,radware,redis,santa,snort,snyk,sonicwall,sophos,squid,suricata,threatintel,tomcat,traefik,zeek,zoom,zscaler|}"
                             }
-                          },
-                          {
+                          }, {
                             "label" : "- (input item)",
                             "type" : "array",
                             "description" : "add new config input",
@@ -10860,14 +10930,11 @@
                           } ],
                           "items" : {
                             "type" : "object",
-                            "oneOf": [
-                              {
-                                "$ref": "#/definitions/moduleProperties"
-                              },
-                              {
-                                "$ref": "#/definitions/inputProperties"
-                              }
-                            ]
+                            "oneOf" : [ {
+                              "$ref" : "#/definitions/moduleProperties"
+                            }, {
+                              "$ref" : "#/definitions/inputProperties"
+                            } ]
                           }
                         }
                       }
@@ -11037,7 +11104,13 @@
           }
         }
       },
-      "$ref" : "#/definitions/allClassicSections"
+      "allOf" : [ {
+        "$ref" : "#/definitions/allClassicSections"
+      }, {
+        "$ref" : "#/definitions/handwrittenShortcuts"
+      }, {
+        "$ref" : "#/definitions/outputShortcuts"
+      } ]
     }
   }
 }
