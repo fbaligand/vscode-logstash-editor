@@ -1351,14 +1351,12 @@
                   "examples" : [ "https://api.amp.cisco.com/v1/events" ]
                 },
                 "var.client_id" : {
-                  "type" : "object",
-                  "description" : "The client ID used as a username for the API requests.",
-                  "properties" : { }
+                  "type" : "string",
+                  "description" : "The client ID used as a username for the API requests."
                 },
                 "var.api_key" : {
-                  "type" : "object",
-                  "description" : "The API key related to the client ID.",
-                  "properties" : { }
+                  "type" : "string",
+                  "description" : "The API key related to the client ID."
                 },
                 "var.first_interval" : {
                   "type" : "string",
@@ -3079,9 +3077,8 @@
                   "examples" : [ "true" ]
                 },
                 "var.kafka_home" : {
-                  "type" : "object",
-                  "description" : "Set custom paths for Kafka. If left empty, Filebeat will look under /opt.",
-                  "properties" : { }
+                  "type" : "string",
+                  "description" : "Set custom paths for Kafka. If left empty, Filebeat will look under /opt."
                 },
                 "var.paths" : {
                   "type" : "array",
@@ -3350,9 +3347,8 @@
                   "examples" : [ "true" ]
                 },
                 "var.api_key" : {
-                  "type" : "object",
-                  "description" : "API key to access MISP",
-                  "properties" : { }
+                  "type" : "string",
+                  "description" : "API key to access MISP"
                 },
                 "var.http_request_body.limit" : {
                   "type" : "string",
@@ -3360,9 +3356,8 @@
                   "examples" : [ "1000" ]
                 },
                 "var.url" : {
-                  "type" : "object",
-                  "description" : "URL of the MISP REST API",
-                  "properties" : { }
+                  "type" : "string",
+                  "description" : "URL of the MISP REST API"
                 },
                 "var.ssl" : {
                   "$ref" : "#/definitions/ssl"
@@ -3997,14 +3992,12 @@
                   "$ref" : "#/definitions/moduleInput"
                 },
                 "var.internal_zones" : {
-                  "type" : "object",
-                  "description" : "Set internal security zones. used to determine network.direction default \"trust\"",
-                  "properties" : { }
+                  "type" : "string",
+                  "description" : "Set internal security zones. used to determine network.direction default \"trust\""
                 },
                 "var.external_zones" : {
-                  "type" : "object",
-                  "description" : "Set external security zones. used to determine network.direction default \"untrust\"",
-                  "properties" : { }
+                  "type" : "string",
+                  "description" : "Set external security zones. used to determine network.direction default \"untrust\""
                 }
               }
             }
@@ -4295,9 +4288,8 @@
                   }
                 },
                 "var.password" : {
-                  "type" : "object",
-                  "description" : "Optional, the password to use when connecting to Redis.",
-                  "properties" : { }
+                  "type" : "string",
+                  "description" : "Optional, the password to use when connecting to Redis."
                 }
               }
             }
@@ -4440,9 +4432,8 @@
                   "examples" : [ "24h" ]
                 },
                 "var.api_token" : {
-                  "type" : "object",
-                  "description" : "The API token that is created for a specific user, found in the Snyk management dashboard.",
-                  "properties" : { }
+                  "type" : "string",
+                  "description" : "The API token that is created for a specific user, found in the Snyk management dashboard."
                 },
                 "var.project_id" : {
                   "type" : "string",
@@ -4485,9 +4476,8 @@
                   "examples" : [ "24h" ]
                 },
                 "var.api_token" : {
-                  "type" : "object",
-                  "description" : "The API token that is created for a specific user, found in the Snyk management dashboard.",
-                  "properties" : { }
+                  "type" : "string",
+                  "description" : "The API token that is created for a specific user, found in the Snyk management dashboard."
                 },
                 "var.orgs" : {
                   "type" : "array",
@@ -5691,9 +5681,8 @@
               "examples" : [ "true" ]
             },
             "json.message_key" : {
-              "type" : "object",
-              "description" : "Decode JSON options. Enable this if your logs are structured in JSON. JSON key on which to apply the line filtering and multiline settings. This key must be top level and its value must be string, otherwise it is ignored. If no text key is defined, the line filtering and multiline features cannot be used.",
-              "properties" : { }
+              "type" : "string",
+              "description" : "Decode JSON options. Enable this if your logs are structured in JSON. JSON key on which to apply the line filtering and multiline settings. This key must be top level and its value must be string, otherwise it is ignored. If no text key is defined, the line filtering and multiline features cannot be used."
             },
             "json.keys_under_root" : {
               "$ref" : "#/definitions/booleanOrString",
@@ -7417,9 +7406,8 @@
     "general" : {
       "properties" : {
         "name" : {
-          "type" : "object",
-          "description" : "The name of the shipper that publishes the network data. It can be used to group all the transactions sent by a single shipper in the web interface. If this options is not defined, the hostname is used.",
-          "properties" : { }
+          "type" : "string",
+          "description" : "The name of the shipper that publishes the network data. It can be used to group all the transactions sent by a single shipper in the web interface. If this options is not defined, the hostname is used."
         },
         "tags" : {
           "type" : "array",
@@ -7583,9 +7571,8 @@
           }
         },
         "max_procs" : {
-          "type" : "object",
-          "description" : "Sets the maximum number of CPUs that can be executing simultaneously. The default is the number of logical CPUs available in the system.",
-          "properties" : { }
+          "type" : "string",
+          "description" : "Sets the maximum number of CPUs that can be executing simultaneously. The default is the number of logical CPUs available in the system."
         }
       }
     },
@@ -9240,9 +9227,8 @@
               "examples" : [ "filebeat" ]
             },
             "password" : {
-              "type" : "object",
-              "description" : "The password to authenticate to Redis with. The default is no authentication.",
-              "properties" : { }
+              "type" : "string",
+              "description" : "The password to authenticate to Redis with. The default is no authentication."
             },
             "db" : {
               "type" : "string",
@@ -9290,9 +9276,8 @@
               "examples" : [ "2048" ]
             },
             "proxy_url" : {
-              "type" : "object",
-              "description" : "The URL of the SOCKS5 proxy to use when connecting to the Redis servers. The value must be a URL with a scheme of socks5://.",
-              "properties" : { }
+              "type" : "string",
+              "description" : "The URL of the SOCKS5 proxy to use when connecting to the Redis servers. The value must be a URL with a scheme of socks5://."
             },
             "proxy_use_local_resolver" : {
               "$ref" : "#/definitions/booleanOrString",
@@ -9462,14 +9447,12 @@
               "examples" : [ "${path.home}/kibana" ]
             },
             "url" : {
-              "type" : "object",
-              "description" : "The URL from where to download the dashboards archive. It is used instead of the directory if it has a value.",
-              "properties" : { }
+              "type" : "string",
+              "description" : "The URL from where to download the dashboards archive. It is used instead of the directory if it has a value."
             },
             "file" : {
-              "type" : "object",
-              "description" : "The file archive (zip file) from where to read the dashboards. It is used instead of the directory when it has a value.",
-              "properties" : { }
+              "type" : "string",
+              "description" : "The file archive (zip file) from where to read the dashboards. It is used instead of the directory when it has a value."
             },
             "beat" : {
               "type" : "string",
@@ -9482,9 +9465,8 @@
               "examples" : [ ".kibana" ]
             },
             "index" : {
-              "type" : "object",
-              "description" : "The Elasticsearch index name. This overwrites the index name defined in the dashboards and index pattern. Example: testbeat-*",
-              "properties" : { }
+              "type" : "string",
+              "description" : "The Elasticsearch index name. This overwrites the index name defined in the dashboards and index pattern. Example: testbeat-*"
             },
             "always_kibana" : {
               "$ref" : "#/definitions/booleanOrString",
@@ -9636,9 +9618,8 @@
               "examples" : [ "mypolicy" ]
             },
             "policy_file" : {
-              "type" : "object",
-              "description" : "The path to a JSON file that contains a lifecycle policy configuration. Used to load your own lifecycle policy.",
-              "properties" : { }
+              "type" : "string",
+              "description" : "The path to a JSON file that contains a lifecycle policy configuration. Used to load your own lifecycle policy."
             },
             "check_exists" : {
               "$ref" : "#/definitions/booleanOrString",
@@ -9809,9 +9790,8 @@
               "examples" : [ "false" ]
             },
             "cluster_uuid" : {
-              "type" : "object",
-              "description" : "Sets the UUID of the Elasticsearch cluster under which monitoring data for this Filebeat instance will appear in the Stack Monitoring UI. If output.elasticsearch is enabled, the UUID is derived from the Elasticsearch cluster referenced by output.elasticsearch.",
-              "properties" : { }
+              "type" : "string",
+              "description" : "Sets the UUID of the Elasticsearch cluster under which monitoring data for this Filebeat instance will appear in the Stack Monitoring UI. If output.elasticsearch is enabled, the UUID is derived from the Elasticsearch cluster referenced by output.elasticsearch."
             },
             "elasticsearch" : {
               "type" : "object",
@@ -9949,14 +9929,12 @@
               }
             },
             "cloud.id" : {
-              "type" : "object",
-              "description" : "The `monitoring.cloud.id` setting overwrites the `monitoring.elasticsearch.hosts` setting. You can find the value for this setting in the Elastic Cloud web UI.",
-              "properties" : { }
+              "type" : "string",
+              "description" : "The `monitoring.cloud.id` setting overwrites the `monitoring.elasticsearch.hosts` setting. You can find the value for this setting in the Elastic Cloud web UI."
             },
             "cloud.auth" : {
-              "type" : "object",
-              "description" : "The `monitoring.cloud.auth` setting overwrites the `monitoring.elasticsearch.username` and `monitoring.elasticsearch.password` settings. The format is `<user>:<pass>`.",
-              "properties" : { }
+              "type" : "string",
+              "description" : "The `monitoring.cloud.auth` setting overwrites the `monitoring.elasticsearch.username` and `monitoring.elasticsearch.password` settings. The format is `<user>:<pass>`."
             }
           }
         }
@@ -9983,14 +9961,12 @@
               "examples" : [ "5066" ]
             },
             "named_pipe.user" : {
-              "type" : "object",
-              "description" : "Define which user should be owning the named pipe.",
-              "properties" : { }
+              "type" : "string",
+              "description" : "Define which user should be owning the named pipe."
             },
             "named_pipe.security_descriptor" : {
-              "type" : "object",
-              "description" : "Define which the permissions that should be applied to the named pipe, use the Security Descriptor Definition Language (SDDL) to define the permission. This option cannot be used with `http.user`.",
-              "properties" : { }
+              "type" : "string",
+              "description" : "Define which the permissions that should be applied to the named pipe, use the Security Descriptor Definition Language (SDDL) to define the permission. This option cannot be used with `http.user`."
             }
           }
         }
@@ -10036,14 +10012,12 @@
               }
             },
             "api_key" : {
-              "type" : "object",
-              "description" : "API Key for the APM Server(s). If api_key is set then secret_token will be ignored.",
-              "properties" : { }
+              "type" : "string",
+              "description" : "API Key for the APM Server(s). If api_key is set then secret_token will be ignored."
             },
             "secret_token" : {
-              "type" : "object",
-              "description" : "Secret token for the APM Server(s).",
-              "properties" : { }
+              "type" : "string",
+              "description" : "Secret token for the APM Server(s)."
             },
             "profiling" : {
               "type" : "object",
