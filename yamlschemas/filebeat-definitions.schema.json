@@ -7827,6 +7827,10 @@
                   } ]
                 }
               },
+              "max_bytes" : {
+                "type" : "string",
+                "examples" : [ "1024" ]
+              },
               "fail_on_error" : {
                 "$ref" : "#/definitions/booleanOrString",
                 "examples" : [ "false" ]
