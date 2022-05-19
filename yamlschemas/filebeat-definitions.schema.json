@@ -237,6 +237,26 @@
                   "description" : "AWS SQS queue url",
                   "examples" : [ "https://sqs.myregion.amazonaws.com/123456/myqueue" ]
                 },
+                "var.bucket_arn" : {
+                  "type" : "string",
+                  "description" : "AWS S3 bucket arn",
+                  "examples" : [ "'arn:aws:s3:::mybucket'" ]
+                },
+                "var.bucket_list_prefix" : {
+                  "type" : "string",
+                  "description" : "AWS S3 list prefix",
+                  "examples" : [ "'prefix'" ]
+                },
+                "var.bucket_list_interval" : {
+                  "type" : "string",
+                  "description" : "Bucket list interval on S3 bucket",
+                  "examples" : [ "300s" ]
+                },
+                "var.number_of_workers" : {
+                  "type" : "string",
+                  "description" : "Number of workers on S3 bucket",
+                  "examples" : [ "5" ]
+                },
                 "var.process_cloudtrail_logs" : {
                   "$ref" : "#/definitions/booleanOrString",
                   "description" : "Process CloudTrail logs default is true, set to false to skip Cloudtrail logs",
@@ -319,6 +339,26 @@
                   "description" : "AWS SQS queue url",
                   "examples" : [ "https://sqs.myregion.amazonaws.com/123456/myqueue" ]
                 },
+                "var.bucket_arn" : {
+                  "type" : "string",
+                  "description" : "AWS S3 bucket arn",
+                  "examples" : [ "'arn:aws:s3:::mybucket'" ]
+                },
+                "var.bucket_list_prefix" : {
+                  "type" : "string",
+                  "description" : "AWS S3 list prefix",
+                  "examples" : [ "'prefix'" ]
+                },
+                "var.bucket_list_interval" : {
+                  "type" : "string",
+                  "description" : "Bucket list interval on S3 bucket",
+                  "examples" : [ "300s" ]
+                },
+                "var.number_of_workers" : {
+                  "type" : "string",
+                  "description" : "Number of workers on S3 bucket",
+                  "examples" : [ "5" ]
+                },
                 "var.shared_credential_file" : {
                   "type" : "string",
                   "description" : "Filename of AWS credential file If not set \"$HOME/.aws/credentials\" is used on Linux/Mac \"%UserProfile%\\.aws\\credentials\" is used on Windows",
@@ -385,6 +425,26 @@
                   "type" : "string",
                   "description" : "AWS SQS queue url",
                   "examples" : [ "https://sqs.myregion.amazonaws.com/123456/myqueue" ]
+                },
+                "var.bucket_arn" : {
+                  "type" : "string",
+                  "description" : "AWS S3 bucket arn",
+                  "examples" : [ "'arn:aws:s3:::mybucket'" ]
+                },
+                "var.bucket_list_prefix" : {
+                  "type" : "string",
+                  "description" : "AWS S3 list prefix",
+                  "examples" : [ "'prefix'" ]
+                },
+                "var.bucket_list_interval" : {
+                  "type" : "string",
+                  "description" : "Bucket list interval on S3 bucket",
+                  "examples" : [ "300s" ]
+                },
+                "var.number_of_workers" : {
+                  "type" : "string",
+                  "description" : "Number of workers on S3 bucket",
+                  "examples" : [ "5" ]
                 },
                 "var.shared_credential_file" : {
                   "type" : "string",
@@ -453,6 +513,26 @@
                   "description" : "AWS SQS queue url",
                   "examples" : [ "https://sqs.myregion.amazonaws.com/123456/myqueue" ]
                 },
+                "var.bucket_arn" : {
+                  "type" : "string",
+                  "description" : "AWS S3 bucket arn",
+                  "examples" : [ "'arn:aws:s3:::mybucket'" ]
+                },
+                "var.bucket_list_prefix" : {
+                  "type" : "string",
+                  "description" : "AWS S3 list prefix",
+                  "examples" : [ "'prefix'" ]
+                },
+                "var.bucket_list_interval" : {
+                  "type" : "string",
+                  "description" : "Bucket list interval on S3 bucket",
+                  "examples" : [ "300s" ]
+                },
+                "var.number_of_workers" : {
+                  "type" : "string",
+                  "description" : "Number of workers on S3 bucket",
+                  "examples" : [ "5" ]
+                },
                 "var.shared_credential_file" : {
                   "type" : "string",
                   "description" : "Filename of AWS credential file If not set \"$HOME/.aws/credentials\" is used on Linux/Mac \"%UserProfile%\\.aws\\credentials\" is used on Windows",
@@ -519,6 +599,26 @@
                   "type" : "string",
                   "description" : "AWS SQS queue url",
                   "examples" : [ "https://sqs.myregion.amazonaws.com/123456/myqueue" ]
+                },
+                "var.bucket_arn" : {
+                  "type" : "string",
+                  "description" : "AWS S3 bucket arn",
+                  "examples" : [ "'arn:aws:s3:::mybucket'" ]
+                },
+                "var.bucket_list_prefix" : {
+                  "type" : "string",
+                  "description" : "AWS S3 list prefix",
+                  "examples" : [ "'prefix'" ]
+                },
+                "var.bucket_list_interval" : {
+                  "type" : "string",
+                  "description" : "Bucket list interval on S3 bucket",
+                  "examples" : [ "300s" ]
+                },
+                "var.number_of_workers" : {
+                  "type" : "string",
+                  "description" : "Number of workers on S3 bucket",
+                  "examples" : [ "5" ]
                 },
                 "var.shared_credential_file" : {
                   "type" : "string",
@@ -587,6 +687,26 @@
                   "description" : "AWS SQS queue url",
                   "examples" : [ "https://sqs.myregion.amazonaws.com/123456/myqueue" ]
                 },
+                "var.bucket_arn" : {
+                  "type" : "string",
+                  "description" : "AWS S3 bucket arn",
+                  "examples" : [ "'arn:aws:s3:::mybucket'" ]
+                },
+                "var.bucket_list_prefix" : {
+                  "type" : "string",
+                  "description" : "AWS S3 list prefix",
+                  "examples" : [ "'prefix'" ]
+                },
+                "var.bucket_list_interval" : {
+                  "type" : "string",
+                  "description" : "Bucket list interval on S3 bucket",
+                  "examples" : [ "300s" ]
+                },
+                "var.number_of_workers" : {
+                  "type" : "string",
+                  "description" : "Number of workers on S3 bucket",
+                  "examples" : [ "5" ]
+                },
                 "var.shared_credential_file" : {
                   "type" : "string",
                   "description" : "Filename of AWS credential file If not set \"$HOME/.aws/credentials\" is used on Linux/Mac \"%UserProfile%\\.aws\\credentials\" is used on Windows",
@@ -639,6 +759,111 @@
                   "type" : "string",
                   "description" : "The maximum number of messages to return from SQS. Valid values: 1 to 10.",
                   "examples" : [ "5" ]
+                }
+              }
+            }
+          }
+        }
+      }, {
+        "if" : {
+          "properties" : {
+            "module" : {
+              "const" : "awsfargate"
+            }
+          }
+        },
+        "then" : {
+          "description" : "AWS Fargate Module",
+          "properties" : {
+            "log" : {
+              "type" : "object",
+              "properties" : {
+                "enabled" : {
+                  "$ref" : "#/definitions/booleanOrString",
+                  "examples" : [ "false" ]
+                },
+                "var.shared_credential_file" : {
+                  "type" : "string",
+                  "description" : "Filename of AWS credential file If not set \"$HOME/.aws/credentials\" is used on Linux/Mac \"%UserProfile%\\.aws\\credentials\" is used on Windows",
+                  "examples" : [ "/etc/filebeat/aws_credentials" ]
+                },
+                "var.credential_profile_name" : {
+                  "type" : "string",
+                  "description" : "Profile name for aws credential If not set the default profile is used",
+                  "examples" : [ "fb-aws" ]
+                },
+                "var.access_key_id" : {
+                  "type" : "string",
+                  "description" : "Use access_key_id, secret_access_key and/or session_token instead of shared credential file",
+                  "examples" : [ "access_key_id" ]
+                },
+                "var.secret_access_key" : {
+                  "type" : "string",
+                  "examples" : [ "secret_access_key" ]
+                },
+                "var.session_token" : {
+                  "type" : "string",
+                  "examples" : [ "session_token" ]
+                },
+                "var.api_timeout" : {
+                  "type" : "string",
+                  "description" : "Maximum duration before AWS API request will be interrupted Default to be 120s",
+                  "examples" : [ "120s" ]
+                },
+                "var.endpoint" : {
+                  "type" : "string",
+                  "description" : "Custom endpoint used to access AWS APIs",
+                  "examples" : [ "amazonaws.com" ]
+                },
+                "var.role_arn" : {
+                  "type" : "string",
+                  "description" : "AWS IAM Role to assume",
+                  "examples" : [ "arn:aws:iam::123456789012:role/test-mb" ]
+                },
+                "var.log_group_arn" : {
+                  "type" : "string",
+                  "description" : "ARN of the log group to collect logs from",
+                  "examples" : [ "arn:aws:logs:us-east-1:123456789012:log-group:test:*" ]
+                },
+                "var.log_group_name" : {
+                  "type" : "string",
+                  "description" : "Name of the log group to collect logs from",
+                  "examples" : [ "/ecs/test-log-group" ]
+                },
+                "var.region_name" : {
+                  "type" : "string",
+                  "description" : "Region that the specified log group belongs to",
+                  "examples" : [ "us-east-1" ]
+                },
+                "var.log_streams" : {
+                  "type" : "array",
+                  "description" : "A list of strings of log streams names that Filebeat collect log events from",
+                  "items" : {
+                    "type" : "string",
+                    "defaultSnippets" : [ {
+                      "body" : "/ecs/test-log-group/test-log-stream"
+                    } ]
+                  }
+                },
+                "var.log_stream_prefix" : {
+                  "type" : "string",
+                  "description" : "A string to filter the results to include only log events from log streams that have names starting with this prefix",
+                  "examples" : [ "/ecs/test-log-group/" ]
+                },
+                "var.start_position" : {
+                  "type" : "string",
+                  "description" : "Specify if Filebeat should read log files from the beginning or from the end Default start_position is beginning",
+                  "examples" : [ "beginning" ]
+                },
+                "var.scan_frequency" : {
+                  "type" : "string",
+                  "description" : "How often Filebeat checks for new log events from the specified log group Default scan_frequency is 1 minute",
+                  "examples" : [ "1m" ]
+                },
+                "var.api_sleep" : {
+                  "type" : "string",
+                  "description" : "Time used to sleep between AWS FilterLogEvents API calls inside the same collection period Default api_sleep is 200 ms",
+                  "examples" : [ "200ms" ]
                 }
               }
             }
@@ -1496,6 +1721,58 @@
                   "type" : "string",
                   "description" : "Set custom timezone offset. \"local\" (default) for system timezone. \"+02:00\" for GMT+02:00",
                   "examples" : [ "local" ]
+                }
+              }
+            }
+          }
+        }
+      }, {
+        "if" : {
+          "properties" : {
+            "module" : {
+              "const" : "cyberarkpas"
+            }
+          }
+        },
+        "then" : {
+          "description" : "CyberArk PAS Module",
+          "properties" : {
+            "audit" : {
+              "type" : "object",
+              "properties" : {
+                "enabled" : {
+                  "$ref" : "#/definitions/booleanOrString",
+                  "examples" : [ "true" ]
+                },
+                "var.input" : {
+                  "type" : "string",
+                  "description" : "Set which input to use between tcp (default), udp, or file.",
+                  "examples" : [ "tcp" ]
+                },
+                "var.syslog_host" : {
+                  "type" : "string",
+                  "examples" : [ "localhost" ]
+                },
+                "var.syslog_port" : {
+                  "type" : "string",
+                  "examples" : [ "9301" ]
+                },
+                "var.ssl" : {
+                  "description" : "With tcp input, set the optional tls configuration:",
+                  "$ref" : "#/definitions/ssl"
+                },
+                "var.paths" : {
+                  "type" : "array",
+                  "description" : "Set paths for the log files when file input is used.",
+                  "items" : {
+                    "type" : "string",
+                    "defaultSnippets" : [ {
+                      "body" : "/path/to/file"
+                    } ]
+                  }
+                },
+                "input" : {
+                  "$ref" : "#/definitions/moduleInput"
                 }
               }
             }
@@ -3277,7 +3554,17 @@
                 "var.oauth2.token_url" : {
                   "type" : "string",
                   "description" : "Oauth Token URL, should include the tenant ID",
-                  "examples" : [ "https://login.microsoftonline.com/TENANT-ID/oauth2/token" ]
+                  "examples" : [ "https://login.microsoftonline.com/TENANT-ID/oauth2/v2.0/token" ]
+                },
+                "var.oauth2.scopes" : {
+                  "type" : "array",
+                  "description" : "Related scopes, default should be included",
+                  "items" : {
+                    "type" : "string",
+                    "defaultSnippets" : [ {
+                      "body" : "https://api.security.microsoft.com/.default"
+                    } ]
+                  }
                 }
               }
             },
@@ -3904,9 +4191,14 @@
                   "examples" : [ "file" ]
                 },
                 "var.paths" : {
-                  "type" : "string",
+                  "type" : "array",
                   "description" : "Set paths for the log files when file input is used. Should only be used together with file input",
-                  "examples" : [ "/home/user/oracleauditlogs/*.aud" ]
+                  "items" : {
+                    "type" : "string",
+                    "defaultSnippets" : [ {
+                      "body" : "/home/user/oracleauditlogs/*.aud"
+                    } ]
+                  }
                 },
                 "input" : {
                   "$ref" : "#/definitions/moduleInput"
@@ -4495,7 +4787,7 @@
                   "items" : {
                     "type" : "string",
                     "defaultSnippets" : [ {
-                      "body" : "high"
+                      "body" : "critical"
                     } ]
                   }
                 },
@@ -4890,6 +5182,30 @@
                 }
               }
             },
+            "malwarebazaar" : {
+              "type" : "object",
+              "properties" : {
+                "enabled" : {
+                  "$ref" : "#/definitions/booleanOrString",
+                  "examples" : [ "true" ]
+                },
+                "var.input" : {
+                  "type" : "string",
+                  "description" : "Input used for ingesting threat intel data.",
+                  "examples" : [ "httpjson" ]
+                },
+                "var.url" : {
+                  "type" : "string",
+                  "description" : "The URL used for Threat Intel API calls.",
+                  "examples" : [ "https://mb-api.abuse.ch/api/v1/" ]
+                },
+                "var.interval" : {
+                  "type" : "string",
+                  "description" : "The interval to poll the API for updates.",
+                  "examples" : [ "10m" ]
+                }
+              }
+            },
             "misp" : {
               "type" : "object",
               "properties" : {
@@ -5025,6 +5341,78 @@
                   "type" : "string",
                   "description" : "The interval to poll the API for updates",
                   "examples" : [ "5m" ]
+                }
+              }
+            },
+            "anomalithreatstream" : {
+              "type" : "object",
+              "properties" : {
+                "enabled" : {
+                  "$ref" : "#/definitions/booleanOrString",
+                  "examples" : [ "true" ]
+                },
+                "var.input" : {
+                  "type" : "string",
+                  "description" : "Input used for ingesting threat intel data",
+                  "examples" : [ "http_endpoint" ]
+                },
+                "var.listen_address" : {
+                  "type" : "string",
+                  "description" : "Address to bind to in order to receive HTTP requests from the Integrator SDK. Use 0.0.0.0 to bind to all existing interfaces.",
+                  "examples" : [ "localhost" ]
+                },
+                "var.listen_port" : {
+                  "type" : "string",
+                  "description" : "Port to use to receive HTTP requests from the Integrator SDK.",
+                  "examples" : [ "8080" ]
+                },
+                "var.secret" : {
+                  "type" : "string",
+                  "description" : "Secret key to authenticate requests from the SDK.",
+                  "examples" : [ "'<Add your secret here>'" ]
+                },
+                "var.ssl_certificate" : {
+                  "type" : "string",
+                  "description" : "Uncomment the following and set the absolute paths to the server SSL certificate and private key to enable HTTPS secure connections.",
+                  "examples" : [ "path/to/server_ssl_cert.pem" ]
+                },
+                "var.ssl_key" : {
+                  "type" : "string",
+                  "examples" : [ "path/to/ssl_key.pem" ]
+                }
+              }
+            },
+            "recordedfuture" : {
+              "type" : "object",
+              "properties" : {
+                "enabled" : {
+                  "$ref" : "#/definitions/booleanOrString",
+                  "examples" : [ "true" ]
+                },
+                "var.input" : {
+                  "type" : "string",
+                  "description" : "Input used for ingesting threat intel data",
+                  "examples" : [ "httpjson" ]
+                },
+                "var.interval" : {
+                  "type" : "string",
+                  "description" : "The interval to poll the API for updates",
+                  "examples" : [ "5m" ]
+                },
+                "var.first_interval" : {
+                  "type" : "string",
+                  "description" : "How far back in time to start fetching intelligence when run for the first time. Value must be in hours. Default: 168h (1 week).",
+                  "examples" : [ "168h" ]
+                },
+                "var.url" : {
+                  "type" : "string",
+                  "description" : "The URL used for Threat Intel API calls. Must include the `limit` parameter and at least `entity` and `timestamps` fields. See the Connect API Explorer for a list of possible parameters. For `ip` entities:",
+                  "examples" : [ "https://api.recordedfuture.com/v2/ip/search?limit=200&fields=entity,timestamps,risk,intelCard,location&metadata=false" ]
+                },
+                "var.api_token" : {
+                  "type" : "string",
+                  "description" : "Set your API Token.",
+                  "examples" : [ "<RF_TOKEN>" ]
                 }
               }
             }
@@ -5279,6 +5667,15 @@
                 }
               }
             },
+            "ntp" : {
+              "type" : "object",
+              "properties" : {
+                "enabled" : {
+                  "$ref" : "#/definitions/booleanOrString",
+                  "examples" : [ "true" ]
+                }
+              }
+            },
             "ntlm" : {
               "type" : "object",
               "properties" : {
@@ -5458,6 +5855,64 @@
               }
             },
             "x509" : {
+              "type" : "object",
+              "properties" : {
+                "enabled" : {
+                  "$ref" : "#/definitions/booleanOrString",
+                  "examples" : [ "true" ]
+                },
+                "var.paths" : {
+                  "type" : "array",
+                  "description" : "Set custom paths for the log files. If left empty, Filebeat will choose the paths depending on your OS.",
+                  "items" : {
+                    "type" : "string",
+                    "defaultSnippets" : [ {
+                      "body" : "/path/to/file"
+                    } ]
+                  }
+                },
+                "input" : {
+                  "$ref" : "#/definitions/moduleInput"
+                }
+              }
+            }
+          }
+        }
+      }, {
+        "if" : {
+          "properties" : {
+            "module" : {
+              "const" : "zookeeper"
+            }
+          }
+        },
+        "then" : {
+          "description" : "ZooKeeper Module",
+          "properties" : {
+            "audit" : {
+              "type" : "object",
+              "description" : "All logs",
+              "properties" : {
+                "enabled" : {
+                  "$ref" : "#/definitions/booleanOrString",
+                  "examples" : [ "true" ]
+                },
+                "var.paths" : {
+                  "type" : "array",
+                  "description" : "Set custom paths for the log files. If left empty, Filebeat will choose the paths depending on your OS.",
+                  "items" : {
+                    "type" : "string",
+                    "defaultSnippets" : [ {
+                      "body" : "/path/to/file"
+                    } ]
+                  }
+                },
+                "input" : {
+                  "$ref" : "#/definitions/moduleInput"
+                }
+              }
+            },
+            "log" : {
               "type" : "object",
               "properties" : {
                 "enabled" : {
@@ -5672,7 +6127,7 @@
             },
             "line_terminator" : {
               "type" : "string",
-              "description" : "Characters which separate the lines. Valid values: auto, line_feed, vertical_tab, form_feed, carriage_return, carriage_return_line_feed, next_line, line_separator, paragraph_separator.",
+              "description" : "Characters which separate the lines. Valid values: auto, line_feed, vertical_tab, form_feed, carriage_return, carriage_return_line_feed, next_line, line_separator, paragraph_separator, null_terminator",
               "examples" : [ "auto" ]
             },
             "recursive_glob.enabled" : {
@@ -5835,6 +6290,16 @@
                 } ]
               }
             },
+            "prospector.scanner.include_files" : {
+              "type" : "array",
+              "description" : "Include files. A list of regular expressions to match. Filebeat keeps only the files that are matching any regular expression from the list. By default, no files are dropped.",
+              "items" : {
+                "type" : "string",
+                "defaultSnippets" : [ {
+                  "body" : "'/var/log/.*'"
+                } ]
+              }
+            },
             "prospector.scanner.recursive_glob" : {
               "$ref" : "#/definitions/booleanOrString",
               "description" : "Expand \"**\" patterns into regular glob patterns.",
@@ -5844,6 +6309,20 @@
               "$ref" : "#/definitions/booleanOrString",
               "description" : "If symlinks is enabled, symlinks are opened and harvested. The harvester is opening the original for harvesting but will report the symlink name as source.",
               "examples" : [ "false" ]
+            },
+            "rotation.external.strategy.copytruncate" : {
+              "type" : "string",
+              "description" : "When an external tool rotates the input files with copytruncate strategy use this section to help the input find the rotated files."
+            },
+            "suffix_regex" : {
+              "type" : "string",
+              "description" : "Regex that matches the rotated files.",
+              "examples" : [ "\\.\\d$" ]
+            },
+            "dateformat" : {
+              "type" : "string",
+              "description" : "If the rotated filename suffix is a datetime, set it here.",
+              "examples" : [ "-20060102" ]
             },
             "clean_inactive" : {
               "type" : "string",
@@ -5865,6 +6344,10 @@
               "description" : "Ignore files which were modified more then the defined timespan in the past. ignore_older is disabled by default, so no files are ignored by setting it to 0. Time strings like 2h (2 hours), 5m (5 minutes) can be used.",
               "examples" : [ "0" ]
             },
+            "ignore_inactive" : {
+              "type" : "string",
+              "description" : "Ignore files that have not been updated since the selected event. ignore_inactive is disabled by default, so no files are ignored by setting it to \"\". Available options: since_first_start, since_last_start."
+            },
             "harvester_buffer_size" : {
               "type" : "string",
               "description" : "Defines the buffer size every harvester uses when fetching the file",
@@ -5877,7 +6360,7 @@
             },
             "line_terminator" : {
               "type" : "string",
-              "description" : "Characters which separate the lines. Valid values: auto, line_feed, vertical_tab, form_feed, carriage_return, carriage_return_line_feed, next_line, line_separator, paragraph_separator.",
+              "description" : "Characters which separate the lines. Valid values: auto, line_feed, vertical_tab, form_feed, carriage_return, carriage_return_line_feed, next_line, line_separator, paragraph_separator, null_terminator",
               "examples" : [ "auto" ]
             },
             "backoff.init" : {
@@ -6041,6 +6524,10 @@
         "then" : {
           "description" : "Syslog input",
           "properties" : {
+            "format" : {
+              "type" : "string",
+              "examples" : [ "rfc3164" ]
+            },
             "protocol.udp" : {
               "type" : "object",
               "properties" : {
@@ -6246,13 +6733,40 @@
             },
             "queue_url" : {
               "type" : "string",
-              "description" : "Queue url (required) to receive queue messages from",
+              "description" : "SQS queue URL to receive messages from (required).",
               "examples" : [ "https://sqs.us-east-1.amazonaws.com/1234/test-aws-s3-logs-queue" ]
+            },
+            "max_number_of_messages" : {
+              "type" : "string",
+              "description" : "Maximum number of SQS messages that can be inflight at any time.",
+              "examples" : [ "5" ]
+            },
+            "api_timeout" : {
+              "type" : "string",
+              "description" : "Maximum duration of an AWS API call (excluding S3 GetObject calls).",
+              "examples" : [ "120s" ]
             },
             "visibility_timeout" : {
               "type" : "string",
-              "description" : "The duration (in seconds) that the received messages are hidden from subsequent retrieve requests after being retrieved by a ReceiveMessage request.",
-              "examples" : [ "300" ]
+              "description" : "Duration that received SQS messages are hidden from subsequent requests after being retrieved by a ReceiveMessage request.",
+              "examples" : [ "300s" ]
+            },
+            "include_s3_metadata" : {
+              "type" : "array",
+              "description" : "List of S3 object metadata keys to include in events.",
+              "items" : {
+                "type" : "string"
+              }
+            },
+            "sqs.max_receive_count" : {
+              "type" : "string",
+              "description" : "The max number of times an SQS message should be received (retried) before deleting it.",
+              "examples" : [ "5" ]
+            },
+            "sqs.wait_time" : {
+              "type" : "string",
+              "description" : "Maximum duration for which the SQS ReceiveMessage call waits for a message to arrive in the queue before returning.",
+              "examples" : [ "20s" ]
             }
           }
         }
@@ -6265,46 +6779,84 @@
           }
         },
         "then" : {
-          "description" : "AWS CloudWatch",
+          "description" : "AWS CloudWatch input",
           "properties" : {
+            "access_key_id" : {
+              "type" : "string",
+              "description" : "AWS Credentials If access_key_id and secret_access_key are configured, then use them to make api calls. If not, aws-cloudwatch input will load default AWS config or load with given profile name.",
+              "examples" : [ "'${AWS_ACCESS_KEY_ID:\"\"}'" ]
+            },
+            "secret_access_key" : {
+              "type" : "string",
+              "examples" : [ "'${AWS_SECRET_ACCESS_KEY:\"\"}'" ]
+            },
+            "session_token" : {
+              "type" : "string",
+              "examples" : [ "'${AWS_SESSION_TOKEN:\"”}'" ]
+            },
+            "credential_profile_name" : {
+              "type" : "string",
+              "examples" : [ "test-aws-s3-input" ]
+            },
             "log_group_arn" : {
               "type" : "string",
-              "description" : "ARN of the log group to collect logs from."
+              "description" : "ARN of the log group to collect logs from",
+              "examples" : [ "arn:aws:logs:us-east-1:428152502467:log-group:test:*" ]
             },
             "log_group_name" : {
               "type" : "string",
-              "description" : "Name of the log group to collect logs from. Note: region_name is required when log_group_name is given."
+              "description" : "Name of the log group to collect logs from. Note: region_name is required when log_group_name is given.",
+              "examples" : [ "test" ]
+            },
+            "log_group_name_prefix" : {
+              "type" : "string",
+              "description" : "The prefix for a group of log group names. Note: `region_name` is required when `log_group_name_prefix` is given. `log_group_name` and `log_group_name_prefix` cannot be given at the same time.",
+              "examples" : [ "/aws/" ]
             },
             "region_name" : {
               "type" : "string",
-              "description" : "Region that the specified log group belongs to."
+              "description" : "Region that the specified log group or log group prefix belongs to.",
+              "examples" : [ "us-east-1" ]
             },
             "log_streams" : {
               "type" : "array",
               "description" : "A list of strings of log streams names that Filebeat collect log events from.",
               "items" : {
-                "type" : "string"
+                "type" : "string",
+                "defaultSnippets" : [ {
+                  "body" : "log_stream_name"
+                } ]
               }
             },
             "log_stream_prefix" : {
               "type" : "string",
-              "description" : "A string to filter the results to include only log events from log streams that have names starting with this prefix."
+              "description" : "A string to filter the results to include only log events from log streams that have names starting with this prefix.",
+              "examples" : [ "test" ]
             },
             "start_position" : {
               "type" : "string",
-              "description" : "start_position allows user to specify if this input should read log files from the beginning or from the end.\n- beginning: reads from the beginning of the log group (default).\n- end: read only new messages from current time minus scan_frequency going forward\nFor example, with scan_frequency equals to 30s and current timestamp is 2020-06-24 12:00:00:\n- with start_position = beginning: first iteration: startTime=0, endTime=2020-06-24 12:00:00 second iteration: startTime=2020-06-24 12:00:00, endTime=2020-06-24 12:00:30\n- first iteration: startTime=0, endTime=2020-06-24 12:00:00\n- second iteration: startTime=2020-06-24 12:00:00, endTime=2020-06-24 12:00:30\n- with start_position = end: first iteration: startTime=2020-06-24 11:59:30, endTime=2020-06-24 12:00:00 second iteration: startTime=2020-06-24 12:00:00, endTime=2020-06-24 12:00:30\n- first iteration: startTime=2020-06-24 11:59:30, endTime=2020-06-24 12:00:00\n- second iteration: startTime=2020-06-24 12:00:00, endTime=2020-06-24 12:00:30"
+              "description" : "`start_position` allows user to specify if this input should read log files from the `beginning` or from the `end`. `beginning`: reads from the beginning of the log group (default). `end`: read only new messages from current time minus `scan_frequency` going forward.",
+              "examples" : [ "beginning" ]
             },
             "scan_frequency" : {
               "type" : "string",
-              "description" : "This config parameter sets how often Filebeat checks for new log events from the specified log group. Default scan_frequency is 1 minute, which means Filebeat will sleep for 1 minute before querying for new logs again."
+              "description" : "This config parameter sets how often Filebeat checks for new log events from the specified log group. Default `scan_frequency` is 1 minute, which means Filebeat will sleep for 1 minute before querying for new logs again.",
+              "examples" : [ "1m" ]
             },
             "api_timeout" : {
               "type" : "string",
-              "description" : "The maximum duration of AWS API can take. If it exceeds the timeout, AWS API will be interrupted. The default AWS API timeout for a message is 120 seconds. The minimum is 0 seconds."
+              "description" : "The maximum duration of AWS API can take. If it exceeds the timeout, AWS API will be interrupted. The default AWS API timeout for a message is 120 seconds. The minimum is 0 seconds.",
+              "examples" : [ "120s" ]
             },
             "api_sleep" : {
               "type" : "string",
-              "description" : "This is used to sleep between AWS FilterLogEvents API calls inside the same collection period. FilterLogEvents API has a quota of 5 transactions per second (TPS)/account/Region. By default, api_sleep is 200 ms. This value should only be adjusted when there are multiple Filebeats or multiple Filebeat inputs collecting logs from the same region and AWS account."
+              "description" : "This is used to sleep between AWS `FilterLogEvents` API calls inside the same collection period.",
+              "examples" : [ "200ms" ]
+            },
+            "latency" : {
+              "type" : "string",
+              "description" : "This is used to shift collection start time and end time back in order to collect logs when there is a delay in CloudWatch.",
+              "examples" : [ "1m" ]
             }
           }
         }
@@ -6669,6 +7221,22 @@
               "type" : "string",
               "description" : "The secret stored in the header name specified by secret.header. Certain webhooks provide the possibility to include a special header and secret to identify the source."
             },
+            "hmac.header" : {
+              "type" : "string",
+              "description" : "The name of the header that contains the HMAC signature: X-Dropbox-Signature, X-Hub-Signature-256, etc."
+            },
+            "hmac.key" : {
+              "type" : "string",
+              "description" : "The secret key used to calculate the HMAC signature. Typically, the webhook sender provides this value."
+            },
+            "hmac.type" : {
+              "type" : "string",
+              "description" : "The hash algorithm to use for the HMAC comparison. At this time the only valid values are sha256 or sha1."
+            },
+            "hmac.prefix" : {
+              "type" : "string",
+              "description" : "The prefix for the signature. Certain webhooks prefix the HMAC signature with a value, for example sha256=."
+            },
             "content_type" : {
               "type" : "string",
               "description" : "By default the input expects the incoming POST to include a Content-Type of application/json to try to enforce the incoming data to be valid JSON. In certain scenarios when the source of the request is not able to do that, it can be overwritten with another value or set to null."
@@ -6688,7 +7256,7 @@
             },
             "listen_port" : {
               "type" : "string",
-              "description" : "Which port the listener binds to. Defaults to 8000",
+              "description" : "Which port the listener binds to. Defaults to 8000.",
               "examples" : [ "8000" ]
             },
             "url" : {
@@ -6699,6 +7267,17 @@
             "prefix" : {
               "type" : "string",
               "description" : "This option specifies which prefix the incoming request will be mapped to."
+            },
+            "include_headers" : {
+              "type" : "array",
+              "description" : "This options specifies a list of HTTP headers that should be copied from the incoming request and included in the document. All configured headers will always be canonicalized to match the headers of the incoming request. For example, [\"content-type\"] will become [\"Content-Type\"] when the filebeat is running.",
+              "items" : {
+                "type" : "string"
+              }
+            },
+            "preserve_original_event" : {
+              "type" : "string",
+              "description" : "This option copies the raw unmodified body of the incoming request to the event.original field as a string before sending the event to Elasticsearch."
             }
           }
         }
@@ -6714,18 +7293,18 @@
           "description" : "HTTP JSON",
           "properties" : {
             "append" : {
-              "$ref" : "#/definitions/booleanOrString",
-              "description" : "Appends a value to a list. If the field does not exist, the first entry will be a scalar value, and subsequent additions will convert the value to a list.\n- target defines the destination field where the value is stored.\n- value defines the value that will be stored and it is a value template.\n- default defines the fallback value whenever value is empty or the template parsing fails. Default templates do not have access to any state, only to functions.\n- fail_on_template_error if set to true an error will be returned and the request will be aborted when the template evaluation fails. Default is false.",
-              "examples" : [ "false" ]
+              "type" : "string",
+              "description" : "Appends a value to an array. If the field does not exist, the first entry will create a new array. If the field exists, the value is appended to the existing field and converted to a list.\n- target defines the destination field where the value is stored.\n- value defines the value that will be stored and it is a value template.\n- default defines the fallback value whenever value is empty or the template parsing fails. Default templates do not have access to any state, only to functions.\n- value_type defines the type of the resulting value. Possible values are: string, json, and int. Default is string.\n- fail_on_template_error if set to true an error will be returned and the request will be aborted when the template evaluation fails. Default is false.",
+              "examples" : [ "string" ]
             },
             "delete" : {
               "type" : "string",
               "description" : "Deletes the target field.\n- target defines the destination field to delete. If target is a list and not a single element, the complete list will be deleted."
             },
             "set" : {
-              "$ref" : "#/definitions/booleanOrString",
-              "description" : "Sets a value.\n- target defines the destination field where the value is stored.\n- value defines the value that will be stored and it is a value template.\n- default defines the fallback value whenever value is empty or the template parsing fails. Default templates do not have access to any state, only to functions.\n- fail_on_template_error if set to true an error will be returned and the request will be aborted when the template evaluation fails. Default is false.",
-              "examples" : [ "false" ]
+              "type" : "string",
+              "description" : "Sets a value.\n- target defines the destination field where the value is stored.\n- value defines the value that will be stored and it is a value template.\n- default defines the fallback value whenever value is empty or the template parsing fails. Default templates do not have access to any state, only to functions.\n- value_type defines how the resulting value will be treated. Possible values are: string, json, and int. Default is string.\n- fail_on_template_error if set to true an error will be returned and the request will be aborted when the template evaluation fails. Default is false.",
+              "examples" : [ "string" ]
             },
             "config_version" : {
               "type" : "string",
@@ -6830,6 +7409,10 @@
               "description" : "This specifies SSL/TLS configuration. If the ssl section is missing, the host’s CAs are used for HTTPS connections. See SSL for more information.",
               "$ref" : "#/definitions/ssl"
             },
+            "request.proxy_url" : {
+              "type" : "string",
+              "description" : "This specifies proxy configuration in the form of http[s]://<user>:<password>@<server name/ip>:<port>"
+            },
             "request.retry.max_attempts" : {
               "type" : "string",
               "description" : "The maximum number of retries for the HTTP client. Default: 5.",
@@ -6868,11 +7451,16 @@
             },
             "request.rate_limit.remaining" : {
               "type" : "string",
-              "description" : "The value of the response that specifies the remaining quota of the rate limit. It is defined with a Go template value. Can read state from: [.last_response.header]"
+              "description" : "The value of the response that specifies the remaining quota of the rate limit. It is defined with a Go template value. Can read state from: [.last_response.header] If the remaining header is missing from the Response, no rate-limiting will occur."
             },
             "request.rate_limit.reset" : {
               "type" : "string",
               "description" : "The value of the response that specifies the epoch time when the rate limit will reset. It is defined with a Go template value. Can read state from: [.last_response.header]"
+            },
+            "request.rate_limit.early_limit" : {
+              "type" : "string",
+              "description" : "Optionally start rate-limiting prior to the value specified in the Response.\nUnder the default behavior, Requests will continue while the remaining value is non-zero. Specifying an early_limit will mean that rate-limiting will occur prior to reaching 0.\n- If the value specified for early_limit is less than 1, the value is treated as a percentage of the Response provided limit. e.g. specifying 0.9 will mean that Requests will continue until reaching 90% of the rate-limit — for a limit value of 120, the rate-limit starts when the remaining reaches 12. If the limit header is missing from the Response, default rate-limiting will occur (when remaining reaches 0).\n- If the value specified for early_limit is greater than or equal to 1, the value is treated as the target value for remaining. e.g. instead of rate-limiting when remaining hits 0, rate-limiting will occur when remaining hits the value specified.\nIt is not set by default (by default the rate-limiting as specified in the Response is followed).",
+              "examples" : [ "non-zero" ]
             },
             "response.decode_as" : {
               "type" : "string",
@@ -6885,9 +7473,12 @@
             },
             "cursor" : {
               "type" : "array",
-              "description" : "Cursor is a list of key value objects where arbitrary values are defined. The values are interpreted as value templates and a default template can be set. Cursor state is kept between input restarts and updated once all the events for a request are published.\nCan read state from: [.last_response.*, .first_event.*, .last_event.*].",
+              "description" : "Cursor is a list of key value objects where arbitrary values are defined. The values are interpreted as value templates and a default template can be set. Cursor state is kept between input restarts and updated once all the events for a request are published.\nEach cursor entry is formed by:\n- A value template, which will define the value to store when evaluated.\n- A default template, which will define the value to store when the value template fails or is empty.\n- An ignore_empty_value flag. When set to true, will not store empty values, preserving the previous one, if any. Default: true.\nCan read state from: [.last_response.*, .first_event.*, .last_event.*].",
               "items" : {
-                "type" : "string"
+                "type" : "string",
+                "defaultSnippets" : [ {
+                  "body" : "true"
+                } ]
               }
             },
             "api_key" : {
@@ -6929,6 +7520,51 @@
             "url" : {
               "type" : "string",
               "description" : "Deprecated, use request.url."
+            }
+          }
+        }
+      }, {
+        "if" : {
+          "properties" : {
+            "type" : {
+              "const" : "journald"
+            }
+          }
+        },
+        "then" : {
+          "description" : "journald",
+          "properties" : {
+            "id" : {
+              "type" : "string",
+              "description" : "An optional unique identifier for the input. By providing a unique id you can operate multiple inputs on the same journal. This allows each input’s cursor to be persisted independently in the registry file."
+            },
+            "paths" : {
+              "type" : "array",
+              "description" : "A list of paths that will be crawled and fetched. Each path can be a directory path (to collect events from all journals in a directory), or a file path. If you specify a directory, Filebeat merges all journals under the directory into a single journal and reads them.\nIf no paths are specified, Filebeat reads from the default journal.",
+              "items" : {
+                "type" : "string"
+              }
+            },
+            "backoff" : {
+              "type" : "string",
+              "description" : "The number of seconds to wait before trying to read again from journals. The default is 1s.",
+              "examples" : [ "1s" ]
+            },
+            "max_backoff" : {
+              "type" : "string",
+              "description" : "The maximum number of seconds to wait before attempting to read again from journals. The default is 60s.",
+              "examples" : [ "60s" ]
+            },
+            "seek" : {
+              "type" : "string",
+              "description" : "The position to start reading the journal from. Valid settings are:\n- head: Starts reading at the beginning of the journal. After a restart, Filebeat resends all log messages in the journal.\n- tail: Starts reading at the end of the journal. After a restart, Filebeat resends the last message, which might result in duplicates. If multiple log messages are written to a journal while Filebeat is down, only the last log message is sent on restart.\n- cursor: On first read, starts reading at the beginning of the journal. After a reload or restart, continues reading at the last known position.\nIf you have old log files and want to skip lines, start Filebeat with seek: tail specified. Then stop Filebeat, set seek: cursor, and restart Filebeat."
+            },
+            "include_matches" : {
+              "type" : "array",
+              "description" : "A list of filter expressions used to match fields. The format of the expression is field=value. Filebeat fetches all events that exactly match the expressions. Pattern matching is not supported.\nTo reference fields, use one of the following:\n- The field name used by the systemd journal. For example, CONTAINER_TAG=redis.\n- The translated field name used by Filebeat. For example, container.image.tag=redis. Filebeat does not translate all fields from the journal. For custom fields, use the name specified in the systemd journal.",
+              "items" : {
+                "type" : "string"
+              }
             }
           }
         }
@@ -7053,6 +7689,55 @@
             "kerberos" : {
               "type" : "string",
               "description" : "Configuration options for Kerberos authentication.\nSee Kerberos for more information."
+            },
+            "parsers" : {
+              "type" : "array",
+              "description" : "This option expects a list of parsers that the payload has to go through.\nAvailable parsers:\n- ndjson\n- multiline",
+              "items" : {
+                "type" : "string"
+              }
+            },
+            "ndjson" : {
+              "type" : "object",
+              "description" : "These options make it possible for Filebeat to decode the payload as JSON messages.",
+              "properties" : {
+                "keys_under_root" : {
+                  "$ref" : "#/definitions/booleanOrString",
+                  "description" : "By default, the decoded JSON is placed under a \"json\" key in the output document. If you enable this setting, the keys are copied top level in the output document. The default is false.",
+                  "examples" : [ "false" ]
+                },
+                "overwrite_keys" : {
+                  "$ref" : "#/definitions/booleanOrString",
+                  "description" : "If keys_under_root and this setting are enabled, then the values from the decoded JSON object overwrite the fields that Filebeat normally adds (type, source, offset, etc.) in case of conflicts.",
+                  "examples" : [ "true" ]
+                },
+                "expand_keys" : {
+                  "$ref" : "#/definitions/booleanOrString",
+                  "description" : "If this setting is enabled, Filebeat will recursively de-dot keys in the decoded JSON, and expand them into a hierarchical object structure. For example, {\"a.b.c\": 123} would be expanded into {\"a\":{\"b\":{\"c\":123}}}. This setting should be enabled when the input is produced by an ECS logger.",
+                  "examples" : [ "true" ]
+                },
+                "add_error_key" : {
+                  "$ref" : "#/definitions/booleanOrString",
+                  "description" : "If this setting is enabled, Filebeat adds an \"error.message\" and \"error.type: json\" key in case of JSON unmarshalling errors or when a message_key is defined in the configuration but cannot be used.",
+                  "examples" : [ "true" ]
+                },
+                "message_key" : {
+                  "type" : "string",
+                  "description" : "An optional configuration setting that specifies a JSON key on which to apply the line filtering and multiline settings. If specified the key must be at the top level in the JSON object and the value associated with the key must be a string, otherwise no filtering or multiline aggregation will occur."
+                },
+                "document_id" : {
+                  "type" : "string",
+                  "description" : "Option configuration setting that specifies the JSON key to set the document id. If configured, the field will be removed from the original JSON document and stored in @metadata._id"
+                },
+                "ignore_decoding_error" : {
+                  "$ref" : "#/definitions/booleanOrString",
+                  "description" : "An optional configuration setting that specifies if JSON decoding errors should be logged or not. If set to true, errors will not be logged. The default is false.",
+                  "examples" : [ "false" ]
+                }
+              }
+            },
+            "multiline" : {
+              "$ref" : "#/definitions/multiline"
             }
           }
         }
@@ -7175,6 +7860,11 @@
               "type" : "string",
               "description" : "The maximum time window that API allows in a single query. Defaults to 24h to match Microsoft’s documented limit.",
               "examples" : [ "24h" ]
+            },
+            "api.preserve_original_event" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "description" : "Controls whether the original o365 audit object will be kept in event.original or not. Defaults to false.",
+              "examples" : [ "false" ]
             }
           }
         }
@@ -7383,7 +8073,7 @@
               "properties" : {
                 "enabled" : {
                   "$ref" : "#/definitions/booleanOrString",
-                  "examples" : [ "false" ]
+                  "examples" : [ "true" ]
                 },
                 "path" : {
                   "type" : "string",
@@ -7497,7 +8187,7 @@
             },
             "spool" : {
               "type" : "object",
-              "description" : "The spool queue will store events in a local spool file, before forwarding the events to the outputs. Beta: spooling to disk is currently a beta feature. Use with care. The spool file is a circular buffer, which blocks once the file/buffer is full. Events are put into a write buffer and flushed once the write buffer is full or the flush_timeout is triggered. Once ACKed by the output, events are removed immediately from the queue, making space for new events to be persisted.",
+              "description" : "The spool queue will store events in a local spool file, before forwarding the events to the outputs. Note: the spool queue is deprecated and will be removed in the future. Use the disk queue instead. The spool file is a circular buffer, which blocks once the file/buffer is full. Events are put into a write buffer and flushed once the write buffer is full or the flush_timeout is triggered. Once ACKed by the output, events are removed immediately from the queue, making space for new events to be persisted.",
               "properties" : {
                 "file" : {
                   "type" : "object",
@@ -7921,7 +8611,7 @@
           },
           "add_fields" : {
             "type" : [ "object", "null" ],
-            "description" : "The add_fields processor adds additional fields to the event. Fields can be scalar values, arrays, dictionaries, or any nested combination of these. By default the fields that you specify will be grouped under the fields sub-dictionary in the event. To group the fields under a different sub-dictionary, use the target setting. To store the fields as top-level fields, set target: ''.",
+            "description" : "The add_fields processor adds additional fields to the event. Fields can be scalar values, arrays, dictionaries, or any nested combination of these. The add_fields processor will overwrite the target field if it already exists. By default the fields that you specify will be grouped under the fields sub-dictionary in the event. To group the fields under a different sub-dictionary, use the target setting. To store the fields as top-level fields, set target: ''.",
             "properties" : {
               "when" : {
                 "$ref" : "#/definitions/condition"
@@ -8012,7 +8702,7 @@
           },
           "add_kubernetes_metadata" : {
             "type" : [ "object", "null" ],
-            "description" : "The add_kubernetes_metadata processor annotates each event with relevant metadata based on which Kubernetes pod the event originated from. At startup it detects an in_cluster environment and caches the Kubernetes-related metadata. Events are only annotated if a valid configuration is detected. If it’s not able to detect a valid Kubernetes configuration, the events are not annotated with Kubernetes-related metadata.",
+            "description" : "The add_kubernetes_metadata processor annotates each event with relevant metadata based on which Kubernetes pod the event originated from. At startup, it detects an in_cluster environment and caches the Kubernetes-related metadata. Events are only annotated if a valid configuration is detected. If it’s not able to detect a valid Kubernetes configuration, the events are not annotated with Kubernetes-related metadata.",
             "properties" : {
               "when" : {
                 "$ref" : "#/definitions/condition"
@@ -8020,6 +8710,10 @@
               "host" : {
                 "type" : "string",
                 "description" : "(Optional) Specify the node to scope filebeat to in case it cannot be accurately detected, as when running filebeat in host network mode."
+              },
+              "scope" : {
+                "type" : "string",
+                "description" : "(Optional) Specify if the processor should have visibility at the node level or at the entire cluster level. Possible values are node and cluster. Scope is node by default."
               },
               "namespace" : {
                 "type" : "string",
@@ -8032,15 +8726,29 @@
                 "type" : "string",
                 "description" : "(Optional) Use given config file as configuration for Kubernetes client. It defaults to KUBECONFIG environment variable if present."
               },
+              "cleanup_timeout" : {
+                "type" : "string",
+                "description" : "(Optional) Specify the time of inactivity before stopping the running configuration for a container. This is 60s by default."
+              },
+              "sync_period" : {
+                "type" : "string",
+                "description" : "(Optional) Specify the timeout for listing historical resources."
+              },
               "default_indexers.enabled" : {
-                "$ref" : "#/definitions/booleanOrString",
-                "description" : "(Optional) Enable/Disable default pod indexers, in case you want to specify your own.",
-                "examples" : [ "true" ]
+                "type" : "string",
+                "description" : "(Optional) Enable or disable default pod indexers when you want to specify your own."
               },
               "default_matchers.enabled" : {
-                "$ref" : "#/definitions/booleanOrString",
-                "description" : "(Optional) Enable/Disable default pod matchers, in case you want to specify your own.",
-                "examples" : [ "true" ]
+                "type" : "string",
+                "description" : "(Optional) Enable or disable default pod matchers when you want to specify your own."
+              },
+              "labels.dedot" : {
+                "type" : "string",
+                "description" : "(Optional) Default to be true. If set to true, then . in labels will be replaced with _."
+              },
+              "annotations.dedot" : {
+                "type" : "string",
+                "description" : "(Optional) Default to be true. If set to true, then . in labels will be replaced with _."
               },
               "indexers" : {
                 "type" : "array",
@@ -8089,11 +8797,11 @@
                       "properties" : {
                         "logs_path" : {
                           "type" : "string",
-                          "description" : "(Optional) Base path of container logs. If not specified, it uses the default logs path of the platform where Filebeat is running."
+                          "description" : "(Optional) Base path of container logs. If not specified, it uses the default logs path of the platform where Filebeat is running: for Linux - /var/lib/docker/containers/, Windows - C:\\\\ProgramData\\\\Docker\\\\containers. To change the default value: container ID must follow right after the logs_path - <log_path>/<container_id>, where container_id is a 64-character-long hexadecimal string."
                         },
                         "resource_type" : {
                           "type" : "string",
-                          "description" : "(Optional) Type of the resource to obtain the ID of. It can be pod, to make the lookup based on the pod UID, or container, to make the lookup based on the container ID. It defaults to container.",
+                          "description" : "(Optional) Type of the resource to obtain the ID of. Valid resource_type: pod: to make the lookup based on the pod UID. When resource_type is set to pod, logs_path must be set as well, supported path in this case: /var/lib/kubelet/pods/ used to read logs from mounted into the pod volumes, those logs end up under /var/lib/kubelet/pods/<pod UID>/volumes/<volume name>/... To use /var/lib/kubelet/pods/ as a log_path, /var/lib/kubelet/pods must be mounted into the filebeat Pods. /var/log/pods/ Note: when using resource_type: 'pod' logs will be enriched only with pod metadata: pod id, pod name, etc., not container metadata. container: to make the lookup based on the container ID, logs_path must be set to /var/log/containers/. It defaults to container.",
                           "examples" : [ "container" ]
                         }
                       }
@@ -8113,6 +8821,78 @@
               "labels" : {
                 "type" : "string",
                 "description" : "dictionaries of labels to be added."
+              }
+            }
+          },
+          "add_nomad_metadata" : {
+            "type" : [ "object", "null" ],
+            "description" : "This functionality is in technical preview and may be changed or removed in a future release. Elastic will apply best effort to fix any issues, but features in technical preview are not subject to the support SLA of official GA features.",
+            "properties" : {
+              "when" : {
+                "$ref" : "#/definitions/condition"
+              },
+              "address" : {
+                "type" : "string",
+                "description" : "(Optional) The URL of the agent API used to request the metadata. It uses http://127.0.0.1:4646 by default."
+              },
+              "namespace" : {
+                "type" : "string",
+                "description" : "(Optional) Namespace to watch. If set, only events for allocations in this namespace will be annotated."
+              },
+              "region" : {
+                "type" : "string",
+                "description" : "(Optional) Region to watch. If set, only events for allocations in this region will be annotated."
+              },
+              "secret_id" : {
+                "type" : "string",
+                "description" : "(Optional) SecretID to use when connecting with the agent API. This is an example ACL policy to apply to the token."
+              },
+              "refresh_interval" : {
+                "type" : "string",
+                "description" : "(Optional) Interval used to updated the cached metadata. It defaults to 30 seconds."
+              },
+              "cleanup_timeout" : {
+                "type" : "string",
+                "description" : "(Optional) After an allocation has been removed, time to wait before cleaning up their associated resources. This is useful if you expect to receive events after an allocation has been removed, what can happen when collecting logs. It defaults to 60 seconds."
+              },
+              "scope" : {
+                "type" : "string",
+                "description" : "(Optional) Scope of the resources to watch. It can be node to get metadata only for the allocations in a single agent, or global, to get metadata for allocations running on any agent. It defaults to node.",
+                "examples" : [ "node" ]
+              },
+              "node" : {
+                "type" : "string",
+                "description" : "(Optional) When using scope: node, use node to specify the name of the local node if it cannot be discovered automatically."
+              },
+              "indexers" : {
+                "type" : "array",
+                "description" : "Indexers use allocation metadata to create unique identifiers for each one of the pods.",
+                "items" : {
+                  "type" : "object",
+                  "properties" : { }
+                }
+              },
+              "matchers" : {
+                "type" : "array",
+                "description" : "Matchers are used to construct the lookup keys that match with the identifiers created by indexes.",
+                "items" : {
+                  "type" : "object",
+                  "properties" : { }
+                }
+              },
+              "field_format" : {
+                "type" : "object",
+                "description" : "Looks up allocation metadata using a key created with a string format that can include event fields.\nThis matcher has an option format to define the string format. This string format can contain placeholders for any field in the event.\nFor example, the following configuration uses the allocation_name indexer to identify the allocation metadata by its name and namespace, and uses custom fields existing in the event as match keys:",
+                "additionalItems" : true
+              },
+              "fields" : {
+                "type" : "object",
+                "description" : "Looks up allocation metadata using as key the value of some specific fields. When multiple fields are defined, the first one included in the event is used.\nThis matcher has an option lookup_fields to define the fields whose value will be used for lookup.\nFor example, the following configuration uses the allocation_uuid indexer to identify allocations, and defines a matcher that uses some fields where the allocation UUID can be found for lookup, the first it finds in the event:",
+                "additionalItems" : true
+              },
+              "logs_path" : {
+                "type" : "string",
+                "description" : "Looks up allocation metadata using identifiers extracted from the log path stored in the log.file.path field.\nThis matcher has an optional logs_path option with the base path of the directory containing the logs for the local agent.\nThe default configuration is able to lookup the metadata using the allocation UUID when the logs are collected under /var/lib/nomad.\nFor example the following configuration would use the allocation UUID when the logs are collected from /var/lib/NomadClient001/alloc/<alloc UUID>/alloc/logs/...."
               }
             }
           },
@@ -8354,7 +9134,7 @@
           },
           "decode_xml" : {
             "type" : [ "object", "null" ],
-            "description" : "This functionality is in technical preview and may be changed or removed in a future release. Elastic will apply best effort to fix any issues, but features in technical preview are not subject to the support SLA of official GA features.",
+            "description" : "The decode_xml processor decodes XML data that is stored under the field key. It outputs the result into the target_field.",
             "properties" : {
               "when" : {
                 "$ref" : "#/definitions/condition"
@@ -8381,6 +9161,45 @@
               "document_id" : {
                 "type" : "string",
                 "description" : "(Optional) XML key to use as the document ID. If configured, the field will be removed from the original XML document and stored in @metadata._id."
+              },
+              "ignore_missing" : {
+                "$ref" : "#/definitions/booleanOrString",
+                "description" : "(Optional) If true the processor will not return an error when a specified field does not exist. Defaults to false.",
+                "examples" : [ "false" ]
+              },
+              "ignore_failure" : {
+                "$ref" : "#/definitions/booleanOrString",
+                "description" : "(Optional) Ignore all errors produced by the processor. Defaults to false.",
+                "examples" : [ "false" ]
+              }
+            }
+          },
+          "decode_xml_wineventlog" : {
+            "type" : [ "object", "null" ],
+            "description" : "This functionality is in technical preview and may be changed or removed in a future release. Elastic will apply best effort to fix any issues, but features in technical preview are not subject to the support SLA of official GA features.",
+            "properties" : {
+              "when" : {
+                "$ref" : "#/definitions/condition"
+              },
+              "field" : {
+                "type" : "string",
+                "description" : "(Required) Source field containing the XML. Defaults to message.",
+                "examples" : [ "message" ]
+              },
+              "target_field" : {
+                "type" : "string",
+                "description" : "(Required) The field under which the decoded XML will be written. To merge the decoded XML fields into the root of the event specify target_field with an empty string (target_field: \"\"). The default value is winlog.",
+                "examples" : [ "winlog" ]
+              },
+              "overwrite_keys" : {
+                "$ref" : "#/definitions/booleanOrString",
+                "description" : "(Optional) A boolean that specifies whether keys that already exist in the event are overwritten by keys from the decoded XML object. The default value is true.",
+                "examples" : [ "true" ]
+              },
+              "map_ecs_fields" : {
+                "$ref" : "#/definitions/booleanOrString",
+                "description" : "(Optional) A boolean that specifies whether to map additional ECS fields when possible. Note that ECS field keys are placed outside of target_field. The default value is true.",
+                "examples" : [ "true" ]
               },
               "ignore_missing" : {
                 "$ref" : "#/definitions/booleanOrString",
@@ -8565,7 +9384,7 @@
               },
               "fields" : {
                 "type" : "array",
-                "description" : "List of fields to use as the source for the fingerprint.",
+                "description" : "List of fields to use as the source for the fingerprint. The list will be alphabetically sorted by the processor.",
                 "items" : {
                   "type" : "string"
                 }
@@ -8768,7 +9587,7 @@
             },
             "pipeline" : {
               "type" : "string",
-              "description" : "Optional ingest node pipeline. By default no pipeline will be used."
+              "description" : "Optional ingest pipeline. By default no pipeline will be used."
             },
             "path" : {
               "type" : "string",
@@ -9139,11 +9958,6 @@
               "description" : "The configurable ClientID used for logging, debugging, and auditing purposes.  The default is \"beats\".",
               "examples" : [ "beats" ]
             },
-            "enable_krb5_fast" : {
-              "$ref" : "#/definitions/booleanOrString",
-              "description" : "Enables Kerberos FAST authentication in the Kafka output. This may conflict with certain Active Directory configurations.",
-              "examples" : [ "false" ]
-            },
             "ssl" : {
               "description" : "Use SSL settings for HTTPS.",
               "$ref" : "#/definitions/ssl"
@@ -9187,6 +10001,11 @@
               "type" : "string",
               "description" : "Kerberos realm.",
               "examples" : [ "ELASTIC" ]
+            },
+            "kerberos.enable_krb5_fast" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "description" : "Enables Kerberos FAST authentication. This may conflict with certain Active Directory configurations.",
+              "examples" : [ "false" ]
             }
           }
         },
@@ -9508,8 +10327,8 @@
             },
             "type" : {
               "type" : "string",
-              "description" : "Select the kind of index template. From Elasticsearch 7.8, it is possible to use component templates. Available options: legacy, component, index. By default filebeat uses the legacy index templates.",
-              "examples" : [ "legacy" ]
+              "description" : "Select the kind of index template. From Elasticsearch 7.8, it is possible to use component templates. Available options: legacy, component, index. By default filebeat uses index templates.",
+              "examples" : [ "index" ]
             },
             "name" : {
               "type" : "string",
@@ -9724,6 +10543,16 @@
               "description" : "The period after which to log the internal metrics. The default is 30s.",
               "examples" : [ "30s" ]
             },
+            "metrics.namespaces" : {
+              "type" : "array",
+              "description" : "A list of metrics namespaces to report in the logs. Defaults to [stats]. `stats` contains general Beat metrics. `dataset` may be present in some Beats and contains module or input metrics.",
+              "items" : {
+                "type" : "string",
+                "defaultSnippets" : [ {
+                  "body" : "stats"
+                } ]
+              }
+            },
             "to_files" : {
               "$ref" : "#/definitions/booleanOrString",
               "description" : "Logging to rotating files. Set logging.to_files to false to disable logging to files.",
@@ -9766,17 +10595,22 @@
                   "$ref" : "#/definitions/booleanOrString",
                   "description" : "Rotate existing logs on startup rather than appending to the existing file. Defaults to true.",
                   "examples" : [ "true" ]
+                },
+                "suffix" : {
+                  "type" : "string",
+                  "description" : "Rotated files are either suffixed with a number e.g. filebeat.1 when renamed during rotation. Or when set to date, the date is added to the end of the file. On rotation a new file is created, older files are untouched.",
+                  "examples" : [ "count" ]
                 }
               }
             },
             "json" : {
               "$ref" : "#/definitions/booleanOrString",
-              "description" : "Set to true to log messages in JSON format.",
+              "description" : "Set to true to log messages in JSON format. Deprecated: As of 7.16.0 this setting is deprecated and will be removed in an upcoming release.",
               "examples" : [ "false" ]
             },
             "ecs" : {
               "$ref" : "#/definitions/booleanOrString",
-              "description" : "Set to true, to log messages with minimal required Elastic Common Schema (ECS) information. Recommended to use in combination with `logging.json=true` Defaults to false.",
+              "description" : "Set to true, to log messages with minimal required Elastic Common Schema (ECS) information. Recommended to use in combination with `logging.json=true` Defaults to false. Deprecated: As of 7.16.0 this setting is deprecated and will be removed in an upcoming release.",
               "examples" : [ "false" ]
             }
           }
@@ -9971,6 +10805,11 @@
             "named_pipe.security_descriptor" : {
               "type" : "string",
               "description" : "Define which the permissions that should be applied to the named pipe, use the Security Descriptor Definition Language (SDDL) to define the permission. This option cannot be used with `http.user`."
+            },
+            "pprof.enabled" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "description" : "Defines if the HTTP pprof endpoints are enabled. It is recommended that this is only enabled on localhost as these endpoints may leak data.",
+              "examples" : [ "false" ]
             }
           }
         }
@@ -10133,7 +10972,7 @@
         "description" : "add new module",
         "suggestionKind" : 9,
         "body" : {
-          "module" : "${1|system,activemq,apache,auditd,aws,azure,barracuda,bluecoat,cef,checkpoint,cisco,coredns,crowdstrike,cyberark,cylance,elasticsearch,envoyproxy,f5,fortinet,gcp,google_workspace,gsuite,haproxy,ibmmq,icinga,iis,imperva,infoblox,iptables,juniper,kafka,kibana,logstash,microsoft,misp,mssql,mysql,mysqlenterprise,nats,netflow,netscout,nginx,o365,okta,oracle,osquery,panw,pensando,postgresql,proofpoint,rabbitmq,radware,redis,santa,snort,snyk,sonicwall,sophos,squid,suricata,threatintel,tomcat,traefik,zeek,zoom,zscaler|}"
+          "module" : "${1|system,activemq,apache,auditd,aws,awsfargate,azure,barracuda,bluecoat,cef,checkpoint,cisco,coredns,crowdstrike,cyberark,cyberarkpas,cylance,elasticsearch,envoyproxy,f5,fortinet,gcp,google_workspace,gsuite,haproxy,ibmmq,icinga,iis,imperva,infoblox,iptables,juniper,kafka,kibana,logstash,microsoft,misp,mssql,mysql,mysqlenterprise,nats,netflow,netscout,nginx,o365,okta,oracle,osquery,panw,pensando,postgresql,proofpoint,rabbitmq,radware,redis,santa,snort,snyk,sonicwall,sophos,squid,suricata,threatintel,tomcat,traefik,zeek,zookeeper,zoom,zscaler|}"
         }
       } ],
       "items" : {
@@ -10145,7 +10984,7 @@
       "properties" : {
         "module" : {
           "type" : "string",
-          "examples" : [ "system", "activemq", "apache", "auditd", "aws", "azure", "barracuda", "bluecoat", "cef", "checkpoint", "cisco", "coredns", "crowdstrike", "cyberark", "cylance", "elasticsearch", "envoyproxy", "f5", "fortinet", "gcp", "google_workspace", "gsuite", "haproxy", "ibmmq", "icinga", "iis", "imperva", "infoblox", "iptables", "juniper", "kafka", "kibana", "logstash", "microsoft", "misp", "mssql", "mysql", "mysqlenterprise", "nats", "netflow", "netscout", "nginx", "o365", "okta", "oracle", "osquery", "panw", "pensando", "postgresql", "proofpoint", "rabbitmq", "radware", "redis", "santa", "snort", "snyk", "sonicwall", "sophos", "squid", "suricata", "threatintel", "tomcat", "traefik", "zeek", "zoom", "zscaler" ],
+          "examples" : [ "system", "activemq", "apache", "auditd", "aws", "awsfargate", "azure", "barracuda", "bluecoat", "cef", "checkpoint", "cisco", "coredns", "crowdstrike", "cyberark", "cyberarkpas", "cylance", "elasticsearch", "envoyproxy", "f5", "fortinet", "gcp", "google_workspace", "gsuite", "haproxy", "ibmmq", "icinga", "iis", "imperva", "infoblox", "iptables", "juniper", "kafka", "kibana", "logstash", "microsoft", "misp", "mssql", "mysql", "mysqlenterprise", "nats", "netflow", "netscout", "nginx", "o365", "okta", "oracle", "osquery", "panw", "pensando", "postgresql", "proofpoint", "rabbitmq", "radware", "redis", "santa", "snort", "snyk", "sonicwall", "sophos", "squid", "suricata", "threatintel", "tomcat", "traefik", "zeek", "zookeeper", "zoom", "zscaler" ],
           "description" : "module type"
         }
       },
@@ -10166,7 +11005,7 @@
         "description" : "add new input",
         "suggestionKind" : 9,
         "body" : {
-          "type" : "${1|log,filestream,redis,udp,tcp,syslog,container,netflow,gcp-pubsub,aws-s3,aws-cloudwatch,azure-eventhub,cloudfoundry,docker,http_endpoint,httpjson,kafka,mqtt,o365audit,stdin|}"
+          "type" : "${1|log,filestream,redis,udp,tcp,syslog,container,netflow,gcp-pubsub,aws-s3,aws-cloudwatch,azure-eventhub,cloudfoundry,docker,http_endpoint,httpjson,journald,kafka,mqtt,o365audit,stdin|}"
         }
       } ],
       "items" : {
@@ -10178,7 +11017,7 @@
       "properties" : {
         "type" : {
           "type" : "string",
-          "examples" : [ "log", "filestream", "redis", "udp", "tcp", "syslog", "container", "netflow", "gcp-pubsub", "aws-s3", "aws-cloudwatch", "azure-eventhub", "cloudfoundry", "docker", "http_endpoint", "httpjson", "kafka", "mqtt", "o365audit", "stdin" ],
+          "examples" : [ "log", "filestream", "redis", "udp", "tcp", "syslog", "container", "netflow", "gcp-pubsub", "aws-s3", "aws-cloudwatch", "azure-eventhub", "cloudfoundry", "docker", "http_endpoint", "httpjson", "journald", "kafka", "mqtt", "o365audit", "stdin" ],
           "description" : "input type"
         }
       },
@@ -10895,7 +11734,7 @@
                             "description" : "add new config module",
                             "suggestionKind" : 9,
                             "body" : {
-                              "module" : "${1|system,activemq,apache,auditd,aws,azure,barracuda,bluecoat,cef,checkpoint,cisco,coredns,crowdstrike,cyberark,cylance,elasticsearch,envoyproxy,f5,fortinet,gcp,google_workspace,gsuite,haproxy,ibmmq,icinga,iis,imperva,infoblox,iptables,juniper,kafka,kibana,logstash,microsoft,misp,mssql,mysql,mysqlenterprise,nats,netflow,netscout,nginx,o365,okta,oracle,osquery,panw,pensando,postgresql,proofpoint,rabbitmq,radware,redis,santa,snort,snyk,sonicwall,sophos,squid,suricata,threatintel,tomcat,traefik,zeek,zoom,zscaler|}"
+                              "module" : "${1|system,activemq,apache,auditd,aws,awsfargate,azure,barracuda,bluecoat,cef,checkpoint,cisco,coredns,crowdstrike,cyberark,cyberarkpas,cylance,elasticsearch,envoyproxy,f5,fortinet,gcp,google_workspace,gsuite,haproxy,ibmmq,icinga,iis,imperva,infoblox,iptables,juniper,kafka,kibana,logstash,microsoft,misp,mssql,mysql,mysqlenterprise,nats,netflow,netscout,nginx,o365,okta,oracle,osquery,panw,pensando,postgresql,proofpoint,rabbitmq,radware,redis,santa,snort,snyk,sonicwall,sophos,squid,suricata,threatintel,tomcat,traefik,zeek,zookeeper,zoom,zscaler|}"
                             }
                           }, {
                             "label" : "- (input item)",
@@ -10903,7 +11742,7 @@
                             "description" : "add new config input",
                             "suggestionKind" : 9,
                             "body" : {
-                              "type" : "${1|log,filestream,redis,udp,tcp,syslog,container,netflow,gcp-pubsub,aws-s3,aws-cloudwatch,azure-eventhub,cloudfoundry,docker,http_endpoint,httpjson,kafka,mqtt,o365audit,stdin|}"
+                              "type" : "${1|log,filestream,redis,udp,tcp,syslog,container,netflow,gcp-pubsub,aws-s3,aws-cloudwatch,azure-eventhub,cloudfoundry,docker,http_endpoint,httpjson,journald,kafka,mqtt,o365audit,stdin|}"
                             }
                           } ],
                           "items" : {
