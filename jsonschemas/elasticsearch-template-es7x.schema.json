@@ -398,6 +398,7 @@
         "runtime": {
           "type": "object",
           "$ref": "#/definitions/runtime_field",
+          "description": "Since Elasticsearch 7.11",
           "defaultSnippets": [
             {
               "label": "add new runtime property",
@@ -474,7 +475,8 @@
             },
             "is_hidden": {
               "type": "boolean",
-              "default": false
+              "default": false,
+              "description": "Since Elasticsearch 7.12"
             },
             "routing": {
               "type": "string"
@@ -759,11 +761,13 @@
         },
         "include_in_parent": {
           "type": "boolean",
-          "default": false
+          "default": false,
+          "description": "Since Elasticsearch 7.6"
         },
         "include_in_root": {
           "type": "boolean",
-          "default": false
+          "default": false,
+          "description": "Since Elasticsearch 7.6"
         },
         "scaling_factor": {
           "type": "integer",
@@ -785,6 +789,7 @@
         },
         "script": {
           "type": "object",
+          "description": "Since Elasticsearch 7.13",
           "properties": {
             "source": {
               "type": "string"
@@ -797,11 +802,13 @@
             "fail",
             "continue"
           ],
-          "default": "fail"
+          "default": "fail",
+          "description": "Since Elasticsearch 7.13"
         },
         "time_series_dimension": {
           "type": "boolean",
-          "default": false
+          "default": false,
+          "description": "Since Elasticsearch 7.16"
         },
         "time_series_metric": {
           "type": "string",
@@ -810,7 +817,8 @@
             "counter",
             "histogram",
             "summary"
-          ]
+          ],
+          "description": "Since Elasticsearch 7.16"
         }
       }
     },
@@ -902,7 +910,8 @@
         },
         "allocation.existing_shards_allocator": {
           "type": "string",
-          "default": "gateway_allocator"
+          "default": "gateway_allocator",
+          "description": "Since Elasticsearch 7.9"
         },
         "analyze.max_token_count": {
           "type": "integer",
@@ -950,7 +959,8 @@
         },
         "final_pipeline": {
           "type": "string",
-          "default": "_none"
+          "default": "_none",
+          "description": "Since Elasticsearch 7.5"
         },
         "flush_after_merge": {
           "type": "string",
@@ -974,7 +984,8 @@
         },
         "hidden": {
           "type": "boolean",
-          "default": false
+          "default": false,
+          "description": "Since Elasticsearch 7.9"
         },
         "highlight.max_analyzed_offset": {
           "type": "string",
@@ -1018,11 +1029,13 @@
         },
         "lifecycle.origination_date": {
           "type": "string",
-          "default": "-1"
+          "default": "-1",
+          "description": "Since Elasticsearch 7.5"
         },
         "lifecycle.parse_origination_date": {
           "type": "string",
-          "default": "false"
+          "default": "false",
+          "description": "Since Elasticsearch 7.5"
         },
         "lifecycle.rollover_alias": {
           "type": "string",
@@ -1030,7 +1043,8 @@
         },
         "lifecycle.step.wait_time_threshold": {
           "type": "string",
-          "default": "12h"
+          "default": "12h",
+          "description": "Since Elasticsearch 7.13"
         },
         "load_fixed_bitset_filters_eagerly": {
           "type": "string",
@@ -1050,7 +1064,8 @@
         },
         "mapping.dimension_fields.limit": {
           "type": "string",
-          "default": "16"
+          "default": "16",
+          "description": "Since Elasticsearch 7.15"
         },
         "mapping.field_name_length.limit": {
           "type": "string",
@@ -1201,7 +1216,8 @@
         },
         "recovery.type": {
           "type": "string",
-          "default": ""
+          "default": "",
+          "description": "Since Elasticsearch 7.9"
         },
         "refresh_interval": {
           "type": "string",
@@ -1213,15 +1229,18 @@
         },
         "rollup.source.name": {
           "type": "string",
-          "default": ""
+          "default": "",
+          "description": "Since Elasticsearch 7.17"
         },
         "rollup.source.uuid": {
           "type": "string",
-          "default": ""
+          "default": "",
+          "description": "Since Elasticsearch 7.17"
         },
         "routing.allocation.disk.watermark.ignore": {
           "type": "string",
-          "default": "false"
+          "default": "false",
+          "description": "Since Elasticsearch 7.12"
         },
         "routing.allocation.enable": {
           "type": "string",
@@ -1229,15 +1248,18 @@
         },
         "routing.allocation.exclude._tier": {
           "type": "string",
-          "default": ""
+          "default": "",
+          "description": "Since Elasticsearch 7.12"
         },
         "routing.allocation.include._tier": {
           "type": "string",
-          "default": ""
+          "default": "",
+          "description": "Since Elasticsearch 7.12"
         },
         "routing.allocation.require._tier": {
           "type": "string",
-          "default": ""
+          "default": "",
+          "description": "Since Elasticsearch 7.12"
         },
         "routing.allocation.total_shards_per_node": {
           "type": "string",
@@ -1301,7 +1323,8 @@
         },
         "shard_limit.group": {
           "type": "string",
-          "default": "normal"
+          "default": "normal",
+          "description": "Since Elasticsearch 7.17"
         },
         "soft_deletes.enabled": {
           "type": "string",
@@ -1395,7 +1418,8 @@
         },
         "top_metrics_max_size": {
           "type": "integer",
-          "default": 10
+          "default": 10,
+          "description": "Since Elasticsearch 7.9"
         },
         "translog.durability": {
           "type": "string",
