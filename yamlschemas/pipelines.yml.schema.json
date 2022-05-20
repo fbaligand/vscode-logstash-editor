@@ -95,7 +95,7 @@
 			},
 			"pipeline.plugin_classloaders": {
 				"$ref": "#/definitions/booleanOrString",
-				"description": "(Beta) Load Java plugins in independent classloaders to isolate their dependencies.",
+				"description": "(Beta) Load Java plugins in independent classloaders to isolate their dependencies.\nSince Logstash 7.2",
 				"default": "false",
 				"examples": [
 					"true"
@@ -103,7 +103,7 @@
 			},
 			"pipeline.ordered": {
 				"type": "string",
-				"description": "Set the pipeline event ordering. Valid options are: 'auto', 'true' and 'false'. 'auto' will automatically enable ordering if the pipeline.workers setting is also set to 1. 'true' will enforce ordering on the pipeline and prevent logstash from starting if there are multiple workers. 'false' will disable the processing required to preserve order. When 'false', ordering is not guaranteed, but you save the processing cost of preserving order.",
+				"description": "Set the pipeline event ordering. Valid options are: 'auto', 'true' and 'false'. 'auto' will automatically enable ordering if the pipeline.workers setting is also set to 1. 'true' will enforce ordering on the pipeline and prevent logstash from starting if there are multiple workers. 'false' will disable the processing required to preserve order. When 'false', ordering is not guaranteed, but you save the processing cost of preserving order.\nSince Logstash 7.7",
 				"default": "auto",
 				"examples": [
 					"true",
@@ -112,7 +112,7 @@
 			},
 			"pipeline.ecs_compatibility": {
 				"type": "string",
-				"description": "Sets the pipeline’s default value for ecs_compatibility, a setting that is available to plugins that implement an ECS compatibility mode for use with the Elastic Common Schema.",
+				"description": "Sets the pipeline’s default value for ecs_compatibility, a setting that is available to plugins that implement an ECS compatibility mode for use with the Elastic Common Schema.\nSince Logstash 7.14",
 				"default": "disabled",
 				"examples": [
 					"v1",

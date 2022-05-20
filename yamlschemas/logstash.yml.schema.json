@@ -90,7 +90,7 @@
 		},
 		"pipeline.plugin_classloaders": {
 			"$ref": "#/definitions/booleanOrString",
-			"description": "(Beta) Load Java plugins in independent classloaders to isolate their dependencies.",
+			"description": "(Beta) Load Java plugins in independent classloaders to isolate their dependencies.\nSince Logstash 7.2",
 			"default": "false",
 			"examples": [
 				"true"
@@ -98,7 +98,7 @@
 		},
 		"pipeline.ordered": {
 			"type": "string",
-			"description": "Set the pipeline event ordering. Valid options are: 'auto', 'true' and 'false'. 'auto' will automatically enable ordering if the pipeline.workers setting is also set to 1. 'true' will enforce ordering on the pipeline and prevent logstash from starting if there are multiple workers. 'false' will disable the processing required to preserve order. When 'false', ordering is not guaranteed, but you save the processing cost of preserving order.",
+			"description": "Set the pipeline event ordering. Valid options are: 'auto', 'true' and 'false'. 'auto' will automatically enable ordering if the pipeline.workers setting is also set to 1. 'true' will enforce ordering on the pipeline and prevent logstash from starting if there are multiple workers. 'false' will disable the processing required to preserve order. When 'false', ordering is not guaranteed, but you save the processing cost of preserving order.\nSince Logstash 7.7",
 			"default": "auto",
 			"examples": [
 				"true",
@@ -107,7 +107,7 @@
 		},
 		"pipeline.ecs_compatibility": {
 			"type": "string",
-			"description": "Sets the pipeline’s default value for ecs_compatibility, a setting that is available to plugins that implement an ECS compatibility mode for use with the Elastic Common Schema.",
+			"description": "Sets the pipeline’s default value for ecs_compatibility, a setting that is available to plugins that implement an ECS compatibility mode for use with the Elastic Common Schema.\nSince Logstash 7.14",
 			"default": "disabled",
 			"examples": [
 				"v1",
@@ -300,7 +300,7 @@
 		},
 		"api.enabled": {
 			"type": "string",
-			"description": "The HTTP API is enabled by default. It can be disabled, but features that rely on it will not work as intended.",
+			"description": "The HTTP API is enabled by default. It can be disabled, but features that rely on it will not work as intended.\nSince Logstash 7.16",
 			"default": "true",
 			"examples": [
 				"false"
@@ -308,22 +308,22 @@
 		},
 		"api.environment": {
 			"type": "string",
-			"description": "The API returns the provided string as a part of its response. Setting your environment may help to disambiguate between similarly-named nodes in production vs test environments.",
+			"description": "The API returns the provided string as a part of its response. Setting your environment may help to disambiguate between similarly-named nodes in production vs test environments.\nSince Logstash 7.16",
 			"default": "production"
 		},
 		"api.http.host": {
 			"type": "string",
-			"description": "The bind address for the HTTP API endpoint. By default, the Logstash HTTP API binds only to the local loopback interface. When configured securely (api.ssl.enabled: true and api.auth.type: basic), the HTTP API binds to all available interfaces.",
+			"description": "The bind address for the HTTP API endpoint. By default, the Logstash HTTP API binds only to the local loopback interface. When configured securely (api.ssl.enabled: true and api.auth.type: basic), the HTTP API binds to all available interfaces.\nSince Logstash 7.16",
 			"default": "\"127.0.0.1\""
 		},
 		"api.http.port": {
 			"type": "string",
-			"description": "The bind port for the HTTP API endpoint.",
+			"description": "The bind port for the HTTP API endpoint.\nSince Logstash 7.16",
 			"default": "9600-9700"
 		},
 		"api.ssl.enabled": {
 			"$ref": "#/definitions/booleanOrString",
-			"description": "Set to true to enable SSL on the HTTP API. Doing so requires both api.ssl.keystore.path and api.ssl.keystore.password to be set.",
+			"description": "Set to true to enable SSL on the HTTP API. Doing so requires both api.ssl.keystore.path and api.ssl.keystore.password to be set.\nSince Logstash 7.16",
 			"default": "false",
 			"examples": [
 				"true"
@@ -331,7 +331,7 @@
 		},
 		"api.ssl.keystore.path": {
 			"type": "string",
-			"description": "The path to a valid JKS or PKCS12 keystore for use in securing the Logstash API. The keystore must be password-protected, and must contain a single certificate chain and a private key. This setting is ignored unless api.ssl.enabled is set to true.",
+			"description": "The path to a valid JKS or PKCS12 keystore for use in securing the Logstash API. The keystore must be password-protected, and must contain a single certificate chain and a private key. This setting is ignored unless api.ssl.enabled is set to true.\nSince Logstash 7.16",
 			"default": "",
 			"examples": [
 				"/path/to/keystore.p12"
@@ -339,7 +339,7 @@
 		},
 		"api.ssl.keystore.password": {
 			"type": "string",
-			"description": "The password to the keystore provided with api.ssl.keystore.path. This setting is ignored unless api.ssl.enabled is set to true.",
+			"description": "The password to the keystore provided with api.ssl.keystore.path. This setting is ignored unless api.ssl.enabled is set to true.\nSince Logstash 7.16",
 			"default": "",
 			"examples": [
 				"password"
@@ -347,7 +347,7 @@
 		},
 		"api.auth.type": {
 			"type": "string",
-			"description": "Set to 'basic' to require HTTP Basic auth on the API using the credentials supplied with api.auth.basic.username and api.auth.basic.password.",
+			"description": "Set to 'basic' to require HTTP Basic auth on the API using the credentials supplied with api.auth.basic.username and api.auth.basic.password.\nSince Logstash 7.16",
 			"default": "none",
 			"examples": [
 				"basic"
@@ -355,14 +355,14 @@
 		},
 		"api.auth.basic.username": {
 			"type": "string",
-			"description": "The username to require for HTTP Basic auth Ignored unless api.auth.type is set to basic.",
+			"description": "The username to require for HTTP Basic auth Ignored unless api.auth.type is set to basic.\nSince Logstash 7.16",
 			"examples": [
 				"username"
 			]
 		},
 		"api.auth.basic.password": {
 			"type": "string",
-			"description": "The password to require for HTTP Basic auth Ignored unless api.auth.type is set to basic.",
+			"description": "The password to require for HTTP Basic auth Ignored unless api.auth.type is set to basic.\nSince Logstash 7.16",
 			"examples": [
 				"password"
 			]
