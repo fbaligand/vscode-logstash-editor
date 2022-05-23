@@ -1,6 +1,23 @@
 # Change Log
 
 
+## 1.3.0
+
+- add support for Logstash 7.17 completion
+- add support for Filebeat 7.17 completion
+- add support for Elasticsearch 7.17 index template completion
+- add support for Elasticsearch composable index templates (named also v2.0) and component templates
+- add 'Since Logstash <VERSION>' info in logstash.yml and pipelines.yml
+- add 'Since Elasticsearch <VERSION>' info in Elasticsearch index template fields
+- several enhancements and bug fixes in filebeat.yml completion:
+  - add completion for root entries present in default filebeat.yml
+  - enhance inputs and modules completion
+  - authorize null or ~ value for processors
+  - fix completion for some string entries that were previously considered as objects
+  - fix 'when' completion
+  - add 'max_bytes' option
+
+
 ## 1.2.0
 
 - logstash.yml and pipelines.yml: fix 'pipeline.ordered' description (thanks to camAtGitHub)

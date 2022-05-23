@@ -25,7 +25,7 @@ For example, if cursor is inside `grok` filter, options for `grok` filter are su
   - filebeat.config.modules.yml
   - filebeat*/inputs.d/*.yml
   - filebeat*/modules.d/*.yml
-- Provides completion for Elasticsearch index template json files, based on a json schema
+- Provides completion for Elasticsearch index template (and composable index template) json files, based on a json schema
 - Provides a specific index template json schema for Elasticsearch 6.x and 7.x
 - Provides "logstash.version" configuration setting to choose Logstash version (for completion)
 - Provides "Set Logstash Version" command (shortcut: Ctrl+Shift+L) to change Logstash version setting
