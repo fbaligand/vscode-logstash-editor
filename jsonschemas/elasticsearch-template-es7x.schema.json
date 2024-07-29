@@ -351,6 +351,9 @@
                   },
                   "mapping": {
                     "$ref": "#/definitions/field_mapping"
+                  },
+                  "runtime": {
+                    "$ref": "#/definitions/runtime_field_mapping"
                   }
                 }
               }
@@ -824,6 +827,7 @@
     },
     "runtime_field_mapping": {
       "type": "object",
+      "description": "Since Elasticsearch 7.11",
       "properties": {
         "type": {
           "type": "string",
