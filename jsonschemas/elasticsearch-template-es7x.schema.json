@@ -1693,6 +1693,16 @@
         ]
       }
     },
+    "data_stream": {
+      "type": "object",
+      "description": "specific to composable index templates",
+      "properties": {
+        "hidden": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
     "_meta": {
       "type": "object",
       "description": "specific to composable index templates",
