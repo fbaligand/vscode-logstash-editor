@@ -1636,34 +1636,23 @@
       ]
     },
     "template": {
-      "oneOf": [
-        {
-          "type": "string",
-          "description": "deprecated",
-          "examples": [
-            "logstash-*"
-          ]
-        },
-        {
-          "type": "object",
-          "description": "specific to composable index templates",
-          "properties": {
-            "settings": {
-              "$ref": "#/definitions/settings"
-            },
-            "mappings": {
-              "$ref": "#/definitions/mappings"
-            },
-            "aliases": {
-              "$ref": "#/definitions/aliases"
-            }
-          }
-        }
-      ],
+      "description": "specific to composable index templates",
+      "type": "object",
       "default": {},
-      "description": "specific to composable index templates"
+      "properties": {
+        "settings": {
+          "$ref": "#/definitions/settings"
+        },
+        "mappings": {
+          "$ref": "#/definitions/mappings"
+        },
+        "aliases": {
+          "$ref": "#/definitions/aliases"
+        }
+      }
     },
     "order": {
+      "description": "specific to legacy index templates",
       "type": "integer",
       "default": 0
     },
@@ -1672,12 +1661,15 @@
       "default": 1
     },
     "settings": {
+      "description": "specific to legacy index templates",
       "$ref": "#/definitions/settings"
     },
     "mappings": {
+      "description": "specific to legacy index templates",
       "$ref": "#/definitions/mappings"
     },
     "aliases": {
+      "description": "specific to legacy index templates",
       "$ref": "#/definitions/aliases"
     },
     "priority": {
