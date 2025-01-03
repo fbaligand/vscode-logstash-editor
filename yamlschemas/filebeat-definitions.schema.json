@@ -909,6 +909,10 @@
                       "type" : "string",
                       "description" : "the name of the storage account the state/offsets will be stored and updated"
                     },
+                    "storage_account_container" : {
+                      "type" : "string",
+                      "description" : "the name of the storage account container you would like to store the offset information in."
+                    },
                     "storage_account_key" : {
                       "type" : "string",
                       "description" : "the storage account key, this key will be used to authorize access to data in your storage account"
@@ -1304,18 +1308,22 @@
                 },
                 "var.input" : {
                   "type" : "string",
-                  "description" : "Set which input to use between syslog (default) or file.",
-                  "examples" : [ "syslog" ]
+                  "description" : "Set which input to use between udp (default), tcp or file.",
+                  "examples" : [ "udp" ]
                 },
                 "var.syslog_host" : {
                   "type" : "string",
-                  "description" : "The interface to listen to UDP based syslog traffic. Defaults to localhost. Set to 0.0.0.0 to bind to all available interfaces.",
+                  "description" : "The interface to listen to udp or tcp syslog traffic. Defaults to localhost. Set to 0.0.0.0 to bind to all available interfaces.",
                   "examples" : [ "localhost" ]
                 },
                 "var.syslog_port" : {
                   "type" : "string",
-                  "description" : "The UDP port to listen for syslog traffic. Defaults to 9001.",
+                  "description" : "The port to listen for udp or tcp syslog traffic. Defaults to 9001.",
                   "examples" : [ "9001" ]
+                },
+                "var.ssl" : {
+                  "description" : "With tcp input, set the optional tls configuration:",
+                  "$ref" : "#/definitions/ssl"
                 },
                 "var.log_level" : {
                   "type" : "string",
@@ -1353,18 +1361,22 @@
                 },
                 "var.input" : {
                   "type" : "string",
-                  "description" : "Set which input to use between syslog (default) or file.",
-                  "examples" : [ "syslog" ]
+                  "description" : "Set which input to use between udp (default), tcp or file.",
+                  "examples" : [ "udp" ]
                 },
                 "var.syslog_host" : {
                   "type" : "string",
-                  "description" : "The interface to listen to UDP based syslog traffic. Defaults to localhost. Set to 0.0.0.0 to bind to all available interfaces.",
+                  "description" : "The interface to listen to tcp or udp syslog traffic. Defaults to localhost. Set to 0.0.0.0 to bind to all available interfaces.",
                   "examples" : [ "localhost" ]
                 },
                 "var.syslog_port" : {
                   "type" : "string",
-                  "description" : "The UDP port to listen for syslog traffic. Defaults to 9003.",
+                  "description" : "The UDP port to listen for tcp or udp syslog traffic. Defaults to 9003.",
                   "examples" : [ "9003" ]
+                },
+                "var.ssl" : {
+                  "description" : "With tcp input, set the optional tls configuration:",
+                  "$ref" : "#/definitions/ssl"
                 },
                 "var.log_level" : {
                   "type" : "string",
@@ -1407,13 +1419,18 @@
                 },
                 "var.syslog_host" : {
                   "type" : "string",
-                  "description" : "The interface to listen to UDP based syslog traffic. Defaults to localhost. Set to 0.0.0.0 to bind to all available interfaces.",
+                  "description" : "The interface to listen to syslog traffic. Defaults to localhost. Set to 0.0.0.0 to bind to all available interfaces.",
                   "examples" : [ "localhost" ]
                 },
                 "var.syslog_port" : {
                   "type" : "string",
-                  "description" : "The UDP port to listen for syslog traffic. Defaults to 9002.",
+                  "description" : "The port to listen on for syslog traffic. Defaults to 9002.",
                   "examples" : [ "9002" ]
+                },
+                "var.syslog_protocol" : {
+                  "type" : "string",
+                  "description" : "Set which protocol to use between udp (default) or tcp.",
+                  "examples" : [ "udp" ]
                 },
                 "var.paths" : {
                   "type" : "array",
@@ -1760,6 +1777,11 @@
                 "var.ssl" : {
                   "description" : "With tcp input, set the optional tls configuration:",
                   "$ref" : "#/definitions/ssl"
+                },
+                "var.preserve_original_event" : {
+                  "$ref" : "#/definitions/booleanOrString",
+                  "description" : "Uncoment to keep the original syslog event under event.original.",
+                  "examples" : [ "true" ]
                 },
                 "var.paths" : {
                   "type" : "array",
@@ -5231,18 +5253,27 @@
                 "var.ssl" : {
                   "$ref" : "#/definitions/ssl"
                 },
-                "threat_level" : {
+                "var.filters" : {
                   "type" : "array",
+                  "description" : "Optional filters that can be applied to the API for filtering out results. This should support the majority of fields in a MISP context. For examples please reference the filebeat module documentation.",
                   "items" : {
-                    "type" : "string",
-                    "defaultSnippets" : [ {
-                      "body" : "4"
-                    } ]
+                    "type" : "object",
+                    "properties" : {
+                      "threat_level" : {
+                        "type" : "array",
+                        "items" : {
+                          "type" : "string",
+                          "defaultSnippets" : [ {
+                            "body" : "4"
+                          } ]
+                        }
+                      },
+                      "to_ids" : {
+                        "$ref" : "#/definitions/booleanOrString",
+                        "examples" : [ "true" ]
+                      }
+                    }
                   }
-                },
-                "to_ids" : {
-                  "$ref" : "#/definitions/booleanOrString",
-                  "examples" : [ "true" ]
                 },
                 "var.first_interval" : {
                   "type" : "string",
@@ -5814,9 +5845,14 @@
             "ssl" : {
               "$ref" : "#/definitions/ssl"
             },
-            "enabled" : {
-              "$ref" : "#/definitions/booleanOrString",
-              "examples" : [ "true" ]
+            "stats" : {
+              "type" : "object",
+              "properties" : {
+                "enabled" : {
+                  "$ref" : "#/definitions/booleanOrString",
+                  "examples" : [ "true" ]
+                }
+              }
             },
             "syslog" : {
               "type" : "object",
@@ -6240,6 +6276,11 @@
         "then" : {
           "description" : "Filestream input",
           "properties" : {
+            "id" : {
+              "type" : "string",
+              "description" : "Unique ID among all inputs, an ID is required.",
+              "examples" : [ "my-filestream-id" ]
+            },
             "paths" : {
               "type" : "array",
               "description" : "Paths that should be crawled and fetched. Glob based paths. To fetch all \".log\" files from a specific level of subdirectories /var/log/*/*.log can be used. For each file found under this path, a harvester is started. Make sure not file is defined twice as this can lead to unexpected behaviour.",
@@ -6310,19 +6351,39 @@
               "description" : "If symlinks is enabled, symlinks are opened and harvested. The harvester is opening the original for harvesting but will report the symlink name as source.",
               "examples" : [ "false" ]
             },
+            "prospector.scanner.fingerprint.enabled" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "description" : "If enabled, instead of relying on the device ID and inode values when comparing files, compare hashes of the given byte ranges in files. A file becomes an ingest target when its size grows larger than offset+length (see below). Until then it's ignored.",
+              "examples" : [ "false" ]
+            },
+            "prospector.scanner.fingerprint.offset" : {
+              "type" : "string",
+              "description" : "If fingerprint mode is enabled, sets the offset from the beginning of the file for the byte range used for computing the fingerprint value.",
+              "examples" : [ "0" ]
+            },
+            "prospector.scanner.fingerprint.length" : {
+              "type" : "string",
+              "description" : "If fingerprint mode is enabled, sets the length of the byte range used for computing the fingerprint value. Cannot be less than 64 bytes.",
+              "examples" : [ "1024" ]
+            },
+            "parsers" : {
+              "$ref" : "#/definitions/parsers"
+            },
             "rotation.external.strategy.copytruncate" : {
-              "type" : "string",
-              "description" : "When an external tool rotates the input files with copytruncate strategy use this section to help the input find the rotated files."
-            },
-            "suffix_regex" : {
-              "type" : "string",
-              "description" : "Regex that matches the rotated files.",
-              "examples" : [ "\\.\\d$" ]
-            },
-            "dateformat" : {
-              "type" : "string",
-              "description" : "If the rotated filename suffix is a datetime, set it here.",
-              "examples" : [ "-20060102" ]
+              "type" : "object",
+              "description" : "When an external tool rotates the input files with copytruncate strategy use this section to help the input find the rotated files.",
+              "properties" : {
+                "suffix_regex" : {
+                  "type" : "string",
+                  "description" : "Regex that matches the rotated files.",
+                  "examples" : [ "\\.\\d$" ]
+                },
+                "dateformat" : {
+                  "type" : "string",
+                  "description" : "If the rotated filename suffix is a datetime, set it here.",
+                  "examples" : [ "-20060102" ]
+                }
+              }
             },
             "clean_inactive" : {
               "type" : "string",
@@ -6388,7 +6449,7 @@
               "description" : "When enabling this option, a file handler is closed immediately in case a file can't be found any more. In case the file shows up again later, harvesting will continue at the last known position after scan_frequency.",
               "examples" : [ "true" ]
             },
-            "close.reader.eof" : {
+            "close.reader.on_eof" : {
               "$ref" : "#/definitions/booleanOrString",
               "description" : "Closes the file handler as soon as the harvesters reaches the end of the file. By default this option is disabled. Note: Potential data loss. Make sure to read and understand the docs for this option.",
               "examples" : [ "false" ]
@@ -7381,6 +7442,10 @@
               "type" : "string",
               "description" : "The JWT Account Key file for Google."
             },
+            "auth.oauth2.google.delegated_account" : {
+              "type" : "string",
+              "description" : "Email of the delegated account used to create the credentials (usually an admin)."
+            },
             "request.url" : {
               "type" : "string",
               "description" : "The URL of the HTTP API. Required."
@@ -7412,6 +7477,26 @@
             "request.proxy_url" : {
               "type" : "string",
               "description" : "This specifies proxy configuration in the form of http[s]://<user>:<password>@<server name/ip>:<port>"
+            },
+            "request.keep_alive.disable" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "description" : "This specifies whether to disable keep-alives for HTTP end-points. Default: true.",
+              "examples" : [ "true" ]
+            },
+            "request.keep_alive.max_idle_connections" : {
+              "type" : "string",
+              "description" : "The maximum number of idle connections across all hosts. Zero means no limit. Default: 0.",
+              "examples" : [ "0" ]
+            },
+            "request.keep_alive.max_idle_connections_per_host" : {
+              "type" : "string",
+              "description" : "The maximum idle connections to keep per-host. If zero, defaults to two. Default: 0.",
+              "examples" : [ "0" ]
+            },
+            "request.keep_alive.idle_connection_timeout" : {
+              "type" : "string",
+              "description" : "The maximum amount of time an idle connection will remain idle before closing itself. Valid time units are ns, us, ms, s, m, h. Zero means no limit. Default: 0s.",
+              "examples" : [ "0s" ]
             },
             "request.retry.max_attempts" : {
               "type" : "string",
@@ -7473,7 +7558,7 @@
             },
             "cursor" : {
               "type" : "array",
-              "description" : "Cursor is a list of key value objects where arbitrary values are defined. The values are interpreted as value templates and a default template can be set. Cursor state is kept between input restarts and updated once all the events for a request are published.\nEach cursor entry is formed by:\n- A value template, which will define the value to store when evaluated.\n- A default template, which will define the value to store when the value template fails or is empty.\n- An ignore_empty_value flag. When set to true, will not store empty values, preserving the previous one, if any. Default: true.\nCan read state from: [.last_response.*, .first_event.*, .last_event.*].",
+              "description" : "Cursor is a list of key value objects where arbitrary values are defined. The values are interpreted as value templates and a default template can be set. Cursor state is kept between input restarts and updated once all the events for a request are published.\nIf no event is published, no cursor update is made. This can have implications on how cursor updates should be performed when the target API returns empty response sets.\nEach cursor entry is formed by:\n- A value template, which will define the value to store when evaluated.\n- A default template, which will define the value to store when the value template fails or is empty.\n- An ignore_empty_value flag. When set to true, will not store empty values, preserving the previous one, if any. Default: true.\nCan read state from: [.last_response.*, .first_event.*, .last_event.*].",
               "items" : {
                 "type" : "string",
                 "defaultSnippets" : [ {
@@ -7691,53 +7776,7 @@
               "description" : "Configuration options for Kerberos authentication.\nSee Kerberos for more information."
             },
             "parsers" : {
-              "type" : "array",
-              "description" : "This option expects a list of parsers that the payload has to go through.\nAvailable parsers:\n- ndjson\n- multiline",
-              "items" : {
-                "type" : "string"
-              }
-            },
-            "ndjson" : {
-              "type" : "object",
-              "description" : "These options make it possible for Filebeat to decode the payload as JSON messages.",
-              "properties" : {
-                "keys_under_root" : {
-                  "$ref" : "#/definitions/booleanOrString",
-                  "description" : "By default, the decoded JSON is placed under a \"json\" key in the output document. If you enable this setting, the keys are copied top level in the output document. The default is false.",
-                  "examples" : [ "false" ]
-                },
-                "overwrite_keys" : {
-                  "$ref" : "#/definitions/booleanOrString",
-                  "description" : "If keys_under_root and this setting are enabled, then the values from the decoded JSON object overwrite the fields that Filebeat normally adds (type, source, offset, etc.) in case of conflicts.",
-                  "examples" : [ "true" ]
-                },
-                "expand_keys" : {
-                  "$ref" : "#/definitions/booleanOrString",
-                  "description" : "If this setting is enabled, Filebeat will recursively de-dot keys in the decoded JSON, and expand them into a hierarchical object structure. For example, {\"a.b.c\": 123} would be expanded into {\"a\":{\"b\":{\"c\":123}}}. This setting should be enabled when the input is produced by an ECS logger.",
-                  "examples" : [ "true" ]
-                },
-                "add_error_key" : {
-                  "$ref" : "#/definitions/booleanOrString",
-                  "description" : "If this setting is enabled, Filebeat adds an \"error.message\" and \"error.type: json\" key in case of JSON unmarshalling errors or when a message_key is defined in the configuration but cannot be used.",
-                  "examples" : [ "true" ]
-                },
-                "message_key" : {
-                  "type" : "string",
-                  "description" : "An optional configuration setting that specifies a JSON key on which to apply the line filtering and multiline settings. If specified the key must be at the top level in the JSON object and the value associated with the key must be a string, otherwise no filtering or multiline aggregation will occur."
-                },
-                "document_id" : {
-                  "type" : "string",
-                  "description" : "Option configuration setting that specifies the JSON key to set the document id. If configured, the field will be removed from the original JSON document and stored in @metadata._id"
-                },
-                "ignore_decoding_error" : {
-                  "$ref" : "#/definitions/booleanOrString",
-                  "description" : "An optional configuration setting that specifies if JSON decoding errors should be logged or not. If set to true, errors will not be logged. The default is false.",
-                  "examples" : [ "false" ]
-                }
-              }
-            },
-            "multiline" : {
-              "$ref" : "#/definitions/multiline"
+              "$ref" : "#/definitions/parsers"
             }
           }
         }
@@ -8826,7 +8865,7 @@
           },
           "add_nomad_metadata" : {
             "type" : [ "object", "null" ],
-            "description" : "This functionality is in technical preview and may be changed or removed in a future release. Elastic will apply best effort to fix any issues, but features in technical preview are not subject to the support SLA of official GA features.",
+            "description" : "This functionality is in technical preview and may be changed or removed in a future release. Elastic will work to fix any issues, but features in technical preview are not subject to the support SLA of official GA features.",
             "properties" : {
               "when" : {
                 "$ref" : "#/definitions/condition"
@@ -9096,7 +9135,7 @@
           },
           "decode_csv_fields" : {
             "type" : [ "object", "null" ],
-            "description" : "This functionality is in technical preview and may be changed or removed in a future release. Elastic will apply best effort to fix any issues, but features in technical preview are not subject to the support SLA of official GA features.",
+            "description" : "This functionality is in technical preview and may be changed or removed in a future release. Elastic will work to fix any issues, but features in technical preview are not subject to the support SLA of official GA features.",
             "properties" : {
               "when" : {
                 "$ref" : "#/definitions/condition"
@@ -9176,7 +9215,7 @@
           },
           "decode_xml_wineventlog" : {
             "type" : [ "object", "null" ],
-            "description" : "This functionality is in technical preview and may be changed or removed in a future release. Elastic will apply best effort to fix any issues, but features in technical preview are not subject to the support SLA of official GA features.",
+            "description" : "This functionality is in technical preview and may be changed or removed in a future release. Elastic will work to fix any issues, but features in technical preview are not subject to the support SLA of official GA features.",
             "properties" : {
               "when" : {
                 "$ref" : "#/definitions/condition"
@@ -9340,7 +9379,7 @@
           },
           "extract_array" : {
             "type" : [ "object", "null" ],
-            "description" : "This functionality is in technical preview and may be changed or removed in a future release. Elastic will apply best effort to fix any issues, but features in technical preview are not subject to the support SLA of official GA features.",
+            "description" : "This functionality is in technical preview and may be changed or removed in a future release. Elastic will work to fix any issues, but features in technical preview are not subject to the support SLA of official GA features.",
             "properties" : {
               "when" : {
                 "$ref" : "#/definitions/condition"
@@ -9535,8 +9574,8 @@
             },
             "compression_level" : {
               "type" : "string",
-              "description" : "Set gzip compression level.",
-              "examples" : [ "0" ]
+              "description" : "Set gzip compression level. Set to 0 to disable compression. The default is 1.",
+              "examples" : [ "1" ]
             },
             "escape_html" : {
               "$ref" : "#/definitions/booleanOrString",
@@ -9882,11 +9921,6 @@
                   "examples" : [ "false" ]
                 }
               }
-            },
-            "worker" : {
-              "type" : "string",
-              "description" : "The number of concurrent load-balanced Kafka output workers.",
-              "examples" : [ "1" ]
             },
             "max_retries" : {
               "type" : "string",
@@ -10446,7 +10480,7 @@
             },
             "check_exists" : {
               "$ref" : "#/definitions/booleanOrString",
-              "description" : "Disable the check for an existing lifecycle policy. The default is true. If you disable this check, set setup.ilm.overwrite: true so the lifecycle policy can be installed.",
+              "description" : "Disable the check for an existing lifecycle policy. The default is true. If you set this option to false, lifecycle policy will not be installed, even if setup.ilm.overwrite is set to true.",
               "examples" : [ "true" ]
             },
             "overwrite" : {
@@ -11427,16 +11461,12 @@
     "ssl" : {
       "type" : "object",
       "description" : "HTTPS settings",
+      "$comment" : "see https://www.elastic.co/guide/en/beats/filebeat/7.17/configuration-ssl.html",
       "properties" : {
         "enabled" : {
           "$ref" : "#/definitions/booleanOrString",
           "description" : "Use SSL settings for HTTPS.",
           "examples" : [ "true" ]
-        },
-        "verification_mode" : {
-          "type" : "string",
-          "description" : "Controls the verification of certificates. Valid values are: * full, which verifies that the provided certificate is signed by a trusted authority (CA) and also verifies that the server's hostname (or IP address) matches the names identified within the certificate. * strict, which verifies that the provided certificate is signed by a trusted authority (CA) and also verifies that the server's hostname (or IP address) matches the names identified within the certificate. If the Subject Alternative Name is empty, it returns an error. * certificate, which verifies that the provided certificate is signed by a trusted authority (CA), but does not perform any hostname verification.  * none, which performs no verification of the server's certificate. This mode disables many of the security benefits of SSL/TLS and should only be used after very careful consideration. It is primarily intended as a temporary diagnostic mechanism when attempting to resolve TLS errors; its use in production environments is strongly discouraged. The default value is full.",
-          "examples" : [ "full", "strict", "certificate", "none" ]
         },
         "supported_protocols" : {
           "type" : "array",
@@ -11447,6 +11477,24 @@
               "body" : "TLSv1.1"
             } ]
           }
+        },
+        "cipher_suites" : {
+          "type" : "array",
+          "description" : "Configure cipher suites to be used for SSL connections",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "curve_types" : {
+          "type" : "array",
+          "description" : "Configure curve types for ECDHE-based cipher suites",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "ca_sha256" : {
+          "type" : "string",
+          "description" : "Configure a pin that can be used to do extra validation of the verified certificate chain, this allow you to ensure that a specific certificate is used to validate the chain of trust. The pin is a base64 encoded string of the SHA-256 fingerprint."
         },
         "certificate_authorities" : {
           "type" : "array",
@@ -11473,43 +11521,47 @@
           "description" : "Optional passphrase for decrypting the certificate key.",
           "examples" : [ "passphrase" ]
         },
-        "cipher_suites" : {
-          "type" : "array",
-          "description" : "Configure cipher suites to be used for SSL connections",
-          "items" : {
-            "type" : "string"
-          }
-        },
-        "curve_types" : {
-          "type" : "array",
-          "description" : "Configure curve types for ECDHE-based cipher suites",
-          "items" : {
-            "type" : "string"
-          }
+        "verification_mode" : {
+          "type" : "string",
+          "description" : "Controls the verification of certificates. Valid values are: * full, which verifies that the provided certificate is signed by a trusted authority (CA) and also verifies that the server's hostname (or IP address) matches the names identified within the certificate. * strict, which verifies that the provided certificate is signed by a trusted authority (CA) and also verifies that the server's hostname (or IP address) matches the names identified within the certificate. If the Subject Alternative Name is empty, it returns an error. * certificate, which verifies that the provided certificate is signed by a trusted authority (CA), but does not perform any hostname verification.  * none, which performs no verification of the server's certificate. This mode disables many of the security benefits of SSL/TLS and should only be used after very careful consideration. It is primarily intended as a temporary diagnostic mechanism when attempting to resolve TLS errors; its use in production environments is strongly discouraged. The default value is full.",
+          "examples" : [ "full", "strict", "certificate", "none" ]
         },
         "renegotiation" : {
           "type" : "string",
           "description" : "Configure what types of renegotiation are supported. Valid options are never, once, and freely. Default is never.",
           "examples" : [ "never", "once", "freely" ]
         },
-        "ca_sha256" : {
+        "client_authentication" : {
           "type" : "string",
-          "description" : "Configure a pin that can be used to do extra validation of the verified certificate chain, this allow you to ensure that a specific certificate is used to validate the chain of trust. The pin is a base64 encoded string of the SHA-256 fingerprint."
+          "description" : "The type of client authentication mode. When certificate_authorities is set, it defaults to required. Otherwise, it defaults to none.",
+          "examples" : [ "none", "optional", "required" ]
         }
       }
     },
     "multiline" : {
       "type" : "object",
       "description" : "Options that control how Filebeat deals with log messages that span multiple lines.",
+      "defaultSnippets" : [ {
+        "label" : "(multiline snippet)",
+        "body" : {
+          "type" : "${1|pattern,count|}",
+          "pattern" : "'${2:^\\[}'",
+          "negate" : "${3|true,false|}",
+          "match" : "${4|after,before|}"
+        }
+      } ],
       "properties" : {
         "type" : {
           "type" : "string",
           "description" : "Defines which aggregation method to use. The default is pattern. The other option is count which lets you aggregate constant number of lines.",
-          "examples" : [ "pattern", "count" ]
+          "defaultSnippets" : [ {
+            "label" : "(snippet)",
+            "body" : "${1|pattern,count|}"
+          } ]
         },
         "pattern" : {
           "type" : "string",
-          "description" : "Specifies the regular expression pattern to match. Note that the regexp patterns supported by Filebeat differ somewhat from the patterns supported by Logstash. See Regular expression support for a list of supported regexp patterns. Depending on how you configure other multiline options, lines that match the specified regular expression are considered either continuations of a previous line or the start of a new multiline event. You can set the negate option to negate the pattern."
+          "description" : "Specifies the regular expression pattern to match. Depending on how you configure other multiline options, lines that match the specified regular expression are considered either continuations of a previous line or the start of a new multiline event. You can set the negate option to negate the pattern."
         },
         "negate" : {
           "$ref" : "#/definitions/booleanOrString",
@@ -11518,8 +11570,11 @@
         },
         "match" : {
           "type" : "string",
-          "description" : "Specifies how Filebeat combines matching lines into an event. The settings are after or before. The behavior of these settings depends on what you specify for negate: Setting for negate Setting for match Result Example pattern: ^b false after Consecutive lines that match the pattern are appended to the previous line that doesn’t match. false before Consecutive lines that match the pattern are prepended to the next line that doesn’t match. true after Consecutive lines that don’t match the pattern are appended to the previous line that does match. true before Consecutive lines that don’t match the pattern are prepended to the next line that does match. The after setting is equivalent to previous in Logstash, and before is equivalent to next.",
-          "examples" : [ "after", "before" ]
+          "description" : " Specifies how Filebeat combines matching lines into an event. The settings are after or before. The behavior of these settings depends on what you specify for negate.",
+          "defaultSnippets" : [ {
+            "label" : "(snippet)",
+            "body" : "${1|after,before|}"
+          } ]
         },
         "flush_pattern" : {
           "type" : "string",
@@ -11544,6 +11599,73 @@
           "$ref" : "#/definitions/booleanOrString",
           "description" : "When set, multiline events are concatenated without a line separator.",
           "examples" : [ "false" ]
+        }
+      }
+    },
+    "parsers" : {
+      "description" : "This option expects a list of parsers that the log line has to go through.",
+      "type" : "array",
+      "items" : {
+        "type" : "object",
+        "maxProperties" : 1,
+        "properties" : {
+          "multiline" : {
+            "$ref" : "#/definitions/multiline"
+          },
+          "ndjson" : {
+            "description" : "These options make it possible for Filebeat to decode logs structured as JSON messages. Filebeat processes the logs line by line, so the JSON decoding only works if there is one JSON object per message.",
+            "type" : "object",
+            "properties" : {
+              "target" : {
+                "description" : "The name of the new JSON object that should contain the parsed key value pairs. If you leave it empty, the new keys will go under root.",
+                "type" : "string"
+              },
+              "overwrite_keys" : {
+                "description" : "Values from the decoded JSON object overwrite the fields that Filebeat normally adds (type, source, offset, etc.) in case of conflicts. Disable it if you want to keep previously added values.",
+                "$ref" : "#/definitions/booleanOrString",
+                "examples" : [ "true" ]
+              },
+              "expand_keys" : {
+                "description" : "If this setting is enabled, Filebeat will recursively de-dot keys in the decoded JSON, and expand them into a hierarchical object structure. For example, {\"a.b.c\": 123} would be expanded into {\"a\":{\"b\":{\"c\":123}}}. This setting should be enabled when the input is produced by an ECS logger.",
+                "$ref" : "#/definitions/booleanOrString",
+                "examples" : [ "true" ]
+              },
+              "add_error_key" : {
+                "description" : "If this setting is enabled, Filebeat adds an 'error.message' and 'error.type: json' key in case of JSON unmarshalling errors or when a message_key is defined in the configuration but cannot be used.",
+                "$ref" : "#/definitions/booleanOrString",
+                "examples" : [ "true" ]
+              },
+              "message_key" : {
+                "description" : "An optional configuration setting that specifies a JSON key on which to apply the line filtering and multiline settings. If specified the key must be at the top level in the JSON object and the value associated with the key must be a string, otherwise no filtering or multiline aggregation will occur.",
+                "type" : "string"
+              },
+              "document_id" : {
+                "description" : "Option configuration setting that specifies the JSON key to set the document id. If configured, the field will be removed from the original JSON document and stored in @metadata._id",
+                "type" : "string"
+              },
+              "ignore_decoding_error" : {
+                "description" : "An optional configuration setting that specifies if JSON decoding errors should be logged or not. If set to true, errors will not be logged. The default is false.",
+                "$ref" : "#/definitions/booleanOrString",
+                "examples" : [ "true" ]
+              }
+            }
+          },
+          "container" : {
+            "description" : "Use the container parser to extract information from containers log files. It parses lines into common message lines, extracting timestamps too.",
+            "type" : "object",
+            "properties" : {
+              "stream" : {
+                "description" : "Reads from the specified streams only: all, stdout or stderr. The default is all.",
+                "type" : "string",
+                "examples" : [ "all", "stdout", "stderr" ]
+              },
+              "format" : {
+                "description" : "Use the given format when parsing logs: auto, docker or cri. The default is auto, it will automatically detect the format. To disable autodetection set any of the other options.",
+                "type" : "string",
+                "examples" : [ "auto", "docker", "cri" ]
+              }
+            }
+          }
         }
       }
     },
