@@ -1,6 +1,21 @@
 # Change Log
 
 
+## 1.3.1
+
+- elasticsearch index template completion:
+  - add 'data_stream' option
+  - add 'runtime' option in 'dynamic_templates'
+  - add 'specific to legacy index templates' description for concerned root options
+- logstash pipeline configuration completion:
+  - fix documentation & completion for 'action' option in elasticsearch output
+- filebeat completion:
+  - complete ssl options
+  - add 'ssl' option to all missing inputs/outputs/modules
+  - add various missing properties for inputs/outputs/modules
+  - specifically add a complete and effective list of options to filestream input (especially for 'parsers' option)
+
+
 ## 1.3.0
 
 - add support for Logstash 7.17 completion
