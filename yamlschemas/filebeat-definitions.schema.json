@@ -3672,7 +3672,20 @@
                   "$ref" : "#/definitions/ssl"
                 }
               }
-            },
+            }
+          }
+        }
+      }, {
+        "if" : {
+          "properties" : {
+            "module" : {
+              "const" : "mongodb"
+            }
+          }
+        },
+        "then" : {
+          "description" : "Mongodb Module",
+          "properties" : {
             "log" : {
               "type" : "object",
               "description" : "Logs",
@@ -11006,7 +11019,7 @@
         "description" : "add new module",
         "suggestionKind" : 9,
         "body" : {
-          "module" : "${1|system,activemq,apache,auditd,aws,awsfargate,azure,barracuda,bluecoat,cef,checkpoint,cisco,coredns,crowdstrike,cyberark,cyberarkpas,cylance,elasticsearch,envoyproxy,f5,fortinet,gcp,google_workspace,gsuite,haproxy,ibmmq,icinga,iis,imperva,infoblox,iptables,juniper,kafka,kibana,logstash,microsoft,misp,mssql,mysql,mysqlenterprise,nats,netflow,netscout,nginx,o365,okta,oracle,osquery,panw,pensando,postgresql,proofpoint,rabbitmq,radware,redis,santa,snort,snyk,sonicwall,sophos,squid,suricata,threatintel,tomcat,traefik,zeek,zookeeper,zoom,zscaler|}"
+          "module" : "${1|system,activemq,apache,auditd,aws,awsfargate,azure,barracuda,bluecoat,cef,checkpoint,cisco,coredns,crowdstrike,cyberark,cyberarkpas,cylance,elasticsearch,envoyproxy,f5,fortinet,gcp,google_workspace,gsuite,haproxy,ibmmq,icinga,iis,imperva,infoblox,iptables,juniper,kafka,kibana,logstash,microsoft,misp,mongodb,mssql,mysql,mysqlenterprise,nats,netflow,netscout,nginx,o365,okta,oracle,osquery,panw,pensando,postgresql,proofpoint,rabbitmq,radware,redis,santa,snort,snyk,sonicwall,sophos,squid,suricata,threatintel,tomcat,traefik,zeek,zookeeper,zoom,zscaler|}"
         }
       } ],
       "items" : {
@@ -11018,7 +11031,7 @@
       "properties" : {
         "module" : {
           "type" : "string",
-          "examples" : [ "system", "activemq", "apache", "auditd", "aws", "awsfargate", "azure", "barracuda", "bluecoat", "cef", "checkpoint", "cisco", "coredns", "crowdstrike", "cyberark", "cyberarkpas", "cylance", "elasticsearch", "envoyproxy", "f5", "fortinet", "gcp", "google_workspace", "gsuite", "haproxy", "ibmmq", "icinga", "iis", "imperva", "infoblox", "iptables", "juniper", "kafka", "kibana", "logstash", "microsoft", "misp", "mssql", "mysql", "mysqlenterprise", "nats", "netflow", "netscout", "nginx", "o365", "okta", "oracle", "osquery", "panw", "pensando", "postgresql", "proofpoint", "rabbitmq", "radware", "redis", "santa", "snort", "snyk", "sonicwall", "sophos", "squid", "suricata", "threatintel", "tomcat", "traefik", "zeek", "zookeeper", "zoom", "zscaler" ],
+          "examples" : [ "system", "activemq", "apache", "auditd", "aws", "awsfargate", "azure", "barracuda", "bluecoat", "cef", "checkpoint", "cisco", "coredns", "crowdstrike", "cyberark", "cyberarkpas", "cylance", "elasticsearch", "envoyproxy", "f5", "fortinet", "gcp", "google_workspace", "gsuite", "haproxy", "ibmmq", "icinga", "iis", "imperva", "infoblox", "iptables", "juniper", "kafka", "kibana", "logstash", "microsoft", "misp", "mongodb", "mssql", "mysql", "mysqlenterprise", "nats", "netflow", "netscout", "nginx", "o365", "okta", "oracle", "osquery", "panw", "pensando", "postgresql", "proofpoint", "rabbitmq", "radware", "redis", "santa", "snort", "snyk", "sonicwall", "sophos", "squid", "suricata", "threatintel", "tomcat", "traefik", "zeek", "zookeeper", "zoom", "zscaler" ],
           "description" : "module type"
         }
       },
@@ -11856,7 +11869,7 @@
                             "description" : "add new config module",
                             "suggestionKind" : 9,
                             "body" : {
-                              "module" : "${1|system,activemq,apache,auditd,aws,awsfargate,azure,barracuda,bluecoat,cef,checkpoint,cisco,coredns,crowdstrike,cyberark,cyberarkpas,cylance,elasticsearch,envoyproxy,f5,fortinet,gcp,google_workspace,gsuite,haproxy,ibmmq,icinga,iis,imperva,infoblox,iptables,juniper,kafka,kibana,logstash,microsoft,misp,mssql,mysql,mysqlenterprise,nats,netflow,netscout,nginx,o365,okta,oracle,osquery,panw,pensando,postgresql,proofpoint,rabbitmq,radware,redis,santa,snort,snyk,sonicwall,sophos,squid,suricata,threatintel,tomcat,traefik,zeek,zookeeper,zoom,zscaler|}"
+                              "module" : "${1|system,activemq,apache,auditd,aws,awsfargate,azure,barracuda,bluecoat,cef,checkpoint,cisco,coredns,crowdstrike,cyberark,cyberarkpas,cylance,elasticsearch,envoyproxy,f5,fortinet,gcp,google_workspace,gsuite,haproxy,ibmmq,icinga,iis,imperva,infoblox,iptables,juniper,kafka,kibana,logstash,microsoft,misp,mongodb,mssql,mysql,mysqlenterprise,nats,netflow,netscout,nginx,o365,okta,oracle,osquery,panw,pensando,postgresql,proofpoint,rabbitmq,radware,redis,santa,snort,snyk,sonicwall,sophos,squid,suricata,threatintel,tomcat,traefik,zeek,zookeeper,zoom,zscaler|}"
                             }
                           }, {
                             "label" : "- (input item)",
