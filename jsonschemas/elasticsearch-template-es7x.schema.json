@@ -304,35 +304,30 @@
                 "properties": {
                   "match": {
                     "type": "string",
-                    "default": "",
                     "examples": [
                       "long_*"
                     ]
                   },
                   "unmatch": {
                     "type": "string",
-                    "default": "",
                     "examples": [
                       "*_text"
                     ]
                   },
                   "path_match": {
                     "type": "string",
-                    "default": "",
                     "examples": [
                       "name.*"
                     ]
                   },
                   "path_unmatch": {
                     "type": "string",
-                    "default": "",
                     "examples": [
                       "*.name"
                     ]
                   },
                   "match_pattern": {
                     "type": "string",
-                    "default": "",
                     "examples": [
                       "regex"
                     ]
@@ -373,8 +368,11 @@
           "items": {
             "type": "string",
             "examples": [
+              "strict_date_time",
+              "strict_date_optional_time",
               "strict_date",
               "epoch_millis",
+              "epoch_second",
               "yyyy-MM-dd"
             ]
           }
@@ -875,7 +873,7 @@
       }
     },
     "dynamic": {
-      "$comment": "disable/enable dynamic field mapping at index level and field level",
+      "description": "disable/enable dynamic field mapping at index level and field level",
       "default": true,
       "anyOf": [
         {
