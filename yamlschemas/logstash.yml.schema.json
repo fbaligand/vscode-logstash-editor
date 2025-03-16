@@ -170,6 +170,15 @@
 				"true"
 			]
 		},
+		"config.field_reference.escape_style": {
+			"type": "string",
+			"description": "Provides a way to reference fields that contain field reference special characters [ and ].\nThis feature is in technical preview and may change in the future.\nCurrent options are:\npercent: URI-style %+HH hexadecimal encoding of UTF-8 bytes ([ → %5B; ] → %5D)\nampersand: HTML-style &#+DD+; encoding of decimal Unicode code-points ([ → &#91;; ] → &#93;)\nnone: field names containing special characters cannot be referenced.\nSince Logstash 8.3",
+			"default": "none",
+			"examples": [
+				"percent",
+				"ampersand"
+			]
+		},
 		"modules": {
 			"type": "array",
 			"description": "When configured, modules must be in the nested YAML structure described above this table. There is no default value.",
@@ -274,6 +283,12 @@
 				"1024mb"
 			]
 		},
+		"dead_letter_queue.storage_policy": {
+			"type": "string",
+			"description": "Defines the action to take when the dead_letter_queue.max_bytes setting is reached:\ndrop_newer stops accepting new values that would push the file size over the limit, and drop_older removes the oldest events to make space for new ones.\nSince Logstash 8.3",
+			"default": "drop_newer",
+			"examples": ["drop_older"]
+		},
 		"path.dead_letter_queue": {
 			"type": "string",
 			"description": "The directory path where the data files will be stored for the dead-letter queue.",
@@ -284,7 +299,7 @@
 		},
 		"http.host": {
 			"type": "string",
-			"description": "The bind address for the metrics REST endpoint. Since Logstash 7.16, use 'api.http.host' setting instead.",
+			"description": "The bind address for the metrics REST endpoint.\nSince Logstash 7.16, use 'api.http.host' setting instead.",
 			"default": "127.0.0.1",
 			"examples": [
 				"127.0.0.1"
@@ -292,14 +307,14 @@
 		},
 		"http.port": {
 			"$ref": "#/definitions/integerOrString",
-			"description": "The bind port for the metrics REST endpoint. Since Logstash 7.16, use 'api.http.port' setting instead.",
+			"description": "The bind port for the metrics REST endpoint.\nSince Logstash 7.16, use 'api.http.port' setting instead.",
 			"default": "9600",
 			"examples": [
 				"9600"
 			]
 		},
 		"api.enabled": {
-			"type": "string",
+			"$ref": "#/definitions/booleanOrString",
 			"description": "The HTTP API is enabled by default. It can be disabled, but features that rely on it will not work as intended.\nSince Logstash 7.16",
 			"default": "true",
 			"examples": [
@@ -345,6 +360,11 @@
 				"password"
 			]
 		},
+		"api.ssl.supported_protocols": {
+			"type": "string",
+			"description": "List of allowed SSL/TLS versions to use when establishing a secure connection. The availability of protocols depends on the JVM version. Certain protocols are disabled by default and need to be enabled manually by changing jdk.tls.disabledAlgorithms in the $JDK_HOME/conf/security/java.security configuration file.\nPossible values are: TLSv1, TLSv1.1, TLSv1.2 and TLSv1.3.\nSince Logstash 8.10",
+			"examples": ["TLSv1", "TLSv1.1", "TLSv1.2", "TLSv1.3"]
+		},
 		"api.auth.type": {
 			"type": "string",
 			"description": "Set to 'basic' to require HTTP Basic auth on the API using the credentials supplied with api.auth.basic.username and api.auth.basic.password.\nSince Logstash 7.16",
@@ -366,6 +386,12 @@
 			"examples": [
 				"password"
 			]
+		},
+		"api.auth.basic.password_policy.mode": {
+			"type": "string",
+			"description": "Raises either WARN or ERROR message when password requirements are not met.\nIgnored unless api.auth.type is set to basic.\nSince Logstash 8.3",
+			"default": "WARN",
+			"examples": ["ERROR"]
 		},
 		"log.level": {
 			"type": "string",
@@ -389,6 +415,12 @@
 				"json"
 			]
 		},
+		"log.format.json.fix_duplicate_message_fields": {
+			"$ref": "#/definitions/booleanOrString",
+			"description": "When the log format is json avoid collision of field names in log lines.\nSince Logstash 8.14",
+			"default": "false",
+			"examples": ["true"]
+		},
 		"path.logs": {
 			"type": "string",
 			"description": "The directory where Logstash will write its log to.",
@@ -408,6 +440,24 @@
 		"path.plugins": {
 			"type": "string",
 			"description": "Where to find custom plugins. You can specify this setting multiple times to include multiple paths. Plugins are expected to be in a specific directory hierarchy: PATH/logstash/TYPE/NAME.rb where TYPE is inputs, filters, outputs, or codecs, and NAME is the name of the plugin. Default value is platform-specific, see Logstash Directory Layout."
+		},
+		"allow_superuser": {
+			"$ref": "#/definitions/booleanOrString",
+			"description": "Setting to true to allow or false to block running Logstash as a superuser.\nSince Logstash 8.3",
+			"default": "true",
+			"examples": ["false"]
+		},
+		"event_api.tags.illegal": {
+			"type": "string",
+			"description": "When set to warn, allow illegal value assignment to the reserved tags field.\nWhen set to rename, Logstash events can’t be created with an illegal value in tags. This value will be moved to _tags and a _tagsparsefailure tag is added to indicate the illegal operation. Doing set operation with illegal value will throw exception.\nSetting this flag to warn is deprecated and will be removed in a future release.\nSince Logstash 8.7",
+			"default": "rename",
+			"examples": ["warn", "rename"]
+		},
+		"pipeline.buffer.type": {
+			"type": "string",
+			"description": "Determine where to allocate memory buffers, for plugins that leverage them. Default to direct, optionally can be switched to heap to select Java heap space.\nSince Logstash 8.14",
+			"default": "direct",
+			"examples": ["heap"]
 		}
 	}
 }

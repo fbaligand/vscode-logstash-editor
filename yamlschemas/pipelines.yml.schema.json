@@ -271,6 +271,14 @@
 					"5000"
 				]
 			},
+			"dead_letter_queue.storage_policy": {
+				"type": "string",
+				"description": "Defines the action to take when the dead_letter_queue.max_bytes setting is reached:\ndrop_newer stops accepting new values that would push the file size over the limit, and drop_older removes the oldest events to make space for new ones.\nSince Logstash 8.3",
+				"default": "drop_newer",
+				"examples": [
+					"drop_older"
+				]
+			},
 			"path.dead_letter_queue": {
 				"type": "string",
 				"description": "The directory path where the data files will be stored for the dead-letter queue.  \nDefault value is: ${path.data}/dead_letter_queue",
