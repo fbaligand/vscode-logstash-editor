@@ -1,10 +1,7 @@
 import * as vscode from 'vscode';
 import { snippets68 } from './snippets68';
-import { snippets72 } from './snippets72';
-import { snippets75 } from './snippets75';
-import { snippets79 } from './snippets79';
-import { snippets712 } from './snippets712';
 import { snippets717 } from './snippets717';
+import { snippets814 } from './snippets814';
 
 
 // CONSTANTS //
@@ -20,11 +17,8 @@ const logstashVersionConfig = extension && extension.packageJSON.contributes.con
 
 const snippetsByVersion: Record<string, Record<string, vscode.CompletionItem[]>> = {
 	'6.8': snippets68,
-	'7.2': snippets72,
-	'7.5': snippets75,
-	'7.9': snippets79,
-	'7.12': snippets712,
-	'7.17': snippets717
+	'7.17': snippets717,
+	'8.14': snippets814
 };
 
 /** Current snippets base, for configured Logstash version */
