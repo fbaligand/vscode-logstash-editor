@@ -105,13 +105,11 @@
 						"type": "string",
 						"enum": [
 							"6.8",
-							"7.2",
-							"7.5",
-							"7.9",
-							"7.12",
-							"7.17"
+							"7.17",
+							"8.14",
+							"latest"
 						],
-						"default": "7.17",
+						"default": "latest",
 						"description": "Logstash Version",
 						"scope": "resource"
 					}

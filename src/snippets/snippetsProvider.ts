@@ -29,7 +29,16 @@ let snippetsBase: Record<string, vscode.CompletionItem[]>;
 
 /** Get and return configured Logstash version */
 function getLogstashVersion() {
-	return  vscode.workspace.getConfiguration().get(LOGSTASH_VERSION_CONFIG_NAME, logstashVersionConfig.default);
+	const version = vscode.workspace.getConfiguration().get(LOGSTASH_VERSION_CONFIG_NAME, logstashVersionConfig.default);
+	if (version !== '7.17' && version.startsWith('7')) {
+		return '7.17';
+	}
+	else if (version === 'latest') {
+		return '8.14';
+	}
+	else {
+		return version;
+	}
 }
 
 // EXPORTS //
