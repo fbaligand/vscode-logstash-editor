@@ -89,6 +89,10 @@
 				"url": "./yamlschemas/filebeat.yml.schema.json"
 			},
 			{
+				"fileMatch": "filebeat-*.yml",
+				"url": "./yamlschemas/filebeat.yml.schema.json"
+			},
+			{
 				"fileMatch": "filebeat.config.inputs.yml",
 				"url": "./yamlschemas/filebeat.config.inputs.yml.schema.json"
 			},
