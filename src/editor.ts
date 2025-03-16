@@ -15,6 +15,7 @@ const QUOTE_BLOCK_START_REGEX = /=>\s*('(?:[^'\\]|\\.)*|"(?:[^"\\]|\\.)*)$/;
 const QUOTE_BLOCK_END_REGEX = /((?:[^'\\]|\\.)*'|(?:[^"\\]|\\.)*")\s*$/;
 const OPEN_PARENTHESIS_REGEX = /\{/g;
 const CLOSED_PARENTHESIS_REGEX = /\}/g;
+const LOGSTASH_ENABLE_DEFAULT_VSCODE_COMPLETION_CONFIG_NAME = 'logstash.enableDefaultVSCodeCompletion';
 
 /**
  * INTERNAL CLASSES AND INTERFACES
@@ -177,10 +178,16 @@ function createCompletionItemSnippet(baseCompletionItem: vscode.CompletionItem, 
  * create return a 'No suggestions' item list, when no completion is available
  */
 function getNoSuggestionCompletionItems(): vscode.CompletionItem[] {
-	const noSuggestionCompletionItem = new vscode.CompletionItem('No suggestions.');
-	noSuggestionCompletionItem.insertText = '';
-	noSuggestionCompletionItem.filterText = '';
-	return [ noSuggestionCompletionItem ];
+	const enableDefaultVSCodeCompletion = vscode.workspace.getConfiguration().get(LOGSTASH_ENABLE_DEFAULT_VSCODE_COMPLETION_CONFIG_NAME, false);
+	if (enableDefaultVSCodeCompletion) {
+		return [];
+	}
+	else {
+		const noSuggestionCompletionItem = new vscode.CompletionItem('No suggestions.');
+		noSuggestionCompletionItem.insertText = '';
+		noSuggestionCompletionItem.filterText = '';
+		return [noSuggestionCompletionItem];
+	}
 }
 
 /**

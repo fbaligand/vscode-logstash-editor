@@ -112,6 +112,11 @@
 						"default": "latest",
 						"description": "Logstash Version",
 						"scope": "resource"
+					},
+					"logstash.enableDefaultVSCodeCompletion": {
+						"type":"boolean",
+						"default": false,
+						"description": "Enable default VSCode completion for Logstash configuration files"
 					}
 				}
 			}
