@@ -47,24 +47,32 @@
 		],
 		"jsonValidation": [
 			{
-				"fileMatch": "*elasticsearch-template.json",
+				"fileMatch": "*elasticsearch-template-es8x*.json",
+				"url": "./jsonschemas/elasticsearch-template-es8x.schema.json"
+			},
+			{
+				"fileMatch": "*elasticsearch-template-es7x*.json",
 				"url": "./jsonschemas/elasticsearch-template-es7x.schema.json"
 			},
 			{
-				"fileMatch": "*elasticsearch-component-template.json",
-				"url": "./jsonschemas/elasticsearch-template-es7x.schema.json"
-			},
-			{
-				"fileMatch": "*elasticsearch-template-es7x.json",
-				"url": "./jsonschemas/elasticsearch-template-es7x.schema.json"
-			},
-			{
-				"fileMatch": "*elasticsearch-component-template-es7x.json",
-				"url": "./jsonschemas/elasticsearch-template-es7x.schema.json"
-			},
-			{
-				"fileMatch": "*elasticsearch-template-es6x.json",
+				"fileMatch": "*elasticsearch-template-es6x*.json",
 				"url": "./jsonschemas/elasticsearch-template-es6x.schema.json"
+			},
+			{
+				"fileMatch": "*index-template*.json",
+				"url": "./jsonschemas/elasticsearch-template-es8x.schema.json"
+			},
+			{
+				"fileMatch": "*component-template*.json",
+				"url": "./jsonschemas/elasticsearch-component-template-es8x.schema.json"
+			},
+			{
+				"fileMatch": "*/_index_templates/*.json",
+				"url": "./jsonschemas/elasticsearch-template-es8x.schema.json"
+			},
+			{
+				"fileMatch": "*/_component_templates/*.json",
+				"url": "./jsonschemas/elasticsearch-component-template-es8x.schema.json"
 			}
 		],
 		"yamlValidation": [
