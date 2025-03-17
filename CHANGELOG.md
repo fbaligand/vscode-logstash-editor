@@ -1,6 +1,27 @@
 # Change Log
 
 
+## 1.4.0
+
+- add support for Logstash 8.14 completion
+- add support for Filebeat 8.14 completion
+- add support for Elasticsearch 8.14 index template completion
+- add support for Elasticsearch component template completion
+- Elasticsearch completion is now based on [elasticsearch-specification](https://github.com/elastic/elasticsearch-specification/)
+- add a new 'latest' value for 'logstash.version' setting. It is a shortcut that points to the latest supported Logstash version
+- remove support for Logstash 7.2, 7.5, 7.9 and 7.12 completion (keep only 6.8, 7.17 and 8.14)
+- add new `logstash.enableDefaultVSCodeCompletion` setting (fix [#9](https://github.com/fbaligand/vscode-logstash-editor/issues/9)) to enable default VSCode completion when the extension does not have suggestions to provide
+- add support for new Elasticsearch index templates filenames patterns:
+  - `*elasticsearch-template-es8x*.json`
+  - `*index-template*.json`
+  - `*/_index_templates/*.json`
+- add support for new Elasticsearch component templates filenames patterns:
+  - `*component-template*.json`
+  - `*/_component_templates/*.json`
+- add support for new Filebeat configuration filenames patterns:
+  - `filebeat-*.yml`
+
+
 ## 1.3.1
 
 - elasticsearch index template completion:

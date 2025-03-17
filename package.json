@@ -2,7 +2,7 @@
 	"name": "vscode-logstash-editor",
 	"displayName": "Logstash Editor",
 	"description": "Provide completion, documentation and auto-formatting for Logstash pipeline configuration files and Elasticsearch index template json files",
-	"version": "1.3.1",
+	"version": "1.4.0",
 	"author": {
 		"name": "Fabien Baligand",
 		"email": "fbaligand@gmail.com"
@@ -18,16 +18,22 @@
 		"url": "https://github.com/fbaligand/vscode-logstash-editor.git"
 	},
 	"engines": {
-		"vscode": "^1.52.0"
+		"vscode": "^1.63.0"
 	},
 	"main": "./out/extension.js",
 	"icon": "images/icon-logstash.png",
 	"categories": [
-		"Programming Languages"
+		"Programming Languages",
+		"Linters",
+		"Snippets",
+		"Formatters"
 	],
 	"keywords": [
 		"logstash",
-		"completion"
+		"filebeat",
+		"elasticsearch",
+		"completion",
+		"autocompletion"
 	],
 	"contributes": {
 		"languages": [
@@ -126,7 +132,7 @@
 						"scope": "resource"
 					},
 					"logstash.enableDefaultVSCodeCompletion": {
-						"type":"boolean",
+						"type": "boolean",
 						"default": false,
 						"description": "Enable default VSCode completion for Logstash configuration files"
 					}
