@@ -6743,16 +6743,6 @@
               "type" : "string",
               "description" : "The datasets to collect from the API. This can be one of \"all\", \"users\" or \"devices\", or may be left empty for the default behavior which is to collect all entities. When the dataset is set to \"devices\", some user entity data is collected in order to populate the registered users and registered owner fields for each device."
             },
-            "sync_interval" : {
-              "type" : "string",
-              "description" : "The interval in which full synchronizations should occur. The interval must be longer than the update interval (update_interval) Expressed as a duration string (e.g., 1m, 3h, 24h). Defaults to 24h (24 hours).",
-              "examples" : [ "24h" ]
-            },
-            "update_interval" : {
-              "type" : "string",
-              "description" : "The interval in which incremental updates should occur. The interval must be shorter than the full synchronization interval (sync_interval). Expressed as a duration string (e.g., 1m, 3h, 24h). Defaults to 15m (15 minutes).",
-              "examples" : [ "15m" ]
-            },
             "login_endpoint" : {
               "type" : "string",
               "description" : "Override the default authentication login endpoint. Only change if directed to do so. Altering this value will also require a change to login_scopes."
@@ -6802,20 +6792,6 @@
             "collect_device_details" : {
               "type" : "string",
               "description" : "Whether the input should collect device and device-associated user details from the Okta API. Device details must be activated on the Okta account for this option."
-            },
-            "dataset" : {
-              "type" : "string",
-              "description" : "The datasets to collect from the API. This can be one of \"all\", \"users\" or \"devices\", or may be left empty for the default behavior which is to collect all entities. When the dataset is set to \"devices\", some user entity data is collected in order to populate the registered users and registered owner fields for each device."
-            },
-            "sync_interval" : {
-              "type" : "string",
-              "description" : "The interval in which full synchronizations should occur. The interval must be longer than the update interval (update_interval) Expressed as a duration string (e.g., 1m, 3h, 24h). Defaults to 24h (24 hours).",
-              "examples" : [ "24h" ]
-            },
-            "update_interval" : {
-              "type" : "string",
-              "description" : "The interval in which incremental updates should occur. The interval must be shorter than the full synchronization interval (sync_interval). Expressed as a duration string (e.g., 1m, 3h, 24h). Defaults to 15m (15 minutes).",
-              "examples" : [ "15m" ]
             }
           }
         }
