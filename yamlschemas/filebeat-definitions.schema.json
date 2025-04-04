@@ -4692,13 +4692,11 @@
               }
             },
             "kerberos" : {
-              "type" : "object",
-              "properties" : {
-                "enabled" : {
-                  "$ref" : "#/definitions/booleanOrString",
-                  "examples" : [ "false" ]
-                }
-              }
+              "$ref" : "#/definitions/kerberos"
+            },
+            "enabled" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "examples" : [ "false" ]
             },
             "modbus" : {
               "type" : "object",
@@ -5783,8 +5781,7 @@
               }
             },
             "kerberos" : {
-              "type" : "string",
-              "description" : "Configuration options for Kerberos authentication.\nSee Kerberos for more information."
+              "$ref" : "#/definitions/kerberos"
             }
           }
         }
@@ -9719,40 +9716,8 @@
               "description" : "Use SSL settings for HTTPS.",
               "$ref" : "#/definitions/ssl"
             },
-            "kerberos.enabled" : {
-              "$ref" : "#/definitions/booleanOrString",
-              "description" : "Enable Kerberos support. Kerberos is automatically enabled if any Kerberos setting is set.",
-              "examples" : [ "true" ]
-            },
-            "kerberos.auth_type" : {
-              "type" : "string",
-              "description" : "Authentication type to use with Kerberos. Available options: keytab, password.",
-              "examples" : [ "password" ]
-            },
-            "kerberos.keytab" : {
-              "type" : "string",
-              "description" : "Path to the keytab file. It is used when auth_type is set to keytab.",
-              "examples" : [ "/etc/elastic.keytab" ]
-            },
-            "kerberos.config_path" : {
-              "type" : "string",
-              "description" : "Path to the Kerberos configuration.",
-              "examples" : [ "/etc/krb5.conf" ]
-            },
-            "kerberos.username" : {
-              "type" : "string",
-              "description" : "Name of the Kerberos user.",
-              "examples" : [ "elastic" ]
-            },
-            "kerberos.password" : {
-              "type" : "string",
-              "description" : "Password of the Kerberos user. It is used when auth_type is set to password.",
-              "examples" : [ "changeme" ]
-            },
-            "kerberos.realm" : {
-              "type" : "string",
-              "description" : "Kerberos realm.",
-              "examples" : [ "ELASTIC" ]
+            "kerberos" : {
+              "$ref" : "#/definitions/kerberos"
             }
           }
         },
@@ -10038,50 +10003,8 @@
               "description" : "Use SSL settings for HTTPS.",
               "$ref" : "#/definitions/ssl"
             },
-            "kerberos.enabled" : {
-              "$ref" : "#/definitions/booleanOrString",
-              "description" : "Enable Kerberos support. Kerberos is automatically enabled if any Kerberos setting is set.",
-              "examples" : [ "true" ]
-            },
-            "kerberos.auth_type" : {
-              "type" : "string",
-              "description" : "Authentication type to use with Kerberos. Available options: keytab, password.",
-              "examples" : [ "password" ]
-            },
-            "kerberos.keytab" : {
-              "type" : "string",
-              "description" : "Path to the keytab file. It is used when auth_type is set to keytab.",
-              "examples" : [ "/etc/security/keytabs/kafka.keytab" ]
-            },
-            "kerberos.config_path" : {
-              "type" : "string",
-              "description" : "Path to the Kerberos configuration.",
-              "examples" : [ "/etc/krb5.conf" ]
-            },
-            "kerberos.service_name" : {
-              "type" : "string",
-              "description" : "The service name. Service principal name is contructed from service_name/hostname@realm.",
-              "examples" : [ "kafka" ]
-            },
-            "kerberos.username" : {
-              "type" : "string",
-              "description" : "Name of the Kerberos user.",
-              "examples" : [ "elastic" ]
-            },
-            "kerberos.password" : {
-              "type" : "string",
-              "description" : "Password of the Kerberos user. It is used when auth_type is set to password.",
-              "examples" : [ "changeme" ]
-            },
-            "kerberos.realm" : {
-              "type" : "string",
-              "description" : "Kerberos realm.",
-              "examples" : [ "ELASTIC" ]
-            },
-            "kerberos.enable_krb5_fast" : {
-              "$ref" : "#/definitions/booleanOrString",
-              "description" : "Enables Kerberos FAST authentication. This may conflict with certain Active Directory configurations.",
-              "examples" : [ "false" ]
+            "kerberos" : {
+              "$ref" : "#/definitions/kerberos"
             }
           }
         },
@@ -10782,40 +10705,8 @@
                   "description" : "Use SSL settings for HTTPS.",
                   "$ref" : "#/definitions/ssl"
                 },
-                "kerberos.enabled" : {
-                  "$ref" : "#/definitions/booleanOrString",
-                  "description" : "Enable Kerberos support. Kerberos is automatically enabled if any Kerberos setting is set.",
-                  "examples" : [ "true" ]
-                },
-                "kerberos.auth_type" : {
-                  "type" : "string",
-                  "description" : "Authentication type to use with Kerberos. Available options: keytab, password.",
-                  "examples" : [ "password" ]
-                },
-                "kerberos.keytab" : {
-                  "type" : "string",
-                  "description" : "Path to the keytab file. It is used when auth_type is set to keytab.",
-                  "examples" : [ "/etc/elastic.keytab" ]
-                },
-                "kerberos.config_path" : {
-                  "type" : "string",
-                  "description" : "Path to the Kerberos configuration.",
-                  "examples" : [ "/etc/krb5.conf" ]
-                },
-                "kerberos.username" : {
-                  "type" : "string",
-                  "description" : "Name of the Kerberos user.",
-                  "examples" : [ "elastic" ]
-                },
-                "kerberos.password" : {
-                  "type" : "string",
-                  "description" : "Password of the Kerberos user. It is used when auth_type is set to password.",
-                  "examples" : [ "changeme" ]
-                },
-                "kerberos.realm" : {
-                  "type" : "string",
-                  "description" : "Kerberos realm.",
-                  "examples" : [ "ELASTIC" ]
+                "kerberos" : {
+                  "$ref" : "#/definitions/kerberos"
                 },
                 "metrics.period" : {
                   "type" : "string",
@@ -11748,6 +11639,53 @@
               }
             }
           }
+        }
+      }
+    },
+    "kerberos" : {
+      "description" : "Configuration options for Kerberos authentication.",
+      "type" : "object",
+      "properties" : {
+        "enabled" : {
+          "$ref" : "#/definitions/booleanOrString",
+          "description" : "Enable Kerberos authentication.",
+          "default" : [ "true" ]
+        },
+        "auth_type" : {
+          "type" : "string",
+          "description" : "There are two options to authenticate with Kerberos KDC: password and keytab.\npassword expects the principal name and its password.\nWhen choosing keytab, you have to specify a principal name and a path to a keytab. The keytab must contain the keys of the selected principal. Otherwise, authentication will fail.",
+          "examples" : [ "password", "keytab" ]
+        },
+        "config_path" : {
+          "type" : "string",
+          "description" : "You need to set the path to the krb5.conf, so Filebeat can find the Kerberos KDC to retrieve a ticket.",
+          "examples" : [ "/etc/krb5.conf" ]
+        },
+        "username" : {
+          "type" : "string",
+          "description" : "Name of the principal used to connect to the output."
+        },
+        "password" : {
+          "type" : "string",
+          "description" : "If you configured password for auth_type, you have to provide a password for the selected principal."
+        },
+        "keytab" : {
+          "type" : "string",
+          "description" : "If you configured keytab for auth_type, you have to provide the path to the keytab of the selected principal.",
+          "examples" : [ "/path/to/file.keytab" ]
+        },
+        "service_name" : {
+          "type" : "string",
+          "description" : "This option can only be configured for Kafka. It is the name of the Kafka service, usually kafka."
+        },
+        "realm" : {
+          "type" : "string",
+          "description" : "Name of the realm where the output resides."
+        },
+        "enable_krb5_fast" : {
+          "$ref" : "#/definitions/booleanOrString",
+          "description" : "Enable Kerberos FAST authentication. This may conflict with some Active Directory installations. The default is false.",
+          "default" : "false"
         }
       }
     },
