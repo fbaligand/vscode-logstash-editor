@@ -8183,6 +8183,7 @@
     "processors" : {
       "type" : "array",
       "description" : "Processors are used to reduce the number of fields in the exported event or to enhance the event with external metadata. This section defines a list of processors that are applied one by one and the first one receives the initial event:   event -> filter1 -> event1 -> filter2 ->event2 ...",
+      "markdownDescription" : "**processors** ([documentation](https://www.elastic.co/guide/en/beats/filebeat/8.14/defining-processors.html#processors))  \nProcessors are used to reduce the number of fields in the exported event or to enhance the event with external metadata. This section defines a list of processors that are applied one by one and the first one receives the initial event:   event -> filter1 -> event1 -> filter2 ->event2 ...",
       "items" : {
         "type" : "object",
         "maxProperties" : 1,
@@ -10932,6 +10933,7 @@
     },
     "modulesArray" : {
       "description" : "Modules configuration",
+      "markdownDescription" : "Modules configuration ([documentation](https://www.elastic.co/guide/en/beats/filebeat/8.14/filebeat-modules.html))",
       "type" : "array",
       "defaultSnippets" : [ {
         "label" : "- (array item)",
@@ -10952,7 +10954,8 @@
         "module" : {
           "type" : "string",
           "examples" : [ "system", "activemq", "apache", "auditd", "aws", "awsfargate", "azure", "cef", "checkpoint", "cisco", "coredns", "crowdstrike", "cyberarkpas", "elasticsearch", "envoyproxy", "fortinet", "gcp", "google_workspace", "haproxy", "ibmmq", "icinga", "iis", "iptables", "juniper", "kafka", "kibana", "logstash", "microsoft", "misp", "mongodb", "mssql", "mysql", "mysqlenterprise", "nats", "netflow", "nginx", "o365", "okta", "oracle", "osquery", "panw", "pensando", "postgresql", "rabbitmq", "redis", "salesforce", "santa", "snyk", "sophos", "suricata", "threatintel", "traefik", "zeek", "zookeeper", "zoom" ],
-          "description" : "module type"
+          "description" : "module type",
+          "markdownDescription" : "module type ([documentation](https://www.elastic.co/guide/en/beats/filebeat/8.14/filebeat-modules.html))"
         }
       },
       "$ref" : "#/definitions/modules"
@@ -10961,10 +10964,12 @@
       "type" : "object",
       "additionalProperties" : true,
       "description" : "Behind the scenes, each module starts a Filebeat input. Advanced users can add or override any input settings here.",
+      "markdownDescription" : "**input configuration** ([documentation](https://www.elastic.co/guide/en/beats/filebeat/8.14/configuration-filebeat-options.html#filebeat-input-types))  \nBehind the scenes, each module starts a Filebeat input. Advanced users can add or override any input settings here.",
       "$ref" : "#/definitions/inputCommonProperties"
     },
     "inputsArray" : {
       "description" : "Inputs configuration",
+      "markdownDescription" : "Inputs configuration ([documentation](https://www.elastic.co/guide/en/beats/filebeat/8.14/configuration-filebeat-options.html))",
       "type" : "array",
       "defaultSnippets" : [ {
         "label" : "- (array item)",
@@ -10985,7 +10990,8 @@
         "type" : {
           "type" : "string",
           "examples" : [ "log", "filestream", "redis", "udp", "tcp", "kafka", "syslog", "container", "journald", "netflow", "gcp-pubsub", "aws-s3", "aws-cloudwatch", "etw", "azure-eventhub", "azure-blob-storage", "benchmark", "cel", "cloudfoundry", "cometd", "entity-analytics", "gcs", "http_endpoint", "httpjson", "mqtt", "o365audit", "salesforce", "stdin", "websocket" ],
-          "description" : "input type"
+          "description" : "input type",
+          "markdownDescription" : "input type ([documentation](https://www.elastic.co/guide/en/beats/filebeat/8.14/configuration-filebeat-options.html#filebeat-input-types))"
         }
       },
       "allOf" : [ {
@@ -11141,6 +11147,7 @@
     "cloud" : {
       "type" : "object",
       "description" : "Elastic Cloud authentication. These settings simplify using Filebeat with the Elastic Cloud.",
+      "markdownDescription" : "**Elastic Cloud authentication** ([documentation](https://www.elastic.co/guide/en/beats/filebeat/8.14/configure-cloud-id.html))  \nThese settings simplify using Filebeat with the Elastic Cloud.",
       "properties" : {
         "id" : {
           "type" : "string",
@@ -11155,6 +11162,7 @@
     "condition" : {
       "type" : "object",
       "description" : "describe condition that must be matched",
+      "markdownDescription" : "**condition** ([documentation](https://www.elastic.co/guide/en/beats/filebeat/8.14/defining-processors.html#conditions))  \ndescribe condition that must be matched",
       "properties" : {
         "equals" : {
           "type" : "object",
@@ -11246,6 +11254,7 @@
       }
     },
     "awsCredentials" : {
+      "markdownDescription" : "**aws credentials** ([documentation](https://www.elastic.co/guide/en/beats/filebeat/8.14/filebeat-input-aws-s3.html#aws-credentials-config))",
       "properties" : {
         "access_key_id" : {
           "type" : "string",
@@ -11394,7 +11403,7 @@
     "ssl" : {
       "type" : "object",
       "description" : "HTTPS settings",
-      "$comment" : "see https://www.elastic.co/guide/en/beats/filebeat/7.17/configuration-ssl.html",
+      "markdownDescription" : "**HTTPS settings** ([documentation](https://www.elastic.co/guide/en/beats/filebeat/8.14/configuration-ssl.html))",
       "properties" : {
         "enabled" : {
           "$ref" : "#/definitions/booleanOrString",
@@ -11474,6 +11483,7 @@
     "multiline" : {
       "type" : "object",
       "description" : "Options that control how Filebeat deals with log messages that span multiple lines.",
+      "markdownDescription" : "**multiline configuration** ([documentation](https://www.elastic.co/guide/en/beats/filebeat/8.14/multiline-examples.html))  \nOptions that control how Filebeat deals with log messages that span multiple lines.",
       "defaultSnippets" : [ {
         "label" : "(multiline snippet)",
         "body" : {
@@ -11537,6 +11547,7 @@
     },
     "parsers" : {
       "description" : "This option expects a list of parsers that the log line has to go through.",
+      "markdownDescription" : "**Parsers configuration** ([documentation](https://www.elastic.co/guide/en/beats/filebeat/8.14/filebeat-input-filestream.html#_parsers))  \nThis option expects a list of parsers that the log line has to go through.",
       "type" : "array",
       "items" : {
         "type" : "object",
@@ -11644,6 +11655,7 @@
     },
     "kerberos" : {
       "description" : "Configuration options for Kerberos authentication.",
+      "markdownDescription" : "**kerberos configuration** ([documentation](https://www.elastic.co/guide/en/beats/filebeat/8.14/configuration-kerberos.html))  \nConfiguration options for Kerberos authentication.",
       "type" : "object",
       "properties" : {
         "enabled" : {
@@ -11737,6 +11749,7 @@
         "add_cloud_metadata" : {
           "type" : [ "object", "null" ],
           "description" : "The add_cloud_metadata processor enriches each event with instance metadata from the machine’s hosting provider. At startup it will query a list of hosting providers and cache the instance metadata.",
+          "markdownDescription" : "**add_cloud_metadata** ([documentation](https://www.elastic.co/guide/en/beats/filebeat/8.14/add-cloud-metadata.html))  \nThe add_cloud_metadata processor enriches each event with instance metadata from the machine’s hosting provider. At startup it will query a list of hosting providers and cache the instance metadata.",
           "properties" : {
             "timeout" : {
               "type" : "string",
@@ -11828,6 +11841,7 @@
         },
         "output" : {
           "description" : "Output configuration",
+          "markdownDescription" : "**Output configuration** ([documentation](https://www.elastic.co/guide/en/beats/filebeat/8.14/configuring-output.html))",
           "$ref" : "#/definitions/output"
         },
         "cloud" : {
@@ -11836,6 +11850,7 @@
         "filebeat.autodiscover" : {
           "type" : "object",
           "description" : "When you run applications on containers, they become moving targets to the monitoring system. Autodiscover allows you to track them and adapt settings as changes happen. By defining configuration templates, the autodiscover subsystem can monitor services as they start running.",
+          "markdownDescription" : "**Autodiscover** ([documentation](https://www.elastic.co/guide/en/beats/filebeat/8.14/configuration-autodiscover.html))  \nYou run applications on containers, they become moving targets to the monitoring system. Autodiscover allows you to track them and adapt settings as changes happen. By defining configuration templates, the autodiscover subsystem can monitor services as they start running.",
           "properties" : {
             "providers" : {
               "type" : "array",
