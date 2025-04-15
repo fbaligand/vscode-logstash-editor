@@ -1,6 +1,15 @@
 # Change Log
 
 
+## 1.4.1
+
+- add several enhancements to filebeat completion:
+  - complete input fields based on internet documentation
+  - add markdown documentation with link to internet documentation
+  - enhance kerberos completion
+  - fix duplicate properties in JSON schema
+
+
 ## 1.4.0
 
 - add support for Logstash 8.14 completion
