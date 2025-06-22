@@ -8180,1391 +8180,1381 @@
         }
       }
     },
-    "processors" : {
-      "type" : "array",
-      "description" : "Processors are used to reduce the number of fields in the exported event or to enhance the event with external metadata. This section defines a list of processors that are applied one by one and the first one receives the initial event:   event -> filter1 -> event1 -> filter2 ->event2 ...",
-      "markdownDescription" : "**processors** ([documentation](https://www.elastic.co/guide/en/beats/filebeat/8.14/defining-processors.html#processors))  \nProcessors are used to reduce the number of fields in the exported event or to enhance the event with external metadata. This section defines a list of processors that are applied one by one and the first one receives the initial event:   event -> filter1 -> event1 -> filter2 ->event2 ...",
-      "items" : {
-        "type" : "object",
-        "maxProperties" : 1,
-        "allOf" : [ {
-          "$ref" : "#/definitions/handwritten_processors"
-        } ],
-        "properties" : {
-          "include_fields" : {
-            "type" : "object",
-            "description" : "keep only provided field names (whatever field hierarchical position)",
-            "properties" : {
-              "when" : {
-                "$ref" : "#/definitions/condition"
-              },
-              "fields" : {
-                "type" : "array",
-                "items" : {
-                  "type" : "string",
-                  "defaultSnippets" : [ {
-                    "body" : "cpu"
-                  } ]
-                }
+    "generated_processors" : {
+      "properties" : {
+        "include_fields" : {
+          "type" : "object",
+          "description" : "keep only provided field names (whatever field hierarchical position)",
+          "properties" : {
+            "when" : {
+              "$ref" : "#/definitions/condition"
+            },
+            "fields" : {
+              "type" : "array",
+              "items" : {
+                "type" : "string",
+                "defaultSnippets" : [ {
+                  "body" : "cpu"
+                } ]
               }
             }
-          },
-          "drop_fields" : {
-            "type" : "object",
-            "description" : "drop provided field names (whatever field hierarchical position)",
-            "properties" : {
-              "when" : {
-                "$ref" : "#/definitions/condition"
-              },
-              "fields" : {
-                "type" : "array",
-                "items" : {
-                  "type" : "string",
-                  "defaultSnippets" : [ {
-                    "body" : "cpu.user"
-                  } ]
-                }
+          }
+        },
+        "drop_fields" : {
+          "type" : "object",
+          "description" : "drop provided field names (whatever field hierarchical position)",
+          "properties" : {
+            "when" : {
+              "$ref" : "#/definitions/condition"
+            },
+            "fields" : {
+              "type" : "array",
+              "items" : {
+                "type" : "string",
+                "defaultSnippets" : [ {
+                  "body" : "cpu.user"
+                } ]
               }
             }
-          },
-          "drop_event" : {
-            "type" : "object",
-            "description" : "drop event if 'when' condition is matched",
-            "properties" : {
-              "when" : {
-                "$ref" : "#/definitions/condition"
-              }
+          }
+        },
+        "drop_event" : {
+          "type" : "object",
+          "description" : "drop event if 'when' condition is matched",
+          "properties" : {
+            "when" : {
+              "$ref" : "#/definitions/condition"
             }
-          },
-          "rename" : {
-            "type" : "object",
-            "description" : "renames the field a to b",
-            "properties" : {
-              "when" : {
-                "$ref" : "#/definitions/condition"
-              },
-              "fields" : {
-                "type" : "array",
-                "items" : {
-                  "type" : "object",
-                  "properties" : {
-                    "from" : {
-                      "type" : "string",
-                      "examples" : [ "a" ]
-                    },
-                    "to" : {
-                      "type" : "string",
-                      "examples" : [ "b" ]
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "add_locale" : {
-            "type" : "object",
-            "description" : "enriches each event with the machine's local time zone offset from UTC.",
-            "properties" : {
-              "when" : {
-                "$ref" : "#/definitions/condition"
-              },
-              "format" : {
-                "type" : "string",
-                "examples" : [ "offset" ]
-              }
-            }
-          },
-          "add_docker_metadata" : {
-            "type" : "object",
-            "description" : "enriches each event with docker metadata, it matches given fields to an existing container id and adds info from that container",
-            "properties" : {
-              "when" : {
-                "$ref" : "#/definitions/condition"
-              },
-              "host" : {
-                "type" : "string",
-                "examples" : [ "unix:///var/run/docker.sock" ]
-              },
-              "match_fields" : {
-                "type" : "array",
-                "items" : {
-                  "type" : "string",
-                  "defaultSnippets" : [ {
-                    "body" : "system.process.cgroup.id"
-                  } ]
-                }
-              },
-              "match_pids" : {
-                "type" : "array",
-                "items" : {
-                  "type" : "string",
-                  "defaultSnippets" : [ {
-                    "body" : "process.pid"
-                  } ]
-                }
-              },
-              "match_source" : {
-                "$ref" : "#/definitions/booleanOrString",
-                "examples" : [ "true" ]
-              },
-              "match_source_index" : {
-                "type" : "string",
-                "examples" : [ "4" ]
-              },
-              "match_short_id" : {
-                "$ref" : "#/definitions/booleanOrString",
-                "examples" : [ "false" ]
-              },
-              "cleanup_timeout" : {
-                "type" : "string",
-                "examples" : [ "60" ]
-              },
-              "labels.dedot" : {
-                "$ref" : "#/definitions/booleanOrString",
-                "examples" : [ "false" ]
-              }
-            }
-          },
-          "decode_json_fields" : {
-            "type" : "object",
-            "description" : "decodes fields containing JSON strings and replaces the strings with valid JSON objects.",
-            "properties" : {
-              "when" : {
-                "$ref" : "#/definitions/condition"
-              },
-              "fields" : {
-                "type" : "array",
-                "items" : {
-                  "type" : "string",
-                  "defaultSnippets" : [ {
-                    "body" : "field1"
-                  } ]
-                }
-              },
-              "process_array" : {
-                "$ref" : "#/definitions/booleanOrString",
-                "examples" : [ "false" ]
-              },
-              "max_depth" : {
-                "type" : "string",
-                "examples" : [ "1" ]
-              },
-              "target" : {
-                "type" : "string"
-              },
-              "overwrite_keys" : {
-                "$ref" : "#/definitions/booleanOrString",
-                "examples" : [ "false" ]
-              }
-            }
-          },
-          "decompress_gzip_field" : {
-            "type" : "object",
-            "description" : "decompress 'from' field content to 'to' field",
-            "properties" : {
-              "when" : {
-                "$ref" : "#/definitions/condition"
-              },
-              "from" : {
-                "type" : "string",
-                "examples" : [ "field1" ]
-              },
-              "to" : {
-                "type" : "string",
-                "examples" : [ "field2" ]
-              },
-              "ignore_missing" : {
-                "$ref" : "#/definitions/booleanOrString",
-                "examples" : [ "false" ]
-              },
-              "fail_on_error" : {
-                "$ref" : "#/definitions/booleanOrString",
-                "examples" : [ "true" ]
-              }
-            }
-          },
-          "copy_fields" : {
-            "type" : "object",
-            "description" : "copy field a to b",
-            "properties" : {
-              "when" : {
-                "$ref" : "#/definitions/condition"
-              },
-              "fields" : {
-                "type" : "array",
-                "items" : {
-                  "type" : "object",
-                  "properties" : {
-                    "from" : {
-                      "type" : "string",
-                      "examples" : [ "message" ]
-                    },
-                    "to" : {
-                      "type" : "string",
-                      "examples" : [ "message_copied" ]
-                    }
-                  }
-                }
-              },
-              "fail_on_error" : {
-                "$ref" : "#/definitions/booleanOrString",
-                "examples" : [ "true" ]
-              },
-              "ignore_missing" : {
-                "$ref" : "#/definitions/booleanOrString",
-                "examples" : [ "false" ]
-              }
-            }
-          },
-          "truncate_fields" : {
-            "type" : "object",
-            "description" : "truncate field length",
-            "properties" : {
-              "when" : {
-                "$ref" : "#/definitions/condition"
-              },
-              "fields" : {
-                "type" : "array",
-                "items" : {
-                  "type" : "string",
-                  "defaultSnippets" : [ {
-                    "body" : "message"
-                  } ]
-                }
-              },
-              "max_bytes" : {
-                "type" : "string",
-                "examples" : [ "1024" ]
-              },
-              "fail_on_error" : {
-                "$ref" : "#/definitions/booleanOrString",
-                "examples" : [ "false" ]
-              },
-              "ignore_missing" : {
-                "$ref" : "#/definitions/booleanOrString",
-                "examples" : [ "true" ]
-              }
-            }
-          },
-          "urldecode" : {
-            "type" : "object",
-            "description" : "URL-decodes the value of field1 to field2",
-            "properties" : {
-              "when" : {
-                "$ref" : "#/definitions/condition"
-              },
-              "fields" : {
-                "type" : "array",
-                "items" : {
-                  "type" : "object",
-                  "properties" : {
-                    "from" : {
-                      "type" : "string",
-                      "examples" : [ "field1" ]
-                    },
-                    "to" : {
-                      "type" : "string",
-                      "examples" : [ "field2" ]
-                    }
-                  }
-                }
-              },
-              "ignore_missing" : {
-                "$ref" : "#/definitions/booleanOrString",
-                "examples" : [ "false" ]
-              },
-              "fail_on_error" : {
-                "$ref" : "#/definitions/booleanOrString",
-                "examples" : [ "true" ]
-              }
-            }
-          },
-          "add_cloudfoundry_metadata" : {
-            "type" : [ "object", "null" ],
-            "description" : "The add_cloudfoundry_metadata processor annotates each event with relevant metadata from Cloud Foundry applications. The events are annotated with Cloud Foundry metadata, only if the event contains a reference to a Cloud Foundry application (using field cloudfoundry.app.id) and the configured Cloud Foundry client is able to retrieve information for the application.",
-            "properties" : {
-              "when" : {
-                "$ref" : "#/definitions/condition"
-              },
-              "api_address" : {
-                "type" : "string",
-                "description" : "(Optional) The URL of the Cloud Foundry API. It uses http://api.bosh-lite.com by default."
-              },
-              "doppler_address" : {
-                "type" : "string",
-                "description" : "(Optional) The URL of the Cloud Foundry Doppler Websocket. It uses value from ${api_address}/v2/info by default."
-              },
-              "uaa_address" : {
-                "type" : "string",
-                "description" : "(Optional) The URL of the Cloud Foundry UAA API. It uses value from ${api_address}/v2/info by default."
-              },
-              "rlp_address" : {
-                "type" : "string",
-                "description" : "(Optional) The URL of the Cloud Foundry RLP Gateway. It uses value from ${api_address}/v2/info by default."
-              },
-              "client_id" : {
-                "type" : "string",
-                "description" : "Client ID to authenticate with Cloud Foundry."
-              },
-              "client_secret" : {
-                "type" : "string",
-                "description" : "Client Secret to authenticate with Cloud Foundry."
-              },
-              "cache_duration" : {
-                "type" : "string",
-                "description" : "(Optional) Maximum amount of time to cache an application’s metadata. Defaults to 120 seconds."
-              },
-              "cache_retry_delay" : {
-                "type" : "string",
-                "description" : "(Optional) Time to wait before trying to obtain an application’s metadata again in case of error. Defaults to 20 seconds."
-              },
-              "ssl" : {
-                "description" : "(Optional) SSL configuration to use when connecting to Cloud Foundry.",
-                "$ref" : "#/definitions/ssl"
-              }
-            }
-          },
-          "add_fields" : {
-            "type" : [ "object", "null" ],
-            "description" : "The add_fields processor adds additional fields to the event. Fields can be scalar values, arrays, dictionaries, or any nested combination of these. The add_fields processor will overwrite the target field if it already exists. By default the fields that you specify will be grouped under the fields sub-dictionary in the event. To group the fields under a different sub-dictionary, use the target setting. To store the fields as top-level fields, set target: ''.",
-            "properties" : {
-              "when" : {
-                "$ref" : "#/definitions/condition"
-              },
-              "target" : {
-                "type" : "string",
-                "description" : "(Optional) Sub-dictionary to put all fields into. Defaults to fields. Setting this to @metadata will add values to the event metadata instead of fields.",
-                "examples" : [ "fields" ]
-              },
-              "fields" : {
+          }
+        },
+        "rename" : {
+          "type" : "object",
+          "description" : "renames the field a to b",
+          "properties" : {
+            "when" : {
+              "$ref" : "#/definitions/condition"
+            },
+            "fields" : {
+              "type" : "array",
+              "items" : {
                 "type" : "object",
-                "description" : "Fields to be added.",
-                "additionalItems" : true
-              }
-            }
-          },
-          "add_host_metadata" : {
-            "type" : [ "object", "null" ],
-            "description" : "It has the following settings:",
-            "properties" : {
-              "when" : {
-                "$ref" : "#/definitions/condition"
-              },
-              "netinfo.enabled" : {
-                "type" : "string",
-                "description" : "(Optional) Default true. Include IP addresses and MAC addresses as fields host.ip and host.mac"
-              },
-              "cache.ttl" : {
-                "type" : "string",
-                "description" : "(Optional) The processor uses an internal cache for the host metadata. This sets the cache expiration time. The default is 5m, negative values disable caching altogether.",
-                "examples" : [ "5m" ]
-              },
-              "geo.name" : {
-                "type" : "string",
-                "description" : "(Optional) User definable token to be used for identifying a discrete location. Frequently a datacenter, rack, or similar."
-              },
-              "geo.location" : {
-                "type" : "string",
-                "description" : "(Optional) Longitude and latitude in comma separated format."
-              },
-              "geo.continent_name" : {
-                "type" : "string",
-                "description" : "(Optional) Name of the continent."
-              },
-              "geo.country_name" : {
-                "type" : "string",
-                "description" : "(Optional) Name of the country."
-              },
-              "geo.region_name" : {
-                "type" : "string",
-                "description" : "(Optional) Name of the region."
-              },
-              "geo.city_name" : {
-                "type" : "string",
-                "description" : "(Optional) Name of the city."
-              },
-              "geo.country_iso_code" : {
-                "type" : "string",
-                "description" : "(Optional) ISO country code."
-              },
-              "geo.region_iso_code" : {
-                "type" : "string",
-                "description" : "(Optional) ISO region code."
-              },
-              "replace_fields" : {
-                "type" : "string",
-                "description" : "(Optional) Default true. If set to false, original host fields from the event will not be replaced by host fields from add_host_metadata."
-              }
-            }
-          },
-          "add_id" : {
-            "type" : [ "object", "null" ],
-            "description" : "The add_id processor generates a unique ID for an event.",
-            "properties" : {
-              "when" : {
-                "$ref" : "#/definitions/condition"
-              },
-              "target_field" : {
-                "type" : "string",
-                "description" : "(Optional) Field where the generated ID will be stored. Default is @metadata._id.",
-                "examples" : [ "@metadata" ]
-              },
-              "type" : {
-                "type" : "string",
-                "description" : "(Optional) Type of ID to generate. Currently only elasticsearch is supported and is the default. The elasticsearch type generates IDs using the same algorithm that Elasticsearch uses for auto-generating document IDs."
-              }
-            }
-          },
-          "add_kubernetes_metadata" : {
-            "type" : [ "object", "null" ],
-            "description" : "The add_kubernetes_metadata processor annotates each event with relevant metadata based on which Kubernetes pod the event originated from. At startup, it detects an in_cluster environment and caches the Kubernetes-related metadata. Events are only annotated if a valid configuration is detected. If it’s not able to detect a valid Kubernetes configuration, the events are not annotated with Kubernetes-related metadata.",
-            "properties" : {
-              "when" : {
-                "$ref" : "#/definitions/condition"
-              },
-              "host" : {
-                "type" : "string",
-                "description" : "(Optional) Specify the node to scope filebeat to in case it cannot be accurately detected, as when running filebeat in host network mode."
-              },
-              "scope" : {
-                "type" : "string",
-                "description" : "(Optional) Specify if the processor should have visibility at the node level or at the entire cluster level. Possible values are node and cluster. Scope is node by default."
-              },
-              "namespace" : {
-                "type" : "string",
-                "description" : "(Optional) Select the namespace from which to collect the metadata. If it is not set, the processor collects metadata from all namespaces. It is unset by default."
-              },
-              "add_resource_metadata" : {
-                "$ref" : "#/definitions/add_resource_metadata"
-              },
-              "kube_config" : {
-                "type" : "string",
-                "description" : "(Optional) Use given config file as configuration for Kubernetes client. It defaults to KUBECONFIG environment variable if present."
-              },
-              "kube_client_options" : {
-                "type" : "string",
-                "description" : "(Optional) Additional options can be configured for Kubernetes client. Currently client QPS and burst are supported, if not set Kubernetes client’s default QPS and burst will be used. Example:"
-              },
-              "cleanup_timeout" : {
-                "type" : "string",
-                "description" : "(Optional) Specify the time of inactivity before stopping the running configuration for a container. This is 60s by default."
-              },
-              "sync_period" : {
-                "type" : "string",
-                "description" : "(Optional) Specify the timeout for listing historical resources."
-              },
-              "default_indexers.enabled" : {
-                "type" : "string",
-                "description" : "(Optional) Enable or disable default pod indexers when you want to specify your own."
-              },
-              "default_matchers.enabled" : {
-                "type" : "string",
-                "description" : "(Optional) Enable or disable default pod matchers when you want to specify your own."
-              },
-              "labels.dedot" : {
-                "type" : "string",
-                "description" : "(Optional) Default to be true. If set to true, then . in labels will be replaced with _."
-              },
-              "annotations.dedot" : {
-                "type" : "string",
-                "description" : "(Optional) Default to be true. If set to true, then . in labels will be replaced with _."
-              },
-              "indexers" : {
-                "type" : "array",
-                "description" : "Indexers use pods metadata to create unique identifiers for each one of the pods.",
-                "items" : {
-                  "type" : "object",
-                  "properties" : {
-                    "container" : {
-                      "type" : "string",
-                      "description" : "Identifies the pod metadata using the IDs of its containers."
-                    },
-                    "ip_port" : {
-                      "type" : "string",
-                      "description" : "Identifies the pod metadata using combinations of its IP and its exposed ports. When using this indexer metadata is identified using the IP of the pods, and the combination if ip:port for each one of the ports exposed by its containers."
-                    },
-                    "pod_name" : {
-                      "type" : "string",
-                      "description" : "Identifies the pod metadata using its namespace and its name as namespace/pod_name."
-                    },
-                    "pod_uid" : {
-                      "type" : "string",
-                      "description" : "Identifies the pod metadata using the UID of the pod."
-                    }
+                "properties" : {
+                  "from" : {
+                    "type" : "string",
+                    "examples" : [ "a" ]
+                  },
+                  "to" : {
+                    "type" : "string",
+                    "examples" : [ "b" ]
                   }
                 }
-              },
-              "matchers" : {
-                "type" : "array",
-                "description" : "Matchers are used to construct the lookup keys that match with the identifiers created by indexes.",
-                "items" : {
-                  "type" : "object",
-                  "properties" : {
-                    "field_format" : {
-                      "type" : "object",
-                      "description" : "Looks up pod metadata using a key created with a string format that can include event fields.\nThis matcher has an option format to define the string format. This string format can contain placeholders for any field in the event.\nFor example, the following configuration uses the ip_port indexer to identify the pod metadata by combinations of the pod IP and its exposed ports, and uses the destination IP and port in events as match keys:",
-                      "additionalItems" : true
-                    },
-                    "fields" : {
-                      "type" : "object",
-                      "description" : "Looks up pod metadata using as key the value of some specific fields. When multiple fields are defined, the first one included in the event is used.\nThis matcher has an option lookup_fields to define the files whose value will be used for lookup.\nFor example, the following configuration uses the ip_port indexer to identify pods, and defines a matcher that uses the destination IP or the server IP for the lookup, the first it finds in the event:",
-                      "additionalItems" : true
-                    },
-                    "logs_path" : {
-                      "type" : "object",
-                      "description" : "Looks up pod metadata using identifiers extracted from the log path stored in the log.file.path field.",
-                      "properties" : {
-                        "logs_path" : {
-                          "type" : "string",
-                          "description" : "(Optional) Base path of container logs. If not specified, it uses the default logs path of the platform where Filebeat is running: for Linux - /var/lib/docker/containers/, Windows - C:\\\\ProgramData\\\\Docker\\\\containers. To change the default value: container ID must follow right after the logs_path - <log_path>/<container_id>, where container_id is a 64-character-long hexadecimal string."
-                        },
-                        "resource_type" : {
-                          "type" : "string",
-                          "description" : "(Optional) Type of the resource to obtain the ID of. Valid resource_type: pod: to make the lookup based on the pod UID. When resource_type is set to pod, logs_path must be set as well, supported path in this case: /var/lib/kubelet/pods/ used to read logs from mounted into the pod volumes, those logs end up under /var/lib/kubelet/pods/<pod UID>/volumes/<volume name>/... To use /var/lib/kubelet/pods/ as a log_path, /var/lib/kubelet/pods must be mounted into the filebeat Pods. /var/log/pods/ Note: when using resource_type: 'pod' logs will be enriched only with pod metadata: pod id, pod name, etc., not container metadata. container: to make the lookup based on the container ID, logs_path must be set to /var/log/containers/. It defaults to container.",
-                          "examples" : [ "container" ]
-                        }
+              }
+            }
+          }
+        },
+        "add_locale" : {
+          "type" : "object",
+          "description" : "enriches each event with the machine's local time zone offset from UTC.",
+          "properties" : {
+            "when" : {
+              "$ref" : "#/definitions/condition"
+            },
+            "format" : {
+              "type" : "string",
+              "examples" : [ "offset" ]
+            }
+          }
+        },
+        "add_docker_metadata" : {
+          "type" : "object",
+          "description" : "enriches each event with docker metadata, it matches given fields to an existing container id and adds info from that container",
+          "properties" : {
+            "when" : {
+              "$ref" : "#/definitions/condition"
+            },
+            "host" : {
+              "type" : "string",
+              "examples" : [ "unix:///var/run/docker.sock" ]
+            },
+            "match_fields" : {
+              "type" : "array",
+              "items" : {
+                "type" : "string",
+                "defaultSnippets" : [ {
+                  "body" : "system.process.cgroup.id"
+                } ]
+              }
+            },
+            "match_pids" : {
+              "type" : "array",
+              "items" : {
+                "type" : "string",
+                "defaultSnippets" : [ {
+                  "body" : "process.pid"
+                } ]
+              }
+            },
+            "match_source" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "examples" : [ "true" ]
+            },
+            "match_source_index" : {
+              "type" : "string",
+              "examples" : [ "4" ]
+            },
+            "match_short_id" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "examples" : [ "false" ]
+            },
+            "cleanup_timeout" : {
+              "type" : "string",
+              "examples" : [ "60" ]
+            },
+            "labels.dedot" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "examples" : [ "false" ]
+            }
+          }
+        },
+        "decode_json_fields" : {
+          "type" : "object",
+          "description" : "decodes fields containing JSON strings and replaces the strings with valid JSON objects.",
+          "properties" : {
+            "when" : {
+              "$ref" : "#/definitions/condition"
+            },
+            "fields" : {
+              "type" : "array",
+              "items" : {
+                "type" : "string",
+                "defaultSnippets" : [ {
+                  "body" : "field1"
+                } ]
+              }
+            },
+            "process_array" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "examples" : [ "false" ]
+            },
+            "max_depth" : {
+              "type" : "string",
+              "examples" : [ "1" ]
+            },
+            "target" : {
+              "type" : "string"
+            },
+            "overwrite_keys" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "examples" : [ "false" ]
+            }
+          }
+        },
+        "decompress_gzip_field" : {
+          "type" : "object",
+          "description" : "decompress 'from' field content to 'to' field",
+          "properties" : {
+            "when" : {
+              "$ref" : "#/definitions/condition"
+            },
+            "from" : {
+              "type" : "string",
+              "examples" : [ "field1" ]
+            },
+            "to" : {
+              "type" : "string",
+              "examples" : [ "field2" ]
+            },
+            "ignore_missing" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "examples" : [ "false" ]
+            },
+            "fail_on_error" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "examples" : [ "true" ]
+            }
+          }
+        },
+        "copy_fields" : {
+          "type" : "object",
+          "description" : "copy field a to b",
+          "properties" : {
+            "when" : {
+              "$ref" : "#/definitions/condition"
+            },
+            "fields" : {
+              "type" : "array",
+              "items" : {
+                "type" : "object",
+                "properties" : {
+                  "from" : {
+                    "type" : "string",
+                    "examples" : [ "message" ]
+                  },
+                  "to" : {
+                    "type" : "string",
+                    "examples" : [ "message_copied" ]
+                  }
+                }
+              }
+            },
+            "fail_on_error" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "examples" : [ "true" ]
+            },
+            "ignore_missing" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "examples" : [ "false" ]
+            }
+          }
+        },
+        "truncate_fields" : {
+          "type" : "object",
+          "description" : "truncate field length",
+          "properties" : {
+            "when" : {
+              "$ref" : "#/definitions/condition"
+            },
+            "fields" : {
+              "type" : "array",
+              "items" : {
+                "type" : "string",
+                "defaultSnippets" : [ {
+                  "body" : "message"
+                } ]
+              }
+            },
+            "max_bytes" : {
+              "type" : "string",
+              "examples" : [ "1024" ]
+            },
+            "fail_on_error" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "examples" : [ "false" ]
+            },
+            "ignore_missing" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "examples" : [ "true" ]
+            }
+          }
+        },
+        "urldecode" : {
+          "type" : "object",
+          "description" : "URL-decodes the value of field1 to field2",
+          "properties" : {
+            "when" : {
+              "$ref" : "#/definitions/condition"
+            },
+            "fields" : {
+              "type" : "array",
+              "items" : {
+                "type" : "object",
+                "properties" : {
+                  "from" : {
+                    "type" : "string",
+                    "examples" : [ "field1" ]
+                  },
+                  "to" : {
+                    "type" : "string",
+                    "examples" : [ "field2" ]
+                  }
+                }
+              }
+            },
+            "ignore_missing" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "examples" : [ "false" ]
+            },
+            "fail_on_error" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "examples" : [ "true" ]
+            }
+          }
+        },
+        "add_cloudfoundry_metadata" : {
+          "type" : [ "object", "null" ],
+          "description" : "The add_cloudfoundry_metadata processor annotates each event with relevant metadata from Cloud Foundry applications. The events are annotated with Cloud Foundry metadata, only if the event contains a reference to a Cloud Foundry application (using field cloudfoundry.app.id) and the configured Cloud Foundry client is able to retrieve information for the application.",
+          "properties" : {
+            "when" : {
+              "$ref" : "#/definitions/condition"
+            },
+            "api_address" : {
+              "type" : "string",
+              "description" : "(Optional) The URL of the Cloud Foundry API. It uses http://api.bosh-lite.com by default."
+            },
+            "doppler_address" : {
+              "type" : "string",
+              "description" : "(Optional) The URL of the Cloud Foundry Doppler Websocket. It uses value from ${api_address}/v2/info by default."
+            },
+            "uaa_address" : {
+              "type" : "string",
+              "description" : "(Optional) The URL of the Cloud Foundry UAA API. It uses value from ${api_address}/v2/info by default."
+            },
+            "rlp_address" : {
+              "type" : "string",
+              "description" : "(Optional) The URL of the Cloud Foundry RLP Gateway. It uses value from ${api_address}/v2/info by default."
+            },
+            "client_id" : {
+              "type" : "string",
+              "description" : "Client ID to authenticate with Cloud Foundry."
+            },
+            "client_secret" : {
+              "type" : "string",
+              "description" : "Client Secret to authenticate with Cloud Foundry."
+            },
+            "cache_duration" : {
+              "type" : "string",
+              "description" : "(Optional) Maximum amount of time to cache an application’s metadata. Defaults to 120 seconds."
+            },
+            "cache_retry_delay" : {
+              "type" : "string",
+              "description" : "(Optional) Time to wait before trying to obtain an application’s metadata again in case of error. Defaults to 20 seconds."
+            },
+            "ssl" : {
+              "description" : "(Optional) SSL configuration to use when connecting to Cloud Foundry.",
+              "$ref" : "#/definitions/ssl"
+            }
+          }
+        },
+        "add_fields" : {
+          "type" : [ "object", "null" ],
+          "description" : "The add_fields processor adds additional fields to the event. Fields can be scalar values, arrays, dictionaries, or any nested combination of these. The add_fields processor will overwrite the target field if it already exists. By default the fields that you specify will be grouped under the fields sub-dictionary in the event. To group the fields under a different sub-dictionary, use the target setting. To store the fields as top-level fields, set target: ''.",
+          "properties" : {
+            "when" : {
+              "$ref" : "#/definitions/condition"
+            },
+            "target" : {
+              "type" : "string",
+              "description" : "(Optional) Sub-dictionary to put all fields into. Defaults to fields. Setting this to @metadata will add values to the event metadata instead of fields.",
+              "examples" : [ "fields" ]
+            },
+            "fields" : {
+              "type" : "object",
+              "description" : "Fields to be added.",
+              "additionalItems" : true
+            }
+          }
+        },
+        "add_host_metadata" : {
+          "type" : [ "object", "null" ],
+          "description" : "It has the following settings:",
+          "properties" : {
+            "when" : {
+              "$ref" : "#/definitions/condition"
+            },
+            "netinfo.enabled" : {
+              "type" : "string",
+              "description" : "(Optional) Default true. Include IP addresses and MAC addresses as fields host.ip and host.mac"
+            },
+            "cache.ttl" : {
+              "type" : "string",
+              "description" : "(Optional) The processor uses an internal cache for the host metadata. This sets the cache expiration time. The default is 5m, negative values disable caching altogether.",
+              "examples" : [ "5m" ]
+            },
+            "geo.name" : {
+              "type" : "string",
+              "description" : "(Optional) User definable token to be used for identifying a discrete location. Frequently a datacenter, rack, or similar."
+            },
+            "geo.location" : {
+              "type" : "string",
+              "description" : "(Optional) Longitude and latitude in comma separated format."
+            },
+            "geo.continent_name" : {
+              "type" : "string",
+              "description" : "(Optional) Name of the continent."
+            },
+            "geo.country_name" : {
+              "type" : "string",
+              "description" : "(Optional) Name of the country."
+            },
+            "geo.region_name" : {
+              "type" : "string",
+              "description" : "(Optional) Name of the region."
+            },
+            "geo.city_name" : {
+              "type" : "string",
+              "description" : "(Optional) Name of the city."
+            },
+            "geo.country_iso_code" : {
+              "type" : "string",
+              "description" : "(Optional) ISO country code."
+            },
+            "geo.region_iso_code" : {
+              "type" : "string",
+              "description" : "(Optional) ISO region code."
+            },
+            "replace_fields" : {
+              "type" : "string",
+              "description" : "(Optional) Default true. If set to false, original host fields from the event will not be replaced by host fields from add_host_metadata."
+            }
+          }
+        },
+        "add_id" : {
+          "type" : [ "object", "null" ],
+          "description" : "The add_id processor generates a unique ID for an event.",
+          "properties" : {
+            "when" : {
+              "$ref" : "#/definitions/condition"
+            },
+            "target_field" : {
+              "type" : "string",
+              "description" : "(Optional) Field where the generated ID will be stored. Default is @metadata._id.",
+              "examples" : [ "@metadata" ]
+            },
+            "type" : {
+              "type" : "string",
+              "description" : "(Optional) Type of ID to generate. Currently only elasticsearch is supported and is the default. The elasticsearch type generates IDs using the same algorithm that Elasticsearch uses for auto-generating document IDs."
+            }
+          }
+        },
+        "add_kubernetes_metadata" : {
+          "type" : [ "object", "null" ],
+          "description" : "The add_kubernetes_metadata processor annotates each event with relevant metadata based on which Kubernetes pod the event originated from. At startup, it detects an in_cluster environment and caches the Kubernetes-related metadata. Events are only annotated if a valid configuration is detected. If it’s not able to detect a valid Kubernetes configuration, the events are not annotated with Kubernetes-related metadata.",
+          "properties" : {
+            "when" : {
+              "$ref" : "#/definitions/condition"
+            },
+            "host" : {
+              "type" : "string",
+              "description" : "(Optional) Specify the node to scope filebeat to in case it cannot be accurately detected, as when running filebeat in host network mode."
+            },
+            "scope" : {
+              "type" : "string",
+              "description" : "(Optional) Specify if the processor should have visibility at the node level or at the entire cluster level. Possible values are node and cluster. Scope is node by default."
+            },
+            "namespace" : {
+              "type" : "string",
+              "description" : "(Optional) Select the namespace from which to collect the metadata. If it is not set, the processor collects metadata from all namespaces. It is unset by default."
+            },
+            "add_resource_metadata" : {
+              "$ref" : "#/definitions/add_resource_metadata"
+            },
+            "kube_config" : {
+              "type" : "string",
+              "description" : "(Optional) Use given config file as configuration for Kubernetes client. It defaults to KUBECONFIG environment variable if present."
+            },
+            "kube_client_options" : {
+              "type" : "string",
+              "description" : "(Optional) Additional options can be configured for Kubernetes client. Currently client QPS and burst are supported, if not set Kubernetes client’s default QPS and burst will be used. Example:"
+            },
+            "cleanup_timeout" : {
+              "type" : "string",
+              "description" : "(Optional) Specify the time of inactivity before stopping the running configuration for a container. This is 60s by default."
+            },
+            "sync_period" : {
+              "type" : "string",
+              "description" : "(Optional) Specify the timeout for listing historical resources."
+            },
+            "default_indexers.enabled" : {
+              "type" : "string",
+              "description" : "(Optional) Enable or disable default pod indexers when you want to specify your own."
+            },
+            "default_matchers.enabled" : {
+              "type" : "string",
+              "description" : "(Optional) Enable or disable default pod matchers when you want to specify your own."
+            },
+            "labels.dedot" : {
+              "type" : "string",
+              "description" : "(Optional) Default to be true. If set to true, then . in labels will be replaced with _."
+            },
+            "annotations.dedot" : {
+              "type" : "string",
+              "description" : "(Optional) Default to be true. If set to true, then . in labels will be replaced with _."
+            },
+            "indexers" : {
+              "type" : "array",
+              "description" : "Indexers use pods metadata to create unique identifiers for each one of the pods.",
+              "items" : {
+                "type" : "object",
+                "properties" : {
+                  "container" : {
+                    "type" : "string",
+                    "description" : "Identifies the pod metadata using the IDs of its containers."
+                  },
+                  "ip_port" : {
+                    "type" : "string",
+                    "description" : "Identifies the pod metadata using combinations of its IP and its exposed ports. When using this indexer metadata is identified using the IP of the pods, and the combination if ip:port for each one of the ports exposed by its containers."
+                  },
+                  "pod_name" : {
+                    "type" : "string",
+                    "description" : "Identifies the pod metadata using its namespace and its name as namespace/pod_name."
+                  },
+                  "pod_uid" : {
+                    "type" : "string",
+                    "description" : "Identifies the pod metadata using the UID of the pod."
+                  }
+                }
+              }
+            },
+            "matchers" : {
+              "type" : "array",
+              "description" : "Matchers are used to construct the lookup keys that match with the identifiers created by indexes.",
+              "items" : {
+                "type" : "object",
+                "properties" : {
+                  "field_format" : {
+                    "type" : "object",
+                    "description" : "Looks up pod metadata using a key created with a string format that can include event fields.\nThis matcher has an option format to define the string format. This string format can contain placeholders for any field in the event.\nFor example, the following configuration uses the ip_port indexer to identify the pod metadata by combinations of the pod IP and its exposed ports, and uses the destination IP and port in events as match keys:",
+                    "additionalItems" : true
+                  },
+                  "fields" : {
+                    "type" : "object",
+                    "description" : "Looks up pod metadata using as key the value of some specific fields. When multiple fields are defined, the first one included in the event is used.\nThis matcher has an option lookup_fields to define the files whose value will be used for lookup.\nFor example, the following configuration uses the ip_port indexer to identify pods, and defines a matcher that uses the destination IP or the server IP for the lookup, the first it finds in the event:",
+                    "additionalItems" : true
+                  },
+                  "logs_path" : {
+                    "type" : "object",
+                    "description" : "Looks up pod metadata using identifiers extracted from the log path stored in the log.file.path field.",
+                    "properties" : {
+                      "logs_path" : {
+                        "type" : "string",
+                        "description" : "(Optional) Base path of container logs. If not specified, it uses the default logs path of the platform where Filebeat is running: for Linux - /var/lib/docker/containers/, Windows - C:\\\\ProgramData\\\\Docker\\\\containers. To change the default value: container ID must follow right after the logs_path - <log_path>/<container_id>, where container_id is a 64-character-long hexadecimal string."
+                      },
+                      "resource_type" : {
+                        "type" : "string",
+                        "description" : "(Optional) Type of the resource to obtain the ID of. Valid resource_type: pod: to make the lookup based on the pod UID. When resource_type is set to pod, logs_path must be set as well, supported path in this case: /var/lib/kubelet/pods/ used to read logs from mounted into the pod volumes, those logs end up under /var/lib/kubelet/pods/<pod UID>/volumes/<volume name>/... To use /var/lib/kubelet/pods/ as a log_path, /var/lib/kubelet/pods must be mounted into the filebeat Pods. /var/log/pods/ Note: when using resource_type: 'pod' logs will be enriched only with pod metadata: pod id, pod name, etc., not container metadata. container: to make the lookup based on the container ID, logs_path must be set to /var/log/containers/. It defaults to container.",
+                        "examples" : [ "container" ]
                       }
                     }
                   }
                 }
               }
             }
-          },
-          "add_labels" : {
-            "type" : [ "object", "null" ],
-            "description" : "The add_labels processors adds a set of key-value pairs to an event. The processor will flatten nested configuration objects like arrays or dictionaries into a fully qualified name by merging nested names with a .. Array entries create numeric names starting with 0. Labels are always stored under the Elastic Common Schema compliant labels sub-dictionary.",
-            "properties" : {
-              "when" : {
-                "$ref" : "#/definitions/condition"
-              },
-              "labels" : {
-                "type" : "string",
-                "description" : "dictionaries of labels to be added."
-              }
+          }
+        },
+        "add_labels" : {
+          "type" : [ "object", "null" ],
+          "description" : "The add_labels processors adds a set of key-value pairs to an event. The processor will flatten nested configuration objects like arrays or dictionaries into a fully qualified name by merging nested names with a .. Array entries create numeric names starting with 0. Labels are always stored under the Elastic Common Schema compliant labels sub-dictionary.",
+          "properties" : {
+            "when" : {
+              "$ref" : "#/definitions/condition"
+            },
+            "labels" : {
+              "type" : "string",
+              "description" : "dictionaries of labels to be added."
             }
-          },
-          "add_nomad_metadata" : {
-            "type" : [ "object", "null" ],
-            "description" : "This functionality is in technical preview and may be changed or removed in a future release. Elastic will work to fix any issues, but features in technical preview are not subject to the support SLA of official GA features.",
-            "properties" : {
-              "when" : {
-                "$ref" : "#/definitions/condition"
-              },
-              "address" : {
-                "type" : "string",
-                "description" : "(Optional) The URL of the agent API used to request the metadata. It uses http://127.0.0.1:4646 by default."
-              },
-              "namespace" : {
-                "type" : "string",
-                "description" : "(Optional) Namespace to watch. If set, only events for allocations in this namespace will be annotated."
-              },
-              "region" : {
-                "type" : "string",
-                "description" : "(Optional) Region to watch. If set, only events for allocations in this region will be annotated."
-              },
-              "secret_id" : {
-                "type" : "string",
-                "description" : "(Optional) SecretID to use when connecting with the agent API. This is an example ACL policy to apply to the token."
-              },
-              "refresh_interval" : {
-                "type" : "string",
-                "description" : "(Optional) Interval used to update the cached metadata. It defaults to 30 seconds."
-              },
-              "cleanup_timeout" : {
-                "type" : "string",
-                "description" : "(Optional) After an allocation has been removed, time to wait before cleaning up their associated resources. This is useful if you expect to receive events after an allocation has been removed, which can happen when collecting logs. It defaults to 60 seconds."
-              },
-              "scope" : {
-                "type" : "string",
-                "description" : "(Optional) Scope of the resources to watch. It can be node to get metadata only for the allocations in a single agent, or global, to get metadata for allocations running on any agent. It defaults to node.",
-                "examples" : [ "node" ]
-              },
-              "node" : {
-                "type" : "string",
-                "description" : "(Optional) When using scope: node, use node to specify the name of the local node if it cannot be discovered automatically."
-              },
-              "indexers" : {
-                "type" : "array",
-                "description" : "Indexers use allocation metadata to create unique identifiers for each one of the pods.",
-                "items" : {
-                  "type" : "object",
-                  "properties" : { }
-                }
-              },
-              "matchers" : {
-                "type" : "array",
-                "description" : "Matchers are used to construct the lookup keys that match with the identifiers created by indexes.",
-                "items" : {
-                  "type" : "object",
-                  "properties" : { }
-                }
-              },
-              "field_format" : {
+          }
+        },
+        "add_nomad_metadata" : {
+          "type" : [ "object", "null" ],
+          "description" : "This functionality is in technical preview and may be changed or removed in a future release. Elastic will work to fix any issues, but features in technical preview are not subject to the support SLA of official GA features.",
+          "properties" : {
+            "when" : {
+              "$ref" : "#/definitions/condition"
+            },
+            "address" : {
+              "type" : "string",
+              "description" : "(Optional) The URL of the agent API used to request the metadata. It uses http://127.0.0.1:4646 by default."
+            },
+            "namespace" : {
+              "type" : "string",
+              "description" : "(Optional) Namespace to watch. If set, only events for allocations in this namespace will be annotated."
+            },
+            "region" : {
+              "type" : "string",
+              "description" : "(Optional) Region to watch. If set, only events for allocations in this region will be annotated."
+            },
+            "secret_id" : {
+              "type" : "string",
+              "description" : "(Optional) SecretID to use when connecting with the agent API. This is an example ACL policy to apply to the token."
+            },
+            "refresh_interval" : {
+              "type" : "string",
+              "description" : "(Optional) Interval used to update the cached metadata. It defaults to 30 seconds."
+            },
+            "cleanup_timeout" : {
+              "type" : "string",
+              "description" : "(Optional) After an allocation has been removed, time to wait before cleaning up their associated resources. This is useful if you expect to receive events after an allocation has been removed, which can happen when collecting logs. It defaults to 60 seconds."
+            },
+            "scope" : {
+              "type" : "string",
+              "description" : "(Optional) Scope of the resources to watch. It can be node to get metadata only for the allocations in a single agent, or global, to get metadata for allocations running on any agent. It defaults to node.",
+              "examples" : [ "node" ]
+            },
+            "node" : {
+              "type" : "string",
+              "description" : "(Optional) When using scope: node, use node to specify the name of the local node if it cannot be discovered automatically."
+            },
+            "indexers" : {
+              "type" : "array",
+              "description" : "Indexers use allocation metadata to create unique identifiers for each one of the pods.",
+              "items" : {
                 "type" : "object",
-                "description" : "Looks up allocation metadata using a key created with a string format that can include event fields.\nThis matcher has an option format to define the string format. This string format can contain placeholders for any field in the event.\nFor example, the following configuration uses the allocation_name indexer to identify the allocation metadata by its name and namespace, and uses custom fields existing in the event as match keys:",
-                "additionalItems" : true
-              },
-              "fields" : {
+                "properties" : { }
+              }
+            },
+            "matchers" : {
+              "type" : "array",
+              "description" : "Matchers are used to construct the lookup keys that match with the identifiers created by indexes.",
+              "items" : {
                 "type" : "object",
-                "description" : "Looks up allocation metadata using as key the value of some specific fields. When multiple fields are defined, the first one included in the event is used.\nThis matcher has an option lookup_fields to define the fields whose value will be used for lookup.\nFor example, the following configuration uses the allocation_uuid indexer to identify allocations, and defines a matcher that uses some fields where the allocation UUID can be found for lookup, the first it finds in the event:",
-                "additionalItems" : true
-              },
-              "logs_path" : {
-                "type" : "string",
-                "description" : "Looks up allocation metadata using identifiers extracted from the log path stored in the log.file.path field.\nThis matcher has an optional logs_path option with the base path of the directory containing the logs for the local agent.\nThe default configuration is able to lookup the metadata using the allocation UUID when the logs are collected under /var/lib/nomad.\nFor example the following configuration would use the allocation UUID when the logs are collected from /var/lib/NomadClient001/alloc/<alloc UUID>/alloc/logs/...."
+                "properties" : { }
+              }
+            },
+            "field_format" : {
+              "type" : "object",
+              "description" : "Looks up allocation metadata using a key created with a string format that can include event fields.\nThis matcher has an option format to define the string format. This string format can contain placeholders for any field in the event.\nFor example, the following configuration uses the allocation_name indexer to identify the allocation metadata by its name and namespace, and uses custom fields existing in the event as match keys:",
+              "additionalItems" : true
+            },
+            "fields" : {
+              "type" : "object",
+              "description" : "Looks up allocation metadata using as key the value of some specific fields. When multiple fields are defined, the first one included in the event is used.\nThis matcher has an option lookup_fields to define the fields whose value will be used for lookup.\nFor example, the following configuration uses the allocation_uuid indexer to identify allocations, and defines a matcher that uses some fields where the allocation UUID can be found for lookup, the first it finds in the event:",
+              "additionalItems" : true
+            },
+            "logs_path" : {
+              "type" : "string",
+              "description" : "Looks up allocation metadata using identifiers extracted from the log path stored in the log.file.path field.\nThis matcher has an optional logs_path option with the base path of the directory containing the logs for the local agent.\nThe default configuration is able to lookup the metadata using the allocation UUID when the logs are collected under /var/lib/nomad.\nFor example the following configuration would use the allocation UUID when the logs are collected from /var/lib/NomadClient001/alloc/<alloc UUID>/alloc/logs/...."
+            }
+          }
+        },
+        "add_observer_metadata" : {
+          "type" : [ "object", "null" ],
+          "description" : "This functionality is in beta and is subject to change. The design and code is less mature than official GA features and is being provided as-is with no warranties. Beta features are not subject to the support SLA of official GA features.",
+          "properties" : {
+            "when" : {
+              "$ref" : "#/definitions/condition"
+            },
+            "netinfo.enabled" : {
+              "type" : "string",
+              "description" : "(Optional) Default true. Include IP addresses and MAC addresses as fields observer.ip and observer.mac"
+            },
+            "cache.ttl" : {
+              "type" : "string",
+              "description" : "(Optional) The processor uses an internal cache for the observer metadata. This sets the cache expiration time. The default is 5m, negative values disable caching altogether.",
+              "examples" : [ "5m" ]
+            },
+            "geo.name" : {
+              "type" : "string",
+              "description" : "(Optional) User definable token to be used for identifying a discrete location. Frequently a datacenter, rack, or similar."
+            },
+            "geo.location" : {
+              "type" : "string",
+              "description" : "(Optional) Longitude and latitude in comma separated format."
+            },
+            "geo.continent_name" : {
+              "type" : "string",
+              "description" : "(Optional) Name of the continent."
+            },
+            "geo.country_name" : {
+              "type" : "string",
+              "description" : "(Optional) Name of the country."
+            },
+            "geo.region_name" : {
+              "type" : "string",
+              "description" : "(Optional) Name of the region."
+            },
+            "geo.city_name" : {
+              "type" : "string",
+              "description" : "(Optional) Name of the city."
+            },
+            "geo.country_iso_code" : {
+              "type" : "string",
+              "description" : "(Optional) ISO country code."
+            },
+            "geo.region_iso_code" : {
+              "type" : "string",
+              "description" : "(Optional) ISO region code."
+            }
+          }
+        },
+        "add_process_metadata" : {
+          "type" : [ "object", "null" ],
+          "description" : "The add_process_metadata processor enriches events with information from running processes, identified by their process ID (PID).",
+          "properties" : {
+            "when" : {
+              "$ref" : "#/definitions/condition"
+            },
+            "match_pids" : {
+              "type" : "array",
+              "description" : "List of fields to lookup for a PID. The processor will search the list sequentially until the field is found in the current event, and the PID lookup will be applied to the value of this field.",
+              "items" : {
+                "type" : "string"
+              }
+            },
+            "target" : {
+              "type" : "string",
+              "description" : "(Optional) Destination prefix where the process object will be created. The default is the event’s root."
+            },
+            "include_fields" : {
+              "type" : "array",
+              "description" : "(Optional) List of fields to add. By default, the processor will add all the available fields except process.env.",
+              "items" : {
+                "type" : "string"
+              }
+            },
+            "ignore_missing" : {
+              "type" : "string",
+              "description" : "(Optional) When set to false, events that don’t contain any of the fields in match_pids will be discarded and an error will be generated. By default, this condition is ignored."
+            },
+            "overwrite_keys" : {
+              "type" : "string",
+              "description" : "(Optional) By default, if a target field already exists, it will not be overwritten, and an error will be logged. If overwrite_keys is set to true, this condition will be ignored."
+            },
+            "restricted_fields" : {
+              "type" : "string",
+              "description" : "(Optional) By default, the process.env field is not output, to avoid leaking sensitive data. If restricted_fields is true, the field will be present in the output."
+            },
+            "host_path" : {
+              "type" : "string",
+              "description" : "(Optional) By default, the host_path field is set to the root directory of the host /. This is the path where /proc is mounted. For different runtime configurations of Kubernetes or Docker, the host_path can be set to overwrite the default."
+            },
+            "cgroup_prefixes" : {
+              "type" : "array",
+              "description" : "(Optional) List of prefixes that will be matched against cgroup paths. When a cgroup path begins with a prefix in the list, then the last element of the path is returned as the container ID. Only one of cgroup_prefixes and cgroup_rexex should be configured. If neither are configured then a default cgroup_regex value is used that matches cgroup paths containing 64-character container IDs (like those from Docker, Kubernetes, and Podman).",
+              "items" : {
+                "type" : "string"
+              }
+            },
+            "cgroup_regex" : {
+              "type" : "string",
+              "description" : "(Optional) A regular expression that will be matched against cgroup paths. It must contain one capturing group. When a cgroup path matches the regular expression then the value of the capturing group is returned as the container ID. Only one of cgroup_prefixes and cgroup_rexex should be configured. If neither are configured then a default cgroup_regex value is used that matches cgroup paths containing 64-character container IDs (like those from Docker, Kubernetes, and Podman)."
+            },
+            "cgroup_cache_expire_time" : {
+              "type" : "string",
+              "description" : "(Optional) By default, the cgroup_cache_expire_time is set to 30 seconds. This is the length of time before cgroup cache elements expire in seconds. It can be set to 0 to disable the cgroup cache. In some container runtimes technology like runc, the container’s process is also process in the host kernel, and will be affected by PID rollover/reuse. The expire time needs to set smaller than the PIDs wrap around time to avoid wrong container id."
+            }
+          }
+        },
+        "add_tags" : {
+          "type" : [ "object", "null" ],
+          "description" : "The add_tags processor adds tags to a list of tags. If the target field already exists, the tags are appended to the existing list of tags.",
+          "properties" : {
+            "when" : {
+              "$ref" : "#/definitions/condition"
+            },
+            "tags" : {
+              "type" : "array",
+              "description" : "List of tags to add.",
+              "items" : {
+                "type" : "string"
+              }
+            },
+            "target" : {
+              "type" : "string",
+              "description" : "(Optional) Field the tags will be added to. Defaults to tags. Setting tags in @metadata is not supported.",
+              "examples" : [ "tags" ]
+            }
+          }
+        },
+        "append" : {
+          "type" : [ "object", "null" ],
+          "description" : "The append processor appends one or more values to an existing array if the target field already exists and it is an array. Converts a scaler to an array and appends one or more values to it if the field exists and it is a scaler. Here the values can either be one or more static values or one or more values from the fields listed under fields key.",
+          "properties" : {
+            "when" : {
+              "$ref" : "#/definitions/condition"
+            },
+            "target_field" : {
+              "type" : "string",
+              "description" : "The field in which you want to append the data."
+            },
+            "fields" : {
+              "type" : "array",
+              "description" : "(Optional) List of fields from which you want to copy data from. If the value is of a concrete type it will be appended directly to the target. However, if the value is an array, all the elements of the array are pushed individually to the target field.",
+              "items" : {
+                "type" : "string"
+              }
+            },
+            "values" : {
+              "type" : "array",
+              "description" : "(Optional) List of static values you want to append to target field.",
+              "items" : {
+                "type" : "string"
+              }
+            },
+            "ignore_empty_values" : {
+              "type" : "string",
+              "description" : "(Optional) If set to true, all the \"\" and nil are omitted from being appended to the target field."
+            },
+            "fail_on_error" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "description" : "(Optional) If set to true and an error occurs, the changes are reverted and the original is returned. If set to false, processing continues if an error occurs. Default is true.",
+              "examples" : [ "true" ]
+            },
+            "allow_duplicate" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "description" : "(Optional) If set to false, the processor does not append values already present in the field. The default is true, which will append duplicate values in the array.",
+              "examples" : [ "true" ]
+            },
+            "ignore_missing" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "description" : "(Optional) Indicates whether to ignore events that lack the source field. The default is false, which will fail processing of an event if a field is missing.",
+              "examples" : [ "false" ]
+            }
+          }
+        },
+        "community_id" : {
+          "type" : [ "object", "null" ],
+          "description" : "The community_id processor computes a network flow hash according to the Community ID Flow Hash specification.",
+          "properties" : {
+            "when" : {
+              "$ref" : "#/definitions/condition"
+            }
+          }
+        },
+        "convert" : {
+          "type" : [ "object", "null" ],
+          "description" : "The convert processor converts a field in the event to a different type, such as converting a string to an integer.",
+          "properties" : {
+            "when" : {
+              "$ref" : "#/definitions/condition"
+            },
+            "fields" : {
+              "type" : "array",
+              "description" : "(Required) This is the list of fields to convert. At least one item must be contained in the list. Each item in the list must have a from key that specifies the source field. The to key is optional and specifies where to assign the converted value. If to is omitted then the from field is updated in-place. The type key specifies the data type to convert the value to. If type is omitted then the processor copies or renames the field without any type conversion.",
+              "items" : {
+                "type" : "string"
+              }
+            },
+            "ignore_missing" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "description" : "(Optional) If true the processor continues to the next field when the from key is not found in the event. If false then the processor returns an error and does not process the remaining fields. Default is false.",
+              "examples" : [ "false" ]
+            },
+            "fail_on_error" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "description" : "(Optional) If false type conversion failures are ignored and the processor continues to the next field. Default is true.",
+              "examples" : [ "true" ]
+            },
+            "tag" : {
+              "type" : "string",
+              "description" : "(Optional) An identifier for this processor. Useful for debugging."
+            },
+            "mode" : {
+              "type" : "string",
+              "description" : "(Optional) When both from and to are defined for a field then mode controls whether to copy or rename the field when the type conversion is successful. Default is copy.",
+              "examples" : [ "copy" ]
+            }
+          }
+        },
+        "decode_base64_field" : {
+          "type" : [ "object", "null" ],
+          "description" : "The decode_base64_field processor specifies a field to base64 decode. The field key contains a from: old-key and a to: new-key pair. from is the origin and to the target name of the field.",
+          "properties" : {
+            "when" : {
+              "$ref" : "#/definitions/condition"
+            },
+            "ignore_missing" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "description" : "(Optional) If set to true, no error is logged in case a key which should be base64 decoded is missing. Default is false.",
+              "examples" : [ "false" ]
+            },
+            "fail_on_error" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "description" : "(Optional) If set to true, in case of an error the base64 decode of fields is stopped and the original event is returned. If set to false, decoding continues also if an error happened during decoding. Default is true.",
+              "examples" : [ "true" ]
+            }
+          }
+        },
+        "decode_cef" : {
+          "type" : [ "object", "null" ],
+          "description" : "The decode_cef processor decodes Common Event Format (CEF) messages. It follows the specification defined in Micro Focus Security ArcSight Common Event Format, Version 25. This processor is available in Filebeat. This is an example CEF message.",
+          "properties" : {
+            "when" : {
+              "$ref" : "#/definitions/condition"
+            }
+          }
+        },
+        "decode_csv_fields" : {
+          "type" : [ "object", "null" ],
+          "description" : "This functionality is in technical preview and may be changed or removed in a future release. Elastic will work to fix any issues, but features in technical preview are not subject to the support SLA of official GA features.",
+          "properties" : {
+            "when" : {
+              "$ref" : "#/definitions/condition"
+            },
+            "fields" : {
+              "type" : "object",
+              "description" : "This is a mapping from the source field containing the CSV data to the destination field to which the decoded array will be written.",
+              "additionalItems" : true
+            },
+            "separator" : {
+              "type" : "string",
+              "description" : "(Optional) Character to be used as a column separator. The default is the comma character. For using a TAB character you must set it to \"\\t\"."
+            },
+            "ignore_missing" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "description" : "(Optional) Whether to ignore events which lack the source field. The default is false, which will fail processing of an event if a field is missing.",
+              "examples" : [ "false" ]
+            },
+            "overwrite_keys" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "description" : "Whether the target field is overwritten if it already exists. The default is false, which will fail processing of an event when target already exists.",
+              "examples" : [ "false" ]
+            },
+            "trim_leading_space" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "description" : "Whether extra space after the separator is trimmed from values. This works even if the separator is also a space. The default is false.",
+              "examples" : [ "false" ]
+            },
+            "fail_on_error" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "description" : "(Optional) If set to true, in case of an error the changes to the event are reverted, and the original event is returned. If set to false, processing continues also if an error happens. Default is true.",
+              "examples" : [ "true" ]
+            }
+          }
+        },
+        "decode_duration" : {
+          "type" : [ "object", "null" ],
+          "description" : "The decode_duration processor decodes a Go-style duration string into a specific format.",
+          "properties" : {
+            "when" : {
+              "$ref" : "#/definitions/condition"
+            }
+          }
+        },
+        "decode_xml" : {
+          "type" : [ "object", "null" ],
+          "description" : "The decode_xml processor decodes XML data that is stored under the field key. It outputs the result into the target_field.",
+          "properties" : {
+            "when" : {
+              "$ref" : "#/definitions/condition"
+            },
+            "field" : {
+              "type" : "string",
+              "description" : "(Required) Source field containing the XML. Defaults to message.",
+              "examples" : [ "message" ]
+            },
+            "target_field" : {
+              "type" : "string",
+              "description" : "(Optional) The field under which the decoded XML will be written. By default the decoded XML object replaces the field from which it was read. To merge the decoded XML fields into the root of the event specify target_field with an empty string (target_field: \"\"). Note that the null value (target_field:) is treated as if the field was not set at all."
+            },
+            "overwrite_keys" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "description" : "(Optional) A boolean that specifies whether keys that already exist in the event are overwritten by keys from the decoded XML object. The default value is true.",
+              "examples" : [ "true" ]
+            },
+            "to_lower" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "description" : "(Optional) Converts all keys to lowercase. Accepts either true or false. The default value is true.",
+              "examples" : [ "true" ]
+            },
+            "document_id" : {
+              "type" : "string",
+              "description" : "(Optional) XML key to use as the document ID. If configured, the field will be removed from the original XML document and stored in @metadata._id."
+            },
+            "ignore_missing" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "description" : "(Optional) If true the processor will not return an error when a specified field does not exist. Defaults to false.",
+              "examples" : [ "false" ]
+            },
+            "ignore_failure" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "description" : "(Optional) Ignore all errors produced by the processor. Defaults to false.",
+              "examples" : [ "false" ]
+            }
+          }
+        },
+        "decode_xml_wineventlog" : {
+          "type" : [ "object", "null" ],
+          "description" : "This functionality is in technical preview and may be changed or removed in a future release. Elastic will work to fix any issues, but features in technical preview are not subject to the support SLA of official GA features.",
+          "properties" : {
+            "when" : {
+              "$ref" : "#/definitions/condition"
+            },
+            "field" : {
+              "type" : "string",
+              "description" : "(Required) Source field containing the XML. Defaults to message.",
+              "examples" : [ "message" ]
+            },
+            "target_field" : {
+              "type" : "string",
+              "description" : "(Required) The field under which the decoded XML will be written. To merge the decoded XML fields into the root of the event specify target_field with an empty string (target_field: \"\"). The default value is winlog.",
+              "examples" : [ "winlog" ]
+            },
+            "overwrite_keys" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "description" : "(Optional) A boolean that specifies whether keys that already exist in the event are overwritten by keys from the decoded XML object. The default value is true.",
+              "examples" : [ "true" ]
+            },
+            "map_ecs_fields" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "description" : "(Optional) A boolean that specifies whether to map additional ECS fields when possible. Note that ECS field keys are placed outside of target_field. The default value is true.",
+              "examples" : [ "true" ]
+            },
+            "ignore_missing" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "description" : "(Optional) If true the processor will not return an error when a specified field does not exist. Defaults to false.",
+              "examples" : [ "false" ]
+            },
+            "ignore_failure" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "description" : "(Optional) Ignore all errors produced by the processor. Defaults to false.",
+              "examples" : [ "false" ]
+            }
+          }
+        },
+        "detect_mime_type" : {
+          "type" : [ "object", "null" ],
+          "description" : "The detect_mime_type processor attempts to detect a mime type for a field that contains a given stream of bytes. The field key contains the field used as the data source and the target key contains the field to populate with the detected type. It’s supported to use @metadata. prefix for target and set the value in the event metadata instead of fields.",
+          "properties" : {
+            "when" : {
+              "$ref" : "#/definitions/condition"
+            }
+          }
+        },
+        "dissect" : {
+          "type" : [ "object", "null" ],
+          "description" : "The dissect processor tokenizes incoming strings using defined patterns.",
+          "properties" : {
+            "when" : {
+              "$ref" : "#/definitions/condition"
+            },
+            "tokenizer" : {
+              "type" : "string",
+              "description" : "The field used to define the dissection pattern. Optional convert datatype can be provided after the key using | as separator to convert the value from string to integer, long, float, double, boolean or ip."
+            },
+            "field" : {
+              "type" : "string",
+              "description" : "(Optional) The event field to tokenize. Default is message.",
+              "examples" : [ "message" ]
+            },
+            "target_prefix" : {
+              "type" : "string",
+              "description" : "(Optional) The name of the field where the values will be extracted. When an empty string is defined, the processor will create the keys at the root of the event. Default is dissect. When the target key already exists in the event, the processor won’t replace it and log an error; you need to either drop or rename the key before using dissect, or enable the overwrite_keys flag.",
+              "examples" : [ "dissect" ]
+            },
+            "ignore_failure" : {
+              "type" : "string",
+              "description" : "(Optional) Flag to control whether the processor returns an error if the tokenizer fails to match the message field. If set to true, the processor will silently restore the original event, allowing execution of subsequent processors (if any). If set to false (default), the processor will log an error, preventing execution of other processors."
+            },
+            "overwrite_keys" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "description" : "(Optional) When set to true, the processor will overwrite existing keys in the event. The default is false, which causes the processor to fail when a key already exists.",
+              "examples" : [ "false" ]
+            },
+            "trim_values" : {
+              "type" : "string",
+              "description" : "(Optional) Enables the trimming of the extracted values. Useful to remove leading and/or trailing spaces. Possible values are: none: (default) no trimming is performed. left: values are trimmed on the left (leading). right: values are trimmed on the right (trailing). all: values are trimmed for leading and trailing."
+            },
+            "trim_chars" : {
+              "type" : "string",
+              "description" : "(Optional) Set of characters to trim from values, when trimming is enabled. The default is to trim the space character (\" \"). To trim multiple characters, simply set it to a string containing all characters to trim. For example, trim_chars: \" \\t\" will trim spaces and/or tabs."
+            }
+          }
+        },
+        "dns" : {
+          "type" : [ "object", "null" ],
+          "description" : "The dns processor performs DNS queries. It caches the responses that it receives in accordance to the time-to-live (TTL) value contained in the response. It also caches failures that occur during lookups. Each instance of this processor maintains its own independent cache.",
+          "properties" : {
+            "when" : {
+              "$ref" : "#/definitions/condition"
+            },
+            "type" : {
+              "type" : "string",
+              "description" : "The type of DNS query to perform. The supported types are A, AAAA, PTR (or reverse), and TXT."
+            },
+            "action" : {
+              "type" : "string",
+              "description" : "This defines the behavior of the processor when the target field already exists in the event. The options are append (default) and replace."
+            },
+            "fields" : {
+              "type" : "object",
+              "description" : "This is a mapping of source field names to target field names. The value of the source field will be used in the DNS query and result will be written to the target field.",
+              "additionalItems" : true
+            },
+            "success_cache.capacity.initial" : {
+              "type" : "string",
+              "description" : "The initial number of items that the success cache will be allocated to hold. When initialized the processor will allocate the memory for this number of items. Default value is 1000.",
+              "examples" : [ "1000" ]
+            },
+            "success_cache.capacity.max" : {
+              "type" : "string",
+              "description" : "The maximum number of items that the success cache can hold. When the maximum capacity is reached a random item is evicted. Default value is 10000.",
+              "examples" : [ "10000" ]
+            },
+            "success_cache.min_ttl" : {
+              "type" : "string",
+              "description" : "The duration of the minimum alternative cache TTL for successful DNS responses. Ensures that TTL=0 successful reverse DNS responses can be cached. Valid time units are \"ns\", \"us\" (or \"µs\"), \"ms\", \"s\", \"m\", \"h\". Default value is 1m.",
+              "examples" : [ "1m" ]
+            },
+            "failure_cache.capacity.initial" : {
+              "type" : "string",
+              "description" : "The initial number of items that the failure cache will be allocated to hold. When initialized the processor will allocate the memory for this number of items. Default value is 1000.",
+              "examples" : [ "1000" ]
+            },
+            "failure_cache.capacity.max" : {
+              "type" : "string",
+              "description" : "The maximum number of items that the failure cache can hold. When the maximum capacity is reached a random item is evicted. Default value is 10000.",
+              "examples" : [ "10000" ]
+            },
+            "failure_cache.ttl" : {
+              "type" : "string",
+              "description" : "The duration for which failures are cached. Valid time units are \"ns\", \"us\" (or \"µs\"), \"ms\", \"s\", \"m\", \"h\". Default value is 1m.",
+              "examples" : [ "1m" ]
+            },
+            "nameservers" : {
+              "type" : "array",
+              "description" : "A list of nameservers to query. If there are multiple servers, the resolver queries them in the order listed. If none are specified then it will read the nameservers listed in /etc/resolv.conf once at initialization. On Windows you must always supply at least one nameserver.",
+              "items" : {
+                "type" : "string"
+              }
+            },
+            "timeout" : {
+              "type" : "string",
+              "description" : "The duration after which a DNS query will timeout. This is timeout for each DNS request so if you have 2 nameservers then the total timeout will be 2 times this value. Valid time units are \"ns\", \"us\" (or \"µs\"), \"ms\", \"s\", \"m\", \"h\". Default value is 500ms.",
+              "examples" : [ "500ms" ]
+            },
+            "tag_on_failure" : {
+              "type" : "array",
+              "description" : "A list of tags to add to the event when any lookup fails. The tags are only added once even if multiple lookups fail. By default, no tags are added upon failure.",
+              "items" : {
+                "type" : "string"
+              }
+            },
+            "transport" : {
+              "type" : "string",
+              "description" : "The type of transport connection that should be used can either be tls (DNS over TLS) or udp. Defaults to udp.",
+              "examples" : [ "udp" ]
+            }
+          }
+        },
+        "extract_array" : {
+          "type" : [ "object", "null" ],
+          "description" : "This functionality is in technical preview and may be changed or removed in a future release. Elastic will work to fix any issues, but features in technical preview are not subject to the support SLA of official GA features.",
+          "properties" : {
+            "when" : {
+              "$ref" : "#/definitions/condition"
+            },
+            "field" : {
+              "type" : "string",
+              "description" : "The array field whose elements are to be extracted."
+            },
+            "mappings" : {
+              "type" : "string",
+              "description" : "Maps each field name to an array index. Use 0 for the first element in the array. Multiple fields can be mapped to the same array element."
+            },
+            "ignore_missing" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "description" : "(Optional) Whether to ignore events where the array field is missing. The default is false, which will fail processing of an event if the specified field does not exist. Set it to true to ignore this condition.",
+              "examples" : [ "false" ]
+            },
+            "overwrite_keys" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "description" : "Whether the target fields specified in the mapping are overwritten if they already exist. The default is false, which will fail processing if a target field already exists.",
+              "examples" : [ "false" ]
+            },
+            "fail_on_error" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "description" : "(Optional) If set to true and an error happens, changes to the event are reverted, and the original event is returned. If set to false, processing continues despite errors. Default is true.",
+              "examples" : [ "true" ]
+            },
+            "omit_empty" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "description" : "(Optional) Whether empty values are extracted from the array. If set to true, instead of the target field being set to an empty value, it is left unset. The empty string (\"\"), an empty array ([]) or an empty object ({}) are considered empty values. Default is false.",
+              "examples" : [ "false" ]
+            }
+          }
+        },
+        "fingerprint" : {
+          "type" : [ "object", "null" ],
+          "description" : "The fingerprint processor generates a fingerprint of an event based on a specified subset of its fields.",
+          "properties" : {
+            "when" : {
+              "$ref" : "#/definitions/condition"
+            },
+            "fields" : {
+              "type" : "array",
+              "description" : "List of fields to use as the source for the fingerprint. The list will be alphabetically sorted by the processor.",
+              "items" : {
+                "type" : "string"
+              }
+            },
+            "ignore_missing" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "description" : "(Optional) Whether to ignore missing fields. Default is false.",
+              "examples" : [ "false" ]
+            },
+            "target_field" : {
+              "type" : "string",
+              "description" : "(Optional) Field in which the generated fingerprint should be stored. Default is fingerprint.",
+              "examples" : [ "fingerprint" ]
+            },
+            "method" : {
+              "type" : "string",
+              "description" : "(Optional) Algorithm to use for computing the fingerprint. Must be one of: md5, sha1, sha256, sha384, sha512, xxhash. Default is sha256.",
+              "examples" : [ "sha256" ]
+            },
+            "encoding" : {
+              "type" : "string",
+              "description" : "(Optional) Encoding to use on the fingerprint value. Must be one of hex, base32, or base64. Default is hex.",
+              "examples" : [ "hex" ]
+            }
+          }
+        },
+        "move-fields" : {
+          "type" : [ "object", "null" ],
+          "description" : "The move_fields processor moves event fields from one object into another. It can also rearrange fields or add a prefix to fields.",
+          "properties" : {
+            "when" : {
+              "$ref" : "#/definitions/condition"
+            }
+          }
+        },
+        "parse_aws_vpc_flow_log" : {
+          "type" : [ "object", "null" ],
+          "description" : "The parse_aws_vpc_flow_log processor decodes AWS VPC Flow log messages.",
+          "properties" : {
+            "when" : {
+              "$ref" : "#/definitions/condition"
+            }
+          }
+        },
+        "rate_limit" : {
+          "type" : [ "object", "null" ],
+          "description" : "The rate_limit processor limits the throughput of events based on the specified configuration.",
+          "properties" : {
+            "when" : {
+              "$ref" : "#/definitions/condition"
+            },
+            "limit" : {
+              "type" : "string",
+              "description" : "The rate limit. Supported time units for the rate are s (per second), m (per minute), and h (per hour)."
+            },
+            "fields" : {
+              "type" : "array",
+              "description" : "(Optional) List of fields. The rate limit will be applied to each distinct value derived by combining the values of these fields.",
+              "items" : {
+                "type" : "string"
               }
             }
-          },
-          "add_observer_metadata" : {
-            "type" : [ "object", "null" ],
-            "description" : "This functionality is in beta and is subject to change. The design and code is less mature than official GA features and is being provided as-is with no warranties. Beta features are not subject to the support SLA of official GA features.",
-            "properties" : {
-              "when" : {
-                "$ref" : "#/definitions/condition"
-              },
-              "netinfo.enabled" : {
-                "type" : "string",
-                "description" : "(Optional) Default true. Include IP addresses and MAC addresses as fields observer.ip and observer.mac"
-              },
-              "cache.ttl" : {
-                "type" : "string",
-                "description" : "(Optional) The processor uses an internal cache for the observer metadata. This sets the cache expiration time. The default is 5m, negative values disable caching altogether.",
-                "examples" : [ "5m" ]
-              },
-              "geo.name" : {
-                "type" : "string",
-                "description" : "(Optional) User definable token to be used for identifying a discrete location. Frequently a datacenter, rack, or similar."
-              },
-              "geo.location" : {
-                "type" : "string",
-                "description" : "(Optional) Longitude and latitude in comma separated format."
-              },
-              "geo.continent_name" : {
-                "type" : "string",
-                "description" : "(Optional) Name of the continent."
-              },
-              "geo.country_name" : {
-                "type" : "string",
-                "description" : "(Optional) Name of the country."
-              },
-              "geo.region_name" : {
-                "type" : "string",
-                "description" : "(Optional) Name of the region."
-              },
-              "geo.city_name" : {
-                "type" : "string",
-                "description" : "(Optional) Name of the city."
-              },
-              "geo.country_iso_code" : {
-                "type" : "string",
-                "description" : "(Optional) ISO country code."
-              },
-              "geo.region_iso_code" : {
-                "type" : "string",
-                "description" : "(Optional) ISO region code."
-              }
+          }
+        },
+        "registered_domain" : {
+          "type" : [ "object", "null" ],
+          "description" : "The registered_domain processor reads a field containing a hostname and then writes the \"registered domain\" contained in the hostname to the target field. For example, given www.google.co.uk the processor would output google.co.uk. In other words the \"registered domain\" is the effective top-level domain (co.uk) plus one level (google). Optionally, it can store the rest of the domain, the subdomain into another target field.",
+          "properties" : {
+            "when" : {
+              "$ref" : "#/definitions/condition"
             }
-          },
-          "add_process_metadata" : {
-            "type" : [ "object", "null" ],
-            "description" : "The add_process_metadata processor enriches events with information from running processes, identified by their process ID (PID).",
-            "properties" : {
-              "when" : {
-                "$ref" : "#/definitions/condition"
-              },
-              "match_pids" : {
-                "type" : "array",
-                "description" : "List of fields to lookup for a PID. The processor will search the list sequentially until the field is found in the current event, and the PID lookup will be applied to the value of this field.",
-                "items" : {
-                  "type" : "string"
-                }
-              },
-              "target" : {
-                "type" : "string",
-                "description" : "(Optional) Destination prefix where the process object will be created. The default is the event’s root."
-              },
-              "include_fields" : {
-                "type" : "array",
-                "description" : "(Optional) List of fields to add. By default, the processor will add all the available fields except process.env.",
-                "items" : {
-                  "type" : "string"
-                }
-              },
-              "ignore_missing" : {
-                "type" : "string",
-                "description" : "(Optional) When set to false, events that don’t contain any of the fields in match_pids will be discarded and an error will be generated. By default, this condition is ignored."
-              },
-              "overwrite_keys" : {
-                "type" : "string",
-                "description" : "(Optional) By default, if a target field already exists, it will not be overwritten, and an error will be logged. If overwrite_keys is set to true, this condition will be ignored."
-              },
-              "restricted_fields" : {
-                "type" : "string",
-                "description" : "(Optional) By default, the process.env field is not output, to avoid leaking sensitive data. If restricted_fields is true, the field will be present in the output."
-              },
-              "host_path" : {
-                "type" : "string",
-                "description" : "(Optional) By default, the host_path field is set to the root directory of the host /. This is the path where /proc is mounted. For different runtime configurations of Kubernetes or Docker, the host_path can be set to overwrite the default."
-              },
-              "cgroup_prefixes" : {
-                "type" : "array",
-                "description" : "(Optional) List of prefixes that will be matched against cgroup paths. When a cgroup path begins with a prefix in the list, then the last element of the path is returned as the container ID. Only one of cgroup_prefixes and cgroup_rexex should be configured. If neither are configured then a default cgroup_regex value is used that matches cgroup paths containing 64-character container IDs (like those from Docker, Kubernetes, and Podman).",
-                "items" : {
-                  "type" : "string"
-                }
-              },
-              "cgroup_regex" : {
-                "type" : "string",
-                "description" : "(Optional) A regular expression that will be matched against cgroup paths. It must contain one capturing group. When a cgroup path matches the regular expression then the value of the capturing group is returned as the container ID. Only one of cgroup_prefixes and cgroup_rexex should be configured. If neither are configured then a default cgroup_regex value is used that matches cgroup paths containing 64-character container IDs (like those from Docker, Kubernetes, and Podman)."
-              },
-              "cgroup_cache_expire_time" : {
-                "type" : "string",
-                "description" : "(Optional) By default, the cgroup_cache_expire_time is set to 30 seconds. This is the length of time before cgroup cache elements expire in seconds. It can be set to 0 to disable the cgroup cache. In some container runtimes technology like runc, the container’s process is also process in the host kernel, and will be affected by PID rollover/reuse. The expire time needs to set smaller than the PIDs wrap around time to avoid wrong container id."
-              }
+          }
+        },
+        "replace" : {
+          "type" : [ "object", "null" ],
+          "description" : "The replace processor takes a list of fields to search for a matching value and replaces the matching value with a specified string.",
+          "properties" : {
+            "when" : {
+              "$ref" : "#/definitions/condition"
             }
-          },
-          "add_tags" : {
-            "type" : [ "object", "null" ],
-            "description" : "The add_tags processor adds tags to a list of tags. If the target field already exists, the tags are appended to the existing list of tags.",
-            "properties" : {
-              "when" : {
-                "$ref" : "#/definitions/condition"
-              },
-              "tags" : {
-                "type" : "array",
-                "description" : "List of tags to add.",
-                "items" : {
-                  "type" : "string"
-                }
-              },
-              "target" : {
-                "type" : "string",
-                "description" : "(Optional) Field the tags will be added to. Defaults to tags. Setting tags in @metadata is not supported.",
-                "examples" : [ "tags" ]
+          }
+        },
+        "script" : {
+          "type" : [ "object", "null" ],
+          "description" : "The script processor executes Javascript code to process an event. The processor uses a pure Go implementation of ECMAScript 5.1 and has no external dependencies. This can be useful in situations where one of the other processors doesn’t provide the functionality you need to filter events.",
+          "properties" : {
+            "when" : {
+              "$ref" : "#/definitions/condition"
+            },
+            "lang" : {
+              "type" : "string",
+              "description" : "This field is required and its value must be javascript."
+            },
+            "tag" : {
+              "type" : "string",
+              "description" : "This is an optional identifier that is added to log messages. If defined it enables metrics logging for this instance of the processor. The metrics include the number of exceptions and a histogram of the execution times for the process function."
+            },
+            "source" : {
+              "type" : "string",
+              "description" : "Inline Javascript source code."
+            },
+            "file" : {
+              "type" : "string",
+              "description" : "Path to a script file to load. Relative paths are interpreted as relative to the path.config directory. Globs are expanded."
+            },
+            "files" : {
+              "type" : "array",
+              "description" : "List of script files to load. The scripts are concatenated together. Relative paths are interpreted as relative to the path.config directory. And globs are expanded.",
+              "items" : {
+                "type" : "string"
               }
+            },
+            "params" : {
+              "type" : "string",
+              "description" : "A dictionary of parameters that are passed to the register of the script."
+            },
+            "tag_on_exception" : {
+              "type" : "string",
+              "description" : "Tag to add to events in case the Javascript code causes an exception while processing an event. Defaults to _js_exception.",
+              "examples" : [ "_js_exception" ]
+            },
+            "timeout" : {
+              "type" : "string",
+              "description" : "This sets an execution timeout for the process function. When the process function takes longer than the timeout period the function is interrupted. You can set this option to prevent a script from running for too long (like preventing an infinite while loop). By default there is no timeout."
+            },
+            "max_cached_sessions" : {
+              "type" : "string",
+              "description" : "This sets the maximum number of Javascript VM sessions that will be cached to avoid reallocation. The default is 4.",
+              "examples" : [ "4" ]
             }
-          },
-          "append" : {
-            "type" : [ "object", "null" ],
-            "description" : "The append processor appends one or more values to an existing array if the target field already exists and it is an array. Converts a scaler to an array and appends one or more values to it if the field exists and it is a scaler. Here the values can either be one or more static values or one or more values from the fields listed under fields key.",
-            "properties" : {
-              "when" : {
-                "$ref" : "#/definitions/condition"
-              },
-              "target_field" : {
-                "type" : "string",
-                "description" : "The field in which you want to append the data."
-              },
-              "fields" : {
-                "type" : "array",
-                "description" : "(Optional) List of fields from which you want to copy data from. If the value is of a concrete type it will be appended directly to the target. However, if the value is an array, all the elements of the array are pushed individually to the target field.",
-                "items" : {
-                  "type" : "string"
-                }
-              },
-              "values" : {
-                "type" : "array",
-                "description" : "(Optional) List of static values you want to append to target field.",
-                "items" : {
-                  "type" : "string"
-                }
-              },
-              "ignore_empty_values" : {
-                "type" : "string",
-                "description" : "(Optional) If set to true, all the \"\" and nil are omitted from being appended to the target field."
-              },
-              "fail_on_error" : {
-                "$ref" : "#/definitions/booleanOrString",
-                "description" : "(Optional) If set to true and an error occurs, the changes are reverted and the original is returned. If set to false, processing continues if an error occurs. Default is true.",
-                "examples" : [ "true" ]
-              },
-              "allow_duplicate" : {
-                "$ref" : "#/definitions/booleanOrString",
-                "description" : "(Optional) If set to false, the processor does not append values already present in the field. The default is true, which will append duplicate values in the array.",
-                "examples" : [ "true" ]
-              },
-              "ignore_missing" : {
-                "$ref" : "#/definitions/booleanOrString",
-                "description" : "(Optional) Indicates whether to ignore events that lack the source field. The default is false, which will fail processing of an event if a field is missing.",
-                "examples" : [ "false" ]
-              }
+          }
+        },
+        "syslog" : {
+          "type" : [ "object", "null" ],
+          "description" : "The syslog processor parses RFC 3146 and/or RFC 5424 formatted syslog messages that are stored in a field. The processor itself does not handle receiving syslog messages from external sources. This is done through an input, such as the TCP input. Certain integrations, when enabled through configuration, will embed the syslog processor to process syslog messages, such as Custom TCP Logs and Custom UDP Logs.",
+          "properties" : {
+            "when" : {
+              "$ref" : "#/definitions/condition"
+            },
+            "field" : {
+              "type" : "string",
+              "description" : "(Required) Source field containing the syslog message. Defaults to message.",
+              "examples" : [ "message" ]
+            },
+            "format" : {
+              "type" : "string",
+              "description" : "(Optional) The syslog format to use, rfc3164, or rfc5424. To automatically detect the format from the log entries, set this option to auto. The default is auto.",
+              "examples" : [ "auto" ]
+            },
+            "timezone" : {
+              "type" : "string",
+              "description" : "(Optional) IANA time zone name(e.g. America/New York) or a fixed time offset (e.g. +0200) to use when parsing syslog timestamps that do not contain a time zone. Local may be specified to use the machine’s local time zone. Defaults to Local.",
+              "examples" : [ "Local" ]
+            },
+            "overwrite_keys" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "description" : "(Optional) A boolean that specifies whether keys that already exist in the event are overwritten by keys from the syslog message. The default value is true.",
+              "examples" : [ "true" ]
+            },
+            "ignore_missing" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "description" : "(Optional) If true the processor will not return an error when a specified field does not exist. Defaults to false.",
+              "examples" : [ "false" ]
+            },
+            "ignore_failure" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "description" : "(Optional) Ignore all errors produced by the processor. Defaults to false.",
+              "examples" : [ "false" ]
+            },
+            "tag" : {
+              "type" : "string",
+              "description" : "(Optional) An identifier for this processor. Useful for debugging."
+            },
+            "failure" : {
+              "type" : "string",
+              "description" : "Measures the number of occurrences where a message was unable to be parsed."
+            },
+            "missing" : {
+              "type" : "string",
+              "description" : "Measures the number of occurrences where an event was missing the required input field."
+            },
+            "success" : {
+              "type" : "string",
+              "description" : "Measures the number of successfully parsed syslog messages."
             }
-          },
-          "community_id" : {
-            "type" : [ "object", "null" ],
-            "description" : "The community_id processor computes a network flow hash according to the Community ID Flow Hash specification.",
-            "properties" : {
-              "when" : {
-                "$ref" : "#/definitions/condition"
-              }
+          }
+        },
+        "timestamp" : {
+          "type" : [ "object", "null" ],
+          "description" : "This functionality is in beta and is subject to change. The design and code is less mature than official GA features and is being provided as-is with no warranties. Beta features are not subject to the support SLA of official GA features.",
+          "properties" : {
+            "when" : {
+              "$ref" : "#/definitions/condition"
             }
-          },
-          "convert" : {
-            "type" : [ "object", "null" ],
-            "description" : "The convert processor converts a field in the event to a different type, such as converting a string to an integer.",
-            "properties" : {
-              "when" : {
-                "$ref" : "#/definitions/condition"
-              },
-              "fields" : {
-                "type" : "array",
-                "description" : "(Required) This is the list of fields to convert. At least one item must be contained in the list. Each item in the list must have a from key that specifies the source field. The to key is optional and specifies where to assign the converted value. If to is omitted then the from field is updated in-place. The type key specifies the data type to convert the value to. If type is omitted then the processor copies or renames the field without any type conversion.",
-                "items" : {
-                  "type" : "string"
-                }
-              },
-              "ignore_missing" : {
-                "$ref" : "#/definitions/booleanOrString",
-                "description" : "(Optional) If true the processor continues to the next field when the from key is not found in the event. If false then the processor returns an error and does not process the remaining fields. Default is false.",
-                "examples" : [ "false" ]
-              },
-              "fail_on_error" : {
-                "$ref" : "#/definitions/booleanOrString",
-                "description" : "(Optional) If false type conversion failures are ignored and the processor continues to the next field. Default is true.",
-                "examples" : [ "true" ]
-              },
-              "tag" : {
-                "type" : "string",
-                "description" : "(Optional) An identifier for this processor. Useful for debugging."
-              },
-              "mode" : {
-                "type" : "string",
-                "description" : "(Optional) When both from and to are defined for a field then mode controls whether to copy or rename the field when the type conversion is successful. Default is copy.",
-                "examples" : [ "copy" ]
-              }
-            }
-          },
-          "decode_base64_field" : {
-            "type" : [ "object", "null" ],
-            "description" : "The decode_base64_field processor specifies a field to base64 decode. The field key contains a from: old-key and a to: new-key pair. from is the origin and to the target name of the field.",
-            "properties" : {
-              "when" : {
-                "$ref" : "#/definitions/condition"
-              },
-              "ignore_missing" : {
-                "$ref" : "#/definitions/booleanOrString",
-                "description" : "(Optional) If set to true, no error is logged in case a key which should be base64 decoded is missing. Default is false.",
-                "examples" : [ "false" ]
-              },
-              "fail_on_error" : {
-                "$ref" : "#/definitions/booleanOrString",
-                "description" : "(Optional) If set to true, in case of an error the base64 decode of fields is stopped and the original event is returned. If set to false, decoding continues also if an error happened during decoding. Default is true.",
-                "examples" : [ "true" ]
-              }
-            }
-          },
-          "decode_cef" : {
-            "type" : [ "object", "null" ],
-            "description" : "The decode_cef processor decodes Common Event Format (CEF) messages. It follows the specification defined in Micro Focus Security ArcSight Common Event Format, Version 25. This processor is available in Filebeat. This is an example CEF message.",
-            "properties" : {
-              "when" : {
-                "$ref" : "#/definitions/condition"
-              }
-            }
-          },
-          "decode_csv_fields" : {
-            "type" : [ "object", "null" ],
-            "description" : "This functionality is in technical preview and may be changed or removed in a future release. Elastic will work to fix any issues, but features in technical preview are not subject to the support SLA of official GA features.",
-            "properties" : {
-              "when" : {
-                "$ref" : "#/definitions/condition"
-              },
-              "fields" : {
-                "type" : "object",
-                "description" : "This is a mapping from the source field containing the CSV data to the destination field to which the decoded array will be written.",
-                "additionalItems" : true
-              },
-              "separator" : {
-                "type" : "string",
-                "description" : "(Optional) Character to be used as a column separator. The default is the comma character. For using a TAB character you must set it to \"\\t\"."
-              },
-              "ignore_missing" : {
-                "$ref" : "#/definitions/booleanOrString",
-                "description" : "(Optional) Whether to ignore events which lack the source field. The default is false, which will fail processing of an event if a field is missing.",
-                "examples" : [ "false" ]
-              },
-              "overwrite_keys" : {
-                "$ref" : "#/definitions/booleanOrString",
-                "description" : "Whether the target field is overwritten if it already exists. The default is false, which will fail processing of an event when target already exists.",
-                "examples" : [ "false" ]
-              },
-              "trim_leading_space" : {
-                "$ref" : "#/definitions/booleanOrString",
-                "description" : "Whether extra space after the separator is trimmed from values. This works even if the separator is also a space. The default is false.",
-                "examples" : [ "false" ]
-              },
-              "fail_on_error" : {
-                "$ref" : "#/definitions/booleanOrString",
-                "description" : "(Optional) If set to true, in case of an error the changes to the event are reverted, and the original event is returned. If set to false, processing continues also if an error happens. Default is true.",
-                "examples" : [ "true" ]
-              }
-            }
-          },
-          "decode_duration" : {
-            "type" : [ "object", "null" ],
-            "description" : "The decode_duration processor decodes a Go-style duration string into a specific format.",
-            "properties" : {
-              "when" : {
-                "$ref" : "#/definitions/condition"
-              }
-            }
-          },
-          "decode_xml" : {
-            "type" : [ "object", "null" ],
-            "description" : "The decode_xml processor decodes XML data that is stored under the field key. It outputs the result into the target_field.",
-            "properties" : {
-              "when" : {
-                "$ref" : "#/definitions/condition"
-              },
-              "field" : {
-                "type" : "string",
-                "description" : "(Required) Source field containing the XML. Defaults to message.",
-                "examples" : [ "message" ]
-              },
-              "target_field" : {
-                "type" : "string",
-                "description" : "(Optional) The field under which the decoded XML will be written. By default the decoded XML object replaces the field from which it was read. To merge the decoded XML fields into the root of the event specify target_field with an empty string (target_field: \"\"). Note that the null value (target_field:) is treated as if the field was not set at all."
-              },
-              "overwrite_keys" : {
-                "$ref" : "#/definitions/booleanOrString",
-                "description" : "(Optional) A boolean that specifies whether keys that already exist in the event are overwritten by keys from the decoded XML object. The default value is true.",
-                "examples" : [ "true" ]
-              },
-              "to_lower" : {
-                "$ref" : "#/definitions/booleanOrString",
-                "description" : "(Optional) Converts all keys to lowercase. Accepts either true or false. The default value is true.",
-                "examples" : [ "true" ]
-              },
-              "document_id" : {
-                "type" : "string",
-                "description" : "(Optional) XML key to use as the document ID. If configured, the field will be removed from the original XML document and stored in @metadata._id."
-              },
-              "ignore_missing" : {
-                "$ref" : "#/definitions/booleanOrString",
-                "description" : "(Optional) If true the processor will not return an error when a specified field does not exist. Defaults to false.",
-                "examples" : [ "false" ]
-              },
-              "ignore_failure" : {
-                "$ref" : "#/definitions/booleanOrString",
-                "description" : "(Optional) Ignore all errors produced by the processor. Defaults to false.",
-                "examples" : [ "false" ]
-              }
-            }
-          },
-          "decode_xml_wineventlog" : {
-            "type" : [ "object", "null" ],
-            "description" : "This functionality is in technical preview and may be changed or removed in a future release. Elastic will work to fix any issues, but features in technical preview are not subject to the support SLA of official GA features.",
-            "properties" : {
-              "when" : {
-                "$ref" : "#/definitions/condition"
-              },
-              "field" : {
-                "type" : "string",
-                "description" : "(Required) Source field containing the XML. Defaults to message.",
-                "examples" : [ "message" ]
-              },
-              "target_field" : {
-                "type" : "string",
-                "description" : "(Required) The field under which the decoded XML will be written. To merge the decoded XML fields into the root of the event specify target_field with an empty string (target_field: \"\"). The default value is winlog.",
-                "examples" : [ "winlog" ]
-              },
-              "overwrite_keys" : {
-                "$ref" : "#/definitions/booleanOrString",
-                "description" : "(Optional) A boolean that specifies whether keys that already exist in the event are overwritten by keys from the decoded XML object. The default value is true.",
-                "examples" : [ "true" ]
-              },
-              "map_ecs_fields" : {
-                "$ref" : "#/definitions/booleanOrString",
-                "description" : "(Optional) A boolean that specifies whether to map additional ECS fields when possible. Note that ECS field keys are placed outside of target_field. The default value is true.",
-                "examples" : [ "true" ]
-              },
-              "ignore_missing" : {
-                "$ref" : "#/definitions/booleanOrString",
-                "description" : "(Optional) If true the processor will not return an error when a specified field does not exist. Defaults to false.",
-                "examples" : [ "false" ]
-              },
-              "ignore_failure" : {
-                "$ref" : "#/definitions/booleanOrString",
-                "description" : "(Optional) Ignore all errors produced by the processor. Defaults to false.",
-                "examples" : [ "false" ]
-              }
-            }
-          },
-          "detect_mime_type" : {
-            "type" : [ "object", "null" ],
-            "description" : "The detect_mime_type processor attempts to detect a mime type for a field that contains a given stream of bytes. The field key contains the field used as the data source and the target key contains the field to populate with the detected type. It’s supported to use @metadata. prefix for target and set the value in the event metadata instead of fields.",
-            "properties" : {
-              "when" : {
-                "$ref" : "#/definitions/condition"
-              }
-            }
-          },
-          "dissect" : {
-            "type" : [ "object", "null" ],
-            "description" : "The dissect processor tokenizes incoming strings using defined patterns.",
-            "properties" : {
-              "when" : {
-                "$ref" : "#/definitions/condition"
-              },
-              "tokenizer" : {
-                "type" : "string",
-                "description" : "The field used to define the dissection pattern. Optional convert datatype can be provided after the key using | as separator to convert the value from string to integer, long, float, double, boolean or ip."
-              },
-              "field" : {
-                "type" : "string",
-                "description" : "(Optional) The event field to tokenize. Default is message.",
-                "examples" : [ "message" ]
-              },
-              "target_prefix" : {
-                "type" : "string",
-                "description" : "(Optional) The name of the field where the values will be extracted. When an empty string is defined, the processor will create the keys at the root of the event. Default is dissect. When the target key already exists in the event, the processor won’t replace it and log an error; you need to either drop or rename the key before using dissect, or enable the overwrite_keys flag.",
-                "examples" : [ "dissect" ]
-              },
-              "ignore_failure" : {
-                "type" : "string",
-                "description" : "(Optional) Flag to control whether the processor returns an error if the tokenizer fails to match the message field. If set to true, the processor will silently restore the original event, allowing execution of subsequent processors (if any). If set to false (default), the processor will log an error, preventing execution of other processors."
-              },
-              "overwrite_keys" : {
-                "$ref" : "#/definitions/booleanOrString",
-                "description" : "(Optional) When set to true, the processor will overwrite existing keys in the event. The default is false, which causes the processor to fail when a key already exists.",
-                "examples" : [ "false" ]
-              },
-              "trim_values" : {
-                "type" : "string",
-                "description" : "(Optional) Enables the trimming of the extracted values. Useful to remove leading and/or trailing spaces. Possible values are: none: (default) no trimming is performed. left: values are trimmed on the left (leading). right: values are trimmed on the right (trailing). all: values are trimmed for leading and trailing."
-              },
-              "trim_chars" : {
-                "type" : "string",
-                "description" : "(Optional) Set of characters to trim from values, when trimming is enabled. The default is to trim the space character (\" \"). To trim multiple characters, simply set it to a string containing all characters to trim. For example, trim_chars: \" \\t\" will trim spaces and/or tabs."
-              }
-            }
-          },
-          "dns" : {
-            "type" : [ "object", "null" ],
-            "description" : "The dns processor performs DNS queries. It caches the responses that it receives in accordance to the time-to-live (TTL) value contained in the response. It also caches failures that occur during lookups. Each instance of this processor maintains its own independent cache.",
-            "properties" : {
-              "when" : {
-                "$ref" : "#/definitions/condition"
-              },
-              "type" : {
-                "type" : "string",
-                "description" : "The type of DNS query to perform. The supported types are A, AAAA, PTR (or reverse), and TXT."
-              },
-              "action" : {
-                "type" : "string",
-                "description" : "This defines the behavior of the processor when the target field already exists in the event. The options are append (default) and replace."
-              },
-              "fields" : {
-                "type" : "object",
-                "description" : "This is a mapping of source field names to target field names. The value of the source field will be used in the DNS query and result will be written to the target field.",
-                "additionalItems" : true
-              },
-              "success_cache.capacity.initial" : {
-                "type" : "string",
-                "description" : "The initial number of items that the success cache will be allocated to hold. When initialized the processor will allocate the memory for this number of items. Default value is 1000.",
-                "examples" : [ "1000" ]
-              },
-              "success_cache.capacity.max" : {
-                "type" : "string",
-                "description" : "The maximum number of items that the success cache can hold. When the maximum capacity is reached a random item is evicted. Default value is 10000.",
-                "examples" : [ "10000" ]
-              },
-              "success_cache.min_ttl" : {
-                "type" : "string",
-                "description" : "The duration of the minimum alternative cache TTL for successful DNS responses. Ensures that TTL=0 successful reverse DNS responses can be cached. Valid time units are \"ns\", \"us\" (or \"µs\"), \"ms\", \"s\", \"m\", \"h\". Default value is 1m.",
-                "examples" : [ "1m" ]
-              },
-              "failure_cache.capacity.initial" : {
-                "type" : "string",
-                "description" : "The initial number of items that the failure cache will be allocated to hold. When initialized the processor will allocate the memory for this number of items. Default value is 1000.",
-                "examples" : [ "1000" ]
-              },
-              "failure_cache.capacity.max" : {
-                "type" : "string",
-                "description" : "The maximum number of items that the failure cache can hold. When the maximum capacity is reached a random item is evicted. Default value is 10000.",
-                "examples" : [ "10000" ]
-              },
-              "failure_cache.ttl" : {
-                "type" : "string",
-                "description" : "The duration for which failures are cached. Valid time units are \"ns\", \"us\" (or \"µs\"), \"ms\", \"s\", \"m\", \"h\". Default value is 1m.",
-                "examples" : [ "1m" ]
-              },
-              "nameservers" : {
-                "type" : "array",
-                "description" : "A list of nameservers to query. If there are multiple servers, the resolver queries them in the order listed. If none are specified then it will read the nameservers listed in /etc/resolv.conf once at initialization. On Windows you must always supply at least one nameserver.",
-                "items" : {
-                  "type" : "string"
-                }
-              },
-              "timeout" : {
-                "type" : "string",
-                "description" : "The duration after which a DNS query will timeout. This is timeout for each DNS request so if you have 2 nameservers then the total timeout will be 2 times this value. Valid time units are \"ns\", \"us\" (or \"µs\"), \"ms\", \"s\", \"m\", \"h\". Default value is 500ms.",
-                "examples" : [ "500ms" ]
-              },
-              "tag_on_failure" : {
-                "type" : "array",
-                "description" : "A list of tags to add to the event when any lookup fails. The tags are only added once even if multiple lookups fail. By default, no tags are added upon failure.",
-                "items" : {
-                  "type" : "string"
-                }
-              },
-              "transport" : {
-                "type" : "string",
-                "description" : "The type of transport connection that should be used can either be tls (DNS over TLS) or udp. Defaults to udp.",
-                "examples" : [ "udp" ]
-              }
-            }
-          },
-          "extract_array" : {
-            "type" : [ "object", "null" ],
-            "description" : "This functionality is in technical preview and may be changed or removed in a future release. Elastic will work to fix any issues, but features in technical preview are not subject to the support SLA of official GA features.",
-            "properties" : {
-              "when" : {
-                "$ref" : "#/definitions/condition"
-              },
-              "field" : {
-                "type" : "string",
-                "description" : "The array field whose elements are to be extracted."
-              },
-              "mappings" : {
-                "type" : "string",
-                "description" : "Maps each field name to an array index. Use 0 for the first element in the array. Multiple fields can be mapped to the same array element."
-              },
-              "ignore_missing" : {
-                "$ref" : "#/definitions/booleanOrString",
-                "description" : "(Optional) Whether to ignore events where the array field is missing. The default is false, which will fail processing of an event if the specified field does not exist. Set it to true to ignore this condition.",
-                "examples" : [ "false" ]
-              },
-              "overwrite_keys" : {
-                "$ref" : "#/definitions/booleanOrString",
-                "description" : "Whether the target fields specified in the mapping are overwritten if they already exist. The default is false, which will fail processing if a target field already exists.",
-                "examples" : [ "false" ]
-              },
-              "fail_on_error" : {
-                "$ref" : "#/definitions/booleanOrString",
-                "description" : "(Optional) If set to true and an error happens, changes to the event are reverted, and the original event is returned. If set to false, processing continues despite errors. Default is true.",
-                "examples" : [ "true" ]
-              },
-              "omit_empty" : {
-                "$ref" : "#/definitions/booleanOrString",
-                "description" : "(Optional) Whether empty values are extracted from the array. If set to true, instead of the target field being set to an empty value, it is left unset. The empty string (\"\"), an empty array ([]) or an empty object ({}) are considered empty values. Default is false.",
-                "examples" : [ "false" ]
-              }
-            }
-          },
-          "fingerprint" : {
-            "type" : [ "object", "null" ],
-            "description" : "The fingerprint processor generates a fingerprint of an event based on a specified subset of its fields.",
-            "properties" : {
-              "when" : {
-                "$ref" : "#/definitions/condition"
-              },
-              "fields" : {
-                "type" : "array",
-                "description" : "List of fields to use as the source for the fingerprint. The list will be alphabetically sorted by the processor.",
-                "items" : {
-                  "type" : "string"
-                }
-              },
-              "ignore_missing" : {
-                "$ref" : "#/definitions/booleanOrString",
-                "description" : "(Optional) Whether to ignore missing fields. Default is false.",
-                "examples" : [ "false" ]
-              },
-              "target_field" : {
-                "type" : "string",
-                "description" : "(Optional) Field in which the generated fingerprint should be stored. Default is fingerprint.",
-                "examples" : [ "fingerprint" ]
-              },
-              "method" : {
-                "type" : "string",
-                "description" : "(Optional) Algorithm to use for computing the fingerprint. Must be one of: md5, sha1, sha256, sha384, sha512, xxhash. Default is sha256.",
-                "examples" : [ "sha256" ]
-              },
-              "encoding" : {
-                "type" : "string",
-                "description" : "(Optional) Encoding to use on the fingerprint value. Must be one of hex, base32, or base64. Default is hex.",
-                "examples" : [ "hex" ]
-              }
-            }
-          },
-          "move-fields" : {
-            "type" : [ "object", "null" ],
-            "description" : "The move_fields processor moves event fields from one object into another. It can also rearrange fields or add a prefix to fields.",
-            "properties" : {
-              "when" : {
-                "$ref" : "#/definitions/condition"
-              }
-            }
-          },
-          "parse_aws_vpc_flow_log" : {
-            "type" : [ "object", "null" ],
-            "description" : "The parse_aws_vpc_flow_log processor decodes AWS VPC Flow log messages.",
-            "properties" : {
-              "when" : {
-                "$ref" : "#/definitions/condition"
-              }
-            }
-          },
-          "rate_limit" : {
-            "type" : [ "object", "null" ],
-            "description" : "The rate_limit processor limits the throughput of events based on the specified configuration.",
-            "properties" : {
-              "when" : {
-                "$ref" : "#/definitions/condition"
-              },
-              "limit" : {
-                "type" : "string",
-                "description" : "The rate limit. Supported time units for the rate are s (per second), m (per minute), and h (per hour)."
-              },
-              "fields" : {
-                "type" : "array",
-                "description" : "(Optional) List of fields. The rate limit will be applied to each distinct value derived by combining the values of these fields.",
-                "items" : {
-                  "type" : "string"
-                }
-              }
-            }
-          },
-          "registered_domain" : {
-            "type" : [ "object", "null" ],
-            "description" : "The registered_domain processor reads a field containing a hostname and then writes the \"registered domain\" contained in the hostname to the target field. For example, given www.google.co.uk the processor would output google.co.uk. In other words the \"registered domain\" is the effective top-level domain (co.uk) plus one level (google). Optionally, it can store the rest of the domain, the subdomain into another target field.",
-            "properties" : {
-              "when" : {
-                "$ref" : "#/definitions/condition"
-              }
-            }
-          },
-          "replace" : {
-            "type" : [ "object", "null" ],
-            "description" : "The replace processor takes a list of fields to search for a matching value and replaces the matching value with a specified string.",
-            "properties" : {
-              "when" : {
-                "$ref" : "#/definitions/condition"
-              }
-            }
-          },
-          "script" : {
-            "type" : [ "object", "null" ],
-            "description" : "The script processor executes Javascript code to process an event. The processor uses a pure Go implementation of ECMAScript 5.1 and has no external dependencies. This can be useful in situations where one of the other processors doesn’t provide the functionality you need to filter events.",
-            "properties" : {
-              "when" : {
-                "$ref" : "#/definitions/condition"
-              },
-              "lang" : {
-                "type" : "string",
-                "description" : "This field is required and its value must be javascript."
-              },
-              "tag" : {
-                "type" : "string",
-                "description" : "This is an optional identifier that is added to log messages. If defined it enables metrics logging for this instance of the processor. The metrics include the number of exceptions and a histogram of the execution times for the process function."
-              },
-              "source" : {
-                "type" : "string",
-                "description" : "Inline Javascript source code."
-              },
-              "file" : {
-                "type" : "string",
-                "description" : "Path to a script file to load. Relative paths are interpreted as relative to the path.config directory. Globs are expanded."
-              },
-              "files" : {
-                "type" : "array",
-                "description" : "List of script files to load. The scripts are concatenated together. Relative paths are interpreted as relative to the path.config directory. And globs are expanded.",
-                "items" : {
-                  "type" : "string"
-                }
-              },
-              "params" : {
-                "type" : "string",
-                "description" : "A dictionary of parameters that are passed to the register of the script."
-              },
-              "tag_on_exception" : {
-                "type" : "string",
-                "description" : "Tag to add to events in case the Javascript code causes an exception while processing an event. Defaults to _js_exception.",
-                "examples" : [ "_js_exception" ]
-              },
-              "timeout" : {
-                "type" : "string",
-                "description" : "This sets an execution timeout for the process function. When the process function takes longer than the timeout period the function is interrupted. You can set this option to prevent a script from running for too long (like preventing an infinite while loop). By default there is no timeout."
-              },
-              "max_cached_sessions" : {
-                "type" : "string",
-                "description" : "This sets the maximum number of Javascript VM sessions that will be cached to avoid reallocation. The default is 4.",
-                "examples" : [ "4" ]
-              }
-            }
-          },
-          "syslog" : {
-            "type" : [ "object", "null" ],
-            "description" : "The syslog processor parses RFC 3146 and/or RFC 5424 formatted syslog messages that are stored in a field. The processor itself does not handle receiving syslog messages from external sources. This is done through an input, such as the TCP input. Certain integrations, when enabled through configuration, will embed the syslog processor to process syslog messages, such as Custom TCP Logs and Custom UDP Logs.",
-            "properties" : {
-              "when" : {
-                "$ref" : "#/definitions/condition"
-              },
-              "field" : {
-                "type" : "string",
-                "description" : "(Required) Source field containing the syslog message. Defaults to message.",
-                "examples" : [ "message" ]
-              },
-              "format" : {
-                "type" : "string",
-                "description" : "(Optional) The syslog format to use, rfc3164, or rfc5424. To automatically detect the format from the log entries, set this option to auto. The default is auto.",
-                "examples" : [ "auto" ]
-              },
-              "timezone" : {
-                "type" : "string",
-                "description" : "(Optional) IANA time zone name(e.g. America/New York) or a fixed time offset (e.g. +0200) to use when parsing syslog timestamps that do not contain a time zone. Local may be specified to use the machine’s local time zone. Defaults to Local.",
-                "examples" : [ "Local" ]
-              },
-              "overwrite_keys" : {
-                "$ref" : "#/definitions/booleanOrString",
-                "description" : "(Optional) A boolean that specifies whether keys that already exist in the event are overwritten by keys from the syslog message. The default value is true.",
-                "examples" : [ "true" ]
-              },
-              "ignore_missing" : {
-                "$ref" : "#/definitions/booleanOrString",
-                "description" : "(Optional) If true the processor will not return an error when a specified field does not exist. Defaults to false.",
-                "examples" : [ "false" ]
-              },
-              "ignore_failure" : {
-                "$ref" : "#/definitions/booleanOrString",
-                "description" : "(Optional) Ignore all errors produced by the processor. Defaults to false.",
-                "examples" : [ "false" ]
-              },
-              "tag" : {
-                "type" : "string",
-                "description" : "(Optional) An identifier for this processor. Useful for debugging."
-              },
-              "failure" : {
-                "type" : "string",
-                "description" : "Measures the number of occurrences where a message was unable to be parsed."
-              },
-              "missing" : {
-                "type" : "string",
-                "description" : "Measures the number of occurrences where an event was missing the required input field."
-              },
-              "success" : {
-                "type" : "string",
-                "description" : "Measures the number of successfully parsed syslog messages."
-              }
-            }
-          },
-          "timestamp" : {
-            "type" : [ "object", "null" ],
-            "description" : "This functionality is in beta and is subject to change. The design and code is less mature than official GA features and is being provided as-is with no warranties. Beta features are not subject to the support SLA of official GA features.",
-            "properties" : {
-              "when" : {
-                "$ref" : "#/definitions/condition"
-              }
-            }
-          },
-          "translate_sid" : {
-            "type" : [ "object", "null" ],
-            "description" : "The translate_sid processor translates a Windows security identifier (SID) into an account name. It retrieves the name of the account associated with the SID, the first domain on which the SID is found, and the type of account. This is only available on Windows.",
-            "properties" : {
-              "when" : {
-                "$ref" : "#/definitions/condition"
-              }
+          }
+        },
+        "translate_sid" : {
+          "type" : [ "object", "null" ],
+          "description" : "The translate_sid processor translates a Windows security identifier (SID) into an account name. It retrieves the name of the account associated with the SID, the first domain on which the SID is found, and the type of account. This is only available on Windows.",
+          "properties" : {
+            "when" : {
+              "$ref" : "#/definitions/condition"
             }
           }
         }
@@ -11744,6 +11734,30 @@
         }
       }
     },
+    "processors" : {
+      "type" : "array",
+      "description" : "You can use processors to filter and enhance data before sending it to the configured output. To define a processor, you specify the processor name, an optional condition (with 'when' property), and a set of options",
+      "markdownDescription" : "**processors** ([documentation](https://www.elastic.co/guide/en/beats/filebeat/8.14/defining-processors.html#processors))  \nYou can use processors to filter and enhance data before sending it to the configured output.  \nTo define a processor, you specify the processor name, an optional condition (with 'when' property), and a set of options",
+      "items" : {
+        "type" : "object",
+        "title" : "processor",
+        "oneOf" : [ {
+          "additionalProperties" : false,
+          "maxProperties" : 1,
+          "title" : "processor",
+          "$ref" : "#/definitions/handwritten_processors"
+        }, {
+          "additionalProperties" : false,
+          "maxProperties" : 1,
+          "title" : "processor",
+          "$ref" : "#/definitions/generated_processors"
+        }, {
+          "additionalProperties" : false,
+          "title" : "processor",
+          "$ref" : "#/definitions/conditional_processors"
+        } ]
+      }
+    },
     "handwritten_processors" : {
       "properties" : {
         "add_cloud_metadata" : {
@@ -11776,6 +11790,29 @@
             }
           }
         }
+      }
+    },
+    "conditional_processors" : {
+      "properties" : {
+        "if" : {
+          "$ref" : "#/definitions/condition",
+          "description" : "The if processor conditionally executes the processors that are defined in the then section. If the condition is not met, the processors in the else section are executed instead.",
+          "markdownDescription" : "The if processor conditionally executes the processors that are defined in the `then` section.  \nIf the condition is not met, the processors in the `else` section are executed instead."
+        },
+        "then" : {
+          "$ref" : "#/definitions/processors",
+          "description" : "Processors to execute if the condition is met.",
+          "markdownDescription" : "Processors to execute if the condition is met."
+        },
+        "else" : {
+          "$ref" : "#/definitions/processors",
+          "description" : "Processors to execute if the condition is not met.",
+          "markdownDescription" : "Processors to execute if the condition is not met."
+        }
+      },
+      "dependencies" : {
+        "then" : [ "if" ],
+        "else" : [ "if" ]
       }
     },
     "handwrittenShortcuts" : {
