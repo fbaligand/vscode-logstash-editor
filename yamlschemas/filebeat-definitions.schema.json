@@ -8253,7 +8253,7 @@
           }
         },
         "add_locale" : {
-          "type" : "object",
+          "type" : [ "object", "null" ],
           "description" : "enriches each event with the machine's local time zone offset from UTC.",
           "properties" : {
             "when" : {
@@ -8266,7 +8266,7 @@
           }
         },
         "add_docker_metadata" : {
-          "type" : "object",
+          "type" : [ "object", "null" ],
           "description" : "enriches each event with docker metadata, it matches given fields to an existing container id and adds info from that container",
           "properties" : {
             "when" : {
@@ -8729,8 +8729,9 @@
               "$ref" : "#/definitions/condition"
             },
             "labels" : {
-              "type" : "string",
-              "description" : "dictionaries of labels to be added."
+              "type" : "object",
+              "description" : "dictionaries of labels to be added.",
+              "additionalItems" : true
             }
           }
         },
@@ -9376,15 +9377,6 @@
               "type" : "string",
               "description" : "(Optional) Encoding to use on the fingerprint value. Must be one of hex, base32, or base64. Default is hex.",
               "examples" : [ "hex" ]
-            }
-          }
-        },
-        "move-fields" : {
-          "type" : [ "object", "null" ],
-          "description" : "The move_fields processor moves event fields from one object into another. It can also rearrange fields or add a prefix to fields.",
-          "properties" : {
-            "when" : {
-              "$ref" : "#/definitions/condition"
             }
           }
         },
@@ -11789,6 +11781,41 @@
               "$ref" : "#/definitions/ssl"
             }
           }
+        },
+        "move_fields" : {
+          "type" : "object",
+          "description" : "The move_fields processor moves event fields from one object into another. It can also rearrange fields or add a prefix to fields.",
+          "markdownDescription" : "**move_fields** ([documentation](https://www.elastic.co/guide/en/beats/filebeat/8.14/move-fields.html))  \nThe move_fields processor moves event fields from one object into another. It can also rearrange fields or add a prefix to fields.  \nThe processor extracts fields from `from`, then uses `fields` and `exclude` as filters to choose which fields to move into the `to` field.",
+          "properties" : {
+            "from" : {
+              "type" : "string",
+              "markdownDescription" : "Which field you want extract. This field and any nested fields will be moved into to unless they are filtered out. If empty, indicates event root."
+            },
+            "fields" : {
+              "type" : "array",
+              "markdownDescription" : "Which fields to extract from `from` and move to `to`. An empty list indicates all fields.",
+              "items" : {
+                "type" : "string"
+              }
+            },
+            "ignore_missing" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "markdownDescription" : "Ignore 'not found' errors when extracting fields. Default is false.",
+              "examples" : [ "false" ]
+            },
+            "exclude" : {
+              "type" : "array",
+              "markdownDescription" : "Which fields to exclude from `from` and not move to `to`.",
+              "items" : {
+                "type" : "string"
+              }
+            },
+            "to" : {
+              "type" : "string",
+              "markdownDescription" : "These fields extract from `from` destination field prefix the `to` will base on fields root."
+            }
+          },
+          "required" : [ "to" ]
         }
       }
     },
