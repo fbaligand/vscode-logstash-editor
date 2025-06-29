@@ -10918,7 +10918,7 @@
       "markdownDescription" : "Modules configuration ([documentation](https://www.elastic.co/guide/en/beats/filebeat/8.14/filebeat-modules.html))",
       "type" : "array",
       "defaultSnippets" : [ {
-        "label" : "- (array item)",
+        "label" : "- (array item) module",
         "type" : "array",
         "description" : "add new module",
         "suggestionKind" : 9,
@@ -10928,6 +10928,7 @@
       } ],
       "items" : {
         "type" : "object",
+        "title" : "module",
         "$ref" : "#/definitions/moduleProperties"
       }
     },
@@ -10964,6 +10965,7 @@
       } ],
       "items" : {
         "type" : "object",
+        "title" : "input",
         "$ref" : "#/definitions/inputProperties"
       }
     },
@@ -10977,6 +10979,7 @@
         }
       },
       "allOf" : [ {
+        "title" : "input",
         "$ref" : "#/definitions/inputCommonProperties"
       }, {
         "$ref" : "#/definitions/inputs"
