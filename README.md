@@ -44,6 +44,7 @@ For example, if cursor is inside `grok` filter, options for `grok` filter are su
   - `*elasticsearch-template-es8x*.json`
   - `*elasticsearch-template-es7x*.json`
   - `*elasticsearch-template-es6x*.json`
+  - `*elasticsearch-template.json`
   - `*index-template*.json`
   - `*/_index_templates/*.json`
 - Following file patterns are automatically associated to Elasticsearch component template json schema:

@@ -65,6 +65,10 @@
 				"url": "./jsonschemas/elasticsearch-template-es6x.schema.json"
 			},
 			{
+				"fileMatch": "*elasticsearch-template.json",
+				"url": "./jsonschemas/elasticsearch-template-es8x.schema.json"
+			},
+			{
 				"fileMatch": "*index-template*.json",
 				"url": "./jsonschemas/elasticsearch-template-es8x.schema.json"
 			},
