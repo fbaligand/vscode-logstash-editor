@@ -10923,7 +10923,7 @@
         "description" : "module snippet",
         "suggestionKind" : 9,
         "body" : {
-          "module" : "${1|system,activemq,apache,auditd,aws,awsfargate,azure,cef,checkpoint,cisco,coredns,crowdstrike,cyberarkpas,elasticsearch,envoyproxy,fortinet,gcp,google_workspace,haproxy,ibmmq,icinga,iis,iptables,juniper,kafka,kibana,logstash,microsoft,misp,mongodb,mssql,mysql,mysqlenterprise,nats,netflow,nginx,o365,okta,oracle,osquery,panw,pensando,postgresql,rabbitmq,redis,salesforce,santa,snyk,sophos,suricata,threatintel,traefik,zeek,zookeeper,zoom|}"
+          "module" : "${1|activemq,apache,auditd,aws,awsfargate,azure,cef,checkpoint,cisco,coredns,crowdstrike,cyberarkpas,elasticsearch,envoyproxy,fortinet,gcp,google_workspace,haproxy,ibmmq,icinga,iis,iptables,juniper,kafka,kibana,logstash,microsoft,misp,mongodb,mssql,mysql,mysqlenterprise,nats,netflow,nginx,o365,okta,oracle,osquery,panw,pensando,postgresql,rabbitmq,redis,salesforce,santa,snyk,sophos,suricata,system,threatintel,traefik,zeek,zookeeper,zoom|}"
         }
       } ],
       "items" : {
@@ -10938,7 +10938,7 @@
       "properties" : {
         "module" : {
           "type" : "string",
-          "examples" : [ "system", "activemq", "apache", "auditd", "aws", "awsfargate", "azure", "cef", "checkpoint", "cisco", "coredns", "crowdstrike", "cyberarkpas", "elasticsearch", "envoyproxy", "fortinet", "gcp", "google_workspace", "haproxy", "ibmmq", "icinga", "iis", "iptables", "juniper", "kafka", "kibana", "logstash", "microsoft", "misp", "mongodb", "mssql", "mysql", "mysqlenterprise", "nats", "netflow", "nginx", "o365", "okta", "oracle", "osquery", "panw", "pensando", "postgresql", "rabbitmq", "redis", "salesforce", "santa", "snyk", "sophos", "suricata", "threatintel", "traefik", "zeek", "zookeeper", "zoom" ],
+          "examples" : [ "activemq", "apache", "auditd", "aws", "awsfargate", "azure", "cef", "checkpoint", "cisco", "coredns", "crowdstrike", "cyberarkpas", "elasticsearch", "envoyproxy", "fortinet", "gcp", "google_workspace", "haproxy", "ibmmq", "icinga", "iis", "iptables", "juniper", "kafka", "kibana", "logstash", "microsoft", "misp", "mongodb", "mssql", "mysql", "mysqlenterprise", "nats", "netflow", "nginx", "o365", "okta", "oracle", "osquery", "panw", "pensando", "postgresql", "rabbitmq", "redis", "salesforce", "santa", "snyk", "sophos", "suricata", "system", "threatintel", "traefik", "zeek", "zookeeper", "zoom" ],
           "description" : "module type",
           "markdownDescription" : "module type ([documentation](https://www.elastic.co/guide/en/beats/filebeat/8.14/filebeat-modules.html))"
         }
@@ -10962,7 +10962,7 @@
         "description" : "input snippet",
         "suggestionKind" : 9,
         "body" : {
-          "type" : "${1|log,filestream,redis,udp,tcp,kafka,syslog,container,journald,netflow,gcp-pubsub,aws-s3,aws-cloudwatch,etw,azure-eventhub,azure-blob-storage,benchmark,cel,cloudfoundry,cometd,entity-analytics,gcs,http_endpoint,httpjson,mqtt,o365audit,salesforce,stdin,websocket|}"
+          "type" : "${1|filestream,aws-cloudwatch,aws-s3,azure-blob-storage,azure-eventhub,benchmark,cel,cloudfoundry,cometd,container,entity-analytics,etw,gcp-pubsub,gcs,http_endpoint,httpjson,journald,kafka,log,mqtt,netflow,o365audit,redis,salesforce,stdin,syslog,tcp,udp,websocket|}"
         }
       } ],
       "items" : {
@@ -10977,7 +10977,7 @@
       "properties" : {
         "type" : {
           "type" : "string",
-          "examples" : [ "log", "filestream", "redis", "udp", "tcp", "kafka", "syslog", "container", "journald", "netflow", "gcp-pubsub", "aws-s3", "aws-cloudwatch", "etw", "azure-eventhub", "azure-blob-storage", "benchmark", "cel", "cloudfoundry", "cometd", "entity-analytics", "gcs", "http_endpoint", "httpjson", "mqtt", "o365audit", "salesforce", "stdin", "websocket" ],
+          "examples" : [ "filestream", "aws-cloudwatch", "aws-s3", "azure-blob-storage", "azure-eventhub", "benchmark", "cel", "cloudfoundry", "cometd", "container", "entity-analytics", "etw", "gcp-pubsub", "gcs", "http_endpoint", "httpjson", "journald", "kafka", "log", "mqtt", "netflow", "o365audit", "redis", "salesforce", "stdin", "syslog", "tcp", "udp", "websocket" ],
           "description" : "input type",
           "markdownDescription" : "input type ([documentation](https://www.elastic.co/guide/en/beats/filebeat/8.14/configuration-filebeat-options.html#filebeat-input-types))"
         }
@@ -11961,7 +11961,7 @@
                             "description" : "config module snippet",
                             "suggestionKind" : 9,
                             "body" : {
-                              "module" : "${1|system,activemq,apache,auditd,aws,awsfargate,azure,cef,checkpoint,cisco,coredns,crowdstrike,cyberarkpas,elasticsearch,envoyproxy,fortinet,gcp,google_workspace,haproxy,ibmmq,icinga,iis,iptables,juniper,kafka,kibana,logstash,microsoft,misp,mongodb,mssql,mysql,mysqlenterprise,nats,netflow,nginx,o365,okta,oracle,osquery,panw,pensando,postgresql,rabbitmq,redis,salesforce,santa,snyk,sophos,suricata,threatintel,traefik,zeek,zookeeper,zoom|}"
+                              "module" : "${1|activemq,apache,auditd,aws,awsfargate,azure,cef,checkpoint,cisco,coredns,crowdstrike,cyberarkpas,elasticsearch,envoyproxy,fortinet,gcp,google_workspace,haproxy,ibmmq,icinga,iis,iptables,juniper,kafka,kibana,logstash,microsoft,misp,mongodb,mssql,mysql,mysqlenterprise,nats,netflow,nginx,o365,okta,oracle,osquery,panw,pensando,postgresql,rabbitmq,redis,salesforce,santa,snyk,sophos,suricata,system,threatintel,traefik,zeek,zookeeper,zoom|}"
                             }
                           }, {
                             "label" : "- (array item) config input",
@@ -11969,7 +11969,7 @@
                             "description" : "config input snippet",
                             "suggestionKind" : 9,
                             "body" : {
-                              "type" : "${1|log,filestream,redis,udp,tcp,kafka,syslog,container,journald,netflow,gcp-pubsub,aws-s3,aws-cloudwatch,etw,azure-eventhub,azure-blob-storage,benchmark,cel,cloudfoundry,cometd,entity-analytics,gcs,http_endpoint,httpjson,mqtt,o365audit,salesforce,stdin,websocket|}"
+                              "type" : "${1|filestream,aws-cloudwatch,aws-s3,azure-blob-storage,azure-eventhub,benchmark,cel,cloudfoundry,cometd,container,entity-analytics,etw,gcp-pubsub,gcs,http_endpoint,httpjson,journald,kafka,log,mqtt,netflow,o365audit,redis,salesforce,stdin,syslog,tcp,udp,websocket|}"
                             }
                           } ],
                           "items" : {
