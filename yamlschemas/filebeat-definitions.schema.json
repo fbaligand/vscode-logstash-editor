@@ -10920,16 +10920,18 @@
       "defaultSnippets" : [ {
         "label" : "- (array item) module",
         "type" : "array",
-        "description" : "add new module",
+        "description" : "module snippet",
         "suggestionKind" : 9,
         "body" : {
           "module" : "${1|system,activemq,apache,auditd,aws,awsfargate,azure,cef,checkpoint,cisco,coredns,crowdstrike,cyberarkpas,elasticsearch,envoyproxy,fortinet,gcp,google_workspace,haproxy,ibmmq,icinga,iis,iptables,juniper,kafka,kibana,logstash,microsoft,misp,mongodb,mssql,mysql,mysqlenterprise,nats,netflow,nginx,o365,okta,oracle,osquery,panw,pensando,postgresql,rabbitmq,redis,salesforce,santa,snyk,sophos,suricata,threatintel,traefik,zeek,zookeeper,zoom|}"
         }
       } ],
       "items" : {
-        "type" : "object",
-        "title" : "module",
-        "$ref" : "#/definitions/moduleProperties"
+        "allOf" : [ {
+          "type" : "object",
+          "title" : "module",
+          "$ref" : "#/definitions/moduleProperties"
+        } ]
       }
     },
     "moduleProperties" : {
@@ -10955,18 +10957,20 @@
       "markdownDescription" : "Inputs configuration ([documentation](https://www.elastic.co/guide/en/beats/filebeat/8.14/configuration-filebeat-options.html))",
       "type" : "array",
       "defaultSnippets" : [ {
-        "label" : "- (array item)",
+        "label" : "- (array item) input",
         "type" : "array",
-        "description" : "add new input",
+        "description" : "input snippet",
         "suggestionKind" : 9,
         "body" : {
           "type" : "${1|log,filestream,redis,udp,tcp,kafka,syslog,container,journald,netflow,gcp-pubsub,aws-s3,aws-cloudwatch,etw,azure-eventhub,azure-blob-storage,benchmark,cel,cloudfoundry,cometd,entity-analytics,gcs,http_endpoint,httpjson,mqtt,o365audit,salesforce,stdin,websocket|}"
         }
       } ],
       "items" : {
-        "type" : "object",
-        "title" : "input",
-        "$ref" : "#/definitions/inputProperties"
+        "allOf" : [ {
+          "type" : "object",
+          "title" : "input",
+          "$ref" : "#/definitions/inputProperties"
+        } ]
       }
     },
     "inputProperties" : {
@@ -10978,10 +10982,8 @@
           "markdownDescription" : "input type ([documentation](https://www.elastic.co/guide/en/beats/filebeat/8.14/configuration-filebeat-options.html#filebeat-input-types))"
         }
       },
+      "$ref" : "#/definitions/inputCommonProperties",
       "allOf" : [ {
-        "title" : "input",
-        "$ref" : "#/definitions/inputCommonProperties"
-      }, {
         "$ref" : "#/definitions/inputs"
       }, {
         "if" : {
@@ -11536,6 +11538,7 @@
       "type" : "array",
       "items" : {
         "type" : "object",
+        "title" : "parser",
         "maxProperties" : 1,
         "properties" : {
           "multiline" : {
@@ -11923,9 +11926,9 @@
               "type" : "array",
               "description" : "Autodiscover providers work by watching for events on the system and translating those events into internal autodiscover events with a common format. When you configure the provider, you can optionally use fields from the autodiscover event to set conditions that, when met, launch specific configurations.",
               "defaultSnippets" : [ {
-                "label" : "- (array item)",
+                "label" : "- (array item) provider",
                 "type" : "array",
-                "description" : "add new provider",
+                "description" : "provider snippet",
                 "suggestionKind" : 9,
                 "body" : {
                   "type" : "${1|docker,kubernetes,jolokia|}"
@@ -11933,7 +11936,7 @@
               } ],
               "items" : {
                 "type" : "object",
-                "required" : [ "type" ],
+                "title" : "provider",
                 "properties" : {
                   "type" : {
                     "type" : "string",
@@ -11953,17 +11956,17 @@
                           "type" : "array",
                           "description" : "Configuration contains a list of inputs and modules that are applied when template condition is matched.",
                           "defaultSnippets" : [ {
-                            "label" : "- (module item)",
+                            "label" : "- (array item) config module",
                             "type" : "array",
-                            "description" : "add new config module",
+                            "description" : "config module snippet",
                             "suggestionKind" : 9,
                             "body" : {
                               "module" : "${1|system,activemq,apache,auditd,aws,awsfargate,azure,cef,checkpoint,cisco,coredns,crowdstrike,cyberarkpas,elasticsearch,envoyproxy,fortinet,gcp,google_workspace,haproxy,ibmmq,icinga,iis,iptables,juniper,kafka,kibana,logstash,microsoft,misp,mongodb,mssql,mysql,mysqlenterprise,nats,netflow,nginx,o365,okta,oracle,osquery,panw,pensando,postgresql,rabbitmq,redis,salesforce,santa,snyk,sophos,suricata,threatintel,traefik,zeek,zookeeper,zoom|}"
                             }
                           }, {
-                            "label" : "- (input item)",
+                            "label" : "- (array item) config input",
                             "type" : "array",
-                            "description" : "add new config input",
+                            "description" : "config input snippet",
                             "suggestionKind" : 9,
                             "body" : {
                               "type" : "${1|log,filestream,redis,udp,tcp,kafka,syslog,container,journald,netflow,gcp-pubsub,aws-s3,aws-cloudwatch,etw,azure-eventhub,azure-blob-storage,benchmark,cel,cloudfoundry,cometd,entity-analytics,gcs,http_endpoint,httpjson,mqtt,o365audit,salesforce,stdin,websocket|}"
@@ -11972,9 +11975,13 @@
                           "items" : {
                             "type" : "object",
                             "oneOf" : [ {
-                              "$ref" : "#/definitions/moduleProperties"
+                              "$ref" : "#/definitions/moduleProperties",
+                              "required" : [ "module" ],
+                              "title" : "module"
                             }, {
-                              "$ref" : "#/definitions/inputProperties"
+                              "$ref" : "#/definitions/inputProperties",
+                              "required" : [ "type" ],
+                              "title" : "input"
                             } ]
                           }
                         }
