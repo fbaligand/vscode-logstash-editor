@@ -1,6 +1,23 @@
 # Change Log
 
 
+## 1.4.2
+
+- add several enhancements to filebeat completion:
+  - processors:
+    - add if/then/else support
+    - fix add_labels processor: 'labels' property is now an object (previously string)
+    - fix move_fields processor: named now 'move_fields' (previously 'move-fields')
+    - fix add_docker_metadata and add_locale processors: allow null content
+  - inputs & modules:
+    - reduce count of suggested snippets
+    - enhance name of suggested snippets
+    - suggested types are now sorted by name
+    - 'filestream' is now the first suggested input type
+- new file pattern supported for Elasticsearch index templates:
+  - `*elasticsearch-template.json`
+
+
 ## 1.4.1
 
 - add several enhancements to filebeat completion:
