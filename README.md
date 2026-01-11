@@ -26,7 +26,7 @@ For example, if cursor is inside `grok` filter, options for `grok` filter are su
 - Elasticsearch completion is based on [elasticsearch-specification](https://github.com/elastic/elasticsearch-specification/)
 - Provides "logstash.version" configuration setting to choose Logstash version (for completion)
 - Provides "Set Logstash Version" command (shortcut: Ctrl+Shift+L) to change Logstash version setting
-- Supported Logstash versions: 6.8, 7.17, 8.14 and latest
+- Supported Logstash versions: 6.8, 7.17, 8.14, 8.19 and latest
 - Provides "logstash.enableDefaultVSCodeCompletion" setting to enable default VSCode completion when the extension does not have suggestions to provide
 - Following file patterns are automatically associated to Logstash language:
   - `*logstash.conf`

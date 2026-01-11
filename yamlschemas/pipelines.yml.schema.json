@@ -63,7 +63,7 @@
 			},
 			"pipeline.java_execution": {
 				"$ref": "#/definitions/booleanOrString",
-				"description": "Use the Java execution engine.",
+				"description": "Use the Java execution engine.\nRemoved since Logstash 8.0.",
 				"default": "true",
 				"examples": [
 					"false"
