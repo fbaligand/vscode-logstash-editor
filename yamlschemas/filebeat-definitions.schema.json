@@ -33,6 +33,11 @@
                 },
                 "input" : {
                   "$ref" : "#/definitions/moduleInput"
+                },
+                "var.use_journald" : {
+                  "$ref" : "#/definitions/booleanOrString",
+                  "description" : "Use journald to collect system logs",
+                  "examples" : [ "false" ]
                 }
               }
             },
@@ -56,6 +61,11 @@
                 },
                 "input" : {
                   "$ref" : "#/definitions/moduleInput"
+                },
+                "var.use_journald" : {
+                  "$ref" : "#/definitions/booleanOrString",
+                  "description" : "Use journald to collect auth logs",
+                  "examples" : [ "false" ]
                 }
               }
             }
@@ -254,7 +264,7 @@
                 },
                 "var.number_of_workers" : {
                   "type" : "string",
-                  "description" : "Number of workers on S3 bucket",
+                  "description" : "Number of workers on S3 bucket or SQS queue",
                   "examples" : [ "5" ]
                 },
                 "var.process_cloudtrail_logs" : {
@@ -325,11 +335,6 @@
                   "description" : "Enabling this option changes the service name from `s3` to `s3-fips` for connecting to the correct service endpoint.",
                   "examples" : [ "false" ]
                 },
-                "var.max_number_of_messages" : {
-                  "type" : "string",
-                  "description" : "The maximum number of messages to return from SQS. Valid values: 1 to 10.",
-                  "examples" : [ "5" ]
-                },
                 "var.proxy_url" : {
                   "type" : "string",
                   "description" : "URL to proxy AWS API calls",
@@ -370,7 +375,7 @@
                 },
                 "var.number_of_workers" : {
                   "type" : "string",
-                  "description" : "Number of workers on S3 bucket",
+                  "description" : "Number of workers on S3 bucket or SQS queue",
                   "examples" : [ "5" ]
                 },
                 "var.shared_credential_file" : {
@@ -425,11 +430,6 @@
                   "$ref" : "#/definitions/booleanOrString",
                   "description" : "Enabling this option changes the service name from `s3` to `s3-fips` for connecting to the correct service endpoint.",
                   "examples" : [ "false" ]
-                },
-                "var.max_number_of_messages" : {
-                  "type" : "string",
-                  "description" : "The maximum number of messages to return from SQS. Valid values: 1 to 10.",
-                  "examples" : [ "5" ]
                 },
                 "var.proxy_url" : {
                   "type" : "string",
@@ -471,7 +471,7 @@
                 },
                 "var.number_of_workers" : {
                   "type" : "string",
-                  "description" : "Number of workers on S3 bucket",
+                  "description" : "Number of workers on S3 bucket or SQS queue",
                   "examples" : [ "5" ]
                 },
                 "var.shared_credential_file" : {
@@ -526,11 +526,6 @@
                   "$ref" : "#/definitions/booleanOrString",
                   "description" : "Enabling this option changes the service name from `s3` to `s3-fips` for connecting to the correct service endpoint.",
                   "examples" : [ "false" ]
-                },
-                "var.max_number_of_messages" : {
-                  "type" : "string",
-                  "description" : "The maximum number of messages to return from SQS. Valid values: 1 to 10.",
-                  "examples" : [ "5" ]
                 },
                 "var.proxy_url" : {
                   "type" : "string",
@@ -572,7 +567,7 @@
                 },
                 "var.number_of_workers" : {
                   "type" : "string",
-                  "description" : "Number of workers on S3 bucket",
+                  "description" : "Number of workers on S3 bucket or SQS queue",
                   "examples" : [ "5" ]
                 },
                 "var.shared_credential_file" : {
@@ -627,11 +622,6 @@
                   "$ref" : "#/definitions/booleanOrString",
                   "description" : "Enabling this option changes the service name from `s3` to `s3-fips` for connecting to the correct service endpoint.",
                   "examples" : [ "false" ]
-                },
-                "var.max_number_of_messages" : {
-                  "type" : "string",
-                  "description" : "The maximum number of messages to return from SQS. Valid values: 1 to 10.",
-                  "examples" : [ "5" ]
                 },
                 "var.proxy_url" : {
                   "type" : "string",
@@ -673,7 +663,7 @@
                 },
                 "var.number_of_workers" : {
                   "type" : "string",
-                  "description" : "Number of workers on S3 bucket",
+                  "description" : "Number of workers on S3 bucket or SQS queue",
                   "examples" : [ "5" ]
                 },
                 "var.shared_credential_file" : {
@@ -728,11 +718,6 @@
                   "$ref" : "#/definitions/booleanOrString",
                   "description" : "Enabling this option changes the service name from `s3` to `s3-fips` for connecting to the correct service endpoint.",
                   "examples" : [ "false" ]
-                },
-                "var.max_number_of_messages" : {
-                  "type" : "string",
-                  "description" : "The maximum number of messages to return from SQS. Valid values: 1 to 10.",
-                  "examples" : [ "5" ]
                 },
                 "var.proxy_url" : {
                   "type" : "string",
@@ -774,7 +759,7 @@
                 },
                 "var.number_of_workers" : {
                   "type" : "string",
-                  "description" : "Number of workers on S3 bucket",
+                  "description" : "Number of workers on S3 bucket or SQS queue",
                   "examples" : [ "5" ]
                 },
                 "var.shared_credential_file" : {
@@ -829,11 +814,6 @@
                   "$ref" : "#/definitions/booleanOrString",
                   "description" : "Enabling this option changes the service name from `s3` to `s3-fips` for connecting to the correct service endpoint.",
                   "examples" : [ "false" ]
-                },
-                "var.max_number_of_messages" : {
-                  "type" : "string",
-                  "description" : "The maximum number of messages to return from SQS. Valid values: 1 to 10.",
-                  "examples" : [ "5" ]
                 },
                 "var.proxy_url" : {
                   "type" : "string",
@@ -5081,9 +5061,7 @@
               }
             },
             "encoding" : {
-              "type" : "string",
-              "description" : "Configure the file encoding for reading files with international characters following the W3C recommendation for HTML5 (http://www.w3.org/TR/encoding). Some sample encodings:   plain, utf-8, utf-16be-bom, utf-16be, utf-16le, big5, gb18030, gbk,    hz-gb-2312, euc-kr, euc-jp, iso-2022-jp, shift-jis, ...",
-              "examples" : [ "plain" ]
+              "$ref" : "#/definitions/encoding"
             },
             "exclude_lines" : {
               "type" : "array",
@@ -5308,9 +5286,7 @@
               }
             },
             "encoding" : {
-              "type" : "string",
-              "description" : "Configure the file encoding for reading files with international characters following the W3C recommendation for HTML5 (http://www.w3.org/TR/encoding). Some sample encodings:   plain, utf-8, utf-16be-bom, utf-16be, utf-16le, big5, gb18030, gbk,    hz-gb-2312, euc-kr, euc-jp, iso-2022-jp, shift-jis, ...",
-              "examples" : [ "plain" ]
+              "$ref" : "#/definitions/encoding"
             },
             "exclude_lines" : {
               "type" : "array",
@@ -5404,7 +5380,7 @@
             "clean_inactive" : {
               "type" : "string",
               "description" : "Files for the modification data is older than clean_inactive the state from the registry is removed By default this is disabled.",
-              "examples" : [ "0" ]
+              "examples" : [ "-1" ]
             },
             "clean_removed" : {
               "$ref" : "#/definitions/booleanOrString",
@@ -5496,7 +5472,7 @@
               "properties" : {
                 "native" : {
                   "type" : "string",
-                  "description" : "The default behaviour of Filebeat is to differentiate between files using their inodes and device ids. In some cases these values can change during the lifetime of a file. For example, when using the Linux LVM (Logical Volume Manager), device numbers are allocated dynamically at module load (refer to Persistent Device Numbers in the Red Hat Enterprise Linux documentation). To avoid the possibility of data duplication in this case, you can set file_identity to path rather than native."
+                  "description" : "The default behaviour of Filebeat is to differentiate between files using their inodes and device ids. In some cases these values can change during the lifetime of a file. For example, when using the Linux LVM (Logical Volume Manager), device numbers are allocated dynamically at module load (refer to Persistent Device Numbers in the Red Hat Enterprise Linux documentation). To avoid the possibility of data duplication in this case, you can set file_identity to fingerprint rather than the default native. The states of files generated by native file identity can be migrated to fingerprint."
                 },
                 "path" : {
                   "type" : "string",
@@ -5564,6 +5540,10 @@
               "type" : "string",
               "description" : "Redis AUTH password. Empty by default.",
               "examples" : [ "foobared" ]
+            },
+            "username" : {
+              "type" : "string",
+              "description" : "The username to use when connecting to Redis."
             }
           }
         }
@@ -5591,6 +5571,10 @@
             "host" : {
               "type" : "string",
               "description" : "The host and UDP port to listen on for event streams."
+            },
+            "network" : {
+              "type" : "string",
+              "description" : "The network type. Acceptable values are: \"udp\" (default), \"udp4\", \"udp6\""
             },
             "timeout" : {
               "type" : "string",
@@ -5634,6 +5618,10 @@
               "type" : "string",
               "description" : "The number of seconds of inactivity before a remote connection is closed.",
               "examples" : [ "300s" ]
+            },
+            "network" : {
+              "type" : "string",
+              "description" : "The network type. Acceptable values are: \"tcp\" (default), \"tcp4\", \"tcp6\""
             },
             "framing" : {
               "type" : "string",
@@ -5878,8 +5866,7 @@
               "examples" : [ "auto" ]
             },
             "encoding" : {
-              "type" : "string",
-              "description" : "The file encoding to use for reading data that contains international characters. See the encoding names recommended by the W3C for use in HTML5.\nValid encodings:\n- plain: plain ASCII encoding\n- utf-8 or utf8: UTF-8 encoding\n- gbk: simplified Chinese charaters\n- iso8859-6e: ISO8859-6E, Latin/Arabic\n- iso8859-6i: ISO8859-6I, Latin/Arabic\n- iso8859-8e: ISO8859-8E, Latin/Hebrew\n- iso8859-8i: ISO8859-8I, Latin/Hebrew\n- iso8859-1: ISO8859-1, Latin-1\n- iso8859-2: ISO8859-2, Latin-2\n- iso8859-3: ISO8859-3, Latin-3\n- iso8859-4: ISO8859-4, Latin-4\n- iso8859-5: ISO8859-5, Latin/Cyrillic\n- iso8859-6: ISO8859-6, Latin/Arabic\n- iso8859-7: ISO8859-7, Latin/Greek\n- iso8859-8: ISO8859-8, Latin/Hebrew\n- iso8859-9: ISO8859-9, Latin-5\n- iso8859-10: ISO8859-10, Latin-6\n- iso8859-13: ISO8859-13, Latin-7\n- iso8859-14: ISO8859-14, Latin-8\n- iso8859-15: ISO8859-15, Latin-9\n- iso8859-16: ISO8859-16, Latin-10\n- cp437: IBM CodePage 437\n- cp850: IBM CodePage 850\n- cp852: IBM CodePage 852\n- cp855: IBM CodePage 855\n- cp858: IBM CodePage 858\n- cp860: IBM CodePage 860\n- cp862: IBM CodePage 862\n- cp863: IBM CodePage 863\n- cp865: IBM CodePage 865\n- cp866: IBM CodePage 866\n- ebcdic-037: IBM CodePage 037\n- ebcdic-1040: IBM CodePage 1140\n- ebcdic-1047: IBM CodePage 1047\n- koi8r: KOI8-R, Russian (Cyrillic)\n- koi8u: KOI8-U, Ukranian (Cyrillic)\n- macintosh: Macintosh encoding\n- macintosh-cyrillic: Macintosh Cyrillic encoding\n- windows1250: Windows1250, Central and Eastern European\n- windows1251: Windows1251, Russian, Serbian (Cyrillic)\n- windows1252: Windows1252, Legacy\n- windows1253: Windows1253, Modern Greek\n- windows1254: Windows1254, Turkish\n- windows1255: Windows1255, Hebrew\n- windows1256: Windows1256, Arabic\n- windows1257: Windows1257, Estonian, Latvian, Lithuanian\n- windows1258: Windows1258, Vietnamese\n- windows874: Windows874, ISO/IEC 8859-11, Latin/Thai\n- utf-16-bom: UTF-16 with required BOM\n- utf-16be-bom: big endian UTF-16 with required BOM\n- utf-16le-bom: little endian UTF-16 with required BOM\nThe plain encoding is special, because it does not validate or transform any input."
+              "$ref" : "#/definitions/encoding"
             },
             "exclude_lines" : {
               "type" : "array",
@@ -6064,24 +6051,46 @@
           "properties" : {
             "id" : {
               "type" : "string",
-              "examples" : [ "service-foo" ]
+              "description" : "Unique ID among all inputs, if the ID changes, all entries will be re-ingested",
+              "examples" : [ "my-journald-id" ]
             },
-            "include_matches.or" : {
+            "paths" : {
               "type" : "array",
-              "description" : "You may wish to have separate inputs for each service. You can use include_matches.or to specify a list of filter expressions that are applied as a logical OR. You may specify filter",
+              "description" : "Specify paths to read from custom journal files. Leave it unset to read the system's journal Glob based paths.",
               "items" : {
-                "type" : "object",
-                "properties" : {
-                  "equals" : {
-                    "type" : "array",
-                    "items" : {
-                      "type" : "string",
-                      "defaultSnippets" : [ {
-                        "body" : "_SYSTEMD_UNIT=foo.service"
-                      } ]
-                    }
-                  }
-                }
+                "type" : "string",
+                "defaultSnippets" : [ {
+                  "body" : "/var/log/custom.journal"
+                } ]
+              }
+            },
+            "head" : {
+              "type" : "string",
+              "description" : "The position to start reading from the journal, valid options are:",
+              "examples" : [ "Starts reading at the beginning of the journal." ]
+            },
+            "tail" : {
+              "type" : "string",
+              "examples" : [ "Starts reading at the end of the journal." ]
+            },
+            "seek" : {
+              "type" : "string",
+              "description" : "This means that no events will be sent until a new message is written.  - since: Use also the `since` option to determine when to start reading from.",
+              "examples" : [ "head" ]
+            },
+            "since" : {
+              "type" : "string",
+              "description" : "A time offset from the current time to start reading from. To use since, seek option must be set to since.",
+              "examples" : [ "-24h" ]
+            },
+            "units" : {
+              "type" : "array",
+              "description" : "Collect events from the service and messages about the service, including coredumps.",
+              "items" : {
+                "type" : "string",
+                "defaultSnippets" : [ {
+                  "body" : "docker.service"
+                } ]
               }
             },
             "syslog_identifiers" : {
@@ -6091,16 +6100,6 @@
                 "type" : "string",
                 "defaultSnippets" : [ {
                   "body" : "audit"
-                } ]
-              }
-            },
-            "units" : {
-              "type" : "array",
-              "description" : "Collect events from the service and messages about the service, including coredumps.",
-              "items" : {
-                "type" : "string",
-                "defaultSnippets" : [ {
-                  "body" : "docker.service"
                 } ]
               }
             },
@@ -6114,44 +6113,48 @@
                 } ]
               }
             },
-            "parsers" : {
-              "$ref" : "#/definitions/parsers"
-            },
-            "paths" : {
+            "facilities" : {
               "type" : "array",
-              "description" : "A list of paths that will be crawled and fetched. Each path can be a directory path (to collect events from all journals in a directory), or a file path. If you specify a directory, Filebeat merges all journals under the directory into a single journal and reads them.\nIf no paths are specified, Filebeat reads from the default journal.",
+              "description" : "Filter logs by facilities, they must be specified using their numeric code.",
               "items" : {
-                "type" : "string"
+                "type" : "string",
+                "defaultSnippets" : [ {
+                  "body" : "1"
+                } ]
               }
             },
-            "backoff" : {
-              "type" : "string",
-              "description" : "The number of seconds to wait before trying to read again from journals. The default is 1s.",
-              "examples" : [ "1s" ]
-            },
-            "max_backoff" : {
-              "type" : "string",
-              "description" : "The maximum number of seconds to wait before attempting to read again from journals. The default is 60s.",
-              "examples" : [ "60s" ]
-            },
-            "seek" : {
-              "type" : "string",
-              "description" : "The position to start reading the journal from. Valid settings are:\n- head: Starts reading at the beginning of the journal. After a restart, Filebeat resends all log messages in the journal.\n- tail: Starts reading at the end of the journal. This means that no events will be sent until a new message is written.\n- cursor: On first read, starts reading at the beginning of the journal. After a reload or restart, continues reading at the last known position.\n- since: Use the since option to determine where to start reading from.\nIf you have old log files and want to skip lines, start Filebeat with seek: tail specified. Then stop Filebeat, set seek: cursor, and restart Filebeat."
-            },
-            "cursor_seek_fallback" : {
-              "type" : "string",
-              "description" : "The position to start reading the journal from if no cursor information is available. Valid options are head, tail and since."
-            },
-            "since" : {
-              "type" : "string",
-              "description" : "A time offset from the current time to start reading from. To use since, either the seek option must be set to since, or the seek mode must be set to cursor and the cursor_seek_fallback set to since.\nThis example demonstrates how to resume from the persisted cursor when it exists, or otherwise begin reading logs from the last 24 hours."
+            "include_matches.match" : {
+              "type" : "array",
+              "description" : "You may wish to have separate inputs for each service. You can use include_matches.match to define a list of filters, each event needs to match all filters defined.",
+              "items" : {
+                "type" : "string",
+                "defaultSnippets" : [ {
+                  "body" : "_SYSTEMD_UNIT=foo.service"
+                } ]
+              }
             },
             "include_matches" : {
-              "type" : "array",
-              "description" : "A collection of filter expressions used to match fields. The format of the expression is field=value. Filebeat fetches all events that exactly match the expressions. Pattern matching is not supported.\nIf you configured a filter expression, only entries with this field set will be iterated by the journald reader of Filebeat. If the filter expressions apply to different fields, only entries with all fields set will be iterated. If they apply to the same fields, only entries where the field takes one of the specified values will be iterated.\nmatch: List of filter expressions to match fields. or: The filter expressions listed under or are connected with a disjunction (or). and: The filter expressions listed under and are connected with a conjunction (and).\nPlease note that these expressions are limited. You can build complex filtering, but full logical expressions are not supported.\nThe following include matches configuration reads all systemd syslog entries:\nTo reference fields, use one of the following:\n- The field name used by the systemd journal. For example, CONTAINER_TAG=redis.\n- The translated field name used by Filebeat. For example, container.image.tag=redis. Filebeat does not translate all fields from the journal. For custom fields, use the name specified in the systemd journal.",
-              "items" : {
-                "type" : "string"
+              "type" : "object",
+              "description" : "To create a disjunction (logical OR) use the `+` character between the filters",
+              "properties" : {
+                "match" : {
+                  "type" : "array",
+                  "items" : {
+                    "type" : "string",
+                    "defaultSnippets" : [ {
+                      "body" : "systemd.transport=kernel"
+                    } ]
+                  }
+                }
               }
+            },
+            "save_remote_hostname" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "description" : "Uses the original hostname of the entry instead of the one from the host running jounrald",
+              "examples" : [ "false" ]
+            },
+            "parsers" : {
+              "$ref" : "#/definitions/parsers"
             }
           }
         }
@@ -6211,6 +6214,10 @@
                 } ]
               }
             },
+            "network" : {
+              "type" : "string",
+              "description" : "The network type. Acceptable values are: \"udp\" (default), \"udp4\", \"udp6\""
+            },
             "read_buffer" : {
               "type" : "string",
               "description" : "The size of the read buffer on the UDP socket. If not specified the default from the operating system will be used."
@@ -6219,6 +6226,11 @@
               "type" : "string",
               "description" : "The read and write timeout for socket operations. The default is 5m.",
               "examples" : [ "5m" ]
+            },
+            "workers" : {
+              "type" : "string",
+              "description" : "The number of workers to read and decode concurrently netflow packets. Default is 1. Note that in order to maximize the performance gains of multiple workers it is advised to switch the output to throughput preset (link).",
+              "examples" : [ "1" ]
             },
             "detect_sequence_reset" : {
               "$ref" : "#/definitions/booleanOrString",
@@ -6286,6 +6298,10 @@
             "credentials_json" : {
               "type" : "string",
               "description" : "JSON blob containing the credentials and key used to subscribe. This can be as an alternative to credentials_file if you want to embed the credential data within your config file or put the information into a keystore. You may also use Google Application Default Credentials (ADC)."
+            },
+            "proxy_url" : {
+              "type" : "string",
+              "description" : "This specifies proxy configuration in the form of http[s]://<user>:<password>@<server name/ip>:<port>. Proxy headers may be configured using the resource.proxy_headers field which accepts a set of key/value pairs."
             }
           }
         }
@@ -6322,9 +6338,9 @@
               "description" : "SQS queue URL to receive messages from (required).",
               "examples" : [ "https://sqs.us-east-1.amazonaws.com/1234/test-aws-s3-logs-queue" ]
             },
-            "max_number_of_messages" : {
+            "number_of_workers" : {
               "type" : "string",
-              "description" : "Maximum number of SQS messages that can be inflight at any time.",
+              "description" : "Number of workers on S3 bucket or SQS queue",
               "examples" : [ "5" ]
             },
             "api_timeout" : {
@@ -6358,6 +6374,11 @@
               "type" : "string",
               "description" : "Bucket ARN used for polling AWS S3 buckets",
               "examples" : [ "arn:aws:s3:::test-s3-bucket" ]
+            },
+            "access_point_arn" : {
+              "type" : "string",
+              "description" : "Access Point ARN used for polling AWS S3 buckets",
+              "examples" : [ "arn:aws:s3:us-east-1:123456789:accesspoint/my-accesspoint" ]
             },
             "non_aws_bucket_name" : {
               "type" : "string",
@@ -6393,22 +6414,29 @@
               "description" : "Controls deletion of objects after backing them up",
               "examples" : [ "false" ]
             },
+            "ignore_older" : {
+              "type" : "string",
+              "description" : "Ignore bucket entries older than the given timespan. Timespan is calculated from current time to processing object's last modified timestamp. This is disabled by default(value 0) and can be configured to a time duration like \"48h\" or \"2h30m\".",
+              "examples" : [ "0" ]
+            },
+            "start_timestamp" : {
+              "type" : "string",
+              "description" : "Accept bucket entries with last modified timestamp newer than the given timestamp. Accepts a timestamp in YYYY-MM-DDTHH:MM:SSZ format and default is empty. For example, \"2024-11-20T20:00:00Z\" (UTC) or \"2024-11-20T22:30:00+02:30\" (with zone offset)."
+            },
             "buffer_size" : {
               "type" : "string",
-              "description" : "The size in bytes of the buffer that each harvester uses when fetching a file. This only applies to non-JSON logs. The default is 16 KiB.",
+              "description" : "The size of the buffer in bytes that each harvester uses when fetching a file. This only applies to non-JSON logs. The default is 16 KiB.",
               "examples" : [ "16 KiB" ]
             },
             "content_type" : {
               "type" : "string",
-              "description" : "A standard MIME type describing the format of the object data. This can be set to override the MIME type that was given to the object when it was uploaded. For example: application/json."
+              "description" : "A standard MIME type describing the format of the object data. This can be set to override the MIME type given to the object when it was uploaded. For example: application/json."
             },
             "encoding" : {
-              "type" : "string",
-              "description" : "The file encoding to use for reading data that contains international characters. This only applies to non-JSON logs. See encoding."
+              "$ref" : "#/definitions/encoding"
             },
             "decoding" : {
-              "type" : "string",
-              "description" : "The file decoding option is used to specify a codec that will be used to decode the file contents. This can apply to any file stream data. An example config is shown below:\nCurrently supported codecs are given below:-"
+              "$ref" : "#/definitions/decoding"
             },
             "expand_event_list_from_field" : {
               "type" : "string",
@@ -6462,7 +6490,7 @@
             },
             "log_group_arn" : {
               "type" : "string",
-              "description" : "ARN of the log group to collect logs from",
+              "description" : "ARN of the log group to collect logs from This ARN could refer to a log group from a linked source account Note: This property precedes over `log_group_name` & `log_group_name_prefix`",
               "examples" : [ "arn:aws:logs:us-east-1:428152502467:log-group:test:*" ]
             },
             "log_group_name" : {
@@ -6472,8 +6500,13 @@
             },
             "log_group_name_prefix" : {
               "type" : "string",
-              "description" : "The prefix for a group of log group names. Note: `region_name` is required when `log_group_name_prefix` is given. `log_group_name` and `log_group_name_prefix` cannot be given at the same time.",
+              "description" : "The prefix for a group of log group names. You can include linked source accounts by using the property `include_linked_accounts_for_prefix_mode`. Note: `region_name` is required when `log_group_name_prefix` is given. `log_group_name` and `log_group_name_prefix` cannot be given at the same time.",
               "examples" : [ "/aws/" ]
+            },
+            "include_linked_accounts_for_prefix_mode" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "description" : "State whether to include linked source accounts when obtaining log groups matching the prefix provided through `log_group_name_prefix` This property works together with `log_group_name_prefix` and default value (if unset) is false",
+              "examples" : [ "true" ]
             },
             "region_name" : {
               "type" : "string",
@@ -6594,36 +6627,7 @@
         },
         "then" : {
           "description" : "Azure Event Hub",
-          "properties" : {
-            "eventhub" : {
-              "type" : "string",
-              "description" : "The name of the eventhub users would like to read from, field required."
-            },
-            "consumer_group" : {
-              "type" : "string",
-              "description" : "Optional, we recommend using a dedicated consumer group for the azure input. Reusing consumer groups among non-related consumers can cause unexpected behavior and possibly lost events."
-            },
-            "connection_string" : {
-              "type" : "string",
-              "description" : "The connection string required to communicate with Event Hubs, steps here https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-get-connection-string.\nA Blob Storage account is required in order to store/retrieve/update the offset or state of the eventhub messages. This means that after stopping filebeat it can start back up at the spot that it stopped processing messages."
-            },
-            "storage_account" : {
-              "type" : "string",
-              "description" : "The name of the storage account. Required."
-            },
-            "storage_account_key" : {
-              "type" : "string",
-              "description" : "The storage account key, this key will be used to authorize access to data in your storage account, option is required."
-            },
-            "storage_account_container" : {
-              "type" : "string",
-              "description" : "Optional, the name of the storage account container you would like to store the offset information in."
-            },
-            "resource_manager_endpoint" : {
-              "type" : "string",
-              "description" : "Optional, by default we are using the azure public environment, to override, users can provide a specific resource manager endpoint in order to use a different azure environment. Ex: https://management.chinacloudapi.cn/ for azure ChinaCloud https://management.microsoftazure.de/ for azure GermanCloud https://management.azure.com/ for azure PublicCloud https://management.usgovcloudapi.net/ for azure USGovernmentCloud Users can also use this in case of a Hybrid Cloud model, where one may define their own endpoints."
-            }
-          }
+          "properties" : { }
         }
       }, {
         "if" : {
@@ -6639,6 +6643,10 @@
             "account_name" : {
               "type" : "string",
               "description" : "This attribute is required for various internal operations with respect to authentication, creating service clients and blob clients which are used internally for various processing purposes."
+            },
+            "auth.oauth2" : {
+              "type" : "string",
+              "description" : "This attribute contains the Microsoft Entra ID RBAC authentication credentials for a secure connection to the Azure Blob Storage. The auth.oauth2 attribute contains the following sub-attributes:\nA sample configuration with auth.oauth2 is given below:\nHow to setup the auth.oauth2 credentials can be found in the Azure documentation here"
             },
             "auth.shared_credentials.account_key" : {
               "type" : "string",
@@ -6662,7 +6670,7 @@
             },
             "max_workers" : {
               "type" : "string",
-              "description" : "This attribute defines the maximum number of workers (go routines / lightweight threads) are allocated in the worker pool (thread pool) for processing jobs which read contents of file. More number of workers equals a greater amount of concurrency achieved. There is an upper cap of 5000 workers per container that can be defined due to internal sdk constraints. This attribute can be specified both at the root level of the configuration as well at the container level. The container level values will always take priority and override the root level values if both are specified."
+              "description" : "This attribute defines the maximum number of workers allocated to the worker pool for processing jobs which read file contents. It can be specified both at the root level of the configuration, and at the container level. Container level values override root level values if both are specified. Larger number of workers do not necessarily improve throughput, and this should be carefully tuned based on the number of files, the size of the files being processed and resources available. Increasing max_workers to very high values may cause resource utilization problems and may lead to bottlenecks in processing. Usually a maximum of 2000 workers is recommended. A very low max_worker count will drastically increase the number of network calls required to fetch the blobs, which may cause a bottleneck in processing.\nThe batch size for workload distribution is calculated by the input to ensure that there is an even workload across all workers. This means that for a given max_workers parameter value, the input will calculate the optimal batch size for that setting. The max_workers value should be configured based on factors such as the total number of files to be processed, available system resources and network bandwidth.\nExample:\n- Setting max_workers=3 would result in each request fetching 3 blobs (batch size = 3), which are then distributed among 3 workers.\n- Setting max_workers=100 would fetch 100 blobs (batch size = 100) per request, distributed among 100 workers."
             },
             "poll" : {
               "$ref" : "#/definitions/booleanOrString",
@@ -6673,9 +6681,15 @@
               "type" : "string",
               "description" : "This attribute defines the maximum amount of time after which the internal scheduler will make the polling call for the next set of blobs/files. It can be defined in the following formats : {{x}}s, {{x}}m, {{x}}h, here s = seconds, m = minutes and h = hours. The value {{x}} can be anything we wish. Example : 10s would mean we would like the polling to occur every 10 seconds. If no value is specified for this, by default its initialized to 300 seconds. This attribute can be specified both at the root level of the configuration as well at the container level. The container level values will always take priority and override the root level values if both are specified."
             },
+            "encoding" : {
+              "$ref" : "#/definitions/encoding"
+            },
+            "decoding" : {
+              "$ref" : "#/definitions/decoding"
+            },
             "file_selectors" : {
               "type" : "array",
-              "description" : "If the Azure blob storage container will have blobs that correspond to files that Filebeat shouldn’t process, file_selectors can be used to limit the files that are downloaded. This is a list of selectors which are based on a regex pattern. The regex should match the blob name or should be a part of the blob name (ideally a prefix). The regex syntax is the same as used in the Go programming language. Files that don’t match any configured regex won’t be processed.This attribute can be specified both at the root level of the configuration as well at the container level. The container level values will always take priority and override the root level values if both are specified.",
+              "description" : "If the Azure blob storage container will have blobs that correspond to files that Filebeat shouldn’t process, file_selectors can be used to limit the files that are downloaded. This is a list of selectors which are based on a regex pattern. The regex should match the blob name or should be a part of the blob name (ideally a prefix). The regex syntax is the same as used in the Go programming language. Files that don’t match any configured regex won’t be processed.This attribute can be specified both at the root level of the configuration as well at the container level. The container level values will always take priority and override the root level values if both are specified.\nThe file_selectors operation is performed within the agent locally. The agent will download all the files and then filter them based on the file_selectors. This can cause a bottleneck in processing if the number of files are very high. It is recommended to use this attribute only when the number of files are limited or ample resources are available.",
               "items" : {
                 "type" : "string"
               }
@@ -6686,7 +6700,7 @@
             },
             "timestamp_epoch" : {
               "type" : "string",
-              "description" : "This attribute can be used to filter out files/blobs which have a timestamp older than the specified value. The value of this attribute should be in unix epoch (seconds) format. The timestamp value is compared with the LastModified Timestamp obtained from the blob metadata. This attribute can be specified both at the root level of the configuration as well at the container level. The container level values will always take priority and override the root level values if both are specified.\nThe sample configs below will explain the container level overriding of attributes a bit further :-\nCASE - 1 :\nHere container_1 is using root level attributes while container_2 overrides the values :\nExplanation : In this configuration container_1 has no sub attributes in max_workers, poll and poll_interval defined. It inherits the values for these fileds from the root level, which is max_workers = 10, poll = true and poll_interval = 15 seconds. However container_2 has these fields defined and it will use those values instead of using the root values.\nCASE - 2 :\nHere both container_1 and container_2 overrides the root values :\nExplanation : In this configuration even though we have specified max_workers = 10, poll = true and poll_interval = 15s at the root level, both the containers will override these values with their own respective values which are defined as part of their sub attibutes."
+              "description" : "This attribute can be used to filter out files/blobs which have a timestamp older than the specified value. The value of this attribute should be in unix epoch (seconds) format. The timestamp value is compared with the LastModified Timestamp obtained from the blob metadata. This attribute can be specified both at the root level of the configuration as well at the container level. The container level values will always take priority and override the root level values if both are specified.\nThe Azure Blob Storage APIs don’t provide a direct way to filter files based on timestamp, so the input will download all the files and then filter them based on the timestamp. This can cause a bottleneck in processing if the number of files are very high. It is recommended to use this attribute only when the number of files are limited or ample resources are available.\nThe sample configs below will explain the container level overriding of attributes a bit further :-\nCASE - 1 :\nHere container_1 is using root level attributes while container_2 overrides the values :\nExplanation : In this configuration container_1 has no sub attributes in max_workers, poll and poll_interval defined. It inherits the values for these fileds from the root level, which is max_workers = 10, poll = true and poll_interval = 15 seconds. However container_2 has these fields defined and it will use those values instead of using the root values.\nCASE - 2 :\nHere both container_1 and container_2 overrides the root values :\nExplanation : In this configuration even though we have specified max_workers = 10, poll = true and poll_interval = 15s at the root level, both the containers will override these values with their own respective values which are defined as part of their sub attibutes."
             }
           }
         }
@@ -6751,6 +6765,13 @@
             "state.cursor" : {
               "type" : "string",
               "description" : "The cursor is an object available as state.cursor where arbitrary values may be stored. Cursor state is kept between input restarts and updated after each event of a request has been published. When a cursor is used the CEL program must either create a cursor state for each event that is returned by the program, or a single cursor that reflect the cursor for completion of the full set of events."
+            },
+            "allowed_environment" : {
+              "type" : "array",
+              "description" : "A list of host environment variable that will be made visible to the CEL execution environment. By default, no environment variables are visible.",
+              "items" : {
+                "type" : "string"
+              }
             },
             "regexp" : {
               "type" : "string",
@@ -6870,9 +6891,30 @@
               "type" : "string",
               "description" : "The RSA JWK private key PEM block for your Okta Service App which is used for interacting with Okta Org Auth Server to mint tokens with okta.* scopes."
             },
+            "auth.oauth2.okta.dpop_key_pem" : {
+              "type" : "string",
+              "description" : "The Demonstrating Proof-of-Possession private key PEM block for your Okta authentication token. When this key is provided, Okta authentication will make use of the Okta DPoP authentication flow."
+            },
+            "auth.token.enabled" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "description" : "When set to false, disables the token authentication configuration. Default: true.",
+              "examples" : [ "true" ]
+            },
+            "auth.token.type" : {
+              "type" : "string",
+              "description" : "The type of token to authenticate with, for example \"Token\" or \"Bearer\"."
+            },
+            "auth.token.value" : {
+              "type" : "string",
+              "description" : "The token value to use."
+            },
             "resource.url" : {
               "type" : "string",
               "description" : "The URL of the HTTP API. Required.\nThe API endpoint may be accessed via unix socket and Windows named pipes by adding +unix or +npipe to the URL scheme, for example, http+unix:///var/socket/."
+            },
+            "resource.headers" : {
+              "type" : "string",
+              "description" : "Headers to be added to all requests. Headers are added before authentication headers, so any collision between headers in this configuration and authentication headers will result in the colliding headers here not being included in requests. Header values must be provided as an array."
             },
             "resource.timeout" : {
               "type" : "string",
@@ -6882,6 +6924,10 @@
             "resource.ssl" : {
               "description" : "This specifies SSL/TLS configuration. If the ssl section is missing, the host’s CAs are used for HTTPS connections. See SSL for more information.",
               "$ref" : "#/definitions/ssl"
+            },
+            "resource.proxy_url" : {
+              "type" : "string",
+              "description" : "This specifies proxy configuration in the form of http[s]://<user>:<password>@<server name/ip>:<port>. Proxy headers may be configured using the resource.proxy_headers field which accepts a set of key/value pairs."
             },
             "resource.keep_alive.disable" : {
               "$ref" : "#/definitions/booleanOrString",
@@ -6935,6 +6981,11 @@
               "description" : "The maximum number of redirects to follow for a request. Default: 10.",
               "examples" : [ "10" ]
             },
+            "resource.max_body_size" : {
+              "type" : "string",
+              "description" : "The maximum size of a response body that will be accepted by the client if non-zero. Bodies that are too large will result in an error, \"response body too big\". Default: 0.",
+              "examples" : [ "0" ]
+            },
             "resource.rate_limit.limit" : {
               "type" : "string",
               "description" : "The value of the response that specifies the maximum overall resource request rate."
@@ -6943,13 +6994,17 @@
               "type" : "string",
               "description" : "The maximum burst size. Burst is the maximum number of resource requests that can be made above the overall rate limit."
             },
+            "resource.tracer.enable" : {
+              "type" : "string",
+              "description" : "It is possible to log HTTP requests and responses in a CEL program to a local file-system for debugging configurations. This option is enabled by setting resource.tracer.enabled to true and setting the resource.tracer.filename value. Additional options are available to tune log rotation behavior. To delete existing logs, set resource.tracer.enabled to false without unsetting the filename option.\nEnabling this option compromises security and should only be used for debugging."
+            },
             "resource.tracer.filename" : {
               "type" : "string",
-              "description" : "It is possible to log HTTP requests and responses in a CEL program to a local file-system for debugging configurations. This option is enabled by setting the resource.tracer.filename value. Additional options are available to tune log rotation behavior.\nTo differentiate the trace files generated from different input instances, a placeholder * can be added to the filename and will be replaced with the input instance id. For Example, http-request-trace-*.ndjson.\nEnabling this option compromises security and should only be used for debugging."
+              "description" : "To differentiate the trace files generated from different input instances, a placeholder * can be added to the filename and will be replaced with the input instance id. For Example, http-request-trace-*.ndjson. Setting resource.tracer.filename with resource.tracer.enable set to false will cause any existing trace logs matching the filename option to be deleted."
             },
             "resource.tracer.maxsize" : {
               "type" : "string",
-              "description" : "This value sets the maximum size, in megabytes, the log file will reach before it is rotated. By default logs are allowed to reach 1MB before rotation."
+              "description" : "This value sets the maximum size, in megabytes, the log file will reach before it is rotated. By default logs are allowed to reach 1MB before rotation. Individual request/response bodies will be truncated to 10% of this size."
             },
             "resource.tracer.maxage" : {
               "type" : "string",
@@ -6978,6 +7033,18 @@
             "redact.delete" : {
               "type" : "string",
               "description" : "This specifies whether fields should be replaced with a * or deleted entirely from messages sent to debug logs. If delete is true, fields will be deleted rather than replaced."
+            },
+            "failure_dump.enabled" : {
+              "type" : "string",
+              "description" : "It is possible to log CEL program evaluation failures to a local file-system for debugging configurations. This option is enabled by setting failure_dump.enabled to true and setting the failure_dump.filename value. To delete existing failure dumps, set failure_dump.enabled to false without unsetting the filename option.\nEnabling this option compromises security and should only be used for debugging."
+            },
+            "failure_dump.filename" : {
+              "type" : "string",
+              "description" : "This specifies a directory path to write failure dumps to. If it is not empty and a CEL program evaluation fails, the complete set of states for the CEL program’s evaluation will be written as a JSON file, along with the error that was reported. This option should only be used when debugging a failure as it imposes a significant performance impact on the input and may potentially use large quantities of memory to hold the full set of states. If a failure dump is configured, it is recommended that data input sizes be reduced to avoid excessive memory consumption, and making dumps that are intractable to analysis. To delete existing failure dumps, set failure_dump.enabled to false without unsetting the filename option."
+            },
+            "record_coverage" : {
+              "type" : "string",
+              "description" : "This specifies that CEL code evaluation coverage should be recorded and logged in debug logs. This is a developer-only option."
             }
           }
         }
@@ -7100,9 +7167,25 @@
               "type" : "string",
               "description" : "The client user name. Used for authentication. The user must have Active Directory read access. Field is required."
             },
+            "user_attributes" : {
+              "type" : "string",
+              "description" : "The set of directory attributes to request from the Active Directory server when collecting user data. If not set, all user attributes are requested. If set, only listed attributes are requested, including distinguishedDomain and whenChanged. Note that the Active Directory attribute names are used."
+            },
+            "group_attributes" : {
+              "type" : "string",
+              "description" : "The set of directory attributes to request from the Active Directory server when collecting group data. If not set, all group attributes are requested. If set, only listed attributes are requested, including distinguishedDomain and whenChanged. Note that the Active Directory attribute names are used."
+            },
+            "ad_paging_size" : {
+              "type" : "string",
+              "description" : "The number of records to request from the Active Directory server for each page, if set."
+            },
             "ad_password" : {
               "type" : "string",
               "description" : "The client’s password, used for authentication. Field is required."
+            },
+            "dataset" : {
+              "type" : "string",
+              "description" : "The datasets to collect from Active Directory. This can be one of \"all\", \"users\" or \"devices\", or may be left empty for the default behavior, which is to collect all entities. When the dataset is set to \"devices\", some user entity data is collected in order to populate the registered users and registered owner fields for each device."
             },
             "sync_interval" : {
               "type" : "string",
@@ -7125,10 +7208,6 @@
             "secret" : {
               "type" : "string",
               "description" : "The secret value, used for authentication. Field is required."
-            },
-            "dataset" : {
-              "type" : "string",
-              "description" : "The datasets to collect from the API. This can be one of \"all\", \"users\" or \"devices\", or may be left empty for the default behavior which is to collect all entities. When the dataset is set to \"devices\", some user entity data is collected in order to populate the registered users and registered owner fields for each device."
             },
             "login_endpoint" : {
               "type" : "string",
@@ -7168,6 +7247,42 @@
                 } ]
               }
             },
+            "expand.users" : {
+              "type" : "string",
+              "description" : "Add user query relationship expansions. This is a map of relationship names to attribute lists. By default this is not set. If an empty relationship list is given, the relationship expansion is the same as the users query."
+            },
+            "expand.groups" : {
+              "type" : "string",
+              "description" : "Add group query relationship expansions. This is a map of relationship names to attribute lists. By default this is not set. If an empty relationship list is given, the relationship expansion is the same as the groups query."
+            },
+            "expand.devices" : {
+              "type" : "string",
+              "description" : "Add device query relationship expansions. This is a map of relationship names to attribute lists. By default this is not set. If an empty relationship list is given, the relationship expansion is the same as the devices query."
+            },
+            "tracer.enabled" : {
+              "type" : "string",
+              "description" : "It is possible to log HTTP requests and responses to the EntraID API to a local file-system for debugging configurations. This option is enabled by setting tracer.enabled to true and setting the tracer.filename value. Additional options are available to tune log rotation behavior. To delete existing logs, set tracer.enabled to false without unsetting the filename option.\nEnabling this option compromises security and should only be used for debugging."
+            },
+            "tracer.filename" : {
+              "type" : "string",
+              "description" : "To differentiate the trace files generated from different input instances, a placeholder * can be added to the filename and will be replaced with the input instance id. For Example, http-request-trace-*.ndjson."
+            },
+            "jamf_tenant" : {
+              "type" : "string",
+              "description" : "The Jamf tenant host. Field is required."
+            },
+            "jamf_username" : {
+              "type" : "string",
+              "description" : "The Jamf username, used for authentication. Field is required."
+            },
+            "jamf_password" : {
+              "type" : "string",
+              "description" : "The Jamf user password, used for authentication. Field is required."
+            },
+            "page_size" : {
+              "type" : "string",
+              "description" : "The number of computer records to collect with each API request. Defaults to API default."
+            },
             "okta_domain" : {
               "type" : "string",
               "description" : "The Okta domain. Field is required."
@@ -7179,6 +7294,29 @@
             "collect_device_details" : {
               "type" : "string",
               "description" : "Whether the input should collect device and device-associated user details from the Okta API. Device details must be activated on the Okta account for this option."
+            },
+            "enrich_with" : {
+              "type" : "string",
+              "description" : "The metadata to enrich users with. This is an array of values that may contain \"groups\", \"roles\" and \"factors\", or \"none\". If the array only contains \"none\", no metadata is collected for users. The default behavior is to collect \"groups\"."
+            },
+            "batch_size" : {
+              "type" : "string",
+              "description" : "The pagination batch size for requests. If it is zero or negative, the API default is used. The default is 200.",
+              "examples" : [ "used" ]
+            },
+            "limit_window" : {
+              "type" : "string",
+              "description" : "The time between Okta API rate limit resets. Expressed as a duration string (e.g., 1m, 3h, 24h). Defaults to 1m (1 minute).",
+              "examples" : [ "1m" ]
+            },
+            "limit_fixed" : {
+              "type" : "string",
+              "description" : "The number of requests to allow in each limit window, if set. This parameter should only be set in exceptional cases. When it is set, rate limit information in API responses will be ignored in favor of the fixed limit. The limit is applied separately to each endopint. Defaults to unset.",
+              "examples" : [ "unset" ]
+            },
+            "tracer.maxsize" : {
+              "type" : "string",
+              "description" : "This value sets the maximum size, in megabytes, the log file will reach before it is rotated. By default logs are allowed to reach 1MB before rotation. Individual request/response bodies will be truncated to 10% of this size."
             }
           }
         }
@@ -7207,36 +7345,37 @@
             },
             "buckets" : {
               "type" : "string",
-              "description" : "This attribute contains the details about a specific bucket like name, max_workers, poll, poll_interval and bucket_timeout. The attribute name is specific to a bucket as it describes the bucket name, while the fields max_workers, poll, poll_interval and bucket_timeout can exist both at the bucket level and the root level. This attribute is internally represented as an array, so we can add as many buckets as we require."
+              "description" : "This attribute contains the details about a specific bucket like name, max_workers, poll and poll_interval. The attribute name is specific to a bucket as it describes the bucket name, while the fields max_workers, poll and poll_interval can exist both at the bucket level and the root level. This attribute is internally represented as an array, so we can add as many buckets as we require."
             },
             "name" : {
               "type" : "string",
               "description" : "This is a specific subfield of a bucket. It specifies the bucket name."
             },
-            "bucket_timeout" : {
-              "type" : "string",
-              "description" : "This attribute defines the maximum amount of time after which a bucket operation will give and stop if no response is recieved (example: reading a file / listing a file). It can be defined in the following formats : {{x}}s, {{x}}m, {{x}}h, here s = seconds, m = minutes and h = hours. The value {{x}} can be anything we wish. If no value is specified for this, by default its initialized to 50 seconds. This attribute can be specified both at the root level of the configuration as well at the bucket level. The bucket level values will always take priority and override the root level values if both are specified."
-            },
             "max_workers" : {
               "type" : "string",
-              "description" : "This attribute defines the maximum number of workers (go routines / lightweight threads) are allocated in the worker pool (thread pool) for processing jobs which read contents of file. More number of workers equals a greater amount of concurrency achieved. There is an upper cap of 5000 workers per bucket that can be defined due to internal sdk constraints. This attribute can be specified both at the root level of the configuration as well at the bucket level. The bucket level values will always take priority and override the root level values if both are specified."
+              "description" : "This attribute defines the maximum number of workers (goroutines / lightweight threads) are allocated in the worker pool (thread pool) for processing jobs which read the contents of files. This attribute can be specified both at the root level of the configuration and at the bucket level. Bucket level values override the root level values if both are specified. Larger number of workers do not necessarily improve of throughput, and this should be carefully tuned based on the number of files, the size of the files being processed and resources available. Increasing max_workers to very high values may cause resource utilization problems and can lead to a bottleneck in processing. Usually a maximum cap of 2000 workers is recommended. A very low max_worker count will drastically increase the number of network calls required to fetch the objects, which can cause a bottleneck in processing."
             },
             "poll" : {
-              "$ref" : "#/definitions/booleanOrString",
-              "description" : "This attribute informs the scheduler whether to keep polling for new files or not. Default value of this is false, so it will not keep polling if not explicitly specified. This attribute can be specified both at the root level of the configuration as well at the bucket level. The bucket level values will always take priority and override the root level values if both are specified.",
-              "examples" : [ "false" ]
+              "type" : "string",
+              "description" : "This attribute informs the scheduler whether to keep polling for new files or not. Default value of this is set to true. This attribute can be specified both at the root level of the configuration as well at the bucket level. The bucket level values will always take priority and override the root level values if both are specified."
             },
             "poll_interval" : {
               "type" : "string",
-              "description" : "This attribute defines the maximum amount of time after which the internal scheduler will make the polling call for the next set of objects/files. It can be defined in the following formats : {{x}}s, {{x}}m, {{x}}h, here s = seconds, m = minutes and h = hours. The value {{x}} can be anything we wish. Example : 10s would mean we would like the polling to occur every 10 seconds. If no value is specified for this, by default its initialized to 300 seconds. This attribute can be specified both at the root level of the configuration as well at the bucket level. The bucket level values will always take priority and override the root level values if both are specified."
+              "description" : "This attribute defines the maximum amount of time after which the internal scheduler will make the polling call for the next set of objects/files. It can be defined in the following formats : {{x}}s, {{x}}m, {{x}}h, here s = seconds, m = minutes and h = hours. The value {{x}} can be anything we wish. Example : 10s would mean we would like the polling to occur every 10 seconds. If no value is specified for this, by default its initialized to 5 minutes. This attribute can be specified both at the root level of the configuration as well at the bucket level. The bucket level values will always take priority and override the root level values if both are specified. Having a lower poll_interval can make the input faster at the cost of more resource utilization."
             },
             "parse_json" : {
               "type" : "string",
               "description" : "This attribute informs the publisher whether to parse & objectify json data or not. By default this is set to false, since it can get expensive dealing with highly nested json data. If this is set to false the gcs.storage.object.json_data field in the response will have an empty array. This attribute is only applicable for json objects and has no effect on other types of objects. This attribute can be specified both at the root level of the configuration as well at the bucket level. The bucket level values will always take priority and override the root level values if both are specified."
             },
+            "encoding" : {
+              "$ref" : "#/definitions/encoding"
+            },
+            "decoding" : {
+              "$ref" : "#/definitions/decoding"
+            },
             "file_selectors" : {
               "type" : "array",
-              "description" : "If the GCS buckets have objects that correspond to files that Filebeat shouldn’t process, file_selectors can be used to limit the files that are downloaded. This is a list of selectors which are based on a regular expression pattern. The regular expression should match the object name or should be a part of the object name (ideally a prefix). The regular expression syntax used is [RE2](https://github.com/google/re2/wiki/Syntax). Files that don’t match any configured expression won’t be processed.This attribute can be specified both at the root level of the configuration as well at the container level. The container level values will always take priority and override the root level values if both are specified.",
+              "description" : "If the GCS buckets have objects that correspond to files that Filebeat shouldn’t process, file_selectors can be used to limit the files that are downloaded. This is a list of selectors which are based on a regular expression pattern. The regular expression should match the object name or should be a part of the object name (ideally a prefix). The regular expression syntax used is [RE2](https://github.com/google/re2/wiki/Syntax). Files that don’t match any configured expression won’t be processed.This attribute can be specified both at the root level of the configuration as well at the container level. The container level values will always take priority and override the root level values if both are specified.\nThe file_selectors operation is performed within the agent locally, hence using this option will cause the agent to download all the files and then filter them. This can cause a bottleneck in processing if the number of files is very high. It is recommended to use this attribute only when the number of files is limited or ample resources are available.",
               "items" : {
                 "type" : "string"
               }
@@ -7247,7 +7386,17 @@
             },
             "timestamp_epoch" : {
               "type" : "string",
-              "description" : "This attribute can be used to filter out files and objects that have a timestamp older than the specified value. The value of this attribute should be in unix epoch (seconds) format. The timestamp value is compared with the object.Updated field obtained from the object metadata. This attribute can be specified both at the root level of the configuration as well at the container level. The container level values will always take priority and override the root level values if both are specified.\nThe sample configs below will explain the bucket level overriding of attributes a bit further :-\nCASE - 1 :\nHere bucket_1 is using root level attributes while bucket_2 overrides the values :\nExplanation : In this configuration bucket_1 has no sub attributes in max_workers, poll and poll_interval defined. It inherits the values for these fileds from the root level, which is max_workers = 10, poll = true and poll_interval = 15 seconds. However bucket_2 has these fields defined and it will use those values instead of using the root values.\nCASE - 2 :\nHere both bucket_1 and bucket_2 overrides the root values :\nExplanation : In this configuration even though we have specified max_workers = 10, poll = true and poll_interval = 15s at the root level, both the buckets will override these values with their own respective values which are defined as part of their sub attibutes."
+              "description" : "This attribute can be used to filter out files and objects that have a timestamp older than the specified value. The value of this attribute should be in unix epoch (seconds) format. The timestamp value is compared with the object.Updated field obtained from the object metadata. This attribute can be specified both at the root level of the configuration as well at the container level. The container level values will always take priority and override the root level values if both are specified.\nThe GCS APIs don’t provide a direct way to filter files based on the timestamp, so the input will download all the files and then filter them based on the timestamp. This can cause a bottleneck in processing if the number of files are very high. It is recommended to use this attribute only when the number of files are limited or ample resources are available. This option scales vertically and not horizontally."
+            },
+            "retry" : {
+              "type" : "array",
+              "description" : "This attribute can be used to configure a list of sub attributes that directly control how the input should behave when a download for a file/object fails or gets interrupted.\n- max_attempts: This attribute defines the maximum number of retry attempts(including the initial api call) that should be attempted for a retryable error. The default value for this is 3.\n- initial_backoff_duration: This attribute defines the initial backoff time. The default value for this is 1s.\n- max_backoff_duration: This attribute defines the maximum backoff time. The default value for this is 30s.\n- backoff_multiplier: This attribute defines the backoff multiplication factor. The default value for this is 2.\nBy configuring these attributes, the user is given the flexibility to control how the input should behave when a download fails or gets interrupted. This attribute can only be specified at the root level of the configuration and not at the bucket level. It applies uniformly to all the buckets.\nAn example configuration is given below :-\nThe sample configs below will explain the bucket level overriding of attributes a bit further :-\nCASE - 1 :\nHere bucket_1 is using root level attributes while bucket_2 overrides the values :\nExplanation : In this configuration bucket_1 has no sub attributes in max_workers, poll and poll_interval defined. It inherits the values for these fileds from the root level, which is max_workers = 10, poll = true and poll_interval = 15 seconds. However bucket_2 has these fields defined and it will use those values instead of using the root values.\nCASE - 2 :\nHere both bucket_1 and bucket_2 overrides the root values :\nExplanation : In this configuration even though we have specified max_workers = 10, poll = true and poll_interval = 15s at the root level, both the buckets will override these values with their own respective values which are defined as part of their sub attibutes.",
+              "items" : {
+                "type" : "string",
+                "defaultSnippets" : [ {
+                  "body" : "3"
+                } ]
+              }
             }
           }
         }
@@ -7284,7 +7433,7 @@
             },
             "hmac.header" : {
               "type" : "string",
-              "description" : "The name of the header that contains the HMAC signature: X-Dropbox-Signature, X-Hub-Signature-256, etc."
+              "description" : "The name of the header that contains the HMAC signature: X-Dropbox-Signature, X-Hub-Signature-256, etc. HMAC signatures may be encoded as hex or base64."
             },
             "hmac.key" : {
               "type" : "string",
@@ -7302,9 +7451,23 @@
               "type" : "string",
               "description" : "By default the input expects the incoming POST to include a Content-Type of application/json to try to enforce the incoming data to be valid JSON. In certain scenarios when the source of the request is not able to do that, it can be overwritten with another value or set to null."
             },
+            "max_in_flight_bytes" : {
+              "type" : "string",
+              "description" : "The total sum of request body lengths that are allowed at any given time. If non-zero, the input will compare this value to the sum of in-flight request body lengths from requests that include a wait_for_completion_timeout request query and will return a 503 HTTP status code, along with a Retry-After header configured with the retry_after option. The default value for this option is zero, no limit.",
+              "examples" : [ "zero" ]
+            },
+            "max_body_bytes" : {
+              "type" : "string",
+              "description" : "The maximum body length allowed for a single request. If present, the input will truncate request bodies at the configured limit. The default value for this option is unset, no limit.",
+              "examples" : [ "unset" ]
+            },
+            "retry_after" : {
+              "type" : "string",
+              "description" : "If a request has exceeded the max_in_flight_bytes limit, the response to the client will include a Retry-After header specifying how many seconds the client should wait to retry again. The default value for this option is 10 seconds."
+            },
             "program" : {
               "type" : "string",
-              "description" : "The normal operation of the input treats the body either as a single event when the body is an object, or as a set of events when the body is an array. If the body should be handled differently, for example a set of events in an array field of an object to be handled as a set of events, then a Common Expression Language (CEL) program can be provided through this configuration field. No CEL extensions are provided beyond the function in the CEL standard library. CEL optional types are supported.\nNote that during evaluation, numbers that are not representable exactly within a double floating point value will be converted to a string to avoid data corruption."
+              "description" : "The normal operation of the input treats the body either as a single event when the body is an object, or as a set of events when the body is an array. If the body should be handled differently, for example a set of events in an array field of an object to be handled as a set of events, then a Common Expression Language (CEL) program can be provided through this configuration field. The name of the object in the CEL program is obj. No CEL extensions are provided beyond the function in the CEL standard library. CEL optional types are supported.\nNote that during evaluation, numbers that are not representable exactly within a double floating point value will be converted to a string to avoid data corruption."
             },
             "response_code" : {
               "type" : "string",
@@ -7313,6 +7476,15 @@
             "response_body" : {
               "type" : "string",
               "description" : "The response body returned upon success."
+            },
+            "options_headers" : {
+              "type" : "string",
+              "description" : "A set of response headers to add to the response for OPTIONS requests. Headers with the same canonical MIME header name will be replaced with the values in this configuration."
+            },
+            "options_response_code" : {
+              "type" : "string",
+              "description" : "The HTTP response code to return for OPTIONS requests. Defaults to 200 (OK).",
+              "examples" : [ "200" ]
             },
             "listen_address" : {
               "type" : "string",
@@ -7331,7 +7503,7 @@
             },
             "prefix" : {
               "type" : "string",
-              "description" : "This option specifies which prefix the incoming request will be mapped to."
+              "description" : "This option specifies which prefix the incoming request will be mapped to. If prefix is \".\", the request will be mapped to the root of the resulting document."
             },
             "include_headers" : {
               "type" : "array",
@@ -7342,7 +7514,7 @@
             },
             "preserve_original_event" : {
               "type" : "string",
-              "description" : "This option copies the raw unmodified body of the incoming request to the event.original field as a string before sending the event to Elasticsearch."
+              "description" : "This option includes the JSON representation of the incoming request in the event.original field as a string before sending the event to Elasticsearch. The representation may not be a verbatim copy of the original message, but is guaranteed to be an [RFC7493](https://datatracker.ietf.org/doc/html/rfc7493) compliant message."
             },
             "crc.provider" : {
               "type" : "string",
@@ -7357,13 +7529,17 @@
               "description" : "The HTTP method handled by the endpoint. If specified, method must be POST, PUT or PATCH. The default method is POST. If PUT or PATCH are specified, requests using those method types are accepted, but are treated as POST requests and are expected to have a request body containing the request data.",
               "examples" : [ "POST" ]
             },
+            "tracer.enabled" : {
+              "type" : "string",
+              "description" : "It is possible to log HTTP requests to a local file-system for debugging configurations. This option is enabled by setting tracer.enabled to true and setting the tracer.filename value. Additional options are available to tune log rotation behavior. To delete existing logs, set tracer.enabled to false without unsetting the filename option.\nEnabling this option compromises security and should only be used for debugging."
+            },
             "tracer.filename" : {
               "type" : "string",
-              "description" : "It is possible to log HTTP requests to a local file-system for debugging configurations. This option is enabled by setting the tracer.filename value. Additional options are available to tune log rotation behavior.\nTo differentiate the trace files generated from different input instances, a placeholder * can be added to the filename and will be replaced with the input instance id. For Example, http-request-trace-*.ndjson.\nEnabling this option compromises security and should only be used for debugging."
+              "description" : "To differentiate the trace files generated from different input instances, a placeholder * can be added to the filename and will be replaced with the input instance id. For Example, http-request-trace-*.ndjson."
             },
             "tracer.maxsize" : {
               "type" : "string",
-              "description" : "This value sets the maximum size, in megabytes, the log file will reach before it is rotated. By default logs are allowed to reach 1MB before rotation."
+              "description" : "This value sets the maximum size, in megabytes, the log file will reach before it is rotated. By default logs are allowed to reach 1MB before rotation. Individual request bodies will be truncated to a maximum size of 10kiB."
             },
             "tracer.maxage" : {
               "type" : "string",
@@ -7396,7 +7572,7 @@
           "properties" : {
             "append" : {
               "type" : "string",
-              "description" : "Appends a value to an array. If the field does not exist, the first entry will create a new array. If the field exists, the value is appended to the existing field and converted to a list.\n- target defines the destination field where the value is stored.\n- value defines the value that will be stored and it is a value template.\n- default defines the fallback value whenever value is empty or the template parsing fails. Default templates do not have access to any state, only to functions.\n- value_type defines the type of the resulting value. Possible values are: string, json, and int. Default is string.\n- fail_on_template_error if set to true an error will be returned and the request will be aborted when the template evaluation fails. Default is false.",
+              "description" : "Appends a value to an array. If the field does not exist, the first entry will create a new array. If the field exists, the value is appended to the existing field and converted to a list.\n- target defines the destination field where the value is stored.\n- value defines the value that will be stored and it is a value template.\n- default defines the fallback value whenever value is empty or the template parsing fails. Default templates do not have access to any state, only to functions.\n- value_type defines the type of the resulting value. Possible values are: string, json, and int. Default is string.\n- fail_on_template_error if set to true an error will be returned and the request will be aborted when the template evaluation fails. Default is false.\n- do_not_log_failure if set to true a fail_on_template_error will not be logged except at DEBUG level. This should be used when template failure is expected in normal operation as control flow.",
               "examples" : [ "string" ]
             },
             "delete" : {
@@ -7405,7 +7581,7 @@
             },
             "set" : {
               "type" : "string",
-              "description" : "Sets a value.\n- target defines the destination field where the value is stored.\n- value defines the value that will be stored and it is a value template.\n- default defines the fallback value whenever value is empty or the template parsing fails. Default templates do not have access to any state, only to functions.\n- value_type defines how the resulting value will be treated. Possible values are: string, json, and int. Default is string.\n- fail_on_template_error if set to true an error will be returned and the request will be aborted when the template evaluation fails. Default is false.",
+              "description" : "Sets a value.\n- target defines the destination field where the value is stored.\n- value defines the value that will be stored and it is a value template.\n- default defines the fallback value whenever value is empty or the template parsing fails. Default templates do not have access to any state, only to functions.\n- value_type defines how the resulting value will be treated. Possible values are: string, json, and int. Default is string.\n- fail_on_template_error if set to true an error will be returned and the request will be aborted when the template evaluation fails. Default is false.\n- do_not_log_failure if set to true a fail_on_template_error will not be logged except at DEBUG level. This should be used when template failure is expected in normal operation as control flow.",
               "examples" : [ "string" ]
             },
             "interval" : {
@@ -7501,6 +7677,10 @@
             "auth.oauth2.okta.jwk_pem" : {
               "type" : "string",
               "description" : "The RSA JWK private key PEM block for your Okta Service App which is used for interacting with Okta Org Auth Server to mint tokens with okta.* scopes."
+            },
+            "auth.oauth2.okta.dpop_key_pem" : {
+              "type" : "string",
+              "description" : "The Demonstrating Proof-of-Possession private key PEM block for your Okta authentication token. When this key is provided, Okta authentication will make use of the Okta DPoP authentication flow."
             },
             "auth.oauth2.google.delegated_account" : {
               "type" : "string",
@@ -7607,13 +7787,21 @@
               "description" : "Optionally start rate-limiting prior to the value specified in the Response.\nUnder the default behavior, Requests will continue while the remaining value is non-zero. Specifying an early_limit will mean that rate-limiting will occur prior to reaching 0.\n- If the value specified for early_limit is less than 1, the value is treated as a percentage of the Response provided limit. e.g. specifying 0.9 will mean that Requests will continue until reaching 90% of the rate-limit — for a limit value of 120, the rate-limit starts when the remaining reaches 12. If the limit header is missing from the Response, default rate-limiting will occur (when remaining reaches 0).\n- If the value specified for early_limit is greater than or equal to 1, the value is treated as the target value for remaining. e.g. instead of rate-limiting when remaining hits 0, rate-limiting will occur when remaining hits the value specified.\nIt is not set by default (by default the rate-limiting as specified in the Response is followed).",
               "examples" : [ "non-zero" ]
             },
+            "request.rate_limit.max_non_degraded" : {
+              "type" : "string",
+              "description" : "The maximum number of consecutive 429 rate limit responses from the endpoint to accept before making an input health status update. If this is not set, rate limit responses will not be reported as health updates. Default behavior is to not report rate limiting responses."
+            },
+            "request.tracer.enable" : {
+              "type" : "string",
+              "description" : "It is possible to log HTTP requests and responses to a local file-system for debugging configurations. This option is enabled by setting request.tracer.enabled to true and setting the request.tracer.filename value. Additional options are available to tune log rotation behavior. To delete existing logs, set request.tracer.enabled to false without unsetting the filename option.\nEnabling this option compromises security and should only be used for debugging."
+            },
             "request.tracer.filename" : {
               "type" : "string",
-              "description" : "It is possible to log httpjson requests and responses to a local file-system for debugging configurations. This option is enabled by setting the request.tracer.filename value. Additional options are available to tune log rotation behavior.\nTo differentiate the trace files generated from different input instances, a placeholder * can be added to the filename and will be replaced with the input instance id. For Example, http-request-trace-*.ndjson.\nEnabling this option compromises security and should only be used for debugging."
+              "description" : "To differentiate the trace files generated from different input instances, a placeholder * can be added to the filename and will be replaced with the input instance id. For Example, http-request-trace-*.ndjson."
             },
             "request.tracer.maxsize" : {
               "type" : "string",
-              "description" : "This value sets the maximum size, in megabytes, the log file will reach before it is rotated. By default logs are allowed to reach 1MB before rotation."
+              "description" : "This value sets the maximum size, in megabytes, the log file will reach before it is rotated. By default logs are allowed to reach 1MB before rotation. Individual request/response bodies will be truncated to 10% of this size."
             },
             "request.tracer.maxage" : {
               "type" : "string",
@@ -7653,7 +7841,7 @@
             },
             "cursor" : {
               "type" : "array",
-              "description" : "Cursor is a list of key value objects where arbitrary values are defined. The values are interpreted as value templates and a default template can be set. Cursor state is kept between input restarts and updated once all the events for a request are published.\nEach cursor entry is formed by:\n- A value template, which will define the value to store when evaluated.\n- A default template, which will define the value to store when the value template fails or is empty.\n- An ignore_empty_value flag. When set to true, will not store empty values, preserving the previous one, if any. Default: true.\nCan read state from: [.last_response.*, .first_event.*, .last_event.*].",
+              "description" : "Cursor is a list of key value objects where arbitrary values are defined. The values are interpreted as value templates and a default template can be set. Cursor state is kept between input restarts and updated once all the events for a request are published.\nIf no event is published, no cursor update is made. This can have implications on how cursor updates should be performed when the target API returns empty response sets.\nEach cursor entry is formed by:\n- A value template, which will define the value to store when evaluated.\n- A default template, which will define the value to store when the value template fails or is empty.\n- An ignore_empty_value flag. When set to true, will not store empty values, preserving the previous one, if any. Default: true.\n- A do_not_log_failure flag. When set to true, will not signal a degraded Fleet health status. Default: true.\nCan read state from: [.last_response.*, .first_event.*, .last_event.*].",
               "items" : {
                 "type" : "string",
                 "defaultSnippets" : [ {
@@ -7820,8 +8008,7 @@
           "description" : "Stdin",
           "properties" : {
             "encoding" : {
-              "type" : "string",
-              "description" : "The file encoding to use for reading data that contains international characters. See the encoding names recommended by the W3C for use in HTML5.\nValid encodings:\n- plain: plain ASCII encoding\n- utf-8 or utf8: UTF-8 encoding\n- gbk: simplified Chinese charaters\n- iso8859-6e: ISO8859-6E, Latin/Arabic\n- iso8859-6i: ISO8859-6I, Latin/Arabic\n- iso8859-8e: ISO8859-8E, Latin/Hebrew\n- iso8859-8i: ISO8859-8I, Latin/Hebrew\n- iso8859-1: ISO8859-1, Latin-1\n- iso8859-2: ISO8859-2, Latin-2\n- iso8859-3: ISO8859-3, Latin-3\n- iso8859-4: ISO8859-4, Latin-4\n- iso8859-5: ISO8859-5, Latin/Cyrillic\n- iso8859-6: ISO8859-6, Latin/Arabic\n- iso8859-7: ISO8859-7, Latin/Greek\n- iso8859-8: ISO8859-8, Latin/Hebrew\n- iso8859-9: ISO8859-9, Latin-5\n- iso8859-10: ISO8859-10, Latin-6\n- iso8859-13: ISO8859-13, Latin-7\n- iso8859-14: ISO8859-14, Latin-8\n- iso8859-15: ISO8859-15, Latin-9\n- iso8859-16: ISO8859-16, Latin-10\n- cp437: IBM CodePage 437\n- cp850: IBM CodePage 850\n- cp852: IBM CodePage 852\n- cp855: IBM CodePage 855\n- cp858: IBM CodePage 858\n- cp860: IBM CodePage 860\n- cp862: IBM CodePage 862\n- cp863: IBM CodePage 863\n- cp865: IBM CodePage 865\n- cp866: IBM CodePage 866\n- ebcdic-037: IBM CodePage 037\n- ebcdic-1040: IBM CodePage 1140\n- ebcdic-1047: IBM CodePage 1047\n- koi8r: KOI8-R, Russian (Cyrillic)\n- koi8u: KOI8-U, Ukranian (Cyrillic)\n- macintosh: Macintosh encoding\n- macintosh-cyrillic: Macintosh Cyrillic encoding\n- windows1250: Windows1250, Central and Eastern European\n- windows1251: Windows1251, Russian, Serbian (Cyrillic)\n- windows1252: Windows1252, Legacy\n- windows1253: Windows1253, Modern Greek\n- windows1254: Windows1254, Turkish\n- windows1255: Windows1255, Hebrew\n- windows1256: Windows1256, Arabic\n- windows1257: Windows1257, Estonian, Latvian, Lithuanian\n- windows1258: Windows1258, Vietnamese\n- windows874: Windows874, ISO/IEC 8859-11, Latin/Thai\n- utf-16-bom: UTF-16 with required BOM\n- utf-16be-bom: big endian UTF-16 with required BOM\n- utf-16le-bom: little endian UTF-16 with required BOM\nThe plain encoding is special, because it does not validate or transform any input."
+              "$ref" : "#/definitions/encoding"
             },
             "exclude_lines" : {
               "type" : "array",
@@ -7894,17 +8081,25 @@
         "if" : {
           "properties" : {
             "type" : {
-              "const" : "websocket"
+              "const" : "streaming"
             }
           }
         },
         "then" : {
-          "description" : "Websocket",
+          "description" : "Streaming",
           "properties" : {
+            "stream_type" : {
+              "type" : "string",
+              "description" : "The flavor of streaming to use. This may be either \"websocket\", \"crowdstrike\", or unset. If the field is unset, websocket streaming is used."
+            },
             "program" : {
               "type" : "string",
               "description" : "The CEL program that is executed on each message received. This field should ideally be present but if not the default program given below is used.",
               "examples" : [ "used" ]
+            },
+            "url_program" : {
+              "type" : "string",
+              "description" : "If present, this CEL program is executed before the streaming connection is established using the state object, including any stored cursor value. It must evaluate to a valid URL. The returned URL is used to make the streaming connection for processing. The program may use cursor values or other state defined values to customize the URL at runtime."
             },
             "state" : {
               "type" : "string",
@@ -7929,6 +8124,275 @@
             "redact.delete" : {
               "type" : "string",
               "description" : "This specifies whether fields should be replaced with a * or deleted entirely from messages sent to debug logs. If delete is true, fields will be deleted rather than replaced."
+            },
+            "retry" : {
+              "type" : "string",
+              "description" : "The retry configuration allows the user to specify the number of times the input should attempt to reconnect to the streaming data source in the event of a connection failure. The default value is nil which means no retries will be attempted. It has a wait_min and wait_max configuration which specifies the minimum and maximum time to wait between retries. It also supports blanket retries and infinite retries via the blanket_retires and infinite_retries configuration options. These are set to false by default.",
+              "examples" : [ "nil" ]
+            },
+            "retry.max_attempts" : {
+              "type" : "string",
+              "description" : "The maximum number of times the input should attempt to reconnect to the streaming data source in the event of a connection failure. The default value is 5 which means a maximum of 5 retries will be attempted.",
+              "examples" : [ "5" ]
+            },
+            "retry.wait_min" : {
+              "type" : "string",
+              "description" : "The minimum time to wait between retries. This ensures that retries are spaced out enough to give the system time to recover or resolve transient issues, rather than bombarding the system with rapid retries. For example, wait_min might be set to 1 second, meaning that even if the calculated backoff is less than this, the client will wait at least 1 second before retrying. The default value is 1 second.",
+              "examples" : [ "1" ]
+            },
+            "retry.wait_max" : {
+              "type" : "string",
+              "description" : "The maximum time to wait between retries. This prevents the retry mechanism from becoming too slow, ensuring that the client does not wait indefinitely between retries. This is crucial in systems where timeouts or user experience are critical. For example, wait_max might be set to 10 seconds, meaning that even if the calculated backoff is greater than this, the client will wait at most 10 seconds before retrying. The default value is 30 seconds.",
+              "examples" : [ "30" ]
+            },
+            "retry.blanket_retries" : {
+              "type" : "string",
+              "description" : "Normally the input will only retry when a connection error is found to be retryable based on the error type and the RFC 6455 error codes defined by the websocket protocol. If blanket_retries is set to true (false by default) the input will retry on any error. This is not recommended unless the user is certain that all errors are transient and can be resolved by retrying."
+            },
+            "retry.infinite_retries" : {
+              "type" : "string",
+              "description" : "Normally the input will only retry a maximum of max_attempts times. If infinite_retries is set to true (false by default) the input will retry indefinitely. This is not recommended unless the user is certain that the connection will eventually succeed."
+            },
+            "timeout" : {
+              "type" : "string",
+              "description" : "Timeout is the maximum amount of time the websocket dialer will wait for a connection to be established. The default value is 180 seconds.",
+              "examples" : [ "180" ]
+            },
+            "proxy_url" : {
+              "type" : "string",
+              "description" : "This specifies the forward proxy URL to use for the connection. The proxy_url configuration is optional and can be used to configure the proxy settings for the connection. The proxy_url default value is set by http.ProxyFromEnvironment which reads the HTTP_PROXY, HTTPS_PROXY, and NO_PROXY environment variables."
+            },
+            "proxy_headers" : {
+              "type" : "string",
+              "description" : "This specifies the headers to be sent to the proxy server. The proxy_headers configuration is optional and can be used to configure the headers to be sent to the proxy server."
+            },
+            "ssl" : {
+              "description" : "This specifies the SSL configuration for the connection. The ssl configuration is optional and can be used to configure the SSL settings for the connection. The ssl configuration has the following subfields:\n- certificate_authorities: A list of root certificates to use for verifying the server’s certificate.\n- certificate: The (PEM encoded) certificate to use for client authentication.\n- key: The (PEM encoded) private key to use for client authentication.\nIf this is a self-signed certificate, the certificate_authorities field should be set to the certificate itself.",
+              "$ref" : "#/definitions/ssl"
+            }
+          }
+        }
+      }, {
+        "if" : {
+          "properties" : {
+            "type" : {
+              "const" : "unifiedlogs"
+            }
+          }
+        },
+        "then" : {
+          "description" : "Unified Logs",
+          "properties" : {
+            "archive_file" : {
+              "type" : "string",
+              "description" : "Display events stored in the given archive. The archive must be a valid log archive bundle with the suffix .logarchive."
+            },
+            "trace_file" : {
+              "type" : "string",
+              "description" : "Display events stored in the given .tracev3 file. In order to be decoded, the file must be contained within a valid .logarchive"
+            },
+            "start" : {
+              "type" : "string",
+              "description" : "Shows content starting from the provided date. The following date/time formats are accepted: YYYY-MM-DD, YYYY-MM-DD HH:MM:SS, YYYY-MM-DD HH:MM:SSZZZZZ."
+            },
+            "end" : {
+              "type" : "string",
+              "description" : "Shows content up to the provided date. The following date/time formats are accepted: YYYY-MM-DD, YYYY-MM-DD HH:MM:SS, YYYY-MM-DD HH:MM:SSZZZZZ."
+            },
+            "predicate" : {
+              "type" : "string",
+              "description" : "Filters messages using the provided predicate based on NSPredicate. A compound predicate or multiple predicates can be provided as a list.\nFor detailed information on the use of predicate based filtering, please refer to the Predicate Programming Guide."
+            },
+            "process" : {
+              "type" : "array",
+              "description" : "A list of the processes on which to operate. It accepts a PID or process name.",
+              "items" : {
+                "type" : "string"
+              }
+            },
+            "source" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "description" : "Include symbol names and source line numbers for messages, if available. Default: false.",
+              "examples" : [ "false" ]
+            },
+            "info" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "description" : "Disable or enable info level messages. Default: false.",
+              "examples" : [ "false" ]
+            },
+            "debug" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "description" : "Disable or enable debug level messages. Default: false.",
+              "examples" : [ "false" ]
+            },
+            "backtrace" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "description" : "Disable or enable display of backtraces. Default: false.",
+              "examples" : [ "false" ]
+            },
+            "signpost" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "description" : "Disable or enable display of signposts. Default: false.",
+              "examples" : [ "false" ]
+            },
+            "unreliable" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "description" : "Annotate events with whether the log was emitted unreliably. Default: false.",
+              "examples" : [ "false" ]
+            },
+            "mach_continuous_time" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "description" : "Use mach continuous time timestamps rather than walltime. Default: false.",
+              "examples" : [ "false" ]
+            },
+            "backfill" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "description" : "If set to true the input will process all available logs since the beginning of time the first time it starts. Default: false.",
+              "examples" : [ "false" ]
+            }
+          }
+        }
+      }, {
+        "if" : {
+          "properties" : {
+            "type" : {
+              "const" : "unix"
+            }
+          }
+        },
+        "then" : {
+          "description" : "Unix",
+          "properties" : {
+            "max_message_size" : {
+              "type" : "string",
+              "description" : "The maximum size of the message received over the socket. The default is 20MiB.",
+              "examples" : [ "20MiB" ]
+            },
+            "path" : {
+              "type" : "string",
+              "description" : "The path to the Unix socket that will receive events."
+            },
+            "socket_type" : {
+              "type" : "string",
+              "description" : "The type to of the Unix socket that will receive events. Valid values are stream and datagram. The default is stream.",
+              "examples" : [ "stream" ]
+            },
+            "group" : {
+              "type" : "string",
+              "description" : "The group ownership of the Unix socket that will be created by Filebeat. The default is the primary group name for the user Filebeat is running as. This option is ignored on Windows."
+            },
+            "mode" : {
+              "type" : "string",
+              "description" : "The file mode of the Unix socket that will be created by Filebeat. This is expected to be a file mode as an octal string. The default value is the system default (generally 0755)."
+            },
+            "framing" : {
+              "type" : "string",
+              "description" : "Specify the framing used to split incoming events. Can be one of delimiter or rfc6587. delimiter uses the characters specified in line_delimiter to split the incoming events. rfc6587 supports octet counting and non-transparent framing as described in RFC6587. line_delimiter is used to split the events in non-transparent framing. The default is delimiter.",
+              "examples" : [ "delimiter" ]
+            },
+            "line_delimiter" : {
+              "type" : "string",
+              "description" : "Specify the characters used to split the incoming events. The default is \\n.",
+              "examples" : [ "\\n" ]
+            },
+            "max_connections" : {
+              "type" : "string",
+              "description" : "The at most number of connections to accept at any given point in time."
+            },
+            "timeout" : {
+              "type" : "string",
+              "description" : "The number of seconds of inactivity before a connection is closed. The default is 300s.\nSee SSL for more information.",
+              "examples" : [ "300s" ]
+            }
+          }
+        }
+      }, {
+        "if" : {
+          "properties" : {
+            "type" : {
+              "const" : "winlog"
+            }
+          }
+        },
+        "then" : {
+          "description" : "winlog",
+          "properties" : {
+            "batch_read_size" : {
+              "type" : "string",
+              "description" : "The maximum number of event log records to read from the Windows API in a single batch. The default batch size is 100. Most Windows versions return an error if the value is larger than 1024. {vista_and_newer}\nFilebeat starts a goroutine (a lightweight thread) to read from each individual event log. The goroutine reads a batch of event log records using the Windows API, applies any processors to the events, publishes them to the configured outputs, and waits for an acknowledgement from the outputs before reading additional event log records.",
+              "examples" : [ "100" ]
+            },
+            "name" : {
+              "type" : "array",
+              "description" : "The name of the event log to monitor. It must have a name field, except for those which use a custom XML query. A channel is a named stream of events that transports events from an event source to an event log. Most channels are tied to specific event publishers. You can get a list of available event logs by using the PowerShell Get-WinEvent cmdlet on Windows Vista or newer. Here is a sample of the output from the command:\nIf Get-WinEvent is not available, the Get-EventLog cmdlet can be used in its place.\nYou must specify the full name of the channel in the configuration file.\nTo read events from an archived .evtx file you can specify the name as the absolute path (it cannot be relative) to the file.\nThe name key must not be used with custom XML queries.",
+              "items" : {
+                "type" : "string"
+              }
+            },
+            "id" : {
+              "type" : "string",
+              "description" : "A unique identifier for the event log. This key is required when using a custom XML query.\nIt is used to uniquely identify the event log reader in the registry file. This is useful if multiple event logs are being set up to watch the same channel or file. If an ID is not given, the name value will be used.\nThis value must be unique."
+            },
+            "ignore_older" : {
+              "type" : "string",
+              "description" : "If this option is specified, the input filters events that are older than the specified amount of time. Valid time units are \"ns\", \"us\" (or \"µs\"), \"ms\", \"s\", \"m\", \"h\". This option is useful when you are beginning to monitor an event log that contains older records that you would like to ignore. This field is optional."
+            },
+            "forwarded" : {
+              "type" : "string",
+              "description" : "A boolean flag to indicate that the log contains only events collected from remote hosts using the Windows Event Collector. The value defaults to true for the ForwardedEvents log and false for any other log. {vista_and_newer}\nThis settings allows Filebeat to optimize reads for forwarded events that are already rendered. When the value is true Filebeat does not attempt to render the event using message files from the host computer. The Windows Event Collector subscription should be configured to use the \"RenderedText\" format (this is the default) to ensure that the events are distributed with messages and descriptions."
+            },
+            "event_id" : {
+              "type" : "array",
+              "description" : "An allowlist and blocklist of event IDs. The value is a comma-separated list. The accepted values are single event IDs to include (e.g. 4624), a range of event IDs to include (e.g. 4700-4800), and single event IDs to exclude (e.g. -4735). {vista_and_newer}",
+              "items" : {
+                "type" : "string"
+              }
+            },
+            "language" : {
+              "type" : "array",
+              "description" : "The language ID the events will be rendered in. The language will be forced regardless of the system language. A complete list of language IDs can be found here. It defaults to 0, which indicates to use the system language.",
+              "items" : {
+                "type" : "string",
+                "defaultSnippets" : [ {
+                  "body" : "0"
+                } ]
+              }
+            },
+            "level" : {
+              "type" : "array",
+              "description" : "A list of event levels to include. The value is a comma-separated list of levels. {vista_and_newer}",
+              "items" : {
+                "type" : "string"
+              }
+            },
+            "provider" : {
+              "type" : "array",
+              "description" : "A list of providers (source names) to include. The value is a YAML list. {vista_and_newer}\nYou can obtain a list of providers associated with a log by using PowerShell. Here is an example showing the providers associated with the Security log.",
+              "items" : {
+                "type" : "string"
+              }
+            },
+            "xml_query" : {
+              "type" : "string",
+              "description" : "Provide a custom XML query. This option is mutually exclusive with the name, event_id, ignore_older, level, and provider options. These options should be included in the XML query directly. Furthermore, an id must be provided. Custom XML queries provide more flexibility and advanced options than the simpler query options in Filebeat. {vista_and_newer}\nHere is a configuration which will collect DHCP server events from multiple channels:\nXML queries may also be created in Windows Event Viewer using custom views. The query can be created using a graphical interface and the corresponding XML can be retrieved from the XML tab."
+            },
+            "include_xml" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "description" : "Boolean option that controls if the raw XML representation of an event is included in the data sent by Filebeat. The default is false. {vista_and_newer}\nThe XML representation of the event is useful for troubleshooting purposes. The data in the fields reported by Filebeat can be compared to the data in the XML to diagnose problems.\nExample:",
+              "examples" : [ "false" ]
+            },
+            "ignore_missing_channel" : {
+              "$ref" : "#/definitions/booleanOrString",
+              "description" : "Boolean option that controls whether the input should ignore missing event log channels. When set to true, if a specified event log channel doesn’t exist or cannot be accessed, it will log a warning instead of stopping with an error. The default is true.\nThis option is useful when deploying configurations across multiple systems where certain event log channels may not be available on all machines, or when monitoring optional channels that may not always be present.\nExample:\nIn this example, if the Sysmon channel is missing, Winlogbeat will stop with an error, which may be desired for critical monitoring components.",
+              "examples" : [ "true" ]
+            },
+            "no_more_events" : {
+              "type" : "string",
+              "description" : "The action that the event log reader should take when it receives a signal from Windows that there are no more events to read. It can either wait for more events to be written (the default behavior) or it can stop. The overall Filebeat process will stop when all of the individual event log readers have stopped. {vista_and_newer}\nSetting no_more_events to stop is useful when reading from archived event log files where you want to read the whole file then exit."
+            },
+            "api" : {
+              "type" : "string",
+              "description" : "This selects the event log reader implementation that is used to read events from the Windows APIs. You should only set this option when testing experimental features. When the value is set to wineventlog-experimental Filebeat will replace the default event log reader with the experimental implementation. We are evaluating this implementation to see if it can provide increased performance and reduce CPU usage. {vista_and_newer}\n- If include_xml is true the performance will be the same as the default API, as performance improvements are lost when parsing the XML."
             }
           }
         }
@@ -8007,6 +8471,11 @@
               "type" : "string",
               "description" : "The timeout value that controls when registry entries are written to the disk (flushed). When an unwritten update exceeds this value, it triggers a write to disk. When flush is set to 0s, the registry is written to disk after each batch of events has been published successfully. The default value is 1s.",
               "examples" : [ "1s" ]
+            },
+            "cleanup_interval" : {
+              "type" : "string",
+              "description" : "The interval which to run the registry clean up",
+              "examples" : [ "5m" ]
             },
             "migrate_file" : {
               "type" : "string",
@@ -8598,7 +9067,7 @@
             "target_field" : {
               "type" : "string",
               "description" : "(Optional) Field where the generated ID will be stored. Default is @metadata._id.",
-              "examples" : [ "@metadata" ]
+              "examples" : [ "@metadata._id" ]
             },
             "type" : {
               "type" : "string",
@@ -8608,12 +9077,12 @@
         },
         "add_kubernetes_metadata" : {
           "type" : [ "object", "null" ],
-          "description" : "The add_kubernetes_metadata processor annotates each event with relevant metadata based on which Kubernetes pod the event originated from. At startup, it detects an in_cluster environment and caches the Kubernetes-related metadata. Events are only annotated if a valid configuration is detected. If it’s not able to detect a valid Kubernetes configuration, the events are not annotated with Kubernetes-related metadata.",
+          "description" : "The add_kubernetes_metadata processor annotates each event with relevant metadata based on which Kubernetes pod the event originated from. This processor only adds metadata to the events that do not have it yet present.",
           "properties" : {
             "when" : {
               "$ref" : "#/definitions/condition"
             },
-            "host" : {
+            "node" : {
               "type" : "string",
               "description" : "(Optional) Specify the node to scope filebeat to in case it cannot be accurately detected, as when running filebeat in host network mode."
             },
@@ -8631,6 +9100,10 @@
             "kube_config" : {
               "type" : "string",
               "description" : "(Optional) Use given config file as configuration for Kubernetes client. It defaults to KUBECONFIG environment variable if present."
+            },
+            "use_kubeadm" : {
+              "type" : "string",
+              "description" : "(Optional) Default true. By default requests to kubeadm config map are made in order to enrich cluster name by requesting /api/v1/namespaces/kube-system/configmaps/kubeadm-config API endpoint."
             },
             "kube_client_options" : {
               "type" : "string",
@@ -8660,62 +9133,44 @@
               "type" : "string",
               "description" : "(Optional) Default to be true. If set to true, then . in labels will be replaced with _."
             },
-            "indexers" : {
-              "type" : "array",
-              "description" : "Indexers use pods metadata to create unique identifiers for each one of the pods.",
-              "items" : {
-                "type" : "object",
-                "properties" : {
-                  "container" : {
-                    "type" : "string",
-                    "description" : "Identifies the pod metadata using the IDs of its containers."
-                  },
-                  "ip_port" : {
-                    "type" : "string",
-                    "description" : "Identifies the pod metadata using combinations of its IP and its exposed ports. When using this indexer metadata is identified using the IP of the pods, and the combination if ip:port for each one of the ports exposed by its containers."
-                  },
-                  "pod_name" : {
-                    "type" : "string",
-                    "description" : "Identifies the pod metadata using its namespace and its name as namespace/pod_name."
-                  },
-                  "pod_uid" : {
-                    "type" : "string",
-                    "description" : "Identifies the pod metadata using the UID of the pod."
-                  }
-                }
-              }
+            "container" : {
+              "type" : "string",
+              "description" : "Identifies the pod metadata using the IDs of its containers."
             },
-            "matchers" : {
-              "type" : "array",
-              "description" : "Matchers are used to construct the lookup keys that match with the identifiers created by indexes.",
-              "items" : {
-                "type" : "object",
-                "properties" : {
-                  "field_format" : {
-                    "type" : "object",
-                    "description" : "Looks up pod metadata using a key created with a string format that can include event fields.\nThis matcher has an option format to define the string format. This string format can contain placeholders for any field in the event.\nFor example, the following configuration uses the ip_port indexer to identify the pod metadata by combinations of the pod IP and its exposed ports, and uses the destination IP and port in events as match keys:",
-                    "additionalItems" : true
-                  },
-                  "fields" : {
-                    "type" : "object",
-                    "description" : "Looks up pod metadata using as key the value of some specific fields. When multiple fields are defined, the first one included in the event is used.\nThis matcher has an option lookup_fields to define the files whose value will be used for lookup.\nFor example, the following configuration uses the ip_port indexer to identify pods, and defines a matcher that uses the destination IP or the server IP for the lookup, the first it finds in the event:",
-                    "additionalItems" : true
-                  },
-                  "logs_path" : {
-                    "type" : "object",
-                    "description" : "Looks up pod metadata using identifiers extracted from the log path stored in the log.file.path field.",
-                    "properties" : {
-                      "logs_path" : {
-                        "type" : "string",
-                        "description" : "(Optional) Base path of container logs. If not specified, it uses the default logs path of the platform where Filebeat is running: for Linux - /var/lib/docker/containers/, Windows - C:\\\\ProgramData\\\\Docker\\\\containers. To change the default value: container ID must follow right after the logs_path - <log_path>/<container_id>, where container_id is a 64-character-long hexadecimal string."
-                      },
-                      "resource_type" : {
-                        "type" : "string",
-                        "description" : "(Optional) Type of the resource to obtain the ID of. Valid resource_type: pod: to make the lookup based on the pod UID. When resource_type is set to pod, logs_path must be set as well, supported path in this case: /var/lib/kubelet/pods/ used to read logs from mounted into the pod volumes, those logs end up under /var/lib/kubelet/pods/<pod UID>/volumes/<volume name>/... To use /var/lib/kubelet/pods/ as a log_path, /var/lib/kubelet/pods must be mounted into the filebeat Pods. /var/log/pods/ Note: when using resource_type: 'pod' logs will be enriched only with pod metadata: pod id, pod name, etc., not container metadata. container: to make the lookup based on the container ID, logs_path must be set to /var/log/containers/. It defaults to container.",
-                        "examples" : [ "container" ]
-                      }
-                    }
-                  }
+            "ip_port" : {
+              "type" : "string",
+              "description" : "Identifies the pod metadata using combinations of its IP and its exposed ports. When using this indexer metadata is identified using the IP of the pods, and the combination if ip:port for each one of the ports exposed by its containers."
+            },
+            "pod_name" : {
+              "type" : "string",
+              "description" : "Identifies the pod metadata using its namespace and its name as namespace/pod_name."
+            },
+            "pod_uid" : {
+              "type" : "string",
+              "description" : "Identifies the pod metadata using the UID of the pod."
+            },
+            "field_format" : {
+              "type" : "object",
+              "description" : "Looks up pod metadata using a key created with a string format that can include event fields.\nThis matcher has an option format to define the string format. This string format can contain placeholders for any field in the event.\nFor example, the following configuration uses the ip_port indexer to identify the pod metadata by combinations of the pod IP and its exposed ports, and uses the destination IP and port in events as match keys:",
+              "additionalItems" : true
+            },
+            "fields" : {
+              "type" : "object",
+              "description" : "Looks up pod metadata using as key the value of some specific fields. When multiple fields are defined, the first one included in the event is used.\nThis matcher has an option lookup_fields to define the files whose value will be used for lookup.\nFor example, the following configuration uses the ip_port indexer to identify pods, and defines a matcher that uses the destination IP or the server IP for the lookup, the first it finds in the event:\nIt’s also possible to extract the matching key from fields using a regex pattern. The optional regex_pattern field can be used to set the pattern. The pattern must contain a capture group named key, whose value will be used as the matching key.\nFor example, the following configuration uses the container indexer to identify containers by their id, and extracts the matching key from the cgroup id field added to system process metrics. This field has the form cri-containerd-<id>.scope, so we need a regex pattern to obtain the container id.",
+              "additionalItems" : true
+            },
+            "logs_path" : {
+              "type" : "object",
+              "description" : "Looks up pod metadata using identifiers extracted from the log path stored in the log.file.path field.",
+              "properties" : {
+                "logs_path" : {
+                  "type" : "string",
+                  "description" : "(Optional) Base path of container logs. If not specified, it uses the default logs path of the platform where Filebeat is running: for Linux - /var/lib/docker/containers/, Windows - C:\\\\ProgramData\\\\Docker\\\\containers. To change the default value: container ID must follow right after the logs_path - <log_path>/<container_id>, where container_id is a 64-character-long hexadecimal string."
+                },
+                "resource_type" : {
+                  "type" : "string",
+                  "description" : "(Optional) Type of the resource to obtain the ID of. Valid resource_type: pod: to make the lookup based on the pod UID. When resource_type is set to pod, logs_path must be set as well, supported path in this case: /var/lib/kubelet/pods/ used to read logs from mounted into the pod volumes, those logs end up under /var/lib/kubelet/pods/<pod UID>/volumes/<volume name>/... To use /var/lib/kubelet/pods/ as a log_path, /var/lib/kubelet/pods must be mounted into the filebeat Pods. /var/log/pods/ Note: when using resource_type: 'pod' logs will be enriched only with pod metadata: pod id, pod name, etc., not container metadata. container: to make the lookup based on the container ID, logs_path must be set to /var/log/containers/. It defaults to container.",
+                  "examples" : [ "container" ]
                 }
               }
             }
@@ -8774,22 +9229,6 @@
             "node" : {
               "type" : "string",
               "description" : "(Optional) When using scope: node, use node to specify the name of the local node if it cannot be discovered automatically."
-            },
-            "indexers" : {
-              "type" : "array",
-              "description" : "Indexers use allocation metadata to create unique identifiers for each one of the pods.",
-              "items" : {
-                "type" : "object",
-                "properties" : { }
-              }
-            },
-            "matchers" : {
-              "type" : "array",
-              "description" : "Matchers are used to construct the lookup keys that match with the identifiers created by indexes.",
-              "items" : {
-                "type" : "object",
-                "properties" : { }
-              }
             },
             "field_format" : {
               "type" : "object",
@@ -9179,6 +9618,16 @@
               "$ref" : "#/definitions/booleanOrString",
               "description" : "(Optional) Ignore all errors produced by the processor. Defaults to false.",
               "examples" : [ "false" ]
+            },
+            "language" : {
+              "type" : "array",
+              "description" : "(Optional) The language ID the events will be rendered in. The language will be forced regardless of the system language. Forwarded events will ignore this setting. A complete list of language IDs can be found here. It defaults to 0, which indicates to use the system language.",
+              "items" : {
+                "type" : "string",
+                "defaultSnippets" : [ {
+                  "body" : "0"
+                } ]
+              }
             }
           }
         },
@@ -9479,7 +9928,7 @@
         },
         "syslog" : {
           "type" : [ "object", "null" ],
-          "description" : "The syslog processor parses RFC 3146 and/or RFC 5424 formatted syslog messages that are stored in a field. The processor itself does not handle receiving syslog messages from external sources. This is done through an input, such as the TCP input. Certain integrations, when enabled through configuration, will embed the syslog processor to process syslog messages, such as Custom TCP Logs and Custom UDP Logs.",
+          "description" : "The syslog processor parses RFC 3164 and/or RFC 5424 formatted syslog messages that are stored in a field. The processor itself does not handle receiving syslog messages from external sources. This is done through an input, such as the TCP input. Certain integrations, when enabled through configuration, will embed the syslog processor to process syslog messages, such as Custom TCP Logs and Custom UDP Logs.",
           "properties" : {
             "when" : {
               "$ref" : "#/definitions/condition"
@@ -9535,6 +9984,15 @@
         "timestamp" : {
           "type" : [ "object", "null" ],
           "description" : "This functionality is in beta and is subject to change. The design and code is less mature than official GA features and is being provided as-is with no warranties. Beta features are not subject to the support SLA of official GA features.",
+          "properties" : {
+            "when" : {
+              "$ref" : "#/definitions/condition"
+            }
+          }
+        },
+        "translate_ldap_attribute" : {
+          "type" : [ "object", "null" ],
+          "description" : "The translate_ldap_attribute processor translates an LDAP attributes between eachother. It is typically used to translate AD Global Unique Identifiers (GUID) into their common names.",
           "properties" : {
             "when" : {
               "$ref" : "#/definitions/condition"
@@ -10913,9 +11371,69 @@
         "type" : "string"
       } ]
     },
+    "decoding" : {
+      "description" : "The file decoding option is used to specify a codec that will be used to decode the file contents. This can apply to any file stream data.",
+      "properties" : {
+        "codec" : {
+          "type" : "object",
+          "properties" : {
+            "csv" : {
+              "type" : "object",
+              "description" : "This codec decodes RFC 4180 CSV data streams.",
+              "properties" : {
+                "enabled" : {
+                  "$ref" : "#/definitions/booleanOrString",
+                  "description" : "Enabling the codec without other options will use the default codec options."
+                },
+                "comma" : {
+                  "type" : "string",
+                  "markdownDescription" : "The field delimiter.  Default is `,`.  \nComma must be a valid rune and must not be \\r, \\n, or the Unicode replacement character",
+                  "default" : ","
+                },
+                "comment" : {
+                  "type" : "string",
+                  "markdownDescription" : "Comment, if not 0, is the `comment` character. Lines beginning with the `comment` character without preceding whitespace are ignored."
+                },
+                "lazy_quotes" : {
+                  "$ref" : "#/definitions/booleanOrString",
+                  "markdownDescription" : "If `true`, a quote may appear in an unquoted field and a non-doubled quote may appear in a quoted field."
+                },
+                "trim_leading_space" : {
+                  "$ref" : "#/definitions/booleanOrString",
+                  "markdownDescription" : "If `true`, leading white space in a field is ignored. This is done even if the field delimiter `comma` is white space."
+                }
+              }
+            },
+            "parquet" : {
+              "properties" : {
+                "enabled" : {
+                  "$ref" : "#/definitions/booleanOrString",
+                  "description" : "Enabling the codec without other options will use the default codec options."
+                },
+                "batch_size" : {
+                  "$ref" : "#/definitions/numberOrString",
+                  "description" : "This attribute specifies the number of records to read from the Parquet stream at a time. By default, batch_size is set to 1. Increasing the batch size can boost processing speed by reading more records in each operation.",
+                  "default" : 1
+                },
+                "process_parallel" : {
+                  "$ref" : "#/definitions/booleanOrString",
+                  "description" : "When set to true, this attribute allows Filebeat to read multiple columns from the Parquet stream in parallel, using as many readers as there are columns. Enabling parallel processing can significantly increase throughput, but it will also result in higher memory usage. By default, process_parallel is set to false.",
+                  "default" : false
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "encoding" : {
+      "type" : "string",
+      "markdownDescription" : "The file encoding to use for reading data that contains international characters. See the encoding names [recommended by the W3C for use in HTML5](http://www.w3.org/TR/encoding/).  \nThe `plain` encoding is special, because it does not validate or transform any input.",
+      "examples" : [ "plain", "utf-8", "utf8", "gbk", "iso8859-6e", "iso8859-6i", "iso8859-8e", "iso8859-8i", "iso8859-1", "iso8859-2", "iso8859-3", "iso8859-4", "iso8859-5", "iso8859-6", "iso8859-7", "iso8859-8", "iso8859-9", "iso8859-10", "iso8859-13", "iso8859-14", "iso8859-15", "iso8859-16", "cp437", "cp850", "cp852", "cp855", "cp858", "cp860", "cp862", "cp863", "cp865", "cp866", "ebcdic-037", "ebcdic-1040", "ebcdic-1047", "koi8r", "koi8u", "macintosh", "macintosh-cyrillic", "windows1250", "windows1251", "windows1252", "windows1253", "windows1254", "windows1255", "windows1256", "windows1257", "windows1258", "windows874", "utf-16-bom", "utf-16be-bom", "utf-16le-bom" ]
+    },
     "modulesArray" : {
       "description" : "Modules configuration",
-      "markdownDescription" : "Modules configuration ([documentation](https://www.elastic.co/guide/en/beats/filebeat/8.14/filebeat-modules.html))",
+      "markdownDescription" : "Modules configuration ([documentation](https://www.elastic.co/guide/en/beats/filebeat/8.19/filebeat-modules.html))",
       "type" : "array",
       "defaultSnippets" : [ {
         "label" : "- (array item) module",
@@ -10940,7 +11458,7 @@
           "type" : "string",
           "examples" : [ "activemq", "apache", "auditd", "aws", "awsfargate", "azure", "cef", "checkpoint", "cisco", "coredns", "crowdstrike", "cyberarkpas", "elasticsearch", "envoyproxy", "fortinet", "gcp", "google_workspace", "haproxy", "ibmmq", "icinga", "iis", "iptables", "juniper", "kafka", "kibana", "logstash", "microsoft", "misp", "mongodb", "mssql", "mysql", "mysqlenterprise", "nats", "netflow", "nginx", "o365", "okta", "oracle", "osquery", "panw", "pensando", "postgresql", "rabbitmq", "redis", "salesforce", "santa", "snyk", "sophos", "suricata", "system", "threatintel", "traefik", "zeek", "zookeeper", "zoom" ],
           "description" : "module type",
-          "markdownDescription" : "module type ([documentation](https://www.elastic.co/guide/en/beats/filebeat/8.14/filebeat-modules.html))"
+          "markdownDescription" : "module type ([documentation](https://www.elastic.co/guide/en/beats/filebeat/8.19/filebeat-modules.html))"
         }
       },
       "$ref" : "#/definitions/modules"
@@ -10949,12 +11467,12 @@
       "type" : "object",
       "additionalProperties" : true,
       "description" : "Behind the scenes, each module starts a Filebeat input. Advanced users can add or override any input settings here.",
-      "markdownDescription" : "**input configuration** ([documentation](https://www.elastic.co/guide/en/beats/filebeat/8.14/configuration-filebeat-options.html#filebeat-input-types))  \nBehind the scenes, each module starts a Filebeat input. Advanced users can add or override any input settings here.",
+      "markdownDescription" : "**input configuration** ([documentation](https://www.elastic.co/guide/en/beats/filebeat/8.19/configuration-filebeat-options.html#filebeat-input-types))  \nBehind the scenes, each module starts a Filebeat input. Advanced users can add or override any input settings here.",
       "$ref" : "#/definitions/inputCommonProperties"
     },
     "inputsArray" : {
       "description" : "Inputs configuration",
-      "markdownDescription" : "Inputs configuration ([documentation](https://www.elastic.co/guide/en/beats/filebeat/8.14/configuration-filebeat-options.html))",
+      "markdownDescription" : "Inputs configuration ([documentation](https://www.elastic.co/guide/en/beats/filebeat/8.19/configuration-filebeat-options.html))",
       "type" : "array",
       "defaultSnippets" : [ {
         "label" : "- (array item) input",
@@ -10962,7 +11480,7 @@
         "description" : "input snippet",
         "suggestionKind" : 9,
         "body" : {
-          "type" : "${1|filestream,aws-cloudwatch,aws-s3,azure-blob-storage,azure-eventhub,benchmark,cel,cloudfoundry,cometd,container,entity-analytics,etw,gcp-pubsub,gcs,http_endpoint,httpjson,journald,kafka,log,mqtt,netflow,o365audit,redis,salesforce,stdin,syslog,tcp,udp,websocket|}"
+          "type" : "${1|filestream,aws-cloudwatch,aws-s3,azure-blob-storage,azure-eventhub,benchmark,cel,cloudfoundry,cometd,container,entity-analytics,etw,gcp-pubsub,gcs,http_endpoint,httpjson,journald,kafka,log,mqtt,netflow,o365audit,redis,salesforce,stdin,streaming,syslog,tcp,udp,unifiedlogs,unix,winlog|}"
         }
       } ],
       "items" : {
@@ -10977,9 +11495,9 @@
       "properties" : {
         "type" : {
           "type" : "string",
-          "examples" : [ "filestream", "aws-cloudwatch", "aws-s3", "azure-blob-storage", "azure-eventhub", "benchmark", "cel", "cloudfoundry", "cometd", "container", "entity-analytics", "etw", "gcp-pubsub", "gcs", "http_endpoint", "httpjson", "journald", "kafka", "log", "mqtt", "netflow", "o365audit", "redis", "salesforce", "stdin", "syslog", "tcp", "udp", "websocket" ],
+          "examples" : [ "filestream", "aws-cloudwatch", "aws-s3", "azure-blob-storage", "azure-eventhub", "benchmark", "cel", "cloudfoundry", "cometd", "container", "entity-analytics", "etw", "gcp-pubsub", "gcs", "http_endpoint", "httpjson", "journald", "kafka", "log", "mqtt", "netflow", "o365audit", "redis", "salesforce", "stdin", "streaming", "syslog", "tcp", "udp", "unifiedlogs", "unix", "winlog" ],
           "description" : "input type",
-          "markdownDescription" : "input type ([documentation](https://www.elastic.co/guide/en/beats/filebeat/8.14/configuration-filebeat-options.html#filebeat-input-types))"
+          "markdownDescription" : "input type ([documentation](https://www.elastic.co/guide/en/beats/filebeat/8.19/configuration-filebeat-options.html#filebeat-input-types))"
         }
       },
       "$ref" : "#/definitions/inputCommonProperties",
@@ -11006,6 +11524,75 @@
         },
         "then" : {
           "$ref" : "#/definitions/awsCredentials"
+        }
+      }, {
+        "if" : {
+          "properties" : {
+            "type" : {
+              "const" : "azure-eventhub"
+            }
+          }
+        },
+        "then" : {
+          "properties" : {
+            "eventhub" : {
+              "type" : "string",
+              "description" : "The name of the eventhub users would like to read from, field required."
+            },
+            "consumer_group" : {
+              "type" : "string",
+              "description" : "Optional, we recommend using a dedicated consumer group for the azure input. Reusing consumer groups among non-related consumers can cause unexpected behavior and possibly lost events."
+            },
+            "auth_type" : {
+              "type" : "string",
+              "description" : "Specifies the authentication method to use for both Event Hub and Storage Account. If not specified, defaults to connection_string for backwards compatibility.",
+              "default" : "connection_string",
+              "examples" : [ "connection_string", "client_secret" ]
+            },
+            "connection_string" : {
+              "type" : "string",
+              "description" : "The connection string required to communicate with Event Hubs when using connection_string authentication. For more information, refer to Get an Azure Event Hubs connection string.",
+              "markdownDescription" : "The connection string required to communicate with Event Hubs when using `connection_string` authentication.  \nFor more information, refer to [Get an Azure Event Hubs connection string](https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-get-connection-string).  \nThis option is required if:\n* `auth_type` is set to `connection_string`\n* `auth_type` is not specified (in which case it defaults to `connection_string` for backwards compatibility)"
+            },
+            "eventhub_namespace" : {
+              "type" : "string",
+              "markdownDescription" : "The fully qualified namespace for the Event Hub.  \nRequired when using credential-based authentication methods (such as `client_secret`).  \nNot required when using `connection_string` authentication, as the namespace is embedded in the connection string.  \nFormat: `your-eventhub-namespace.servicebus.windows.net`"
+            },
+            "tenant_id" : {
+              "type" : "string",
+              "markdownDescription" : "The Azure Active Directory tenant ID. Required when using `client_secret` authentication for Event Hub or Storage Account."
+            },
+            "client_id" : {
+              "type" : "string",
+              "markdownDescription" : "The Azure Active Directory application (client) ID. Required when using `client_secret` authentication for Event Hub or Storage Account."
+            },
+            "client_secret" : {
+              "type" : "string",
+              "markdownDescription" : "The Azure Active Directory application client secret. Required when using `client_secret` authentication for Event Hub or Storage Account."
+            },
+            "authority_host" : {
+              "type" : "string",
+              "markdownDescription" : "The Azure Active Directory authority host. Optional when using `client_secret` authentication. Defaults to Azure Public Cloud (`https://login.microsoftonline.com`).  \nSupported values:\n* https://login.microsoftonline.com (Azure Public Cloud - default)\n* https://login.microsoftonline.us (Azure Government)\n* https://login.chinacloudapi.cn (Azure China)",
+              "default" : "https://login.microsoftonline.com",
+              "examples" : [ "https://login.microsoftonline.us", "https://login.chinacloudapi.cn" ]
+            },
+            "storage_account" : {
+              "type" : "string",
+              "markdownDescription" : "The name of the storage account. Required."
+            },
+            "storage_account_key" : {
+              "type" : "string",
+              "markdownDescription" : "The storage account key, this key will be used to authorize access to data in your storage account, option is required."
+            },
+            "storage_account_container" : {
+              "type" : "string",
+              "markdownDescription" : "Optional, the name of the storage account container you would like to store the offset information in."
+            },
+            "resource_manager_endpoint" : {
+              "type" : "string",
+              "markdownDescription" : "Optional, by default we are using the azure public environment, to override, users can provide a specific resource manager endpoint in order to use a different azure environment.  \nEx: https://management.chinacloudapi.cn/ for azure ChinaCloud https://management.microsoftazure.de/ for azure GermanCloud https://management.azure.com/ for azure PublicCloud https://management.usgovcloudapi.net/ for azure USGovernmentCloud Users can also use this in case of a Hybrid Cloud model, where one may define their own endpoints."
+            }
+          }
         }
       }, {
         "if" : {
@@ -11134,7 +11721,7 @@
     "cloud" : {
       "type" : "object",
       "description" : "Elastic Cloud authentication. These settings simplify using Filebeat with the Elastic Cloud.",
-      "markdownDescription" : "**Elastic Cloud authentication** ([documentation](https://www.elastic.co/guide/en/beats/filebeat/8.14/configure-cloud-id.html))  \nThese settings simplify using Filebeat with the Elastic Cloud.",
+      "markdownDescription" : "**Elastic Cloud authentication** ([documentation](https://www.elastic.co/guide/en/beats/filebeat/8.19/configure-cloud-id.html))  \nThese settings simplify using Filebeat with the Elastic Cloud.",
       "properties" : {
         "id" : {
           "type" : "string",
@@ -11149,7 +11736,7 @@
     "condition" : {
       "type" : "object",
       "description" : "describe condition that must be matched",
-      "markdownDescription" : "**condition** ([documentation](https://www.elastic.co/guide/en/beats/filebeat/8.14/defining-processors.html#conditions))  \ndescribe condition that must be matched",
+      "markdownDescription" : "**condition** ([documentation](https://www.elastic.co/guide/en/beats/filebeat/8.19/defining-processors.html#conditions))  \ndescribe condition that must be matched",
       "properties" : {
         "equals" : {
           "type" : "object",
@@ -11241,7 +11828,7 @@
       }
     },
     "awsCredentials" : {
-      "markdownDescription" : "**aws credentials** ([documentation](https://www.elastic.co/guide/en/beats/filebeat/8.14/filebeat-input-aws-s3.html#aws-credentials-config))",
+      "markdownDescription" : "**aws credentials** ([documentation](https://www.elastic.co/guide/en/beats/filebeat/8.19/filebeat-input-aws-s3.html#aws-credentials-config))",
       "properties" : {
         "access_key_id" : {
           "type" : "string",
@@ -11390,7 +11977,7 @@
     "ssl" : {
       "type" : "object",
       "description" : "HTTPS settings",
-      "markdownDescription" : "**HTTPS settings** ([documentation](https://www.elastic.co/guide/en/beats/filebeat/8.14/configuration-ssl.html))",
+      "markdownDescription" : "**HTTPS settings** ([documentation](https://www.elastic.co/guide/en/beats/filebeat/8.19/configuration-ssl.html))",
       "properties" : {
         "enabled" : {
           "$ref" : "#/definitions/booleanOrString",
@@ -11470,7 +12057,7 @@
     "multiline" : {
       "type" : "object",
       "description" : "Options that control how Filebeat deals with log messages that span multiple lines.",
-      "markdownDescription" : "**multiline configuration** ([documentation](https://www.elastic.co/guide/en/beats/filebeat/8.14/multiline-examples.html))  \nOptions that control how Filebeat deals with log messages that span multiple lines.",
+      "markdownDescription" : "**multiline configuration** ([documentation](https://www.elastic.co/guide/en/beats/filebeat/8.19/multiline-examples.html))  \nOptions that control how Filebeat deals with log messages that span multiple lines.",
       "defaultSnippets" : [ {
         "label" : "(multiline snippet)",
         "body" : {
@@ -11534,7 +12121,7 @@
     },
     "parsers" : {
       "description" : "This option expects a list of parsers that the log line has to go through.",
-      "markdownDescription" : "**Parsers configuration** ([documentation](https://www.elastic.co/guide/en/beats/filebeat/8.14/filebeat-input-filestream.html#_parsers))  \nThis option expects a list of parsers that the log line has to go through.",
+      "markdownDescription" : "**Parsers configuration** ([documentation](https://www.elastic.co/guide/en/beats/filebeat/8.19/filebeat-input-filestream.html#_parsers))  \nThis option expects a list of parsers that the log line has to go through.",
       "type" : "array",
       "items" : {
         "type" : "object",
@@ -11643,7 +12230,7 @@
     },
     "kerberos" : {
       "description" : "Configuration options for Kerberos authentication.",
-      "markdownDescription" : "**kerberos configuration** ([documentation](https://www.elastic.co/guide/en/beats/filebeat/8.14/configuration-kerberos.html))  \nConfiguration options for Kerberos authentication.",
+      "markdownDescription" : "**kerberos configuration** ([documentation](https://www.elastic.co/guide/en/beats/filebeat/8.19/configuration-kerberos.html))  \nConfiguration options for Kerberos authentication.",
       "type" : "object",
       "properties" : {
         "enabled" : {
@@ -11735,7 +12322,7 @@
     "processors" : {
       "type" : "array",
       "description" : "You can use processors to filter and enhance data before sending it to the configured output. To define a processor, you specify the processor name, an optional condition (with 'when' property), and a set of options",
-      "markdownDescription" : "**processors** ([documentation](https://www.elastic.co/guide/en/beats/filebeat/8.14/defining-processors.html#processors))  \nYou can use processors to filter and enhance data before sending it to the configured output.  \nTo define a processor, you specify the processor name, an optional condition (with 'when' property), and a set of options",
+      "markdownDescription" : "**processors** ([documentation](https://www.elastic.co/guide/en/beats/filebeat/8.19/defining-processors.html#processors))  \nYou can use processors to filter and enhance data before sending it to the configured output.  \nTo define a processor, you specify the processor name, an optional condition (with 'when' property), and a set of options",
       "items" : {
         "type" : "object",
         "title" : "processor",
@@ -11761,7 +12348,7 @@
         "add_cloud_metadata" : {
           "type" : [ "object", "null" ],
           "description" : "The add_cloud_metadata processor enriches each event with instance metadata from the machine’s hosting provider. At startup it will query a list of hosting providers and cache the instance metadata.",
-          "markdownDescription" : "**add_cloud_metadata** ([documentation](https://www.elastic.co/guide/en/beats/filebeat/8.14/add-cloud-metadata.html))  \nThe add_cloud_metadata processor enriches each event with instance metadata from the machine’s hosting provider. At startup it will query a list of hosting providers and cache the instance metadata.",
+          "markdownDescription" : "**add_cloud_metadata** ([documentation](https://www.elastic.co/guide/en/beats/filebeat/8.19/add-cloud-metadata.html))  \nThe add_cloud_metadata processor enriches each event with instance metadata from the machine’s hosting provider. At startup it will query a list of hosting providers and cache the instance metadata.",
           "properties" : {
             "timeout" : {
               "type" : "string",
@@ -11791,7 +12378,7 @@
         "move_fields" : {
           "type" : "object",
           "description" : "The move_fields processor moves event fields from one object into another. It can also rearrange fields or add a prefix to fields.",
-          "markdownDescription" : "**move_fields** ([documentation](https://www.elastic.co/guide/en/beats/filebeat/8.14/move-fields.html))  \nThe move_fields processor moves event fields from one object into another. It can also rearrange fields or add a prefix to fields.  \nThe processor extracts fields from `from`, then uses `fields` and `exclude` as filters to choose which fields to move into the `to` field.",
+          "markdownDescription" : "**move_fields** ([documentation](https://www.elastic.co/guide/en/beats/filebeat/8.19/move-fields.html))  \nThe move_fields processor moves event fields from one object into another. It can also rearrange fields or add a prefix to fields.  \nThe processor extracts fields from `from`, then uses `fields` and `exclude` as filters to choose which fields to move into the `to` field.",
           "properties" : {
             "from" : {
               "type" : "string",
@@ -11911,7 +12498,7 @@
         },
         "output" : {
           "description" : "Output configuration",
-          "markdownDescription" : "**Output configuration** ([documentation](https://www.elastic.co/guide/en/beats/filebeat/8.14/configuring-output.html))",
+          "markdownDescription" : "**Output configuration** ([documentation](https://www.elastic.co/guide/en/beats/filebeat/8.19/configuring-output.html))",
           "$ref" : "#/definitions/output"
         },
         "cloud" : {
@@ -11920,7 +12507,7 @@
         "filebeat.autodiscover" : {
           "type" : "object",
           "description" : "When you run applications on containers, they become moving targets to the monitoring system. Autodiscover allows you to track them and adapt settings as changes happen. By defining configuration templates, the autodiscover subsystem can monitor services as they start running.",
-          "markdownDescription" : "**Autodiscover** ([documentation](https://www.elastic.co/guide/en/beats/filebeat/8.14/configuration-autodiscover.html))  \nYou run applications on containers, they become moving targets to the monitoring system. Autodiscover allows you to track them and adapt settings as changes happen. By defining configuration templates, the autodiscover subsystem can monitor services as they start running.",
+          "markdownDescription" : "**Autodiscover** ([documentation](https://www.elastic.co/guide/en/beats/filebeat/8.19/configuration-autodiscover.html))  \nYou run applications on containers, they become moving targets to the monitoring system. Autodiscover allows you to track them and adapt settings as changes happen. By defining configuration templates, the autodiscover subsystem can monitor services as they start running.",
           "properties" : {
             "providers" : {
               "type" : "array",
@@ -11969,7 +12556,7 @@
                             "description" : "config input snippet",
                             "suggestionKind" : 9,
                             "body" : {
-                              "type" : "${1|filestream,aws-cloudwatch,aws-s3,azure-blob-storage,azure-eventhub,benchmark,cel,cloudfoundry,cometd,container,entity-analytics,etw,gcp-pubsub,gcs,http_endpoint,httpjson,journald,kafka,log,mqtt,netflow,o365audit,redis,salesforce,stdin,syslog,tcp,udp,websocket|}"
+                              "type" : "${1|filestream,aws-cloudwatch,aws-s3,azure-blob-storage,azure-eventhub,benchmark,cel,cloudfoundry,cometd,container,entity-analytics,etw,gcp-pubsub,gcs,http_endpoint,httpjson,journald,kafka,log,mqtt,netflow,o365audit,redis,salesforce,stdin,streaming,syslog,tcp,udp,unifiedlogs,unix,winlog|}"
                             }
                           } ],
                           "items" : {
