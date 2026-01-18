@@ -19,7 +19,7 @@ For example, if cursor is inside `grok` filter, options for `grok` filter are su
 - Provides documentation when hover on a section, a plugin or an option
 - Provides document formatting and document range formatting on a Logstash pipeline configuration file
 - Provides completion for "logstash.yml" and "pipelines.yml" files
-- Provides completion for Filebeat configuration files (version 8.14)
+- Provides completion for Filebeat configuration files (version 8.19)
 - Provides completion for Elasticsearch index template (and composable index template) json files
 - Provides completion for Elasticsearch component template json files
 - Provides a specific json schema for Elasticsearch index template 6.x, 7.x and 8.x
@@ -69,11 +69,11 @@ Both extensions complement each other perfectly.
 
 By default, with Logstash Editor extension, Elasticsearch index template version is based on file name. And only major versions are supported (6, 7 and 8).
 
-If you want to have completion for one specific minor version, you can do it with 2 ways:
+If you want to have completion for one specific minor version, you can do it in 2 ways:
 - you use "$schema" attribute in index template JSON file:
 ``` json
 {
-  "$schema": "https://raw.githubusercontent.com/fbaligand/vscode-logstash-editor/es-<VERSION>/jsonschemas/elasticsearch-template-es7x.schema.json"
+  "$schema": "https://raw.githubusercontent.com/fbaligand/vscode-logstash-editor/es-<MINOR_VERSION>/jsonschemas/elasticsearch-template-es<MAJOR_VERSION>x.schema.json"
 }
 ```
 - in Visual Studio Code settings, you associate you index template file pattern with URL to JSON schema:
@@ -83,12 +83,44 @@ If you want to have completion for one specific minor version, you can do it wit
         "fileMatch": [
             "/my-elasticsearch-index-template.json"
         ],
-        "url": "https://raw.githubusercontent.com/fbaligand/vscode-logstash-editor/es-<VERSION>/jsonschemas/elasticsearch-template-es7x.schema.json"
+        "url": "https://raw.githubusercontent.com/fbaligand/vscode-logstash-editor/es-<MINOR_VERSION>/jsonschemas/elasticsearch-template-es<MAJOR_VERSION>x.schema.json"
     }
 ]
 ```
 
-In both cases, you replace `<VERSION>` with one of the supported versions: `6.8`, `7.17` or `8.14`
+In both cases, you replace `<MINOR_VERSION>` with one of the supported minor versions: `6.8`, `7.2`, `7.5`, `7.9`, `7.12`, `7.17`, `8.14` or `8.19`.  
+In both cases, you replace `<MAJOR_VERSION>` with one of the supported major versions: `6`, `7` or `8`.  
+Example URL: https://raw.githubusercontent.com/fbaligand/vscode-logstash-editor/es-8.19/jsonschemas/elasticsearch-template-es8x.schema.json
+
+
+## Advanced tip: choose Filebeat schema minor version
+
+By default, with Logstash Editor extension, Filebeat schema version is the latest supported by the extension (`8.19`).
+
+If you want to have completion for one specific minor version, you can do it in 2 ways:
+- you use `yaml-language-server` comment instruction in Filebeat configuration YAML file:
+``` yaml
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fbaligand/vscode-logstash-editor/refs/tags/filebeat-<MINOR_VERSION>/yamlschemas/filebeat.yml.schema.json
+```  
+or  
+``` yaml
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fbaligand/vscode-logstash-editor/refs/tags/filebeat-<MINOR_VERSION>/yamlschemas/filebeat.config.inputs.yml.schema.json
+```  
+or  
+``` yaml
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fbaligand/vscode-logstash-editor/refs/tags/filebeat-<MINOR_VERSION>/yamlschemas/filebeat.config.modules.yml.schema.json
+```  
+- in Visual Studio Code settings, you associate your Filebeat configuration file pattern with URL to JSON schema:
+``` json
+"yaml.schemas": {
+    "https://raw.githubusercontent.com/fbaligand/vscode-logstash-editor/refs/tags/filebeat-<MINOR_VERSION>/yamlschemas/filebeat.yml.schema.json": "my-filebeat.yml",
+    "https://raw.githubusercontent.com/fbaligand/vscode-logstash-editor/refs/tags/filebeat-<MINOR_VERSION>/yamlschemas/filebeat.config.inputs.yml.schema.json": "my-filebeat-inputs.yml",
+    "https://raw.githubusercontent.com/fbaligand/vscode-logstash-editor/refs/tags/filebeat-<MINOR_VERSION>/yamlschemas/filebeat.config.modules.yml.schema.json": "my-filebeat-modules.yml"
+}
+```
+
+In both cases, you replace `<MINOR_VERSION>` with one of the supported minor versions: `7.12`, `7.17`, `8.14` or `8.19`.  
+Example URL: https://raw.githubusercontent.com/fbaligand/vscode-logstash-editor/refs/tags/filebeat-8.19/yamlschemas/filebeat.yml.schema.json
 
 
 ## Limitations
