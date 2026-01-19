@@ -1,6 +1,14 @@
 # Change Log
 
 
+## 1.5.0
+
+- add support for Logstash 8.94 completion
+- add support for Filebeat 8.19 completion
+- add support for Elasticsearch 8.19 index template completion
+- docs: add 'Advanced tip: choose Filebeat schema minor version' section
+
+
 ## 1.4.2
 
 - add several enhancements to filebeat completion:
