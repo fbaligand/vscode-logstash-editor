@@ -494,6 +494,210 @@
 					"description": "Determine where to allocate memory buffers, for plugins that leverage them. Defaults to heap but can be switched to direct to instruct Logstash to prefer allocation of buffers in direct memory.\nSince Logstash 8.14",
 					"default": "heap",
 					"examples": ["direct"]
+				},
+				"xpack.monitoring.allow_legacy_collection": {
+					"$ref": "#/definitions/booleanOrString",
+					"description": "Feature flag to explicitly enable legacy monitoring. Defaults to false.\nSince Logstash 9.0",
+					"default": false,
+					"examples": [
+						true
+					]
+				},
+				"xpack.monitoring.enabled": {
+					"$ref": "#/definitions/booleanOrString",
+					"description": "Monitoring is disabled by default. Set to true to enable X-Pack monitoring.",
+					"default": false,
+					"examples": [
+						true
+					]
+				},
+				"xpack.monitoring.elasticsearch.hosts": {
+					"type": "string",
+					"description": "The Elasticsearch instances that you want to ship your Logstash metrics to. This might be the same Elasticsearch instance specified in the outputs section in your Logstash configuration, or a different one. This is not the URL of your dedicated monitoring cluster. Even if you are using a dedicated monitoring cluster, the Logstash metrics must be routed through your production cluster. You can specify a single host as a string, or specify multiple hosts as an array. Defaults to http://localhost:9200.",
+					"default": ["http://localhost:9200"],
+					"examples": ["http://localhost:9200"]
+				},
+				"xpack.monitoring.elasticsearch.proxy": {
+					"type": "string",
+					"description": "The monitoring Elasticsearch instance and monitored Logstash can be separated by a proxy. To enable Logstash to connect to a proxied Elasticsearch, set this value to the URI of the intermediate proxy using the standard URI format, <protocol>://<host> for example http://192.168.1.1. An empty string is treated as if proxy was not set."
+				},
+				"xpack.monitoring.elasticsearch.username": {
+					"type": "string",
+					"description": "If your Elasticsearch is protected with basic authentication, this setting provides the username that the Logstash instance uses to authenticate for shipping monitoring data."
+				},
+				"xpack.monitoring.elasticsearch.password": {
+					"type": "string",
+					"description": "If your Elasticsearch is protected with basic authentication, this setting provides the password that the Logstash instance uses to authenticate for shipping monitoring data."
+				},
+				"xpack.monitoring.collection.interval": {
+					"type": "string",
+					"description": "Controls how often data samples are collected and shipped on the Logstash side. Defaults to 10s. If you modify the collection interval, set the xpack.monitoring.min_interval_seconds option in kibana.yml to the same value.",
+					"default": "10s",
+					"examples": ["10s"]
+				},
+				"xpack.monitoring.elasticsearch.ssl.ca_trusted_fingerprint": {
+					"type": "string",
+					"description": "Optional setting that enables you to specify the hex-encoded SHA-256 fingerprint of the certificate authority for your Elasticsearch instance."
+				},
+				"xpack.monitoring.elasticsearch.ssl.certificate_authority": {
+					"type": "string",
+					"description": "Optional setting that enables you to specify a path to the .pem file for the certificate authority for your Elasticsearch instance."
+				},
+				"xpack.monitoring.elasticsearch.ssl.truststore.path": {
+					"type": "string",
+					"description": "Optional settings that provide the paths to the Java keystore (JKS) to validate the server's certificate."
+				},
+				"xpack.monitoring.elasticsearch.ssl.truststore.password": {
+					"type": "string",
+					"description": "Optional settings that provide the password to the truststore."
+				},
+				"xpack.monitoring.elasticsearch.ssl.keystore.path": {
+					"type": "string",
+					"description": "Optional settings that provide the paths to the Java keystore (JKS) to validate the client's certificate."
+				},
+				"xpack.monitoring.elasticsearch.ssl.keystore.password": {
+					"type": "string",
+					"description": "Optional settings that provide the password to the keystore."
+				},
+				"xpack.monitoring.elasticsearch.ssl.certificate": {
+					"type": "string",
+					"description": "Optional setting that provides the path to an SSL certificate to use to authenticate the client. This certificate should be an OpenSSL-style X.509 certificate file."
+				},
+				"xpack.monitoring.elasticsearch.ssl.key": {
+					"type": "string",
+					"description": "Optional setting that provides the path to an OpenSSL-style RSA private key that corresponds to the xpack.monitoring.elasticsearch.ssl.certificate."
+				},
+				"xpack.monitoring.elasticsearch.ssl.verification_mode": {
+					"type": "string",
+					"description": "Option to validate the server's certificate. Defaults to full. To disable, set to none. Disabling this severely compromises security.",
+					"default": "full",
+					"examples": ["none"]
+				},
+				"xpack.monitoring.elasticsearch.ssl.cipher_suites": {
+					"type": "string",
+					"description": "Optional setting that provides the list of cipher suites to use, listed by priorities. Supported cipher suites vary depending on the Java and protocol versions."
+				},
+				"xpack.monitoring.elasticsearch.cloud_id": {
+					"type": "string",
+					"description": "If you're using Elasticsearch in Elastic Cloud, you should specify the identifier here. This setting is an alternative to xpack.monitoring.elasticsearch.hosts. If cloud_id is configured, xpack.monitoring.elasticsearch.hosts should not be used. The Elasticsearch instances that you want to ship your Logstash metrics to. This might be the same Elasticsearch instance specified in the outputs section in your Logstash configuration, or a different one."
+				},
+				"xpack.monitoring.elasticsearch.cloud_auth": {
+					"type": "string",
+					"description": "If you're using Elasticsearch in Elastic Cloud, you can set your auth credentials here. This setting is an alternative to both xpack.monitoring.elasticsearch.username and xpack.monitoring.elasticsearch.password. If cloud_auth is configured, those settings should not be used."
+				},
+				"xpack.monitoring.elasticsearch.api_key": {
+					"type": "string",
+					"description": "Authenticate using an Elasticsearch API key. Note that this option also requires using SSL."
+				},
+				"xpack.management.enabled": {
+					"$ref": "#/definitions/booleanOrString",
+					"description": "Set to true to enable X-Pack centralized configuration management for Logstash.",
+					"default": false,
+					"examples": [
+						true
+					]
+				},
+				"xpack.management.logstash.poll_interval": {
+					"type": "string",
+					"description": "How often the Logstash instance polls for pipeline changes from Elasticsearch. The default is 5s.",
+					"default": "5s",
+					"examples": ["5s"]
+				},
+				"xpack.management.pipeline.id": {
+					"type": "string",
+					"description": "Specify a comma-separated list of pipeline IDs to register for centralized pipeline management. After changing this setting, you need to restart Logstash to pick up changes. Pipeline IDs support * as a wildcard for matching multiple IDs"
+				},
+				"xpack.management.elasticsearch.hosts": {
+					"type": "string",
+					"description": "The Elasticsearch instance that will store the Logstash pipeline configurations and metadata. This might be the same Elasticsearch instance specified in the outputs section in your Logstash configuration, or a different one. Defaults to http://localhost:9200.",
+					"default": "http://localhost:9200",
+					"examples": ["http://localhost:9200"]
+				},
+				"xpack.management.elasticsearch.username": {
+					"type": "string",
+					"description": "If your Elasticsearch cluster is protected with basic authentication, this setting provides the username that the Logstash instance uses to authenticate for accessing the configuration data. The username you specify here should have the built-in logstash_admin and logstash_system roles. These roles provide access to system indices for managing configurations."
+				},
+				"xpack.management.elasticsearch.password": {
+					"type": "string",
+					"description": "If your Elasticsearch cluster is protected with basic authentication, this setting provides the password that the Logstash instance uses to authenticate for accessing the configuration data. The username you specify here should have the built-in logstash_admin and logstash_system roles. These roles provide access to system indices for managing configurations."
+				},
+				"xpack.management.elasticsearch.proxy": {
+					"type": "string",
+					"description": "Optional setting that allows you to specify a proxy URL if Logstash needs to use a proxy to reach your Elasticsearch cluster."
+				},
+				"xpack.management.elasticsearch.ssl.ca_trusted_fingerprint": {
+					"type": "string",
+					"description": "Optional setting that enables you to specify the hex-encoded SHA-256 fingerprint of the certificate authority for your Elasticsearch instance."
+				},
+				"xpack.management.elasticsearch.ssl.certificate_authority": {
+					"type": "string",
+					"description": "Optional setting that enables you to specify a path to the .pem file for the certificate authority for your Elasticsearch instance."
+				},
+				"xpack.management.elasticsearch.ssl.truststore.path": {
+					"type": "string",
+					"description": "Optional setting that provides the path to the Java keystore (JKS) to validate the server's certificate."
+				},
+				"xpack.management.elasticsearch.ssl.truststore.password": {
+					"type": "string",
+					"description": "Optional setting that provides the password to the truststore."
+				},
+				"xpack.management.elasticsearch.ssl.keystore.path": {
+					"type": "string",
+					"description": "Optional setting that provides the path to the Java keystore (JKS) to validate the client's certificate."
+				},
+				"xpack.management.elasticsearch.ssl.keystore.password": {
+					"type": "string",
+					"description": "Optional setting that provides the password to the keystore."
+				},
+				"xpack.management.elasticsearch.ssl.certificate": {
+					"type": "string",
+					"description": "Optional setting that provides the path to an SSL certificate to use to authenticate the client. This certificate should be an OpenSSL-style X.509 certificate file."
+				},
+				"xpack.management.elasticsearch.ssl.key": {
+					"type": "string",
+					"description": "Optional setting that provides the path to an OpenSSL-style RSA private key that corresponds to the xpack.management.elasticsearch.ssl.certificate."
+				},
+				"xpack.management.elasticsearch.ssl.verification_mode": {
+					"type": "string",
+					"description": "Option to validate the server's certificate. Defaults to full. To disable, set to none. Disabling this severely compromises security.",
+					"default": "full",
+					"examples": ["none"]
+				},
+				"xpack.management.elasticsearch.ssl.cipher_suites": {
+					"type": "string",
+					"description": "Optional setting that provides the list of cipher suites to use, listed by priorities. Supported cipher suites vary depending on the Java and protocol versions."
+				},
+				"xpack.management.elasticsearch.cloud_id": {
+					"type": "string",
+					"description": "If you're using Elasticsearch in Elastic Cloud, you should specify the identifier here. This setting is an alternative to xpack.management.elasticsearch.hosts. If cloud_id is configured, xpack.management.elasticsearch.hosts should not be used. This Elasticsearch instance will store the Logstash pipeline configurations and metadata."
+				},
+				"xpack.management.elasticsearch.cloud_auth": {
+					"type": "string",
+					"description": "If you're using Elasticsearch in Elastic Cloud, you can set your auth credentials here. This setting is an alternative to both xpack.management.elasticsearch.username and xpack.management.elasticsearch.password. If cloud_auth is configured, those settings should not be used. The credentials you specify here should be for a user with the logstash_admin and logstash_system roles, which provide access to system indices for managing configurations."
+				},
+				"xpack.management.elasticsearch.api_key": {
+					"type": "string",
+					"description": "Authenticate using an Elasticsearch API key. Note that this option also requires using SSL. The API key Format is id:api_key where id and api_key are as returned by the Elasticsearch Create API key API."
+				},
+				"xpack.geoip.downloader.enabled": {
+					"$ref": "#/definitions/booleanOrString",
+					"description": "(Boolean) If true, Logstash automatically downloads and manages updates for GeoIP2 databases from the xpack.geoip.downloader.endpoint. If false, Logstash does not manage GeoIP2 databases and plugins that need a GeoIP2 database must be configured to provide their own.",
+					"default": false,
+					"examples": [
+						true
+					]
+				},
+				"xpack.geoip.downloader.endpoint": {
+					"type": "string",
+					"description": "(String) Endpoint URL used to download updates for GeoIP2 databases. For example, https://example.com/overview.json. Defaults to https://geoip.elastic.co/v1/database. Note that Logstash will periodically make a GET request to ${xpack.geoip.downloader.endpoint}?elastic_geoip_service_tos=agree, expecting the list of metadata about databases typically found in overview.json.",
+					"default": "https://geoip.elastic.co/v1/database",
+					"examples": ["https://geoip.elastic.co/v1/database"]
+				},
+				"xpack.geoip.downloader.poll.interval": {
+					"type": "string",
+					"description": "(Time Value) How often Logstash checks for GeoIP2 database updates at the xpack.geoip.downloader.endpoint. For example, 6h to check every six hours. Defaults to 24h (24 hours).",
+					"default": "24h",
+					"examples": ["24h"]
 				}
 			}
 		}
