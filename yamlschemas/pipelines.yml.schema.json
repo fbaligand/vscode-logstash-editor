@@ -71,7 +71,7 @@
 			},
 			"pipeline.workers": {
 				"$ref": "#/definitions/integerOrString",
-				"description": "The number of workers that will, in parallel, execute the filter and output stages of the pipeline. This setting uses the java.lang.Runtime.getRuntime.availableProcessors value as a default if not overridden by pipeline.workers in pipelines.yml or pipeline.workers from logstash.yml. If you have modified this setting and see that events are backing up, or that the CPU is not saturated, consider increasing this number to better utilize machine processing power. Default value is the number of the host’s CPU cores.",
+				"description": "The number of workers that will, in parallel, execute the filter and output stages of the pipeline.\nThis setting uses the java.lang.Runtime.getRuntime.availableProcessors value as a default if not overridden by pipeline.workers in pipelines.yml or pipeline.workers from logstash.yml.\nIf you have modified this setting and see that events are backing up, or that the CPU is not saturated, consider increasing this number to better utilize machine processing power.\nDefault value is the number of the host's CPU cores.",
 				"default": "",
 				"examples": [
 					"1"
@@ -93,6 +93,22 @@
 					"50"
 				]
 			},
+			"pipeline.batch.output_chunking.growth_threshold_factor": {
+				"$ref": "#/definitions/integerOrString",
+				"description": "Controls when output batches are split into smaller chunks.\nWhen the event count of a batch increases by this multiplication factor by the end of the pipeline's filter section, it is chunked based on the value of pipeline.batch.size.\nFor example: a batch size of 50 that grows to over 50,000 events (1000x50=50,000) will be sent to outputs 50 events at a time instead of a single enormous batch.\nUseful when batch size grows unpredictably due to filter plugins such as split or clone.\nSince Logstash 9.0",
+				"default": "1000",
+				"examples": [
+					"1000"
+				]
+			},
+			"pipeline.batch.metrics.sampling_mode": {
+				"type": "string",
+				"description": "Controls frequency of collection of batch size metrics.\nThese metrics measure the actual number of events and byte size of batches processed through a pipeline. This can be helpful to tune pipeline.batch.size to reflect the actual batch sizes processed.\nNote: This feature is in technical preview and may change in the future.\nCurrent options are:\n* disabled: disabling the collection.\n* minimal: calculate based on a subset of batches.(default)\n* full: calculate based on every processed batch.\nSince Logstash 9.2",
+				"default": "minimal",
+				"examples": [
+					"minimal"
+				]
+			},
 			"pipeline.plugin_classloaders": {
 				"$ref": "#/definitions/booleanOrString",
 				"description": "(Beta) Load Java plugins in independent classloaders to isolate their dependencies.\nSince Logstash 7.2",
@@ -103,16 +119,25 @@
 			},
 			"pipeline.ordered": {
 				"type": "string",
-				"description": "Set the pipeline event ordering. Valid options are: 'auto', 'true' and 'false'. 'auto' will automatically enable ordering if the pipeline.workers setting is also set to 1. 'true' will enforce ordering on the pipeline and prevent logstash from starting if there are multiple workers. 'false' will disable the processing required to preserve order. When 'false', ordering is not guaranteed, but you save the processing cost of preserving order.\nSince Logstash 7.7",
+				"description": "Set the pipeline event ordering.\nValid options are: 'auto', 'true' and 'false'.\n'auto' will automatically enable ordering if the pipeline.workers setting is also set to 1.\n'true' will enforce ordering on the pipeline and prevent logstash from starting if there are multiple workers.\n'false' will disable the processing required to preserve order.\nWhen 'false', ordering is not guaranteed, but you save the processing cost of preserving order.\nSince Logstash 7.7",
 				"default": "auto",
 				"examples": [
 					"true",
 					"false"
 				]
 			},
+			"pipeline.recoverable": {
+				"type": "string",
+				"description": "Configure the pipeline to be eligible for automated recovery. Requires using config.reload.automatic. All plugins in the pipeline must be reloadable.\nPossible values are:\n* auto: enable only if using a persisted queue type.\n* true: always enable, even if queue is ephemeral (may cause data loss)\n* false: never enable.\nSince Logstash 9.0",
+				"default": "false",
+				"examples": [
+					"true",
+					"auto"
+				]
+			},
 			"pipeline.ecs_compatibility": {
 				"type": "string",
-				"description": "Sets the pipeline’s default value for ecs_compatibility, a setting that is available to plugins that implement an ECS compatibility mode for use with the Elastic Common Schema.\nSince Logstash 7.14",
+				"description": "Sets the pipeline's default value for ecs_compatibility, a setting that is available to plugins that implement an ECS compatibility mode for use with the Elastic Common Schema.\nSince Logstash 7.14",
 				"default": "disabled",
 				"examples": [
 					"v1",
@@ -237,6 +262,16 @@
 				"default": "false",
 				"examples": [
 					"true"
+				]
+			},
+			"queue.compression": {
+				"type": "string",
+				"description": "Set a persisted queue compression level, which allows the pipeline to reduce the event size on disk at the cost of CPU usage.\nPossible values are speed, balanced, and size.\nSince Logstash 9.2",
+				"default": "none",
+				"examples": [
+					"speed",
+					"balanced",
+					"size"
 				]
 			},
 			"queue.drain": {

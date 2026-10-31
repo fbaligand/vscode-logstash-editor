@@ -58,7 +58,7 @@
 		},
 		"pipeline.workers": {
 			"$ref": "#/definitions/integerOrString",
-			"description": "The number of workers that will, in parallel, execute the filter and output stages of the pipeline. This setting uses the java.lang.Runtime.getRuntime.availableProcessors value as a default if not overridden by pipeline.workers in pipelines.yml or pipeline.workers from logstash.yml. If you have modified this setting and see that events are backing up, or that the CPU is not saturated, consider increasing this number to better utilize machine processing power. Default value is the number of the host’s CPU cores.",
+			"description": "The number of workers that will, in parallel, execute the filter and output stages of the pipeline.\nThis setting uses the java.lang.Runtime.getRuntime.availableProcessors value as a default if not overridden by pipeline.workers in pipelines.yml or pipeline.workers from logstash.yml.\nIf you have modified this setting and see that events are backing up, or that the CPU is not saturated, consider increasing this number to better utilize machine processing power.\nDefault value is the number of the host's CPU cores.",
 			"default": "",
 			"examples": [
 				"1"
@@ -80,6 +80,22 @@
 				"50"
 			]
 		},
+		"pipeline.batch.output_chunking.growth_threshold_factor": {
+			"$ref": "#/definitions/integerOrString",
+			"description": "Controls when output batches are split into smaller chunks.\nWhen the event count of a batch increases by this multiplication factor by the end of the pipeline's filter section, it is chunked based on the value of pipeline.batch.size.\nFor example: a batch size of 50 that grows to over 50,000 events (1000x50=50,000) will be sent to outputs 50 events at a time instead of a single enormous batch.\nUseful when batch size grows unpredictably due to filter plugins such as split or clone.\nSince Logstash 9.0",
+			"default": "1000",
+			"examples": [
+				"1000"
+			]
+		},
+		"pipeline.batch.metrics.sampling_mode": {
+			"type": "string",
+			"description": "Controls frequency of collection of batch size metrics.\nThese metrics measure the actual number of events and byte size of batches processed through a pipeline. This can be helpful to tune pipeline.batch.size to reflect the actual batch sizes processed.\nNote: This feature is in technical preview and may change in the future.\nCurrent options are:\n* disabled: disabling the collection.\n* minimal: calculate based on a subset of batches.(default)\n* full: calculate based on every processed batch.\nSince Logstash 9.2",
+			"default": "minimal",
+			"examples": [
+				"minimal"
+			]
+		},
 		"pipeline.unsafe_shutdown": {
 			"$ref": "#/definitions/booleanOrString",
 			"description": "When set to true, forces Logstash to exit during shutdown even if there are still inflight events in memory. By default, Logstash will refuse to quit until all received events have been pushed to the outputs. Enabling this option can lead to data loss during shutdown.",
@@ -98,16 +114,25 @@
 		},
 		"pipeline.ordered": {
 			"type": "string",
-			"description": "Set the pipeline event ordering. Valid options are: 'auto', 'true' and 'false'. 'auto' will automatically enable ordering if the pipeline.workers setting is also set to 1. 'true' will enforce ordering on the pipeline and prevent logstash from starting if there are multiple workers. 'false' will disable the processing required to preserve order. When 'false', ordering is not guaranteed, but you save the processing cost of preserving order.\nSince Logstash 7.7",
+			"description": "Set the pipeline event ordering.\nValid options are: 'auto', 'true' and 'false'.\n'auto' will automatically enable ordering if the pipeline.workers setting is also set to 1.\n'true' will enforce ordering on the pipeline and prevent logstash from starting if there are multiple workers.\n'false' will disable the processing required to preserve order.\nWhen 'false', ordering is not guaranteed, but you save the processing cost of preserving order.\nSince Logstash 7.7",
 			"default": "auto",
 			"examples": [
 				"true",
 				"false"
 			]
 		},
+		"pipeline.recoverable": {
+			"type": "string",
+			"description": "Configure the pipeline to be eligible for automated recovery. Requires using config.reload.automatic. All plugins in the pipeline must be reloadable.\nPossible values are:\n* auto: enable only if using a persisted queue type.\n* true: always enable, even if queue is ephemeral (may cause data loss)\n* false: never enable.\nSince Logstash 9.0",
+			"default": "false",
+			"examples": [
+				"true",
+				"auto"
+			]
+		},
 		"pipeline.ecs_compatibility": {
 			"type": "string",
-			"description": "Sets the pipeline’s default value for ecs_compatibility, a setting that is available to plugins that implement an ECS compatibility mode for use with the Elastic Common Schema.\nSince Logstash 7.14",
+			"description": "Sets the pipeline's default value for ecs_compatibility, a setting that is available to plugins that implement an ECS compatibility mode for use with the Elastic Common Schema.\nSince Logstash 7.14",
 			"default": "disabled",
 			"examples": [
 				"v1",
@@ -172,7 +197,7 @@
 		},
 		"config.field_reference.escape_style": {
 			"type": "string",
-			"description": "Provides a way to reference fields that contain field reference special characters [ and ].\nThis feature is in technical preview and may change in the future.\nCurrent options are:\npercent: URI-style %+HH hexadecimal encoding of UTF-8 bytes ([ → %5B; ] → %5D)\nampersand: HTML-style &#+DD+; encoding of decimal Unicode code-points ([ → &#91;; ] → &#93;)\nnone: field names containing special characters cannot be referenced.\nSince Logstash 8.3",
+			"description": "Provides a way to reference fields that contain field reference special characters [ and ].\nNote: This feature is in technical preview and may change in the future.\nCurrent options are:\npercent: URI-style %+HH hexadecimal encoding of UTF-8 bytes ([ → %5B; ] → %5D)\nampersand: HTML-style &#+DD+; encoding of decimal Unicode code-points ([ → &#91;; ] → &#93;)\nnone: field names containing special characters cannot be referenced.\nSince Logstash 8.3",
 			"default": "none",
 			"examples": [
 				"percent",
@@ -181,7 +206,7 @@
 		},
 		"modules": {
 			"type": "array",
-			"description": "When configured, modules must be in the nested YAML structure described above this table. There is no default value.",
+			"description": "When configured, modules must be in the nested YAML structure described above this table. There is no default value.\nRemoved since Logstash 9.0",
 			"items": {
 				"type": "object",
 				"required": [
@@ -259,6 +284,16 @@
 				"true"
 			]
 		},
+		"queue.compression": {
+			"type": "string",
+			"description": "Set a persisted queue compression level, which allows the pipeline to reduce the event size on disk at the cost of CPU usage.\nPossible values are speed, balanced, and size.\nSince Logstash 9.2",
+			"default": "none",
+			"examples": [
+				"speed",
+				"balanced",
+				"size"
+			]
+		},
 		"queue.drain": {
 			"$ref": "#/definitions/booleanOrString",
 			"description": "When enabled, Logstash waits until the persistent queue is drained before shutting down.",
@@ -287,11 +322,13 @@
 			"type": "string",
 			"description": "Defines the action to take when the dead_letter_queue.max_bytes setting is reached:\ndrop_newer stops accepting new values that would push the file size over the limit, and drop_older removes the oldest events to make space for new ones.\nSince Logstash 8.3",
 			"default": "drop_newer",
-			"examples": ["drop_older"]
+			"examples": [
+				"drop_older"
+			]
 		},
 		"path.dead_letter_queue": {
 			"type": "string",
-			"description": "The directory path where the data files will be stored for the dead-letter queue.",
+			"description": "The directory path where the data files will be stored for the dead-letter queue.  \nDefault value is: ${path.data}/dead_letter_queue",
 			"default": "\"<path.data>/dead_letter_queue\"",
 			"examples": [
 				"\"<path.data>/dead_letter_queue\""
@@ -418,8 +455,8 @@
 		"log.format.json.fix_duplicate_message_fields": {
 			"$ref": "#/definitions/booleanOrString",
 			"description": "When the log format is json avoid collision of field names in log lines.\nSince Logstash 8.14",
-			"default": "false",
-			"examples": ["true"]
+			"default": "true",
+			"examples": ["false"]
 		},
 		"path.logs": {
 			"type": "string",
@@ -431,7 +468,7 @@
 		},
 		"pipeline.separate_logs": {
 			"$ref": "#/definitions/booleanOrString",
-			"description": "This a boolean setting to enable separation of logs per pipeline in different log files. If enabled Logstash will create a different log file for each pipeline, using the pipeline.id as name of the file. The destination directory is taken from the `path.log`s setting. When there are many pipelines configured in Logstash, separating each log lines per pipeline could be helpful in case you need to troubleshoot what’s happening in a single pipeline, without interference of the other ones.",
+			"description": "This a boolean setting to enable separation of logs per pipeline in different log files. If enabled Logstash will create a different log file for each pipeline, using the pipeline.id as name of the file. The destination directory is taken from the `path.log`s setting. When there are many pipelines configured in Logstash, separating each log lines per pipeline could be helpful in case you need to troubleshoot what's happening in a single pipeline, without interference of the other ones.",
 			"default": "false",
 			"examples": [
 				"true"
@@ -444,20 +481,20 @@
 		"allow_superuser": {
 			"$ref": "#/definitions/booleanOrString",
 			"description": "Setting to true to allow or false to block running Logstash as a superuser.\nSince Logstash 8.3",
-			"default": "true",
-			"examples": ["false"]
+			"default": "false",
+			"examples": ["true"]
 		},
 		"event_api.tags.illegal": {
 			"type": "string",
-			"description": "When set to warn, allow illegal value assignment to the reserved tags field.\nWhen set to rename, Logstash events can’t be created with an illegal value in tags. This value will be moved to _tags and a _tagsparsefailure tag is added to indicate the illegal operation. Doing set operation with illegal value will throw exception.\nSetting this flag to warn is deprecated and will be removed in a future release.\nSince Logstash 8.7",
+			"description": "When set to warn, allow illegal value assignment to the reserved tags field.\nWhen set to rename, Logstash events can't be created with an illegal value in tags. This value will be moved to _tags and a _tagsparsefailure tag is added to indicate the illegal operation. Doing set operation with illegal value will throw exception.\nSetting this flag to warn is deprecated and will be removed in a future release.\nSince Logstash 8.7.\nRemoved since Logstash 9.0",
 			"default": "rename",
 			"examples": ["warn", "rename"]
 		},
 		"pipeline.buffer.type": {
 			"type": "string",
-			"description": "Determine where to allocate memory buffers, for plugins that leverage them. Default to direct, optionally can be switched to heap to select Java heap space.\nSince Logstash 8.14",
-			"default": "direct",
-			"examples": ["heap"]
+			"description": "Determine where to allocate memory buffers, for plugins that leverage them. Defaults to heap but can be switched to direct to instruct Logstash to prefer allocation of buffers in direct memory.\nSince Logstash 8.14",
+			"default": "heap",
+			"examples": ["direct"]
 		}
 	}
 }
