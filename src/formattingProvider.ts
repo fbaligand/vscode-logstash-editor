@@ -26,7 +26,7 @@ function generateExpectedIndentationText(options: vscode.FormattingOptions, inde
  * Compute and return actual indentation count in provided line
  */
 function computeIndentationFromLine(options: vscode.FormattingOptions, line: vscode.TextLine): number {
-	let actualIndentationText = line.text.substr(0, line.firstNonWhitespaceCharacterIndex);
+	let actualIndentationText = line.text.substring(0, line.firstNonWhitespaceCharacterIndex);
 	const oneIndentationSpaces = ' '.repeat(options.tabSize);
 	actualIndentationText = actualIndentationText.replace(TABS_REGEX, oneIndentationSpaces);
 	return Math.floor(actualIndentationText.length / options.tabSize);

@@ -168,7 +168,7 @@ function createCompletionItemSnippet(baseCompletionItem: vscode.CompletionItem, 
 	newCompletionItem.documentation = baseCompletionItem.documentation;
 	newCompletionItem.sortText = baseCompletionItem.sortText;
 	const snippetReplacementStart = line.text.indexOf(snippetOption);
-	newCompletionItem.filterText = line.text.substr(snippetReplacementStart);
+	newCompletionItem.filterText = line.text.substring(snippetReplacementStart);
 	const startPosition = new vscode.Position(line.range.start.line, snippetReplacementStart);
 	newCompletionItem.range = new vscode.Range(startPosition, line.range.end);
 	return newCompletionItem;
@@ -195,10 +195,10 @@ function getNoSuggestionCompletionItems(): vscode.CompletionItem[] {
  */
 export const logstashCompletionItemProvider: vscode.CompletionItemProvider = {
 
-	provideCompletionItems(document: vscode.TextDocument, position: vscode.Position, token: vscode.CancellationToken, context: vscode.CompletionContext): vscode.CompletionItem[] {
+	provideCompletionItems(document: vscode.TextDocument, position: vscode.Position, _token: vscode.CancellationToken, _context: vscode.CompletionContext): vscode.CompletionItem[] {
 
 		// check if current line has completion available
-		let currentLinePrefix = document.lineAt(position).text.substr(0, position.character);
+		let currentLinePrefix = document.lineAt(position).text.substring(0, position.character);
 		let currentOptionPrefix = '';
 		if (!currentLinePrefix.match(COMPLETION_AVAILABLE_PREFIX_REGEX)) {
 			const optionSnippetMatches = currentLinePrefix.match(OPTION_SNIPPET_COMPLETION_AVAILABLE_PREFIX_REGEX);
@@ -282,7 +282,7 @@ export const logstashHoverProvider: vscode.HoverProvider = {
 		const logstashCurrentItem = document.getText(logstashCurrentItemRange);
 
 		// get completion items given current position
-		const completionContext: vscode.CompletionContext = { triggerKind: vscode.CompletionTriggerKind.Invoke };
+		const completionContext: vscode.CompletionContext = { triggerKind: vscode.CompletionTriggerKind.Invoke, triggerCharacter: undefined };
 		const completionItems = logstashCompletionItemProvider.provideCompletionItems(document, position, token, completionContext);
 
 		// find the completion item where cursor is present (if any)
