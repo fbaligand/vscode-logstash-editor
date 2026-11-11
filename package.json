@@ -160,7 +160,7 @@
 		]
 	},
 	"activationEvents": [
-		"*"
+		"onLanguage:logstash"
 	],
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
@@ -169,7 +169,8 @@
 		"watch": "tsc -watch -p ./"
 	},
 	"extensionDependencies": [
-		"redhat.vscode-yaml"
+		"redhat.vscode-yaml",
+		"randomchance.logstash"
 	],
 	"devDependencies": {
 		"@types/node": "^18.x",
